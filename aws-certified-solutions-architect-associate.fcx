@@ -573,10 +573,311 @@ A: Extract, Transform, and Load.
 Q: Name 9 analytics services.
 A: Athena, EMR, CloudSearch, ElasticSearch, Kinesis, Kinesis Video Streams, QuickSight, Data Pipeline, Glue.
 
+SubSubTopic: Security, identity, and compliance services
 
+Q: What service does Identity Access Management (IAM) provide?
+A: Control user access to services and resources.
 
+Q: What service controls user access to services and resources.
+A: Identity Access Management (IAM).
 
+Q: What does IAM stand for?
+A: Identity Access Management.
 
+Q: What service does Cognito provide?
+A: User authentication and access for mobile applications on internet-connected devices.
+
+Q: What service provides user authentication and access for mobile applications on internet-connected devices?
+A: Cognito.
+
+Q: What service does GuardDuty provide?
+A: Threat detection for AWS account.
+
+Q: What service provides threat detection for AWS account?
+A: GuardDuty.
+
+Q: What service does Inspector provide?
+A: Agent in virtual machines for security and compliance assessment.
+
+Q: What service provides an agent in virtual machines for security and compliance assessment?
+A: Inspector.
+
+Q: What service does Macie provide?
+A: Automatically discover, classify, and protect sensitive data.
+
+Q: What service automatically discovers, classifies, and protects sensitive data?
+A: Macie.
+
+Q: What service does Certificate Manager provide?
+A: Generate, manage, and deploy security certificates for SSL/TLS.
+
+Q: What service generates, manages, and deploys security certificates for SSL/TLS?
+A: Certificate Manager.
+
+Q: What service does CloudHSM provide?
+A: Access to a Hardware Security Module (HSM) for storing sensitive data (e.g. private keys).
+
+Q: What service provides access to a Hardware Security Module (HSM) for storing sensitive data (e.g. private keys)?
+A: CloudHSM.
+
+Q: What does HSM stand for?
+A: Hardware Security Module.
+
+Q: What service does Directory Service Provide
+A: Microsoft Active Directory (AD).
+
+Q: What service provides Microsoft Active Directory (AD)?
+A: Service Directory.
+
+Q: What does AD stand for?
+A: (Microsoft) Active Directory.
+
+Q: What service does Web Application Firewall (WAF) provide?
+A: Application layer firewall.
+
+Q: What service provides an application layer firewall?
+A: Web Application Firewall (WAF).
+
+Q: What does WAF stand for?
+A: Web Application Firewall.
+
+Q: What service does Shield provide?
+A: DDoS mitigation.
+
+Q: What service provides DDoS mitigation?
+A: Shield.
+
+Q: What is the difference between Shield and Shield Advanced?
+A: Shield Advanced provides a 24/7 team and does not charge you for extra resource usage due to a DDoS attack.
+
+Q: What service does Artifact provide?
+A: Generate compliance reports.
+
+Q: What service generates compliance reports?
+A: Artifact.
+
+Q: Name 12 security, identity, and compliance services.
+A: Identity Access Management (IAM), Cognito, GuardDuty, Inspector, Macie, Certificate Manager, CloudHSM, Directory Service, Web Application Framework (WAF), Shield, Artifact.
+
+SubSubTopic: Mobile services
+
+Q: What service does Mobile Hub provide?
+A: A collection of tools to build, test, configure and release mobile applications.
+
+Q: What service provides a collection of tools to build, test, configure and release mobile applications?
+A: Mobile hub.
+
+Q: What service does Pinpoint provide?
+A: Multi-channel user engagement messaging.
+
+Q: What service provides multi-channel user engagement messaging?
+A: Pinpoint
+
+Q: What service does AppSync provide?
+A: GraphQL and on-line off-line data synchronization.
+
+Q: What service provides GraphQL and on-line off-line data synchronization?
+A: AppSync.
+
+Q: What service does DeviceFarm provide?
+A: Test mobile apps on real mobile devices.
+
+Q: What service tests mobile apps on real mobile devices?
+A: DeviceFarm.
+
+Q: What service does Mobile Analytic provide?
+A: Collect and analyze mobile application usage data.
+
+Q: What service collects and analyzes mobile application usage data?
+A: Mobile Analytics.
+
+Q: Name 5 mobile services.
+A: Mobile Hub, Pinpoint, AppSync, Device Farm, Mobile Analytics.
+
+SubSubTopic: Augmented Reality (AR) and Virtual Reality (VR)
+
+Q: What service does Sumerian provide?
+A: Set of tools for creating AR/VR applications.
+
+Q: What service provides a set of tools for creating AR/VR applications?
+A: Sumerian.
+
+Q: What does AR/VR stand for?
+A: Augmented Reality / Virtual Reality.
+
+Q: Name 1 AR/VR service.
+A: Sumerian.
+
+SubSubTopic: Application integration
+
+Q: What service does Step Functions provide?
+A: Managing workflows for serverless applications.
+
+Q: What service manages workflows for serverless applications?
+A: Step Functions.
+
+Q: What service does Message Queue (MQ) provide?
+A: Message queues.
+
+Q: What service offers message queues?
+A: Message Queue (MQ).
+
+Q: What does MQ stand for?
+A: Message Queue.
+
+Q: What service does Simple Notification Service (SNS) provide?
+A: Send messages to subscribing endpoints (e.g email or SMS).
+
+Q: What service sends messages to subscribing endpoints (e.g. email or SMS)?
+A: Simple Notification Service (SNS).
+
+Q: What does SNS stand for?
+A: Simple Notification Service.
+
+Q: What service does Simple Queueing Service (SQS) provide?
+A: Message queues.
+
+Q: What services provide message queues.
+A: Old: Simple Queueing Service (SQS). New: Message Queue (MQ).
+
+Q: What service does Simple WorkFlow (SWF) provide?
+A: Manage workflows that may include human steps.
+
+Q: What service manages workflows that may include human steps?
+A: Simple WorkFlow.
+
+Q: What does SWF stand for?
+A: Simple WorkFlow.
+
+Q: Name 5 application integration services.
+A: Step Functions, Message Queue (MQ), Simple Notification Service (SNS), Simple Queueing Service (SQS), Simple WorkfFlow (SWF).
+
+SubSubTopic: Customer engagement services.
+
+Q: What service does Connect provide?
+A: Contact center (call center) that integrates with CRM.
+
+Q: What service provides a contact center (call center) that integrates with CRM.
+A: Connect.
+
+Q: What does CRM stand for?
+A: Customer Relationship Management.
+
+Q: What service does Simple Email Service provide?
+A: Send large numbers of emails.
+
+Q: What service manages sending large numbers of emails?
+A: Simple Email Service.
+
+Q: Name 2 customer engagement services.
+A: Connect, Simple Email Service.
+
+SubSubTopic: Business productivity
+
+Q: What service does Alexa for Business provide?
+A: Manage Alexa-enabled devices in a business environment.
+
+Q: What service manages Alexa-enabled devices in a business environment?
+A: Alexa for Business.
+
+Q: What service does Chime provide?
+A: Video conferencing (unified communications). Amazon's version of Google Hangouts.
+
+Q: What service offers video conferencing (unified communications)?
+A: Chime.
+
+Q: What is Amazon's version of Google Hangouts?
+A: Chime.
+
+Q: What service does WorkDocs provide?
+A: File storage and sharing (Amazon's version of Dropbox).
+
+Q: What service provides file storage and sharing?
+A: WorkDocs.
+
+Q: What service is Amazon's version of Dropbox?
+A: WorkDocs.
+
+Q: What service does WorkMail provide?
+A: Email and calendar. Amazon's version of Gmail.
+
+Q: What service provides email and calendar?
+A: WorkMail.
+
+Q: What service is Amazon's version of Gmail?
+A: WorkMail.
+
+Q: Name 4 business productivity services.
+A: Alexa for Business, Chime, WorkDocs, WorkMail.
+
+SubSubTopic: Desktop and app streaming
+
+Q: What service does Workspaces provide?
+A: Virtual Desktop Infrastructure (VDI).
+
+Q: What service provides Virtual Desktop Infrastructure (VDI)?
+A: Workspaces.
+
+Q: What does VDI stand for?
+A: Virtual Desktop Infrastructure.
+
+Q: What service does AppStream 2.0 provide?
+A: Host legacy applications in cloud and stream display to browser.
+
+Q: What services hosts legacy applications in cloud and streams display to browser?
+A: AppStream 2.0
+
+Q: What is the difference between Workspaces and AppStream 2.0?
+A: Workspaces stream an entire desktop environment, AppStream 2.0 streams individual applications.
+
+Q: Name 2 desktop and app streaming services.
+A: Workspaces, AppStream 2.0.
+
+SubSubTopic: Internet of Things (IoT)
+
+Q: What service does IoT Core provide?
+A: Platform for building IoT applications.
+
+Q: What service is a platform for building IoT applications?
+A: IoT Core.
+
+Q: What service does IoT Device Management provide?
+A: Manage IoT devices.
+
+Q: What service manages IoT devices?
+A: IoT Device Management.
+
+Q: What service does Greengrass provide?
+A: Edge computing for IoT: run local compute, messaging, data caching, sync, and ML inference capabilities for connected devices in a secure way).
+
+Q: What service provides edge computing for IoT: run local compute, messaging, data caching, sync, and ML inference capabilities for connected devices in a secure way)?
+A: Greengrass.
+
+Q: What service does IoT analytics provide?
+A: Analytics for IoT data.
+
+Q: What service provides analytics for IoT data?
+A: IoT Analytics.
+
+Q: What service does FreeRTOS provide?
+A: Operating system for microcontrollers.
+
+Q: What service provides an operating system for microcontrollers?
+A: FreeRTOS.
+
+Q: Name 5 IoT services.
+A: IoT Core, IoT Device Management, Greengrass, IoT Analytics, FreeRTOS.
+
+SubSubTopic: Game development services
+
+Q: What service does GameLift provide?
+A: Gameserver hosting.
+
+Q: What service provides gameserver hosting?
+A: GameLift.
+
+Q: Name 1 game development service.
+A: GameLift.
 
 
 
