@@ -1,0 +1,583 @@
+Test: AWS Certified Solutions Architect Associate
+
+Topic: Introduction to the course
+
+SubTopic: Introduction & overview
+
+Q: What are the two types of AWS partners?
+A: Technology partners and consulting partners.
+
+Q: What are the three levels of AWS consulting partners?
+A: Standard, advanced, and premier.
+
+Q: What are the certs requirements for a standard level AWS consulting partner?
+A: 2 associate and 0 professional.
+
+Q: What are the certs requirements for a advanced level AWS consulting partner?
+A: 4 associate and 4 professional.
+
+Q: What are the certs requirements for a premier level AWS consulting partner?
+A: 20 associate and 8 professional.
+
+Q: What are the four tiers of AWS certification?
+A: Practitioner, Associate, Speciality, Professional.
+
+Q: What is the one AWS practitioner certification?
+A: Cloud.
+
+Q: What are the three AWS associate certifications?
+A: Solutions architect, developer, sysops administrator.
+
+Q: What are the two AWS professional certifications?
+A: Solutions architect, devops.
+
+Q: Give three examples of AWS speciality certifications.
+A: Security, big data, advanced networking
+
+SubTopic: 10,000 Foot Overview - Part 1
+
+SubSubTopic: Global Infrastructure
+
+Q: What is a region?
+A: A geographical area.
+
+Q: What is an availability zone?
+A: One or more data centers that form an independent failure domain.
+
+Q: What does AZ stand for?
+A: Availability zone.
+
+Q: What is the relation between a region and an availability zone?
+A: A region consists of 2 or more availability zones.
+
+Q: How many regions are there?
+A: 16 regions in 2017, 6 more planned for 2018.
+
+Q: How many availability zones are there?
+A: 44 availability zones in 2017, 17 more planned for 2018.
+
+Q: Name 6 regions in North America
+A: US East (Northern Virginia), US East (Ohio), US West (Oregon), US West (Northern California), US West (GovCloud), Canada (Central).
+
+Q: What is the secret region?
+A: A region in the US for the intelligence community that can operate workloads up to secret classification.
+
+Q: What is an edge location?
+A: AWS endpoints that are used for caching content.
+
+Q: What is the most prevalent caching service?
+A: CloudFront, which is the AWS Content Delivery Network (CDN).
+
+Q: How many edge locations are there?
+A: Over 96 edge locations as of 2017.
+
+SubTopic: 10,000 Foot Overview - Part 1
+
+SubSubTopic: Compute services
+
+Q: What service does EC2 provide?
+A: virtual machines (and bare metal servers).
+
+Q: What does EC2 stand for?
+A: Elastic Compute Cloud.
+
+Q: What services provides virtual machines?
+A: Elastic Compute Cloud (EC2).
+
+Q: What services provides bare metal servers?
+A: Elastic Compute Cloud (EC2).
+
+Q: What service does EC2 container service provide?
+A: Docker containers.
+
+Q: What services provides docker containers?
+A: EC2 container service.
+
+Q: What service does Elastic Beanstalk provide?
+A: Simplified web application deployment.
+
+Q: What service provides simplified web application deployment?
+A: Elastic Beanstalk.
+
+Q: What service does Lambda provide?
+A: Serverless compute service.
+
+Q: What service provides serverless compute?
+A: Lambda.
+
+Q: What service does does LightSail provide?
+A: Virtual private server deployment (simplified version of EC2).
+
+Q: What server provides virtual private server deployment?
+A: LightSail.
+
+Q: What server provides a simplified version of EC2?
+A: LightSail.
+
+Q: What service does Batch provide?
+A: Batch computing.
+
+Q: What service provides batch computing?
+A: Batch.
+
+Q: Name 6 compute services.
+A: EC2, EC2 container service, Elastic Beanstalk, Lambda, LightSail, Batch.
+
+SubSubTopic: Storage services
+
+Q: What service does S3 provide?
+A: Object storage.
+
+Q: What service provides object storage?
+A: Simple Storage Service (S3).
+
+Q: What does S3 stand for?
+A: Simple Storage Service.
+
+Q: What service does EFS provide?
+A: Network Attached Storage (NAS).
+
+Q: What service provides Network Attached Storage (NAS)?
+A: Elastic File Service (EFS).
+
+Q: What does EFS stand for?
+A: Elastic File Service.
+
+Q: What does NAS stand for?
+A: Network Attached Storage.
+
+Q: What service does Glacier provide?
+A: Data archival (low-cost long-term storage).
+
+Q: What service provides data archival?
+A: Glacier.
+
+Q: What service provides low-cost long-term storage?
+A: Glacier.
+
+Q: What service does Snowball provide?
+A: Large-scale data transfer.
+
+Q: What service offers large-scale data transfer?
+A: Snowball.
+
+Q: What services does Storage Gateway provide?
+A: Connect an on-site appliance to cloud-based storage.
+
+Q: What service connects on on-site appliance to cloud-based storage?
+A: Storage Gateway.
+
+Q: Name 5 storage services.
+A: S3, EFS, Glacier, Snowball, Storage Gateway.
+
+SubSubTopic: Database services
+
+Q: What services does RDS provide?
+A: Relational databases.
+
+Q: What service provides relational databases?
+A: Relational Database Service (RDS).
+
+Q: What does RDS stand for?
+A: Relational Database Service.
+
+Q: What service does DynamoDB provide?
+A: Non-relational databases.
+
+Q: What service provides non-relational databases?
+A: DynamoDB.
+
+Q: What service does Elasticache provide?
+A: Database caching.
+
+Q: What service provides database caching?
+A: Elasticache.
+
+Q: What services does Redshift provide?
+A: Data warehousing and business intelligence.
+
+Q: What service provides data warehousing and business intelligence?
+A: Redshift
+
+Q: Name 4 database services.
+A: RDS, DynamoDB, Elasticache, Redshift.
+
+SubSubTopic: Migration services
+
+Q: What service does Migration Hub provide?
+A: Track application migrations.
+
+Q: What service tracks application migrations?
+A: Migration Hub.
+
+Q: What service does Application Discovery Service provide?
+A: Collect and present server configuration, usage, and behavior data.
+
+Q: What service collects and presents server configuration, usage, and behavior data.
+A: Application Discovery Service.
+
+Q: What service automatically discovers applications and their dependencies?
+A: Application Discovery Service.
+
+Q: What service does Database Migration Service provide?
+A: Migrate on-premises databases to the cloud.
+
+Q: What service migrates on-premises databases to the cloud?
+A: Database Migration Service?
+
+Q: What service does Server Migration Service provide?
+A: Migrate on-premises virtual machines and bare metal servers to the cloud.
+
+Q: What service migrates on-premises virtual machines and bare metal servers to the cloud?
+A: Server Migration Service.
+
+Q: Name 5 migration services.
+A: Migration Hub, Application Discovery Service, Database Migration Service, Server Migration Service, Snowball.
+
+SubSubTopic: Networking and content delivery services
+
+Q: What service does VPC provide?
+A: Virtual data centers and advanced virtual networking.
+
+Q: What service provides virtual data centers?
+A: Virtual Private Cloud (VPC).
+
+Q: What service provides advanced virtual networking?
+A: Virtual Private Cloud (VPC).
+
+Q: What does VPC stand for?
+A: Virtual Private Cloud.
+
+Q: What service does CloudFront provide?
+A: Content Delivery Network (CDN) and content caching.
+
+Q: What service provides a Content Delivery Network (CDN)?
+A: CloudFront.
+
+Q: What service provides a content caching?
+A: CloudFront.
+
+Q: What does CDN stand for?
+A: Content Delivery Network.
+
+Q: What service does Route53 provide?
+A: Domain Name Service (DNS).
+
+Q: What service provides Domain Name Service (DNS)?
+A: Route53.
+
+Q: What does DNS stand for?
+A: Domain Name Service.
+
+Q: What does Domain Name Service (DNS) do?
+A: Domain name to IP address translation.
+
+Q: What service does API gateway provide?
+A: Connect web and mobile applications to business logic hosted in the cloud through APIs.
+
+Q: What service connects web and mobile applications to business logic hosted in the cloud through APIs?
+A: API Gateway.
+
+Q: What service does Direct Connect provide?
+A: Direct connection from on-premises data center to VPC in cloud.
+
+Q: What service provides a direct connection from on-premises data center to VPC in cloud?
+A: Direct Connect.
+
+Q: Name 5 networking and content delivery services.
+A: VPC, CloudFront, Route53, API Gateway, Direct Connect.
+
+SubSubTopic: Developer tools services
+
+Q: What service does CodeStar provide?
+A: Software development project management.
+
+Q: What service provides software development project management?
+A: CodeStar.
+
+Q: What service does CodeCommit provide?
+A: Asset version control (Git).
+
+Q: What service provides asset version control?
+A: CodeCommit.
+
+Q: What service provides Git?
+A: CodeCommit.
+
+Q: What service does CodeBuild provide?
+A: Compile, test, and package software.
+
+Q: What services compiles, tests, and packages software?
+A: CodeBuild.
+
+Q: What service does CodeDeploy provide?
+A: Automates application deployment.
+
+Q: What service automates application deployment?
+A: CodeDeploy.
+
+Q: What service does CodePipeline provide?
+A: Continuous delivery.
+
+Q: What service provides continuous delivery?
+A: CodePipeline.
+
+Q: What service does X-Ray provide?
+A: Debug and analyze serverless applications.
+
+Q: What service debugs and analyzes serverless applications?
+A: X-Ray.
+
+Q: What service does Cloud9 provide?
+A: Cloud-based Integrated Development Environment (IDE).
+
+Q: What services provides a cloud-based Integrated Development Environment (IDE).
+A: Cloud9.
+
+Q: Name 7 developer tool services.
+A: CodeStar, CodeCommit, CodeBuid, CodeDeploy, CodePipeline, X-Ray, Cloud9.
+
+SubSubTopic: Management tools services
+
+Q: What service does CloudWatch provide?
+A: Monitor resources and applications.
+
+Q: What services monitors resources and applications?
+A: CloudWatch.
+
+Q: What service does CloudFormation provide?
+A: Deploy AWS resources using scripts.
+
+Q: What service deploys AWS resources using scripts?
+A: CloudFormation.
+
+Q: What service embodies "infrastructure as code"?
+A: CloudFormation.
+
+Q: What service does CloudTrail provide?
+A: Audit trail for AWS API calls.
+
+Q: What service provides an audit trail for AWS API calls?
+A: CloudTrail.
+
+Q: What service will tell you what happened when you AWS account gets hacked?
+A: CloudTrail.
+
+Q: What service does Config provide?
+A: Continuously monitors, records, and evaluates configurations.
+
+Q: What service continuously monitors, records, and evaluates configurations?
+A: Config.
+
+Q: What service allows you to restore a previous snapshot of the configuration?
+A: Config.
+
+Q: What services does OpsWorks provide?
+A: Chef and Puppet.
+
+Q: What service provides Chef and Puppet?
+A: OpsWorks.
+
+Q: What service provides automation configuration, deployment, and management of servers?
+A: OpsWorks.
+
+Q: What service does Service Catalog provide?
+A: Create and manage IT services catalogs.
+
+Q: What service creates and manages IT services catalogs?
+A: Service Catalog.
+
+Q: What service does Systems Manager provide?
+A: Automate operational actions, such as patches, updates, and configuration changes.
+
+Q: What service automates operational actions, such as patches, updates, and configuration changes?
+A: Systems Manager.
+
+Q: What service does Trusted Advisor provide?
+A: Provide advise on how to save money, improve performance, improve security, etc.
+
+Q: What service provides advise on how to save money, improve performance, improve security, etc.?
+A: Trusted Advisor.
+
+Q: What service does Managed Services provide?
+A: Let Amazon manage your AWS infrastructure.
+
+Q: What service lets Amazon manage your AWS infrastructure?
+A: Managed Services.
+
+Q: Name 9 management tools services.
+A: CloudWatch, CloudFormation, CloudTrail, Config, OpsWorks, Service Catalog, Systems Manager, Trusted Advisor, Managed Services.
+
+SubSubTopic: Media services
+
+Q: What service does Elastic Transcoder provide?
+A: File-based media transcoding.
+
+Q: What service does MediaConvert provide?
+A: File-based media transcoding.
+
+Q: What services provide file-based media transcoding?
+A: Elastic Transcoder and MediaConvert.
+
+Q: What service does MediaLive provide?
+A: Broadcast-grade live video processing.
+
+Q: What service provides broadcast-grade live video processing?
+A: MediaLive.
+
+Q: What service does MediaPackage provide?
+A: Just-in-time video packaging and origination.
+
+Q: What service provides just-in-time video packaging and origination?
+A: MediaPackage.
+
+Q: What service does MediaStore provide?
+A: Video origination and storage.
+
+Q: What service provides video origination and storage?
+A: MediaStore.
+
+Q: What service does MediaTailor provide?
+A: Insert targeted advertising into video streams.
+
+Q: What service inserts targeted advertising into video streams.
+A: MediaTailor.
+
+Q: Name 6 media services.
+A: Elastic Transcode, MediaConvert, MediaLive, MediaPackage, MediaStore, MediaTailor.
+
+SubSubTopic: Machine learning services
+
+Q: What service does SageMaker provide?
+A: Deep learning using neural networks.
+
+Q: What service provides deep learning using neural networks?
+A: SageMaker.
+
+Q: What service does Comprehend provide?
+A: Natural Language Processing (NLP) for sentiment analysis of text.
+
+Q: What service provides Natural Language Processing (NLP) for sentiment analysis of text?
+A: Comprehend.
+
+Q: What does NLP stand for?
+A: Natural Language Processing.
+
+Q: What service does DeepLens provide?
+A: A physical wireless video camera device with built-in image recognition.
+
+Q: What service provides a physical wireless video camera device with built-in image recognition?
+A: DeepLens.
+
+Q: What service does Lex provide?
+A: Conversational application interfaces using voice and text.
+
+Q: What service provides conversational application interfaces using voice and text?
+A: Lex.
+
+Q: What service does Machine Learning provide?
+A: Machine learning using traditional (non neural-network) methods.
+
+Q: What service provides machine learning using traditional (non neural-network) methods?
+A: Machine Learning.
+
+Q: What service does Polly provide?
+A: Text to speech conversion.
+
+Q: What service provides text to speech conversion?
+A: Polly.
+
+Q: What service does Rekognition provide?
+A: Recognize objects in images and videos.
+
+Q: What service recognizes objects in images and videos?
+A: Rekognition.
+
+Q: What service does Translate provide?
+A: Text language translation.
+
+Q: What service provides text language translation?
+A: Translate.
+
+Q: What service does Transcribe provide?
+A: Speech to text conversion.
+
+Q: What service provides speech to text conversion.
+A: Transcribe.
+
+Q: Name 9 machine learning services.
+A: SageMaker, Comprehend, DeepLens, Lex, Machine Learning, Polly, Rekognition, Translate, Transcribe.
+
+SubSubTopic: Analytics services
+
+Q: What service does Athena provide?
+A: Analyze data in S2 using SQL.
+
+Q: What service analyzes data in S2 using SQL?
+A: Athena.
+
+Q: What service does Elastic Map Reduce (EMR) provide?
+A: Big data analysis.
+
+Q: What service provides big data analysis?
+A: Elastic Map Reduce (EMR).
+
+Q: What does EMR stand for?
+A: Elastic Map Reduce.
+
+Q: What service does CloudSearch provide?
+A: Provide search capability to applications.
+
+Q: What service provides search capability to applications?
+A: CloudSearch.
+
+Q: What service does ElasticSearch provide?
+A: Operational search and analysis (e.g. logs).
+
+Q: What service provides operational search and analysis (e.g. logs)?
+A: ElasticSearch.
+
+Q: What service does Kinesis provide?
+A: Real-time collection, processing, and analysis of data streams.
+
+Q: What service provides real-time collection, processing, and analysis of data streams?
+A: Kinesis.
+
+Q: What service does Kinesis Video Streams provide?
+A: Real-time collection, processing, and analysis of video streams.
+
+Q: What service provides real-time collection, processing, and analysis of video streams?
+A: Kinesis Video Streams.
+
+Q: What service does QuickSight provide?
+A: Business intelligence.
+
+Q: What service provides business intelligence.
+A: QuickSight.
+
+Q: What service does Data Pipeline provide?
+A: Data-driven workflows to automate the movement and transformation of data.
+
+Q: What service provides data-driven workflows to automate the movement and transformation of data?
+A: Data Pipeline.
+
+Q: What service does Glue provide?
+A: Extract, Transform, and Load (ETL) for cleaning up date.
+
+Q: What service provides Extract, Transform, and Load (ETL) for cleaning up date?
+A: Glue.
+
+Q: What doe ETL stand for?
+A: Extract, Transform, and Load.
+
+Q: Name 9 analytics services.
+A: Athena, EMR, CloudSearch, ElasticSearch, Kinesis, Kinesis Video Streams, QuickSight, Data Pipeline, Glue.
+
+
+
+
+
+
+
+
+
