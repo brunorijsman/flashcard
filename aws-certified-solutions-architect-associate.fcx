@@ -883,6 +883,103 @@ A: GameLift.
 Q: Name 1 game development service.
 A: GameLift.
 
+Topic: Identity Access Management (IAM)
+
+SubTopic: IAM 101
+
+Q: What does IAM stand for?
+A: Identity and Access Management.
+
+Q: What is identity federation?
+A: Integration with Active Directory, Facebook, LinkedIn, etc. for authentication.
+
+Q: What does PCI DSS stand for?
+A: Payment Card Industry Data Security Standard.
+
+Q: What is an IAM user?
+A: A person (or service) that interacts with AWS.
+
+Q: What is an IAM group?
+A: A collection of users.
+
+Q: What is an IAM role?
+A: A set of permissions that can permanently or temporarily be assigned to users, applications, and services.
+
+Q: What is an IAM policy?
+A: A document that defines one or more permissions.
+
+Q: What language is used to define policy document?
+A: JSON.
+
+Q: What is the root account?
+A: The default account created when the AWS account was setup.
+
+Q: What are the default permissions for a user?
+A: Full administrator access for root. No permissions for all other users.
+
+SubTopic: IAM Lab
+
+Q: Name two considerations for choosing a region.
+A: Proximity, available services.
+
+Q: Is IAM global or per-region?
+A: Global.
+
+Q: What is the IAM users sign-in link?
+A: https://xxx.signin.aws.amazon.com/console where xxx is the account ID or alias.
+
+Q: What are the 5 recommended security practices for a new account?
+A: Delete root access keys, enable MFA, create individual IAM users, use groups to assign permissions, apply an IAM password policy.
+
+Q: What does MFA stand for?
+A: Multi Factor Authentication.
+
+Q: What are the two types of MFA devices?
+A: Physical and virtual.
+
+Q: What are the two types of access for an IAM user?
+A: Console and programmatic.
+
+Q: How is console access authenticated?
+A: User name and password and optional MFA.
+
+Q: How is programmatic access authenticated?
+A: Access key and access secret.
+
+Q: What are the access key id and secret used for?
+A: Programmatic access: API, SDK, command-line, etc. Not for the console.
+
+Q: How can you recover your access key secret?
+A: You cannot. You must generate a new access key.
+
+Q: What is the difference between policy AdministratorAccess and policy SystemAdministrator.
+A: AdministratorAccess allows everything. SystemAdministrator allows almost everything (everything needed for development).
+
+Lab: Identity and Access Management (IAM) 101
+Step: Log into AWS console.
+Step: Select region.
+Step: Select IAM service.
+Step: Customize the IAM users sign-in link.
+Step: Create an administrator group with full access.
+Step: Create two users (john and mary) with programmatic and console access and assign them to the administrator group.
+Step: Create an HR group with S3 read-only access.
+Step: Move john to the HR group.
+Step: Attach glacier read-only access directly to john.
+Step: De-active john's access key and create a new one.
+Step: Change the password policy.
+Step: Create a role that allows EC2 instances to write to S3.
+
+SubTopic: Create a Billing Alarm Lab
+
+Lab: Create a Billing Alarm
+Step: Log into AWS console.
+Step: Open billing dashboard.
+Step: Enable monitoring of estimated charges.
+Step: Enable billing alerts.
+Step: Create a billing alarm for estimated charges more than $10.
+
+
+
 
 
 

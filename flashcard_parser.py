@@ -72,6 +72,15 @@ class Parser:
         print('      *** Question:', question_text)
         print('          Answer  :', answer_text)
 
+    def _add_lab(self):
+        lab_name = self._arg
+        print('      *** Lab  :', lab_name)
+        while self._next_command():
+            if self._tag != 'step':
+                break
+            step_text = self._arg
+            print('          Step :', step_text)
+
     def _parse_all_questions(self):
         while self._next_command():
             if self._tag == 'topic':
@@ -82,8 +91,10 @@ class Parser:
                 self._set_sub_sub_topic()
             elif self._tag in ['question', 'q']:
                 self._add_question()
+            elif self._tag == 'lab':
+                self._add_lab()
             else:
-                fatal_error('Unrecognized tag in command')
+                self._fatal_error('Unrecognized tag "' + self._tag + '"')
         
     def _parse_test(self):
         if not self._next_command():
