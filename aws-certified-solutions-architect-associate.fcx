@@ -968,17 +968,226 @@ Step: Attach glacier read-only access directly to john.
 Step: De-active john's access key and create a new one.
 Step: Change the password policy.
 Step: Create a role that allows EC2 instances to write to S3.
+Step: Cleanup: delete the created users, groups, and roles.
 
 SubTopic: Create a Billing Alarm Lab
 
 Lab: Create a Billing Alarm
-Step: Log into AWS console.
+Step: Log into AWS console as root.
 Step: Open billing dashboard.
 Step: Enable monitoring of estimated charges.
 Step: Enable billing alerts.
 Step: Create a billing alarm for estimated charges more than $10.
 
+Topic: AWS object storage and CDN - S3, Glacier, and CloudFront
 
+SubTopic: S3 101
+
+Q: What does S3 stand for?
+A: Simple Storage Service.
+
+Q: What service does S3 provide?
+A: Object store.
+
+Q: How does S3 achieve reliability?
+A: By replicating the data across multiple devices and AZs.
+
+Q: Why can you not use S3 as a virtual disk?
+A: You need block store for that, and S3 is object store.
+
+Q: What does object store really mean?
+A: You can upload entire files.
+
+Q: What is the minimum size of an S3 object?
+A: Zero bytes.
+
+Q: What is the maximum size of a single S3 object?
+A: 5 TB.
+
+Q: What is the maximum total size of all S3 objects?
+A: Unlimited.
+
+Q: What is a bucket?
+A: S3 objects are stored in buckets, which are similar to top-level folders.
+
+Q: What is the scope of a bucket name?
+A: Global, i.e. it must be globally unique.
+
+Q: What are the rules for bucket naming?
+A: Globally unique, must follow DNS naming rules.
+
+Q: What does the URL for a bucket look like?
+A: https://s3-eu-west-1.amazonaws.com/bucketname where eu-west-1 is the region name, and bucketname is the bucket name.
+
+Q: How do you know uploading a file to S3 was succesful?
+A: HTTP response code 200.
+
+Q: What is the S3 data consistency model for PUT of new object?
+A: Read after write consistency.
+
+Q: What is the S3 data consistency model for overwrite PUT of existing object?
+A: Eventual consistency.
+
+Q: What is the S3 data consistency model for DELETE object?
+A: Eventual consistency.
+
+Q: What is the consistency model for S3 objects?
+A: Read afer write consistency for PUT new, eventual consistency for PUT modify and DELETE.
+
+Q: What does read after write consistency mean?
+A: After writing a change, reading always immediately returns the new state, never the old state.
+
+Q: What does eventually consistency mean?
+A: After writing a change, reading may for some time return the old state, but eventually returns the new state.
+
+Q: What is the underlying cause for eventual consistency?
+A: It takes time to propagate a change across a devices where the data is replicated.
+
+Q: What are the components of an S3 object?
+A: Key, value, version ID, metadata, sub-resources.
+
+Q: What is the S3 object key?
+A: The name.
+
+Q: What is the S3 object value?
+A: The contents, which is a sequence of bytes.
+
+Q: What is the S3 object value?
+A: The contents.
+
+Q: What is the S3 object metadata?
+A: Tags, which are key-value pairs.
+
+Q: What are S3 object sub-resources?
+A: Access Control Lists (ACLs), torrent.
+
+Q: What does ACL stand for?
+A: Access Control List.
+
+Q: For which reliability is the S3 platform built?
+A: The target reliability is 99.99% (4 nines).
+
+Q: What availability does AWS guarantee for standard S3?
+A: The Service Level Agreement (SLA) guarantees 99.9% (3 nines) reliability.
+
+Q: What durability does AWS guarantee for standard S3?
+A: 99.999999999% (11 nines).
+
+Q: What is the difference between availability and durability?
+A: Availability is probability of losing access to a file temporarily, durability is probability of losing the file forever.
+
+Q: What is tiered storage?
+A: There are multiple storage classes (aka storage tiers) with different @@@
+
+Q: What is lifecycle management?
+A: Automatically move a file from one tier to another, based on age of the file etc.
+
+Q: What is versioning?
+A: After changes, keep multiple versions of a file, plus the ability to restore older versions.
+
+Q: Name 2 mechanisms for securing S3 data.
+A: Access Control Lists (ACLs) and bucket policies.
+
+Q: Name @@@ S3 storage tiers / classes.
+A: Standard, Infrequenty Accessed (IA), one-zone IA, @@@
+
+Q: What is the target availability of the S3 standard storage tier?
+A: 99.99% (4 nines).
+
+Q: What is the guaranteed availability of the S3 standard storage tier?
+A: 99.9% (3 nines)
+
+Q: What is the durability of the S3 standard storage tier?
+A: 99.999999999% (11 nines).
+
+Q: What is the redundancy of the S3 standard storage tier?
+A: Replicated across at least 3 availability zones.
+
+Q: What is the retrieval latency of the S3 standard storage tier?
+A: Milliseconds.
+
+Q: Is there a retrieval fee for the S3 standard storage tier?
+A: No, retrieval is free.
+
+Q: What is the target availability of the S3 IA storage tier?
+A: 99.9% (3 nines).
+
+Q: What is the guaranteed availability of the S3 IA storage tier?
+A: 99% (2 nines).
+
+Q: What is the durability of the S3 IA storage tier?
+A: 99.999999999% (11 nines).
+
+Q: What is the redundancy of the S3 IA storage tier?
+A: Replicated across at least 3 availability zones.
+
+Q: What is the retrieval latency of the S3 IA storage tier?
+A: Milliseconds.
+
+Q: Is there a retrieval fee for the S3 IA storage tier?
+A: Yes, charged per GB retrieved.
+
+Q: What does IA stand for?
+A: Infrequently Accessed.
+
+Q: What is the main difference between the S3 standard and IA storage tiers?
+A: Lower capacity cost, but adds retrieval cost.
+
+Q: What is the target availability of the S3 one-zone IA storage tier?
+A: 99.5%.
+
+Q: What is the guaranteed availability of the S3 one-zone IA storage tier?
+A: 99% (two nines).
+
+Q: What is the durability of the S3 one-zone IA storage tier?
+A: 99.999999999% (11 nines).
+
+Q: What is the redundancy of the S3 one-zone IA storage tier?
+A: No replication across zones, only one zone.
+
+Q: What is the retrieval latency of the S3 one-zone IA storage tier?
+A: Milliseconds.
+
+Q: Is there a retrieval fee for the S3 one-zone IA storage tier?
+A: Yes, charged per GB retrieved.
+
+Q: What is the main difference between the S3 IA and one-zone IA storage tiers?
+A: Lower capacity cost, but no replication across zones.
+
+Q: What is the target availability of Glacier?
+A: Not specified.
+
+Q: What is the guaranteed availability of Glacier?
+A: Not specified.
+
+Q: What is the durability of the Glacier?
+A: 99.999999999% (11 nines).
+
+Q: What is the redundancy of the Glacier?
+A: Replicated across at least 3 availability zones.
+
+Q: What is the retrieval latency of the Glacier?
+A: 3-5 hours for standard, minutes for expedited.
+
+Q: Is there a retrieval fee for the Glacier?
+A: Yes, charged per GB retrieved.
+
+Q: What is the difference between the S3 IA and Glacier?
+A: Lower capacity cost, but much longer retrieval latency (hours vs milliseconds).
+
+Q: What are the three variations of Glacier?
+A: Standard, expedited, bulk.
+
+Q: What storage would you choose if you simply want the lowest cost possible and you don't care about retrieval latency?
+A: Glacier.
+
+Q: How are you charged for S3 storage?
+A: Storage capacity, number of requests, storage management (e.g. tags), data transfer (retrieval, replication), transfer acceleration.
+
+Q: What is S3 transfer acceleration?
+A: Users transfer data to and from edge locations, and transfer to the region is accelerated over the AWS backbone. It is faster.
+
+SubTopic: Lab: Create an S3 Bucket
 
 
 
