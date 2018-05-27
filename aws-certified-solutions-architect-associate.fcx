@@ -1303,7 +1303,7 @@ A: Show all versions and delete the delete marker.
 Q: What is MFA delete?
 A: Require Multi Factor Authentication (MFS) for permanently deleting an object and changing the versioning state of a bucket.
 
-SubTopic: Cross-region Replication - Lab
+SubTopic: Lab: Cross-region Replication
 
 Q: What is the requirement for cross-region replication?
 A: Versioning must be anabled on both the source and destination bucket.
@@ -1395,10 +1395,71 @@ Step: Observe that this change has NOT been replicated to bucket B2; the delete 
 Step: Manually delete the delete marker in bucket B2.
 Step: Make a change to file F1, and upload the change to bucket B1.
 Step: Observe that file F1 now has 3 versions in bucket B1.
-Step: Observe that the change has been replicated to bucket B2, and that bucket B2 now also has 3 versions of file F1.
+Step: Observe that the change has been replicated to bucket B2, and that bucket B2 now also has the newest version of file F1.
 Step: In bucket B1, delete version 3 of object F1.
 Step: Observe that in bucket B1, only versions 1 and 2 remain.
 Step: Observe that this change has NOT been replicated to bucket B2; there are still 3 versions there.
-Step: Clean up: delete objects and bucket in both regions.
+Step: Clean up: delete objects and buckets in both regions.
 
+SubTopic: Lab: Lifecyle Management, S3-IA, and Glacier
 
+Lab: Lifecyle Management, S3-IA, and Glacier
+Step: Log into the AWS console.
+Step: Go to the S3 console.
+Step: Make sure you are in a region where Glacier is available.
+Step: Create a bucket.
+Step: Initiate the creation of a lifecyle rule (details in next steps)
+Step: Configure the lifecyle rule to apply to both current and previous versions.
+Step: Configure the lifecyle rule to transition the current version to Standard-IA after 50 days.
+Step: Configure the lifecyle rule to transition the current version to Glacier after 100 days.
+Step: Configure the lifecyle rule to transition previous versions to Standard-IA after 30 days.
+Step: Configure the lifecyle rule to transition previous versions to Glacier after 60 days.
+Step: Configure the lifecyle rule to expire the current version after 465 days.
+Step: Configure the lifecyle rule to expire previous versions after 425 days.
+Step: Note that we cannot observe the lifecycle rule in action because it would require us to wait 30 days.
+Step: Clean up: delete the bucket.
+
+Q: What does lifecycle management do?
+A: Move old files to a lower storage tier or delete them, based on a defined policy.
+
+Q: What are the possible destination lower storage tiers for lifecycle management?
+A: S3 Standard-IA, S3 One-Zone-IA, Glacier, retire.
+
+Q: What does expiring an object mean?
+A: Permanently deleting it.
+
+Q: Is Glacier available in every region?
+A: No, there are a few regions where it is not available.
+
+Q: Is versioning compatible with life cycle management?
+A: Yes, versioning is allowed but not required: versioning can be enabled or disabled.
+
+Q: Is versioning compatible with MFA delete?
+A: No, life cycle management cannot be enabled on buckets with MFA delete.
+
+Q: Can lifecycle management manage a subset of objects in a folder?
+A: Yes, you can filter objects on prefix (folder) and/or tags.
+
+Q: Which versions does lifecycle management apply to?
+A: You can choose to apply it to current version and/or previous versions.
+
+Q: What is the minimum size of an object to be subject to lifecycle management?
+A: 128 KB.
+
+Q: In lifecycle management, what is the minimum time interval for the transition to Standard-IA or One-Zone-IA?
+A: 30 days after object creation.
+
+Q: In lifecycle management, what is the minimum time interval for the transition to Glacier?
+A: 30 days after transition to Standard-IA or One-Zone-IA.
+
+Q: In lifecycle management, what is the minimum time interval for the expiry from Standard-IA or One-Zone-IA?
+A: 30 days (if less, you are charged for 30 days of storage)
+
+Q: In lifecycle management, what is the minimum time interval for the expiry from Glacier?
+A: 90 days (if less, you are charged for 90 days of storage)
+
+Q: What is the main use case for life cycle management?
+A: Reduce storage cost by moving old files to a lower storage tier and/or deleting them.
+
+Q: In lifecycle management, what storage class can you NOT transition to?
+A: Reduced redundancy.
