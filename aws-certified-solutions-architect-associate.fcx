@@ -1672,3 +1672,62 @@ A: Create a CloudFront invalidation to flush cached content from the edge locati
 
 Q: What would you do if you accidentally put some confidential information on the web, and you want to remove it immediately?
 A: Create a CloudFront invalidation to flush cached content from the edge locations. Note there is a charge.
+
+SubTopic: S3 Security and Encryption
+
+Q: What are the default permissions for an S3 bucket?
+A: Private: only the owner (the creator) has full access, and everyone else has no access.
+
+Q: Name 2 mechanisms for securing S3 buckets:
+A: Bucket policies and Access Control Lists (ACLs).
+
+Q: Name 1 mechanism for securing S3 buckets:
+A: Access Control Lists (ACLs).
+
+Q: What can Policies be attached to directly in S3?
+A: Only buckets.
+
+Q: What can Access Control Lists be attached to in S3?
+A: Both buckets and objects.
+
+Q: Whose access can be controlled by an S3 ACL?
+A: The owner account, other accounts, public access, and (for buckets) the S3 log delivery group.
+
+Q: What types of access are controlled by a an S3 bucket ACL?
+A: List object, write objects, read bucket permissions, write bucket permissions.
+
+Q: What types of access are controlled by a an S3 object ACL?
+A: Read object, read object permissions, write object permissions.
+
+Q: Where is the permission to write to an object controlled?
+A: In the ACL of the bucket (not the ACL of the object).
+
+Q: What does ACL stand for?
+A: Access Control List.
+
+Q: Describe S3 logging.
+A: If Server Access Logging is enabled on a bucket, all requests for the bucket are written to a log file in S3 for auditing purposes.
+
+Q: What does S3 offer for in-transit encryption?
+A: HTTPS, which relies on SSL/TLS
+
+Q: What are the two locations where at-rest encryptions can be performed?
+A: Client-side encyrption and Server-Side Encryption (SSE)
+
+Q: What 3 forms of Server Side Encryption (SEE) does S3 support?
+A: S3 managed keys (SSE-S3), S3 Key Management Service (KMS) managed keys (SSE-KMS), Customer managed keys (SSE-C).
+
+Q: What encryption algorithm does AWS SSE use?
+A: Advanced Encryption Standard AES-256.
+
+Q: How are the keys managed for SSE-S3?
+A: Each object is encrypted with a unique key chosesn by AWS. The key is encrypted with a master key, which is rotated regularly.
+
+Q: How are the keys managed for SSE-KMS?
+A: The customer choses the keys and the key policies (e.g. rotation) and stores them securely in AWS using the Key Management Service (KMS).
+
+Q: How are the keys managed for SSE-C?
+A: The customer must provide the key in each request (only requests over HTTPS are allowed).
+
+Q: Does AWS store the keys when using SSE-C?
+A: No, Amamzon does not store the keys. For validation purposes it only stores a salt (a hash of the key) from which the key cannot be reconstructed.
