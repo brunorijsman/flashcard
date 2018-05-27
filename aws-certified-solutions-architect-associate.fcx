@@ -1463,3 +1463,53 @@ A: Reduce storage cost by moving old files to a lower storage tier and/or deleti
 
 Q: In lifecycle management, what storage class can you NOT transition to?
 A: Reduced redundancy.
+
+SubTopic: CloudFront CDN Overview
+
+Q: What does CDN stand for?
+A: Content Delivery Network.
+
+Q: What service does CloudFront provide?
+A: Faster access to content by caching content at edge locations.
+
+Q: What is an Edge Location?
+A: A location where content is cached.
+
+Q: What is the relation between an edge location and a region or AZ?
+A: They are unrelated. There are more edge locations than regions, and they are located at difference places.
+
+Q: What is a CloudFront origin?
+A: The original location of delivered content.
+
+Q: What are possible CloudFront origins within AWS?
+A: S3 bucket, EC2 instance, Elastic Load Balancer, Route53.
+
+Q: Does CloudFront support third-party origins (non-AWS origins)?
+A: Yes.
+
+Q: What is a CloudFront distribution?
+A: The name given to a CDN, wich consists of a collection of Edge Locations.
+
+Q: Can CloudFront deliver dynamic, interactive, and streaming websites?
+A: Yes.
+
+Q: Name two types of CloudFront distributions?
+A: Web distribution and RTMP distribution.
+
+Q: What does RTMP stand for?
+A: Real Time Messaging Protocol.
+
+Q: When would you use a CloudFront RTMP distribution.
+A: For media streaming using Adobe Flash.
+
+Q: Are CloudFront edge locations read-only?
+A: No, you can also PUT or POST to edge locations.
+
+Q: How long does CloudFront cache content at an edge location?
+A: For the configured Time To Live (TTL).
+
+Q: Can you manually clear an object from a CloudFront edge location cache?
+A: Yes, you can, but you will be charged for it.
+
+Q: Why would you manually clear an object from a CloudFront edge location cache?
+A: To make sure that end-users see the most recent version of the object.
