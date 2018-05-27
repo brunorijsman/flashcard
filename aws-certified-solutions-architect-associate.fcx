@@ -1189,6 +1189,216 @@ A: Users transfer data to and from edge locations, and transfer to the region is
 
 SubTopic: Lab: Create an S3 Bucket
 
+Lab: Create an S3 bucket
+Step: Log into the AWS console.
+Step: Choose a region.
+Step: Go to the S3 console.
+Step: Create a bucket.
+Step: Look at versioning properties for the bucket.
+Step: Look at logging properties for the bucket.
+Step: Look at static website hosting properties for the bucket.
+Step: Look at tags properties for the bucket.
+Step: Look at transfer acceleration properties for the bucket.
+Step: Look at events properties for the bucket.
+Step: Look at requester pays properties for the bucket.
+Step: Look at the permissions for the bucket.
+Step: Look at the policy generator for the bucket.
+Step: Look at lifecycle management for the bucket.
+Step: Look at replication management for the bucket.
+Step: Look at analytics management for the bucket.
+Step: Look at metrics management for the bucket.
+Step: Look at inventory management for the bucket.
+Step: Set tag department to value engineering, and tag environment to value development for the bucket.
+Step: Give another AWS account read-write access to the bucket.
+Step: Make the bucket publicly readable.
+Step: Upload two files to the bucket.
+Step: Monitor the progress of the upload.
+Step: Try to download the contents of an object using its URL and get an access denied error.
+Step: Make the object public.
+Step: Again, try to download the contents of the object using its URL, which succeeds this time.
+Step: Look at the permissions for an object.
+Step: Look at the storage class properties for the object.
+Step: Look at the encryption properties for the object.
+Step: Look at the Metadata properties for the object.
+Step: Look at the Tags properties for the object.
+Step: Clean up: delete objects and bucket.
 
+Q: What is the default permission for a bucket?
+A: Only the owner (the creator) has full access, and everyone else has no access.
+
+Q: What is the default permission for an object?
+A: Only the owner (the creator) has full access, and everyone else has no access.
+
+Q: What is another name for the one-zone IA storage class?
+A: Reduced redundancy storage class.
+
+Q: Does an object inherit the tags from the bucket?
+A: No.
+
+Q: Name 2 ways to control access to a bucket.
+A: Access Control Lists (ACLs) and Bucket Policy.
+
+Q: What does ARN stand for?
+A: Amazon Resource Name.
+
+Q: What is the scope of bucket names?
+A: The bucket name must be globally unique.
+
+Q: What is the scope of the bucket contents?
+A: The contents of a bucket local to a specific region.
+
+Q: What indicates success for uploading a file to an S3 bucket?
+A: HTTP status code 200.
+
+Q: Name the 4 tiers (classes) of S3 storage?
+A: Standard, Infrequent Access (IA), One Zone IA, Reduced Redundancy.
+
+Q: Name 2 locations where encryption can be performed.
+A: Client-side encryption and server-side encryption.
+
+Q: Name 3 types of server-side encryption.
+A: SSE-S3, SSE-KMS, SSE-C.
+
+Q: What does SSE-S3 stand for?
+A: Server-Side Encryption with amazon S3 managed keys.
+
+Q: What does SSE-KMS stand for?
+A: Server-Side Encryption with amazon Key Management Service managed keys.
+
+Q: What does SSE-C stand for?
+A: Server-Side Encryption with Customer managed keys.
+
+SubTopic: Lab: S3 Version Control
+
+Lab: S3 Version Control
+Step: Log into the AWS console.
+Step: Choose a region.
+Step: Go to the S3 console.
+Step: Create a bucket.
+Step: Enable versioning.
+Step: Upload a small text file to the bucket; make it publicly readable.
+Step: Make a change in the text file, and upload the changed version.
+Step: In the S3 console, click on the object, and use the dropdown menu to look at the two versions.
+Step: Delete the latest version of the object using the same dropdown menu.
+Step: Delete the object itself (not a version of it).
+Step: Enable displaying all versions of the object.
+Step: Observe the delete marker version.
+Step: Restore the object by deleting the delete marker.
+Step: Make a change in the text file, and upload the changed version.
+Step: Observe the total size of all versions (you will be charged for the total)
+Step: Clean up: delete objects and bucket.
+
+Q: How do you disable versioning on a bucket?
+A: You cannot. Once versioning is enabled, you can only suspend it.
+
+Q: What is the main disadvantage of versioning?
+A: You use and pay for a lot more storage capacity because all versions are kept as a whole file.
+
+Q: What happens if an object is deleted (if versioning is enabled)?
+A: A delete marker is added to the version list.
+
+Q: How can you restore a deleted object (if versioning is enabled)?
+A: Show all versions and delete the delete marker.
+
+Q: What is MFA delete?
+A: Require Multi Factor Authentication (MFS) for permanently deleting an object and changing the versioning state of a bucket.
+
+SubTopic: Cross-region Replication - Lab
+
+Q: What is the requirement for cross-region replication?
+A: Versioning must be anabled on both the source and destination bucket.
+
+Q: What feature would you typically enable if you use cross-region replication for backup?
+A: Set the storage class of the replicated objects to Infrequently Accessed (IA), which is cheaper.
+
+Q: When you enable cross-region replication, are existing object replicated?
+A: No, only changes from that point onwards are replicated.
+
+Q: What are the options for installing the AWS command line tools on Mac?
+A: A bundled installer or pip instal.
+
+Q: What is the first step after installing the AWS command line tools?
+A: aws configure.
+
+Q: What do you need to run the command line "aws configure"?
+A: The access key id and the access key secret.
+
+Q: What can you do if you want to use the command line tools but don't have the access key secret?
+A: Create a new user for the command line tools.
+
+Q: What is the command line to show all buckets?
+A: aws s3 ls
+
+Q: What is the command line to copy all objects in one bucket to another bucket?
+A: aws s3 cp --recursive s3://source-bucket-name s3://dest-bucket-name
+
+Q: If cross-region replication is enabled, and you delete an object, what happens?
+A: The delete marker is replicated. 
+
+Q: If cross-region replication is enabled, and you delete a delete marker, what happens?
+A: This change is NOT replicated, the delete marker is still there in the destination bucket.
+
+Q: If cross-region replication is enabled, and you delete a version, what happens?
+A: This change is NOT replicated, the version is still there in the destination bucket.
+
+Q: If cross-regione replication is enabled, what happens with the permissions?
+A: The permissions are also replicated.
+
+Q: Does cross-region replication allow you to replicate from one bucket to another bucket in the same region?
+A: No, the regions must be different.
+
+Q: Is daisy chaining cross-region replication (B1 -> B2 -> B3) allowed?
+A: No, not at this time (this may change)
+
+Q: Is cross-region replication to multiple destination buckets (B1 -> B2 and B1 -> B3) allowed?
+A: No, not at this time (this may change)
+
+Q: Can you do cross-region replication to a bucket in another account?
+A: Yes.
+
+Q: Does cross-region replication require replicating all files in a bucket?
+A: No, you can replicate a subset of files with a given prefix (i.e. in a given folder).
+
+Q: What is a main application for cross-region replication?
+A: Backup and disaster recovery.
+
+Q: What does RPO stand for?
+A: Recovery Point Objective.
+
+Q: Is cross-region replication synchronous or asynchronous?
+A: Asynchronous; the replication happens can take some time after the change, depending on object size and network conditions.
+
+Q: How can you be sure that objects are actually replicated in a timely manner to meet the RPO?
+A: Use cross-region replication monitor (CRR monitor).
+
+Lab: S3 Version Control
+Step: Log into the AWS console.
+Step: Go to the S3 console.
+Step: Create a bucket B1 in one region and enable versioning.
+Step: Create another bucket B2 in another region and do not enable versioning.
+Step: Upload two files F1 and F2 to bucket B1.
+Step: Upload a change to file F1 and upload it to bucket B1.
+Step: Observe the files in bucket B1: file F1 (2 versions) and file F2 (1 version).
+Step: Enable cross-region replication from bucket B1 to bucket B2. Observe that versioning must be enabled on bucket B2.
+Step: Change the cross-region replication to change the storage class in B2 to Infrequently Accessed (IA).
+Step: Observe that the existing objects in bucket B1 have not been replicated to bucket B2.
+Step: Install the AWS command command line tools.
+Step: Do the initial configuration of the AWS command line tools (create a new user if needed).
+Step: Use the AWS command line to list all files in bucket B1 (to make sure it works).
+Step: Use the AWS command line to copy all existing objects in bucket B1 to bucket B2.
+Step: In source bucket B1, delete object F1.
+Step: Observe that a delete marker for object F1 has been placed in source bucket B1.
+Step: Observe that a delete marker for object F1 has been replicated to destination bucket B2.
+Step: In source bucket B1, delete the delete marker for object F1.
+Step: Observe that a delete marker for object F1 has been deleted in source bucket B1, and the object is restored.
+Step: Observe that this change has NOT been replicated to bucket B2; the delete marker is still there.
+Step: Manually delete the delete marker in bucket B2.
+Step: Make a change to file F1, and upload the change to bucket B1.
+Step: Observe that file F1 now has 3 versions in bucket B1.
+Step: Observe that the change has been replicated to bucket B2, and that bucket B2 now also has 3 versions of file F1.
+Step: In bucket B1, delete version 3 of object F1.
+Step: Observe that in bucket B1, only versions 1 and 2 remain.
+Step: Observe that this change has NOT been replicated to bucket B2; there are still 3 versions there.
+Step: Clean up: delete objects and bucket in both regions.
 
 
