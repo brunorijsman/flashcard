@@ -1077,7 +1077,7 @@ Q: What is the difference between availability and durability?
 A: Availability is probability of losing access to a file temporarily, durability is probability of losing the file forever.
 
 Q: What is tiered storage?
-A: There are multiple storage classes (aka storage tiers) with different @@@
+A: There are multiple storage classes (aka storage tiers) with different cost, retrieval latency, and reliability characteristics.
 
 Q: What is lifecycle management?
 A: Automatically move a file from one tier to another, based on age of the file etc.
@@ -1088,8 +1088,8 @@ A: After changes, keep multiple versions of a file, plus the ability to restore 
 Q: Name 2 mechanisms for securing S3 data.
 A: Access Control Lists (ACLs) and bucket policies.
 
-Q: Name @@@ S3 storage tiers / classes.
-A: Standard, Infrequenty Accessed (IA), one-zone IA, @@@
+Q: Name 4 S3 storage tiers / classes.
+A: Standard, Standard-IA (Infrequenty Accessed), One-Zone-IA, Reduced Redundancy.
 
 Q: What is the target availability of the S3 standard storage tier?
 A: 99.99% (4 nines).
@@ -1513,3 +1513,162 @@ A: Yes, you can, but you will be charged for it.
 
 Q: Why would you manually clear an object from a CloudFront edge location cache?
 A: To make sure that end-users see the most recent version of the object.
+
+SubTopic: Lab: Create a CloudFront CDN
+
+Lab: Create a CloudFront CDN
+
+Step: Log into the AWS console.
+Step: Create an S3 bucket in a very remote region (e.g. Syndney).
+Step: Upload a very large image into the remote bucket. Make it publicly readable.
+Step: Open the image (using force refresh on the browser). Observe it takes a long time to download.
+Step: Initiate creation of a CloudFront distribution (details follow in next steps).
+Step: Choose the S3 bucket as the origin.
+Step: Enable Restrict Bucket Access. Create a new origin access identity. Update the bucket policy to grant read access.
+Step: Redirect HTTP to HTTPS.
+Step: Monitor the distribution to observe when the Status reaches Deployed.
+Step: Observe that retrieving the image through S3 still is slow (remember to force the browser to hard refresh)
+Step: Construct the URL to retrieve the image using the CDN
+Step: Retrieve the image using the CDN. Observe that the first retrieval is still slow.
+Step: Retrieve the image using the CDN again. Observe that the first retrieval is fast, even if you force a hard refresh.
+Step: Remove read access for all users for the image in the bucket.
+Step: Observe that retrieving the image using the URL for the S3 bucket returns an error.
+Step: Observe that retrieving the image using the URL for the CloudFront distribution succeeds.
+Step: Observe that retrieving the image using the URL for the CloudFront redirects HTTP to HTTPS.
+Step: Clean up: delete the CloudFront distribution.
+Step: Clean up: delete the S3 bucket.
+
+Q: What type of CloudFront distribution would you use for static web content (e.g. HTML, CSS, client-side JavaScript, graphics)?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for dynamic web content (e.g. PHP)?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for distributing media files using HTTP or HTTPS?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for adding, updating, or deleting objects (PUT, POST, PATCH, DELETE, ...)?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for posting web forms?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for live streams?
+A: Web distribution.
+
+Q: What type of CloudFront distribution would you use for RTMP content?
+A: RTMP distribution.
+
+Q: What type of CloudFront distribution would you use for Adobe Flash content?
+A: RTMP distribution.
+
+Q: What is the "Origin Domain Name" for a CloudFront distribution?
+A: An AWS resource name (S3 bucket, EC2 instance, Elastic Load Balancer, Route53) or non-AWS domain name.
+
+Q: What is the "Origin Path" for a CloudFront distribution?
+A: CloudFront appends this to the Origin Domain Name when forwarding the request to the origin server. Typically the name of a folder in an S3 bucket.
+
+Q: Should you include slashes (/) in "Origin Path" for a CloudFront distribution?
+A: Include the leading slash but not the trailing slash.
+
+Q: What is the "Origin ID" for a CloudFront distribution?
+A: A descriptive name for the origin within the distribution.
+
+Q: What is "Restrict Bucket Access" for a CloudFront distribution?
+A: Is set to "Yes, restrict" it forces users to get the content through CloudFront and they cannot get it directly from the S3 bucket.
+
+Q: "Restrict Bucket Access" in CloudFront is typically used in combination with what other feature?
+A: URL signing and cookie signing.
+
+Q: "Restrict Bucket Access" in CloudFront requires what security feature?
+A: An origin access identity with the proper permissions to access the origin.
+
+Q: What is the most common mistake with enabling "Restrict Bucket Access"?
+A: Forget setting "Yes, Update Bucket Policy" for "Grant Read Permissions on Bucket".
+
+Q: What is "Path Pattern" in a CloudFront distribution behavior?
+A: Matches on a file pattern (e.g. only jpeg extensions) to route a request to particular origin.
+
+Q: What are the possible values for "Viewer Protocol Policy" in a CloudFront distribution behavior?
+A: HTTP and HTTPS, Redirect HTTP to HTTPS, HTTPS Only.
+
+Q: What do you need to do if you want to allow users to upload content?
+A: Incude PUT, POST, PATCH, DELETE in "Allowed HTTP Methods" in a CloudFront distribution behavior.
+
+Q: Name 2 options for controlling the TTL of cached objects.
+A: Using the cache headers provided by the origin server, or customized values specified in the CloudFront configuration.
+
+Q: What is the advantage of using a long TTL in CloudFront?
+A: Fewer trips to the origin server.
+
+Q: What is the disadvantage of using a long TTL in CloudFront?
+A: It takes longer for end-users to see an updated version of the content.
+
+Q: What is an alternative to flushing the cache when you want users to see a new version of content?
+A: Encode a version into the content name (into the URL).
+
+Q: What is "Restrict Viewer Access" in a CloudFront distribution behavior?
+A: It enables URL signing and Cookie signing.
+
+Q: What is "Restrict Viewer Access" typically used for in CloudFront?
+A: To make sure that only authorized (paying) customers can access content.
+
+A: How would you make sure that only authorized (paying) customers can access content?
+Q: Enable "Restrict Viewer Access" in CloudFront to enable URL signing and cookie signing.
+
+Q: What is "Price Class" in a CloudFront distribution distribution settings?
+A: Determines the set of edge locations that will cache the content (US, Canada, Europe only, or also Asia, or all locations).
+
+Q: What does WAF stand for?
+A: Web Application Firewall.
+
+Q: What is WAF used for in CloudFront?
+A: To prevent application-layer attachs on the web server.
+
+Q: What does the default URL for a CloudFront distribution look like?
+A: xxx.cloudfront.net where xxx is a random string.
+
+Q: What is "Alternate Domain Names" in a CloudFront distribution distribution settings?
+A: Allows you to use your own domain name instead of the default CloudFront domain name.
+
+Q: How does using your own domain name affect HTTPS?
+A: You must provide your own certificate and store it in Amazon Certificate Manager (ACM).
+
+Q: Does CloudFront support HTTP2?
+A: Yes, it is enabled by default but it can be disabled.
+
+Q: Does CloudFront support IPv6?
+A: Yes, it is enabled by default but it can be disabled.
+
+Q: How long does it take to create or delete a CloudFront distribution?
+A: A long time, up to 15 minutes.
+
+Q: Why does it take so long to create or delete a CloudFront distribution?
+A: Because many edge locations need to be updated.
+
+Q: How is the distribution domain name related to the distribution ID?
+A: They are unrelated. They both contain random strings, but they are different random strings.
+
+Q: Is it possible to have multiple origin servers for a single CloudFront distribution?
+A: Yes.
+
+Q: Is it possible to have multiple behaviors for a single CloudFront distribution?
+A: Yes.
+
+Q: What would you do if you want your CloudFront content only to be available in certain countries?
+A: Enable Geo Restrictions.
+
+Q: What are the two methods for configuring Geo Restrictions?
+A: Either a white list or a black list of countries (but not both).
+
+Q: What is a CloudFront invalidation?
+A: A request to remove cached objects from edge locations.
+
+Q: How would you remove CloudFront cached objects from edge locations?
+A: Create an invalidation. Note there is a charge.
+
+Q: What would you do if you create an updated version of content, and you want all users to see the new content immediately?
+A: Create a CloudFront invalidation to flush cached content from the edge locations. Note there is a charge.
+
+Q: What would you do if you accidentally put some confidential information on the web, and you want to remove it immediately?
+A: Create a CloudFront invalidation to flush cached content from the edge locations. Note there is a charge.
