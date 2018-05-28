@@ -1823,3 +1823,62 @@ A: Volume gateway.
 
 Q: How can the storage gateway connect to S3?
 A: The Internet, Direct Connect, or Virtual Private Cloud (VPC). The latter is used if the gateway is hosted in EC2.
+
+SubTopic: Snowball
+
+Q: What service does Snowball provide?
+A: Move large amounts of data into or out of the AWS cloud by shipping disks from and to Amazon.
+
+Q: What is the predecessor service for Snowball?
+A: Import/Export Disk.
+
+Q: What is the main difference between Snowball and Import/Export Disk?
+A: In Import/Export Disk you provide your own disk devices, whereas with Snowball Amazon provides the device.
+
+Q: Is Import/Export Disk still available?
+A: Yes, but it is deprecated an no longer advertised on the console.
+
+Q: Name 3 types of Snowball.
+A: Snowball, Snowball Edge, Snowmobile.
+
+Q: What does a Snowball device look like?
+A: A ruggedized disk the size of a large suitcase, with an integrated kindle screen and an Ethernet plug.
+
+Q: How do you physically connect a Snowball device to your local storage?
+A: Using an Ethernet cable (RJ45, SFP+ copper or SFP+ fiber).
+
+Q: What software do you use to transfer content to and from the Snowball device?
+A: The "snowball" utility that can be downloaded from Amazon is used to copy files to and from the Snowball device.
+
+Q: How are Snowball devices secured?
+A: Several layers, including: tamper resistent enclosures, 256-bit encryption, TPM module, full erasure after transfer, location tracking.
+
+Q: What is the cost advantage of Snowball relative to sending the data over the Internet?
+A: Up to 1/5th of the cost.
+
+Q: What is the capacity of a Snowball?
+A: 80 TB in all regions. 50 TB also availble in US.
+
+Q: How is Snowball Edge different from regular Snowball?
+A: It also provides compute in addition to storage. It provides 100 TB of storage. 
+
+Q: How is Snowmobile different from regular Snowball?
+A: Snowmobile is container mounted on a truck. It provides up to 100 Petabyte (= 100,000 TB) of storage.
+
+Q: Where does Snowball store the imported data?
+A: In S3.
+
+Q: Can Snowball also export data?
+A: Yes, it can export from S3.
+
+Q: Can Snowball import to or export from Glacier?
+A: Not directly, you have to go through S3.
+
+Q: How do you get a Snowball device?
+A: You create a job in the Snowball service console to request a Snowball device.
+
+Q: How does Amazon make sure that the Snowball device was shipped to the right person?
+A: The downloaded copy utility requires credentials (a manifest file and an unlock code) which are retrieved from the Snowball console.
+
+Q: How does Snowball know in which S3 bucket to store the data?
+A: You need to specify the bucket when you create the job before the Snowball is shipped and you also need to specify it when you run the copy utility.
