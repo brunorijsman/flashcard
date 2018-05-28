@@ -1882,3 +1882,17 @@ A: The downloaded copy utility requires credentials (a manifest file and an unlo
 
 Q: How does Snowball know in which S3 bucket to store the data?
 A: You need to specify the bucket when you create the job before the Snowball is shipped and you also need to specify it when you run the copy utility.
+
+SubTopic: Transfer Acceleration
+
+Q: What does S3 Transfer Acceleration do?
+A: It accelerates uploads to S3 by uploading to a CloudFront Edge Location and then using the optimized Amazon backbone between the Edge Location and the Region.
+
+Q: How do you enable S3 Transfer Acceleration?
+A: It is a simple Enabled / Disabled option in the bucket properties.
+
+Q: How much of a performance improvement can you expect from S3 Transfer Acceleration?
+A: If you are close the the S3 region, not much of a difference: 3% improvement or even worse performance. For remote regions up to 40% improvement.
+
+Q: How do I know what the actual improvement will be from my current location to each region?
+A: Use the "Want to compare your data transfer speed by region?" link in the bucket properties window on the console. It will make actual measurements.
