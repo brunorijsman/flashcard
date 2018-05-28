@@ -1731,3 +1731,95 @@ A: The customer must provide the key in each request (only requests over HTTPS a
 
 Q: Does AWS store the keys when using SSE-C?
 A: No, Amamzon does not store the keys. For validation purposes it only stores a salt (a hash of the key) from which the key cannot be reconstructed.
+
+SubTopic: Storage Gateway
+
+Q: What service does Storage Gateway provide?
+A: An on-site virtual appliance that connects on-site storage with AWS storage.
+
+Q: What AWS service provides an on-site virtual appliance that connects on-site storage with AWS storage?
+A: Storage Gateway.
+
+Q: Which host platforms does Storage Gateway support?
+A: VMware ESXi, Microsoft Hyper-V (2008 R2 and 2012), Amazon EC2.
+
+Q: Name 4 types of Storage Gateway?
+A: File gateway, Cached volumes gateway, Stored volumes gateway, Tape gateway (aka VTS gateway)
+
+Q: What does VTS stand for?
+A: Virtual Tape System.
+
+Q: What does the "Cloud Tiering" use case for Storage Gateway mean?
+A: Move infrequently used data to multi-tier storage in the cloud to save cost.
+
+Q: What does the "Hybrid Cloud Backup" use case for Storage Gateway mean?
+A: Store active data in on-prem storage (e.g. NAS or SAN) and automatically make backups which are stored in the cloud.
+
+Q: What does the "Hybrid Cloud Workload" use case for Storage Gateway mean?
+A: The legacy application can continue to access files using NAS or SAN, while the cloud-native application can use APIs to access S3 or EC2 EBS.
+
+Q: What service does the File gateway provide?
+A: The File Gateway offers NFS service to local clients, and maps NFS file shares to S3 objects in the AWS cloud.
+
+Q: Where does the File gateway store the files?
+A: The master copy is stored in S3, and there is a cache on the File gateway for efficiency.
+
+Q: Does the File Gateway transparrently preserve the NFS permissions and attributes?
+A: Yes, these are stored in S3 metadata.
+
+Q: What storage protocol does the File gateway support?
+A: Network File System (NFS).
+
+Q: How does the File gateway store files in the cloud?
+A: As S3 objects.
+
+Q: How does the File gateway integrate with S3?
+A: S3 features such as lifecycle management, cross-region replication, etc. are available for the S3 objects that represent files.
+
+Q: How does the File gateway integrate with other AWS services?
+A: Other services, such as Elastic Map Reduce (AMR), can read the S3 objects that represent files.
+
+Q: How does the File gateway enable a migration to cloud-native applications?
+A: The legacy application can continue to access files using NFS, while the cloud-native application can use APIs to access S3 objects.
+
+Q: Name the 2 kinds of Volume gateway.
+A: Cached volume gateway and Stored volume gateway.
+
+Q: What storage protocol does a Volume gateway support?
+A: iSCSI (Internet Small Computer System Interfaca)
+
+Q: Where does the a Volume gateway store the files?
+A: It periodically stores snapshots as objects in S3.
+
+Q: Name 2 ways in which Volume gateway reduce storage cost in S3.
+A: The snapshots are incremental and compressed.
+
+Q: How does the Volume gateway integrate with EC2?
+A: The snapshots stored in S3 can be mounted on virtual machines in EC2 as EBS volumes.
+
+Q: What service does the Cached volume gateway provide?
+A: Primary data is stored in S3 as snapshots (and presumably also live in EBS), local cache is stored in the on-prem SAN.
+
+Q: What disk sizes does Cached volume gateway support?
+A: 1 GB - 32 TB.
+
+Q: What service does the Stored volume gateway provide?
+A: Primary data is locally in the on-prem SAN, periodic snapshots are stored in S3 objects as a backup.
+
+Q: Where does the a Stored volume gateway store the files?
+A: It periodically stores snapshots as objects in S3.
+
+Q: What disk sizes does Cached volume gateway support?
+A: 1 GB - 16 TB.
+
+Q: What service does the tape gateway provide:
+A: The gateway offers a virtual tape device and a virtual media changer device. Tape contents are stored in S3 objects.
+
+Q: Can you continue to use your existing tape backup software (such as NetBackup, Backup Exec, Veeam) with Tape gateway?
+A: Yes.
+
+Q: Which Storage gateways are used for block-based storage?
+A: Volume gateway.
+
+Q: How can the storage gateway connect to S3?
+A: The Internet, Direct Connect, or Virtual Private Cloud (VPC). The latter is used if the gateway is hosted in EC2.
