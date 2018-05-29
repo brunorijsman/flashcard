@@ -1517,7 +1517,6 @@ A: To make sure that end-users see the most recent version of the object.
 SubTopic: Lab: Create a CloudFront CDN
 
 Lab: Create a CloudFront CDN
-
 Step: Log into the AWS console.
 Step: Create an S3 bucket in a very remote region (e.g. Syndney).
 Step: Upload a very large image into the remote bucket. Make it publicly readable.
@@ -1896,3 +1895,53 @@ A: If you are close the the S3 region, not much of a difference: 3% improvement 
 
 Q: How do I know what the actual improvement will be from my current location to each region?
 A: Use the "Want to compare your data transfer speed by region?" link in the bucket properties window on the console. It will make actual measurements.
+
+Q: What is the URL for using Transfer Acceleration when uploading a file?
+A: https://s3-accelerate.amazonaws.com
+
+SubTopic: Create a Static Website using S3.
+
+Lab: Create a Static Website using S3.
+Step: Create a bucket.
+Step: Enable static website hosting for the bucket.
+Step: Create an HTML page index.html and upload it into the bucket.
+Step: Create an HTML page error.html and upload it into the bucket.
+Step: Upload both pages to the bucket.
+Step: Using a browser, open the website home page.
+Step: Force an error by making the index not publicly readable.
+Step: Using a browser, open the website home page again and observe the error page.
+Step: Clean up: delete the bucket.
+
+Q: Who manages the web servers and load balancers when hosting a static website on S3?
+A: Amazon does.
+
+Q: What types of content cannot be hosted as a static website on S3?
+A: Anything that is active on the server side: PHP, .net, etc.
+
+Q: Can content that is active on the client side (e.g. JavaScript) be hosted as a static website on S3?
+A: Yes.
+
+Q: What service do you use to tie a domain name to a static website hosted in S3?
+A: Route53.
+
+Q: If you tie a domain name to a static website hosted in S3, what must be the name of the S3 bucket?
+A: The bucket name must be exactly the same as the full domain name (e.g. "example.com")
+
+Q: What is the default URL for a static website hosted in S3 (not using your own domain name)?
+A: <bucket-name>.s3-website-<region>.amazonws.com
+
+Q: What permissions should be set for S3 objects that are used as content for a static website on S3?
+A: Readbable for everyone, i.e. enable public read access.
+
+Q: Name 2 documents to be configured for a bucket that is used to host a static website on S3?
+A: Index and error.
+
+Q: Give an example of what redirection rules are used for with a static website on S3?
+A: To redirect example.com (the naked domain name) to www.example.com.
+
+
+
+
+
+
+
