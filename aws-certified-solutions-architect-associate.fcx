@@ -1954,9 +1954,325 @@ A: Index and error.
 Q: Give an example of what redirection rules are used for with a static website on S3?
 A: To redirect example.com (the naked domain name) to www.example.com.
 
+SubTopic: S3 FAQ
 
+Q: How many S3 buckets can you have per account by default?
+A: 100
 
+Q: Does S3 provide an SLA?
+A: Yes, and a service credit if the SLA is violated.
 
+Q: Is the cost for S3 the same in all regions?
+A: No.
+
+Q: Does it cost money to copy S3 data?
+A: No within a region, yes accross regions.
+
+Q: Does it cost money to transfer data between EC2 and S3?
+A: No within a region, yes accross regions.
+
+Q: Does it cost money to access S2 data from the console?
+A: Yes.
+
+Q: Who pays when S3 data is accessed from another account?
+A: The owner account, unless requester pays is enabled.
+
+Q: What is recommended for uploading very large files to S3?
+A: Multipart upload.
+
+Q: How much cheaper is the S3 One-Zone-IA storage class than the Standard-IA storage class?
+A: 20%
+
+Q: How do the S3 Standard, Standard-IA, One-Zone-IA differ in terms of performace?
+A: They are all similar.
+
+Q: What are the types of charges for S3 storage?
+A: Charges for the amount of storage per month, bandwidth, requests, early delete and small object fees.
+
+Q: What is a key difference between EC2 and S3 One-Zone-IA in terms of how they use AZs?
+A: EC2 lets you pick the AZ, S3 One-Zone-IA picks the AZ for you.
+
+Todo: Finish the S3 Storage FAQ, starting from S3
+
+Topic: EC2
+
+SubTopic: EC2 101
+
+Q: What does EC2 stand for?
+A: Elastic Compute Cloud.
+
+Q: How does EC2 support scaling up and down?
+A: By using different instance types (larger and smaller).
+
+Q: How does EC2 support scaling in and out?
+A: By increasing or decreasing the number of instances.
+
+Q: How does EC2 improve the economic of compute?
+A: By allowing you to pay only for the capacity that you actually use.
+
+Q: Name the 4 pricing options for EC2 instances.
+A: On-demand, Reserved, Spot, Dedicated Host.
+
+Q: What is the pricing model for EC2 on-demand instances?
+A: You pay a fixed price per second or per hour with no commitment.
+
+Q: What is the use case for EC2 on-demand instances?
+A: No up-front payment or long-term commitment, applications with spiky demands, newly developed applications.
+
+Q: What determines whether you pay per-second or per-hour for EC2 on-demand instances?
+A: Per-second for Linux and (currently) per-hour for Windows.
+
+Q: What is the pricing model for EC2 reserved instances?
+A: Provides a capacity reservation for a contractually committed 1 or 3 year term.
+
+Q: What is the use case for EC2 reserved instances?
+A: Applications with steady and predictable usage, applications that require reserved capacity.
+
+Q: What does the discount of EC2 reserved instances relative to EC2 on-demand instances depend on?
+A: Term duration (1 or 3 year), how much is paid up-front (all or part), and convertible or not.
+
+Q: How do you achieve maximal savings with EC2 reserved instances?
+A: 3 year contract, pay everything up-front, non-convertible.
+
+Q: What is a convertible EC2 reserved instance?
+A: The type of EC2 instance can be changed (increased value, not decreased value).
+
+Q: How much can you expect to save by using EC2 reserved instances relative to standard instances?
+A: Up to 75% for standard up to 54% for convertible.
+
+Q: What is a scheduled EC2 reserved instance?
+A: Reservation is only for certain times and certains days of week or month.
+
+Q: What is the pricing model for EC2 spot instances?
+A: You big a price, you get the EC2 instance when your bid exceeds the spot price.
+
+Q: What is the use case for EC2 spot instances?
+A: When you are flexible in terms of when the instance runs. When you require very low cost.
+
+Q: What happens if the spot price for an EC2 instance drops below your bid?
+A: Your spot instance may be terminated.
+
+Q: If your EC2 spot instance is terminated by AWS because the spot price dropped below your bid, are you charged?
+A: No, you are not charged for the partial hour in which your spot instance was terminated, not even the part you did use.
+
+Q: If you terminate your EC2 spot instance yourself, are you charged for the partial hour?
+A: You are charged for the complete hour, even the part of the hour you did not use.
+
+Q: What is the pricing model for EC2 dedicated host instances?
+A: You pay for a physical server that is reserved for you, upon which EC2 instances are hosted.
+
+Q: Name 2 use cases for EC2 dedicated hosts.
+A: Licenses bound to the physical server, regulatory requirements.
+
+Q: How are EC2 dedicated hosts purchased?
+A: On-demand per hour, or reserved for up to 70% off.
+
+Q: In the instance type, what does the letter and digit stand for?
+A: The letter indicates the speciality (family), the digit the generation.
+
+Q: What is the mnemonic for remembering the EC2 instance types?
+A: FIGHT Dr Mc PX (Brad Pit Fight Club, Dagobert Duck as a scottish Doctor handing out photos).
+
+Q: What is the speciality of an F family instance type in EC2?
+A: Field Programmable Gate Array (F for FPGA).
+
+Q: What EC2 instance type provides FPGAs?
+A: F family.
+
+Q: What are some use cases for F family instance type in EC2?
+A: Genomics research, financial analytics, real-time video processing, big data, ...
+
+Q: What is the speciality of an I family instance type in EC2?
+A: High speed storage.
+
+Q: What EC2 instance type provides high speed storage?
+A: I family.
+
+Q: What are some use cases for I family instance type in EC2?
+A: No-SQL database, data warehousing, ...
+
+Q: What is the speciality of an G family instance type in EC2?
+A: Graphics intensive (G for Graphics).
+
+Q: What EC2 instance type provides intensive graphics?
+A: G family.
+
+Q: What are some use cases for G family instance type in EC2?
+A: Video encoding, 3D application streaming, ...
+
+Q: What is the speciality of an H family instance type in EC2?
+A: High disk throughput (H for High).
+
+Q: What EC2 instance type provides high disk throughput?
+A: H family.
+
+Q: What are some use cases for H family instance type in EC2?
+A: MapReduce workloads, distributed file systems such as HDFS and MapR-FS.
+
+Q: What is the speciality of an T family instance type in EC2?
+A: Lowest cost general purpose (T for Tiny).
+
+Q: What EC2 instance type provides the lowest cost general compute?
+A: T family.
+
+Q: What are some use cases for T family instance type in EC2?
+A: Web servers, small databases.
+
+Q: What is the speciality of an D family instance type in EC2?
+A: Dense storage (D for Dense).
+
+Q: What EC2 instance type provides dense storage?
+A: D family.
+
+Q: What are some use cases for D family instance type in EC2?
+A: File servers, data warehousing, Hadoop, ...
+
+Q: What is the speciality of an R family instance type in EC2?
+A: Memory optimized (R for RAM).
+
+Q: What EC2 instance type provides optimized (large) memory?
+A: R family.
+
+Q: What are some use cases for R family instance type in EC2?
+A: Memory intensive applications, databases, ...
+
+Q: What is the speciality of an M family instance type in EC2?
+A: General purpose (M for Mundane).
+
+Q: What EC2 instance type provides production-quality general purpose compute?
+A: M family.
+
+Q: What are some use cases for M family instance type in EC2?
+A: Application servers.
+
+Q: What is the speciality of an C family instance type in EC2?
+A: Compute optimized (C for Compute).
+
+Q: What EC2 instance type provides optimized (large) compute?
+A: C family (C for Compute).
+
+Q: What are some use cases for C family instance type in EC2?
+A: CPU intensive applications, databases.
+
+Q: What is the speciality of an P family instance type in EC2?
+A: Graphics, general purpose GPU.
+
+Q: What EC2 instance type provides genal purpose GPUs?
+A: P family.
+
+Q: What are some use cases for P family instance type in EC2?
+A: Machine learning, BitCoin mining, ....
+
+Q: What is the speciality of an X family instance type in EC2?
+A: Memory very optimized (X for Xtreme RAM).
+
+Q: What EC2 instance type provides very optimized (extreme) memory?
+A: X family.
+
+Q: What are some use cases for X family instance type in EC2?
+A: SAP, Apache Spark, ...
+
+Q: What does EBS stand for?
+A: Elastic Block Store.
+
+Q: What is an EBS volume?
+A: A virtual disk (block store).
+
+Q: What is an EBS volume attached to?
+A: An EC2 instance.
+
+Q: What are EBS volumes used for?
+A: Virtual disk (block store) use cases: boot operating systems, databases.
+
+Q: What is the scope of an EBS volume?
+A: A specific Availability Zone (AZ) within a specifi region.
+
+Q: How is the reliability of an EBS volume achieved?
+A: By replicating the data across multiple physical disks within an AZ.
+
+Q: What is the root device volume in EBS?
+A: The volume (virtual disk) from which the operating system of an EC2 instance is booted.
+
+Q: What do we call the volume (virtual disk) from which the operating system of an EC2 instance is booted.
+A: The root device volume.
+
+Q: Can an EC2 instance have multiple EBS volumes?
+A: Yes, it has one root device volume and optionally additional volumes.
+
+Q: What are the EBS volume types (families)?
+A: GP2, IO1, ST1, @@@
+
+Q: Which EBS volume types use SSD?
+A: GP2, IO1.
+
+Q: Which EBS volume types use magnetic rotating disks?
+A: ST1, @@@.
+
+Q: What is the GP2 volume type in EBS?
+A: General Purpose SSD, balancing performance and price.
+
+Q: What EBS volume type provides general purpose SSD?
+A: GP2.
+
+Q: What are some use cases for the GP2 volume type in EC2?
+A: Most use cases, when you need less than 10K IOPS.
+
+Q: What IOPS performance does GP2 storage in EBS?
+A: 3 IOPS per GB, up to 10K IOPS for 3334GB instances, ability to bust up to 3K IOPS for extended time.
+
+Q: Can an GP2 type volume be a boot device for an EC2 instance?
+A: Yes.
+
+Q: What is the IO1 volume type in EBS?
+A: Provisioned IOPS SSD, providing high performance.
+
+Q: What EBS volume type provides provisioned IOPS and high performance?
+A: IO1.
+
+Q: What are some use cases for the IO1 volume type in EC2?
+A: When you need more than 10K IOPS, I/O intensive applications such as large databases.
+
+Q: What IOPS performance does IO1 storage in EBS?
+A: You provision the required IOPS performance, up to 20K IOPS.
+
+Q: Can an IO1 type volume be a boot device for an EC2 instance?
+A: Yes.   @@@@????
+
+Q: What is the ST1 volume type in EBS?
+A: Performance optimized HDD (magnetic rotating disk).
+
+Q: What EBS volume type provides performance optimized HDD (magnetic rotating disk).
+A: ST1.
+
+Q: What are some use cases for the ST1 volume type in EC2?
+A: Big data, data warehousing, log processing.
+
+Q: Can an ST1 type volume be a boot device for an EC2 instance?
+A: No.
+
+Q: What is the SC1 volume type in EBS?
+A: Cold HDD (magnetic rotating disk).
+
+Q: What EBS volume type provides cold HDD (magnetic rotating disk).
+A: SC1.
+
+Q: What are some use cases for the SC1 volume type in EC2?
+A: Lowest cost storage for infrequently accessed workloads, e.g. file servers
+
+Q: Can an SC1 type volume be a boot device for an EC2 instance?
+A: No.
+
+Q: What is the Magnetic volume type in EBS?
+A: Lowest cost bootable HDD (magnetic rotating disk). Deprecated.
+
+Q: What EBS volume type provides lowest cost bootable HDD (magnetic rotating disk).
+A: Magnetic.
+
+Q: What are some use cases for the Magnetic volume type in EC2?
+A: Legacy only; use GP2 instead.
+
+Q: Can a Magnetic type volume be a boot device for an EC2 instance?
+A: Yes.
 
 
 
