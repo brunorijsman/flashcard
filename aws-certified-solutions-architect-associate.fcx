@@ -989,6 +989,9 @@ A: Simple Storage Service.
 Q: What service does S3 provide?
 A: Object store.
 
+Q: What service would you use for block storage?
+A: Elastic Block Store (EBS).
+
 Q: How does S3 achieve reliability?
 A: By replicating the data across multiple devices and AZs.
 
@@ -1007,17 +1010,20 @@ A: 5 TB.
 Q: What is the maximum total size of all S3 objects?
 A: Unlimited.
 
+Q: Into what are S3 objects stored?
+A: Into buckets.
+
 Q: What is a bucket?
 A: S3 objects are stored in buckets, which are similar to top-level folders.
 
 Q: What is the scope of a bucket name?
 A: Global, i.e. it must be globally unique.
 
-Q: What are the rules for bucket naming?
-A: Globally unique, must follow DNS naming rules.
+Q: What are the naming rules for buckets?
+A: Globally unique (universal namespace), must follow DNS naming rules.
 
 Q: What does the URL for a bucket look like?
-A: https://s3-eu-west-1.amazonaws.com/bucketname where eu-west-1 is the region name, and bucketname is the bucket name.
+A: https://s3-<region-name>.amazonaws.com/<bucket-name> 
 
 Q: How do you know uploading a file to S3 was succesful?
 A: HTTP response code 200.
@@ -1091,6 +1097,12 @@ A: Access Control Lists (ACLs) and bucket policies.
 Q: Name 4 S3 storage tiers / classes.
 A: Standard, Standard-IA (Infrequenty Accessed), One-Zone-IA, Reduced Redundancy.
 
+Q: When would you use the Reduced Redundancy Storage class (RRS)?
+A: Never, it is deprecated. Use One-Zone-IA instead. (It was originally intended for non-critical reproducable data).
+
+Q: What does RRS stand for?
+A: Reduced Redundancy Storage.
+
 Q: What is the target availability of the S3 standard storage tier?
 A: 99.99% (4 nines).
 
@@ -1102,6 +1114,9 @@ A: 99.999999999% (11 nines).
 
 Q: What is the redundancy of the S3 standard storage tier?
 A: Replicated across at least 3 availability zones.
+
+Q: The loss of how many data centers can the S3 standard storage tier sustain?
+A: The lost of at least 2 data centers (AZs).
 
 Q: What is the retrieval latency of the S3 standard storage tier?
 A: Milliseconds.
@@ -1229,9 +1244,6 @@ A: Only the owner (the creator) has full access, and everyone else has no access
 Q: What is the default permission for an object?
 A: Only the owner (the creator) has full access, and everyone else has no access.
 
-Q: What is another name for the one-zone IA storage class?
-A: Reduced redundancy storage class.
-
 Q: Does an object inherit the tags from the bucket?
 A: No.
 
@@ -1264,6 +1276,9 @@ A: Server-Side Encryption with amazon S3 managed keys.
 
 Q: What does SSE-KMS stand for?
 A: Server-Side Encryption with amazon Key Management Service managed keys.
+
+Q; What is an additional benefit of SSE-KMS?
+A: It provides an audit trail of when your keys were used and by whom.
 
 Q: What does SSE-C stand for?
 A: Server-Side Encryption with Customer managed keys.
@@ -1460,9 +1475,6 @@ A: 90 days (if less, you are charged for 90 days of storage)
 
 Q: What is the main use case for life cycle management?
 A: Reduce storage cost by moving old files to a lower storage tier and/or deleting them.
-
-Q: In lifecycle management, what storage class can you NOT transition to?
-A: Reduced redundancy.
 
 SubTopic: CloudFront CDN Overview
 
@@ -1898,6 +1910,9 @@ A: Use the "Want to compare your data transfer speed by region?" link in the buc
 
 Q: What is the URL for using Transfer Acceleration when uploading a file?
 A: https://s3-accelerate.amazonaws.com
+
+Q: What is another mechanism than Transfer Acceleration to speed up uploads to S3?
+A: Multipart upload.
 
 SubTopic: Create a Static Website using S3.
 
