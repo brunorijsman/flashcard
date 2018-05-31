@@ -2899,7 +2899,29 @@ A: By making the first line #!/bin/bash
 Q: At what priviledge level is the boot script run?
 A: Root.
 
+SubSection: Lab: Using Instance Metadata.
 
+Lab: Using Instance Metadata.
+Step: Launch an EC2 instance @@@ with a simple boot script to echo some text into a file.
+Step: SSH into the EC2 instance.
+Step: Display the metadata index for the instace from inside the instance.
+Step: Display the IPv4 public address of the intsance using the metadata.
+Step: Display the boot script of the intsance using the metadata.
+Step: Clean up.
 
+Q: What is instance metadata?
+A: Data about an instance that can be retrieved from the command line.
+
+Q: What is the link-local IP address for retrieving the metadata?
+A: 169.254.169.254
+
+Q: What is the URL for retrieving the index of the latest metadata?
+A: http://169.254.169.254/latest/meta-data/
+
+Q: What is the command for retrieving the index the latest metadata?
+A: curl http://169.254.169.254/latest/meta-data/
+
+Q: What is the command for retrieving a specific metadata item, e.g. the public IPv4 address?
+A: curl http://169.254.169.254/latest/meta-data/public-ipv4
 
 
