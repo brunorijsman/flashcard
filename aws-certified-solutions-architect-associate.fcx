@@ -2542,3 +2542,19 @@ A: Yes, you can share it with another account or make it completely public.
 Q: Can you share an encrypted snapshot with another user?
 A: No, they will not be able to restore a volume from it.
 
+SubTopic: Lab: Encrypt Root Device Volume and Create an AMI
+
+Lab: Encrypt Root Device Volume and Create an AMI
+Step: Create a t2.micro Amazon Linux instance.
+Step: Stop the instance and take a snapshot.
+Step: Copy the snapshot to a different region and encrypt it.
+Step: In the destination region, create an image from the snapshot.
+Step: Create an image from the newly created image.
+Step: Observe that the root volume of the newly created instance is encrypted.
+Step: SSH into the newly created instance.
+Step: Clean up: delete EC2 instances, security groups, keypairs, snapshots, and images in all regions.
+
+Todo: Play around with trial version of vMX and vSRX and some other produces on the AWS Market Place.
+
+Q: Why are public and community AMIs never encrypted?
+A: Because encrypted images and volumes use a key that is tied to the user.
