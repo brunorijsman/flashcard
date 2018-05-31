@@ -2474,3 +2474,71 @@ A: It specifies the rules for communications between instances that are attached
 
 Q: Can you block a specific IP address using a security group?
 A: No, use an Access Control List (ACL) instead.
+
+SubTopic: Lab: Upgrading EBS Volume Types
+
+Lab: Upgrading EBS Volume Types
+Step: Create a t2.micro Amazon Linux instance with 3 extra volumes: Magnetic, ST1, SC1.
+Step: Take a note of the availability zone of the instance and the volumes.
+Step: Try to change the size and type of each attached volume, and observe which changes are allowed and which not.
+Step: Pick a non-root volume and create a copy of it in another AZ in the same region.
+Step: Pick a non-root volume and create a copy of it in another region.
+Step: Install and configure Apache to start at boot. Create a small website and verify it works.
+Step: Create an AMI from the instance.
+Step: Launch a new EC2 instance from the new AMI, and verify it behaves as a web server.
+Step: Clean up: delete EC2 instances, security groups, keypairs, snapshots, and images in all regions.
+
+Q: Can you mount an EBS volume in one AZ to an EC2 instance in a different AZ?
+A: No.
+
+Q: How can you see which volume in the volume list is the root volume?
+A: It is based of a snapshot.
+
+Q: Can you change the size of a volume on-the-fly (without affecting a running attached EC2 instance)?
+A: Yes, but not for Magnetic (= Standard) volumes.
+
+Q: Can you change the type of a volume on-the-fly (without affecting a running attached EC2 instance)?
+A: Yes, but not for Magnetic (= Standard) volumes.
+
+Q: How can you copy an EBS volume to a different AZ in the same region?
+A: Create a snapshot of the volume, and create a new volume from the snapshot in the other AZ.
+
+Q: How can you copy an EBS volume to a different region?
+A: Create a snapshot of the volume, copy the snapshot to a different region, and create a new volume from the snapshot in the other region.
+
+Q: How can you copy an EC2 instance to another region?
+A: Create a image from the instance, copy the image to the other region, boot an instance from the copied image.
+
+Q: How do you create a new AMI from a running EC2 instance?
+A: Create a snapshot of the root volume, and convert the snapshot into an image.
+
+Q: What is a snapshot?
+A: A point in time copy of a volume.
+
+Q: What happens if you take multiple snapshots of the same volume at different points in time?
+A: Snapshots are incremental: only the deltas as stored.
+
+Q: How long does it take to take a snapshot?
+A: The first snapshot takes long (minutes). Subsequent snapshots are incremental and hence faster.
+
+Q: Can you take a snapshot of the root volume while the instance is running?
+A: It is technically possible but not wise; you should stop the instance.
+
+Q: Name 2 things that you can use as the source for creating an AMI.
+A: EC2 instance, EBS snapshot.
+
+Q: Where are snapshots stored?
+A: On S3 (although you don't see a bucket with the snapshots in them).
+
+Q: If a snapshot is taken from an encrypted volume, is the snapshot encrypted?
+A: Yes.
+
+Q: If a volume is restored from an encrypted snapshot, is the volume encrypted?
+A: Yes.
+
+Q: Can you share an unencrypted snapshot with another user?
+A: Yes, you can share it with another account or make it completely public.
+
+Q: Can you share an encrypted snapshot with another user?
+A: No, they will not be able to restore a volume from it.
+
