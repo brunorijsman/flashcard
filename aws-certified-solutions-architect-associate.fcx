@@ -2554,7 +2554,79 @@ Step: Observe that the root volume of the newly created instance is encrypted.
 Step: SSH into the newly created instance.
 Step: Clean up: delete EC2 instances, security groups, keypairs, snapshots, and images in all regions.
 
-Todo: Play around with trial version of vMX and vSRX and some other produces on the AWS Market Place.
-
 Q: Why are public and community AMIs never encrypted?
 A: Because encrypted images and volumes use a key that is tied to the user.
+
+SubTopic: AMIs, EBS Root Device Volumes vs Instance Store
+
+Q: What are the two type of AMIs?
+A: EBS Backed and Instance Store Backed (aka Ephemeral Store).
+
+Q: Name 5 criteria that you can select an AMI on.
+A: Region, operating system, architecture (32-bit or 64-bit), launch permissions, and root device volume.
+
+Q: Can you add additional Instance Store Backed volumes after the EC2 instance has been launched?
+A: No.
+
+Q: Can you add additional EBS Backed volumes after the EC2 instance has been launched?
+A: Yes.
+
+Q: Can you encrypt additional Instance Store Backed volumes?
+A: No.
+
+Q: Can you encrypt additional EBS Backed volumes?
+A: Yes.
+
+Q: Can you stop an EBS Backet EC2 instance?
+A: Yes.
+
+Q: Can you stop an Instance Store Backet EC2 instance?
+A: No, you can only reboot or terminate it.
+
+Q: Can you detach an EBS Backed volume from an EC2 instance and attach it to some other instance?
+A: Yes, even if it is the root volume.
+
+Q: Can you detach an Instance Store Backed volume from an EC2 instance and attach it to some other instance?
+A: No, is is actually not even a volume and doesn't appear in the volume list.
+
+Q: How is the data for an EBS Backed Volume stored?
+A: Redundantly across multiple physical servers within an AZ. It can survive the loss of a physical server.
+
+Q: How is the data for an Instance Store Backed Volume stored?
+A: Non-redundantly (ephemerally) only on the same physical server that hosts the EC2 instance. It cannot survive the loss of that physical server.
+
+Q: Name 2 reasons for stopping an EC2 instance.
+A: To take a snapshot, to move it to another hypervisor in an attempt to resolve a failed status check.
+
+Q: What is the main reason that Instance Store Backed Volumes exist?
+A: For historical reasons: this was the only type of volume that AWS used to support before EBS Backed Volumes were introduced later.
+
+Q: How is an EBS Backed root volume created?
+A: It is an EBS volume created from an EBS snapshot.
+
+Q: How is an EBS Backed root volume created?
+A: It is an Instance Store volume created from a template stored in S3.
+
+Q: Which is created faster, an EBS Backed Volume or an Instance Store Backed Volume?
+A: An EBS Backed Volume is created faster.
+
+Q: What is another name for Ephemeral Storage?
+A: Instance Store Backed Storage or Instance Store Backed Volumes or simply Instance Store Volumes.
+
+Q: What happens if the host physical server fails for an EBS Backed EC2 Instance?
+A: The data survives.
+
+Q: What happens if the host physical server fails for an Instance Store Backed EC2 Instance?
+A: The data is lost.
+
+Q: What happens if you reboot an EBS Backed EC2 Instance?
+A: The data survives.
+
+Q: What happens if you reboot an Instance Store Backed EC2 Instance?
+A: The data survives.
+
+Q: What happens if you terminate an EBS Backed EC2 Instance?
+A: By default the data is lost, but you can configure EC2 to keep the root device volume.
+
+Q: What happens if you terminate an Instance Store Backed EC2 Instance?
+A: The data is always lost, you cannot configure EC2 to keep the root device volume.
