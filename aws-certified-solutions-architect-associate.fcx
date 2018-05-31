@@ -2803,7 +2803,7 @@ A: Roles.
 Q: What should you do if you accidentally upload the access key secret to GitHub?
 A: Immediately delete the user who owns that access key secret or regenerate the access key for that user.
 
-SubSection: Using IAM Roles with EC2.
+SubSection: Lab: Using IAM Roles with EC2.
 
 Lab: Identity Access Management (IAM) Roles.
 Step: Create a new service role for EC2 that provides full access to S3.
@@ -2843,3 +2843,27 @@ A: Global.
 
 Q: Is it possible to add or change a role on an already running EC2 instance?
 A: Yes, it is, but this was only very recently added and the exam may be out of date (catch-22 situation).
+
+SubSection: Lab: S3 CLI and Regions.
+
+Lab: S3 CLI and Regions.
+Step: Create an Amazon Linux EC2 instance without any role.
+Step: Create three buckets in three different regions: one the same as the EC2 instance, and two other regions.
+Step: Upload an object to each bucket. 
+Step: SSH into the instance and attempt to list the buckets using the CLI without configuring the CLI. Observe it does not work.
+Step: Create a new service role for EC2 that provides full access to S3.
+Step: Attach the role to the EC2 instance.
+Step: SSH into the instance and attempt to list the buckets using the CLI without configuring the CLI. Observe that this time it works.
+Step: Use the CLI to download the object in the 1st bucket in the region as the instance.
+Step: Use the CLI to download the object in the other buckets in the region as the instance.
+Step: Clean up.
+
+Q: What is the AWS CLI command to lists all buckets?
+A: aws s3 ls
+
+Q: What is the AWS CLI command to download all objects from a bucket in the same region as the EC2 instance from where the CLI command is invoked?
+A: aws s3 cp --recursive s3://<bucket-name> .
+
+Q: What is the AWS CLI command to download all objects from a bucket in a different region from the EC2 instance from where the CLI command is invoked?
+A: aws s3 cp --recursive --region <bucket-region> s3://<bucket-name> .
+
