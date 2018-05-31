@@ -2200,13 +2200,13 @@ Q: Can an EC2 instance have multiple EBS volumes?
 A: Yes, it has one root device volume and optionally additional volumes.
 
 Q: What are the EBS volume types (families)?
-A: GP2, IO1, ST1, @@@
+A: GP2, IO1, ST1, SC1, Magnetic (aka Standard).
 
 Q: Which EBS volume types use SSD?
 A: GP2, IO1.
 
 Q: Which EBS volume types use magnetic rotating disks?
-A: ST1, @@@.
+A: ST1, SC1, Magnetic (aka Standard).
 
 Q: What is the GP2 volume type in EBS?
 A: General Purpose SSD, balancing performance and price.
@@ -2420,7 +2420,7 @@ Q: What can you do if you want the public IP address of an EC2 instance to remai
 A: Use an elastic IP address.
 
 Q: What can you do if you want the private IP address of an EC2 instance to remain the same across a reboot?
-A: Attach the instance to a customer VPC.  @@@ check this
+A: Attach the instance to a custom VPC.  @@@ Check this
 
 Q: Can you encrypt the root volume when you create an EC2 instance?
 A: No, not for standard AMIs. You can encrypt the root volume when you create your own AMI by taking a snapshot. Or you can use 3rd party software such as bitlocker.
@@ -2630,3 +2630,72 @@ A: By default the data is lost, but you can configure EC2 to keep the root devic
 
 Q: What happens if you terminate an Instance Store Backed EC2 Instance?
 A: The data is always lost, you cannot configure EC2 to keep the root device volume.
+
+SubTopic: Lab: Load Balancers and Health Checks
+
+Lab: Load Balancers and Health Checks
+Step: Create an Amazon Linux t2.micro EC2 instance with an Apache web server that is configured to start at boot time.
+Step: Create a simple webpage in index.html and verify it works.
+Step: Create a healthcheck.html file.
+Step: Create a classic load balancer
+Step: Use healthcheck.html for the health check and lowest possible healthcheck intervals.
+Step: Add the EC2 instance as a member.
+Step: Verify that the load balancer reports the EC2 instance as in-service and healthy.
+Step: Use a web browser to verify that the load balancer works.
+Step: Remove the healthcheck.html file from the instance, and verify that the load balancer report the instance as out-of-service.
+Step: Create an application load balancer verify it works.
+Step: Clean up.
+
+Q: What does ELB stand for?
+A: Elastic Load Balancer.
+
+Q: What EWS service provides load balancing?
+A: Elastic Load Balancer (ELB).
+
+Q: What are the 2 kinds of load balancers?
+A: Application Load Balancer and Classic Load Balancer.
+
+Q: Based on what layer does an Application Load Balancer make its routing decissions?
+A: Layer 7: sophisticated routing based on the application layer (HTTP, HTTPS).
+
+Q: Based on what layer does a Classic Load Balancer make its routing decissions?
+A: Layer 4: the transport layer (TCP, SSL) and very basic routing based on the application layer (HTTP, HTTPS).
+
+Q: Which type of load balancer supports path-based routing?
+A: Application Load Balancer.
+
+Q: What end-points can an Application Load Balancer route traffic to?
+A: EC2 virtual machines and containers.
+
+Q: What end-points can a Classic Load Balancer route traffic to?
+A: EC2 virtual machines but not containers.
+
+Q: What is the difference between an internal and external load balancer?
+A: An external load balancer can serve traffic from the public Internet.
+
+Q: Name the 4 paramaters that ELB uses for timing health checks.
+A: Response timeout, Interval, Unhealthy threshold, Healthy threshold.
+
+Q: What is the ELB healthcheck unhealthy threshold?
+A: If the healthcheck fails N consecutive pings, the instance is declared unhealthy.
+
+Q: What is the ELB healthcheck healthy threshold?
+A: If the healthcheck passes N consecutive pings, the instance is declared healthy.
+
+Q: What is the ELB healthcheck interval?
+A: Send a healthcheck request this often.
+
+Q: What is the ELB healthcheck timeout?
+A: Wait this long for a healthcheck response.
+
+Q: Are ELB load balancers free in the free tier?
+A: No.
+
+Q: How is the ELB load balancer publicly identified?
+A: Using a public DNS name.
+
+Q: Does an ELB load balancer have a public IP address?
+A: Yes and no. An ELB load balancer will have a public IP address, but AWS manages it and doesn't tell you what it is on the console. It can change.
+
+Q: Can you use your own DNS domain name for an ELB load balancer?
+A: Yes, using Route53.
