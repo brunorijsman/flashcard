@@ -2700,7 +2700,7 @@ A: Yes and no. An ELB load balancer will have a public IP address, but AWS manag
 Q: Can you use your own DNS domain name for an ELB load balancer?
 A: Yes, using Route53.
 
-SubTopic: CloudWatch with EC2.
+SubTopic: Lab: CloudWatch with EC2.
 
 Lab: CloudWatch with EC2.
 Step: Create an EC2 instance with basic monitoring and let it run for some time.
@@ -2712,7 +2712,7 @@ Step: Add a line widget for CPU utilization.
 Step: Add a stacked area widget for network in and out.
 Step: Add a number widget for CU utilization.
 Step: Create an alarm (details in next step).
-Step: Threshold is CPU utilization > 50% for 1 consecutive second.
+Step: Threshold is CPU utilization > 50% for 1 consecutive sample.
 Step: Action is send an email in state alarm.
 Step: Observe that the current alarm state is OK.
 Step: Force high CPU on the instance using "dd if=/dev/zero of=/dev/null"
@@ -2765,3 +2765,40 @@ A: You need to install an agent inside the instance (@@@ is it already installed
 
 Q: What is the difference between CloudWatch and CloudTrail?
 A: CloudWatch monitors performance metrics, CloudTrail provides an audit trail for API calls.
+
+SubTopic: Lab: The AWS Command Line and EC2
+
+Lab: The AWS Command Line and EC2
+Step: Install the AWS CLI ("aws") on the Mac (use Google for instructions).
+Step: Install the AWS shell ("aws-shell") on the Mac (use Google for instructions).
+Step: *IMPORTANT* If you already have AWS CLI configure, make a backup of ~/.aws/config and ~/.aws/credentials first.
+Step: Create a new user for programmatic access and note its Access Key Secret.
+Step: Do the initial configuration of the AWS CLI using the credentials of this new user.
+Step: Execute some AWS CLI commands on the Mac (.e.g. "aws ec2 describe-instances" or "aws s3 ls")
+Step: Create an EC2 instance running Amazon Linux.
+Step: SSH into the instance and run the AWS CLI.
+Step: Do the initial configuration of the AWS CLI using the credentials of the CLI user.
+Step: Execute some AWS CLI commands in the instance (.e.g. "aws ec2 describe-instances" or "aws s3 ls")
+Step: Restore of ~/.aws/config and ~/.aws/credentials if necessary.
+Step: Clean up.
+
+Q: Do Amazon Linux AMIs include the AWS Command Line Interface (CLI)?
+A: Yes.
+
+Q: What is the first step after installing the AWS command line tools?
+A: aws configure.
+
+Q: What do you need to run the command line "aws configure"?
+A: The access key id and the access key secret.
+
+Q: What can you do if you want to use the command line tools but don't have the access key secret?
+A: Create a new user for the command line tools.
+
+Q: Where are the credentials for the AWS CLI stored?
+A: ~/.aws/credentials
+
+Q: What is a more secure mechanism for running the AWS CLI from an instance than using an access key secret?
+A: Roles.
+
+Q: What should you do if you accidentally upload the access key secret to GitHub?
+A: Immediately delete the user who owns that access key secret or regenerate the access key for that user.
