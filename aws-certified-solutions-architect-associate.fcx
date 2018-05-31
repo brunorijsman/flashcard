@@ -2288,7 +2288,7 @@ Step: Check both the system status and the instance status.
 Step: Look at the CloudWatch metrics for the instance.
 Step: Terminate the instance (demonstrate that you have to turn termination protection off first).
 Step: Go through the steps to purchase a reserved instance (but don't complete).
-Step: Clean up: delete EC2 instances.
+Step: Clean up: delete EC2 instance, security group, and keypair.
 
 Q: What does AMI stand for?
 A: Amazon Machine Image.
@@ -2395,6 +2395,9 @@ A: /var/www/html
 Q: How do you start the Apache web server on an Amazon Linux instance?
 A: sudo service httpd start
 
+Q: How do you configure Apache to automatically startup when the Linux instance boots?
+A: sudo chkconfig httpd on
+
 Q: What is the difference between the private and public DNS/IP of an EC2 instance?
 A: The public is globally reachable, the private is only reachable from inside AWS.
 
@@ -2424,3 +2427,50 @@ A: No, not for standard AMIs. You can encrypt the root volume when you create yo
 
 Q: Can you encrypt a non-root volume when you create an EC2 instance?
 A: Yes.
+
+SubTopic: Lab: Security Group basics
+
+Lab: Security Group basics
+Step: Create a t2.micro Amazon Linux instance with a new security group that allows HTTP, HTTPS, and SSL from any IP address.
+Step: SSH into the instance and update.
+Step: Instal Apache, create a little website, start Apache, configure Apache to start at boot time, and verify it works.
+Step: Inspect the inbound and outbound rules for the security group.
+Step: Remove HTTP from the security group and verify that the webpage stops working. Add it back.
+Step: Create an additional security group with additional rules, and also attach it to the instance. Show the resulting union of rules that apply.
+Step: Clean up: delete EC2 instance, security group, and keypair.
+
+Q: What is a security group?
+A: A virtual layer 4 firewall: a set of rules that allows traffic in or out of instances based on protocol, port, and IP address.
+
+Q: Can an EC2 instance be attached to multiple security groups?
+A: Yes.
+
+Q: Can 1 security group have multiple EC2 instances as members?
+A: Yes.
+
+Q: When does a change to a security group take effect?
+A: Immediately, even for already running instances attached to the security group.
+
+Q: Are security groups stateful or stateless?
+A: Stateful.
+
+Q: What does it mean that a security group is stateful?
+A: If a flow is allows in by an inbound rule, the same flow is automatically allowed out regardless of the outbound rules.
+
+Q: Name 2 differences between security groups and access control lists (ACLs)?
+A: Security groups are stateful, ACLs are stateless. Security groups don't support deny rules, ACLs do.
+
+Q: What is the default behavior of a security group traffic in the absence of an explicit allow rule?
+A: Traffic is blocked (denied) by default; a rule is needed to explicitly allow it.
+
+Q: What is the default behavior of a security group for inbound traffic?
+A: Block all inbound traffic by default; there are no inbound rules by default (you can add rules if you want).
+
+Q: What is the default behavior of a security group for outbound traffic?
+A: Allow all outbound traffic by default; there is a default rule that allows all traffic (you can delete this rule if you want). 
+
+Q: What does it mean that the source for the default security group of a VPC is the security group itself?
+A: It specifies the rules for communications between instances that are attached to the same VPC.
+
+Q: Can you block a specific IP address using a security group?
+A: No, use an Access Control List (ACL) instead.
