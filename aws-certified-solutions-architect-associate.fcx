@@ -2867,3 +2867,39 @@ A: aws s3 cp --recursive s3://<bucket-name> .
 Q: What is the AWS CLI command to download all objects from a bucket in a different region from the EC2 instance from where the CLI command is invoked?
 A: aws s3 cp --recursive --region <bucket-region> s3://<bucket-name> .
 
+SubSection: Lab: Using Bootstrap Scripts.
+
+Lab: Using Bootstrap Scripts.
+Step: Create a bucket.
+Step: Create a simple index.html webpage and upload it to the bucket.
+Step: Create a EC2 role that provides full access to S3.
+Step: Launch an Amazon Linux instance... (continued)
+Step: ... with the new role attached ... (continued)
+Step: ... with a boot script that runs yum update ... (continued)
+Step: ... and a security group that allows SSH, HTTP, and HHTP.
+Step: As you are performing the next steps on the live instance, copy and paste each executed bash command into a notepad.
+Step: Install the Apache webserver.
+Step: Start the Apache webserver.
+Step: Configure Apache to automatically start at boot time.
+Step: Copy the index.html file from the S3 bucket to /var/www/html
+Step: Use a browser to verify the webpage works.
+Step: Terminate the instance.
+Step: Launch a new instance, same as before, except use all the commands collected in the notepad as the bootup script.
+Step: Use a browser to verify the webpage on the newly launched instance works.
+
+Q: What is stored in the "user data" of an instance?
+A: The boot script (aka configuration script).
+
+Q: What is a boot script (aka configuration script)?
+A: A set of commands that is run when the instance is launched.
+
+Q: How do you indicate that the boot script is a bash script?
+A: By making the first line #!/bin/bash
+
+Q: At what priviledge level is the boot script run?
+A: Root.
+
+
+
+
+
