@@ -2699,3 +2699,69 @@ A: Yes and no. An ELB load balancer will have a public IP address, but AWS manag
 
 Q: Can you use your own DNS domain name for an ELB load balancer?
 A: Yes, using Route53.
+
+SubTopic: CloudWatch with EC2.
+
+Lab: CloudWatch with EC2.
+Step: Create an EC2 instance with basic monitoring and let it run for some time.
+Step: Look at the monitoring graphs using the EC2 console.
+Step: Go to the CloudWatch console.
+Step: Create a dashboard.
+Step: Add a text widget.
+Step: Add a line widget for CPU utilization.
+Step: Add a stacked area widget for network in and out.
+Step: Add a number widget for CU utilization.
+Step: Create an alarm (details in next step).
+Step: Threshold is CPU utilization > 50% for 1 consecutive second.
+Step: Action is send an email in state alarm.
+Step: Observe that the current alarm state is OK.
+Step: Force high CPU on the instance using "dd if=/dev/zero of=/dev/null"
+Step: Observe that an alarm is generated and an email is sent within 5 minutes.
+Step: Note - you can play around with events but it is not an exam topic.
+Step: Note - you can play around with logs but it is not an exam topic.
+Step: Clean up.
+
+Q: Name the 5 top-level services in the CloudWatch console.
+A: Dashboards, Alarms, Events, Logs, Metrics.
+
+Q: What is the polling interval for EC2 basic monitoring?
+A: Every 5 minutes.
+
+Q: What is the polling interval for EC2 detailed monitoring?
+A: Every 1 minute.
+
+Q: What language does a text widget in a CloudWatch dashboard use?
+A: Markdown.
+
+Q: What types of metrics are available by default for EC2?
+A: CPU, Disk, Network, Status check.
+
+Q: What CPU related metrics are available in CloudWatch by default for EC2?
+A: CPU Credit Balance, CPU Credit Usage, CPU Utilization.
+
+Q: What disk related metrics are available in CloudWatch by default for EC2?
+A: Disk Read Bytes, Disk Read Ops, Disk Write Bytes, Disk Write Ops.
+
+Q: What network related metrics are available in CloudWatch by default for EC2?
+A: Network In, Network Out, Network Packets In, Network Packets Out.
+
+Q: What status related metrics are available in CloudWatch by default for EC2?
+A: Status Check Failed, Status Check Failed Instance, Status Check Failed System.
+
+Q: Is memory (RAM) utilization available by default in CloudWatch?
+A: No, you need to create a custom metric for that.
+
+Q: What is a CloudWatch event?
+A: A state change in an AWS resource that is fed into a CloudWatch event stream.
+
+Q: What happens to CloudWatch events that are fed into an event stream?
+A: CloudWatch rules select events of interest and trigger actions.
+
+Q: What are CloudWatch logs?
+A: They allow you to monitor EC2 instances at the application level by looking at the application logs.
+
+Q: How does CloudWatch logs monitor applications logs inside the virtual machine?
+A: You need to install an agent inside the instance (@@@ is it already installed in Amazon Linux?)
+
+Q: What is the difference between CloudWatch and CloudTrail?
+A: CloudWatch monitors performance metrics, CloudTrail provides an audit trail for API calls.
