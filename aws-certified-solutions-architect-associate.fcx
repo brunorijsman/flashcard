@@ -2284,6 +2284,10 @@ Step: Observe the creation of the instance.
 Step: SSH into the instance.
 Step: Apply security patches.
 Step: Install the Apache web server, create a small web page, and verify it works.
+Step: Check both the system status and the instance status.
+Step: Look at the CloudWatch metrics for the instance.
+Step: Terminate the instance (demonstrate that you have to turn termination protection off first).
+Step: Go through the steps to purchase a reserved instance (but don't complete).
 Step: Clean up: delete EC2 instances.
 
 Q: What does AMI stand for?
@@ -2352,6 +2356,9 @@ A: Standard (5 minute samples) or detailed (1 minute samples) at an extra cost.
 Q: What is termination protection?
 A: Prevents accidental termination of the instance; you have to disable the protection before you can teminate the instance.
 
+Q: By default, is termination protection enabled or disabled?
+A: Disabled.
+
 Q: What is EC2 instance user data used for?
 A: To pass bootstrap scripts to the EC2 instance.
 
@@ -2388,10 +2395,32 @@ A: /var/www/html
 Q: How do you start the Apache web server on an Amazon Linux instance?
 A: sudo service httpd start
 
+Q: What is the difference between the private and public DNS/IP of an EC2 instance?
+A: The public is globally reachable, the private is only reachable from inside AWS.
 
+Q: What is the difference between the system status and the instance status in EC2?
+A: System status checks the health of the underlying amazon infra, instance status checks the instance itself.
 
+Q: What does the EC2 system status check verify?
+A: Whether traffic can make it to the instance (does not check that the instance processes the traffic).
 
+Q: What does the EC2 instance status check verify?
+A: Whether traffic is accepted by guest OS in the instance.
 
+Q: If you reboot an EC2 instance, will it come back on the same host server?
+A: No, that is not guaranteed.
 
+Q: If you reboot an EC2 instance, will the IP address remain the same?
+A: No, that is not guaranteed, neither for the public nor the private IP address.
 
+Q: What can you do if you want the public IP address of an EC2 instance to remain the same across a reboot?
+A: Use an elastic IP address.
 
+Q: What can you do if you want the private IP address of an EC2 instance to remain the same across a reboot?
+A: Attach the instance to a customer VPC.  @@@ check this
+
+Q: Can you encrypt the root volume when you create an EC2 instance?
+A: No, not for standard AMIs. You can encrypt the root volume when you create your own AMI by taking a snapshot. Or you can use 3rd party software such as bitlocker.
+
+Q: Can you encrypt a non-root volume when you create an EC2 instance?
+A: Yes.
