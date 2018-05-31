@@ -2802,3 +2802,44 @@ A: Roles.
 
 Q: What should you do if you accidentally upload the access key secret to GitHub?
 A: Immediately delete the user who owns that access key secret or regenerate the access key for that user.
+
+SubSection: Using IAM Roles with EC2.
+
+Lab: Identity Access Management (IAM) Roles.
+Step: Create a new service role for EC2 that provides full access to S3.
+Step: Observe all the actions that the role allows to be performed.
+Step: Create an Amazon Linux EC2 instance and assign the role to it.
+Step: SSH into the instance
+Step: Run the AWS CLI command to list all S3 buckets without first configuring the CLI. Observe it works.
+Step: Verify that the access key is not stored on the instance.
+Step: Clean up.
+
+Q: Why are roles safer than access keys to control access to resources?
+A: Someone could compromise the key and gain access.
+
+Q: Name a scenario where access keys are the only way to go and roles cannot be used?
+A: When accessing a resource from outside the AWS cloud (e.g. using the AWS CLI from a laptop).
+
+Q: From which service are roles managed?
+A: Identity and Access Management (IAM).
+
+Q: Name 4 types of roles.
+A: AWS Service Role, AWS Service-Linked Role, Role for Cross-Account Access, Role for Identity Provider Access.
+
+Q: What is an AWS Service Role?
+A: It allows some AWS service to perform actions on your (the user's) behalf.
+
+Q: What is an AWS Service-Linked Role?
+A: It allows some AWS service (currently only Lex) to control a bot on your behalf.
+
+Q: What is a Cross-Account Access Role?
+A: It allows users from some other account (owned by you or a 3rd party) to access resources in this account.
+
+Q: What is an Identity Provider Access Role?
+A: Allows user's that have been authenticated by an identity provider to access resources in this account (through the console or programmatically).
+
+Q: What is the scope of a role?
+A: Global.
+
+Q: Is it possible to add or change a role on an already running EC2 instance?
+A: Yes, it is, but this was only very recently added and the exam may be out of date (catch-22 situation).
