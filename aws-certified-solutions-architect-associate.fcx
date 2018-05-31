@@ -2137,7 +2137,7 @@ Q: What are some use cases for R family instance type in EC2?
 A: Memory intensive applications, databases, ...
 
 Q: What is the speciality of an M family instance type in EC2?
-A: General purpose (M for Mundane).
+A: General purpose (M for Main).
 
 Q: What EC2 instance type provides production-quality general purpose compute?
 A: M family.
@@ -2236,7 +2236,7 @@ Q: What IOPS performance does IO1 storage in EBS?
 A: You provision the required IOPS performance, up to 20K IOPS.
 
 Q: Can an IO1 type volume be a boot device for an EC2 instance?
-A: Yes.   @@@@????
+A: Yes.
 
 Q: What is the ST1 volume type in EBS?
 A: Performance optimized HDD (magnetic rotating disk).
@@ -2273,6 +2273,125 @@ A: Legacy only; use GP2 instead.
 
 Q: Can a Magnetic type volume be a boot device for an EC2 instance?
 A: Yes.
+
+SubTopic: Lab: Launch an EC2 instance
+
+Lab: Launch an EC2 instance
+Step: Launch one Amazon Linux t2.micro instance, termination protected (everything else default).
+Step: The security groups must allow SSH, HTTPS, and HTTP from any source.
+Step: Create a key-pair and properly install it on your laptop.
+Step: Observe the creation of the instance.
+Step: SSH into the instance.
+Step: Apply security patches.
+Step: Install the Apache web server, create a small web page, and verify it works.
+Step: Clean up: delete EC2 instances.
+
+Q: What does AMI stand for?
+A: Amazon Machine Image.
+
+Q: What is an AMI?
+A: The image for for an EC2 instance (virtual machine).
+
+Q: What does HVM stand for?
+A: Hardware Virtual Machine.
+
+Q: What does PV stand for?
+A: Paravirtual.
+
+Q: What are the two virtualization types supported by AWS?
+A: Hardware Virtual Machine (HVM) and Paravirtual (PV).
+
+Q: What is the difference between an HVM and PV AMI in EC2 in terms of hardware emulation?
+A: HVM uses fully virtualized hardware; it can make use of all hardware extensions.
+
+Q: What is the difference between an HVM and PV AMI in EC2 in terms of the guest OS?
+A: HVM can run unmodified guest OS, as if running on bare metal. PV needs modified OS.
+
+Q: What is the difference between an HVM and PV AMI in EC2 in terms of the boot loader.
+A: HVM uses standard boot from master boot record. PV needs special PV-GRUB boot loader.
+
+Q: Which is recommended for best performance: HVM or PV?
+A: HVM provised better performance for current generation instances that make use of Intel Virtualization Technology (VT).
+
+Q: Why does PV even exist if HVM is better in all respects?
+A: Historically, PV used to provide better performance, but that is no longer true with virtualization advances in hardware (CPUs).
+
+Q: What is the advantage of Amazon Linux AMIs over other Linux AMIs?
+A: They come with AWS command-line tools, Python, Ruby, Perl, and Java.
+
+Q: What do you need to specify for spot instances?
+A: Maximum price, optional launch group, valid from and to time, persitent or not.
+
+Q: How to you selected dedicated host for an instace?
+A: Set tenancy to dedicated host.
+
+Q: What default VPCs exist when you create your AWS account?
+A: Each region has one default VPC.
+
+Q: How do you choose the AZ when creating an instance?
+A: Pick the subnet for the chosen AZ, or leave it to "no preference" (Amazon picks).
+
+Q: What is the relation to subnets and AZs?
+A: Each subnet is scoped (limited) to one AZ.
+
+Q: What is the scope of a subnet?
+A: Each subnet is scoped (limited) to one AZ.
+
+Q: What is the relation between subnets and IP addresses?
+A: The IP addresses of all instances in a subnet are in the same CIDR prefix of the subnet.
+
+Q: What are the options for the EC2 instance shutdown behavior?
+A: Stop or terminate.
+
+Q: What is the default EC2 instance shutdown behavior?
+A: Stop.
+
+Q: What are the options for monitoring EC2 instances with CloudWatch?
+A: Standard (5 minute samples) or detailed (1 minute samples) at an extra cost.
+
+Q: What is termination protection?
+A: Prevents accidental termination of the instance; you have to disable the protection before you can teminate the instance.
+
+Q: What is EC2 instance user data used for?
+A: To pass bootstrap scripts to the EC2 instance.
+
+Q: By default, what happens to the root EBS volume when the EC2 instance is terminated?
+A: By default, it is deleted.
+
+Q: By default, what happens to the non-root EBS volumes when the EC2 instance is terminated?
+A: By default, they are not deleted.
+
+Q: How do you make sure only your laptop can SSH into an EC2 instance.
+A: Set source to My IP for SSH in the security group for the instance (only if you have a static IP address).
+
+Q: Where and with what permissions should the private key file (pem file) be stored?
+A: In ~/.ssh, read-only by owner (400).
+
+Q: What command-line option to you use the specify the private key file?
+A: -i <private-key-file>.
+
+Q: What is the username for Amazon Linux instances?
+A: ec2-user.
+
+Q: What is the first thing you should do after logging into a newly created EC2 instance?
+A: Apply security patches (sudo yum update -y).
+
+Q: How do you apply security patches to a Amazon Linux AMI?
+A: sudo yum update -y
+
+Q: How do you install the apache web server on an Amazon Linux AMI?
+A: sudo yum install httpd -y
+
+Q: Where do you put the index.html file for Apache?
+A: /var/www/html
+
+Q: How do you start the Apache web server on an Amazon Linux instance?
+A: sudo service httpd start
+
+
+
+
+
 
 
 
