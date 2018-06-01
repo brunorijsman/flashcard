@@ -3127,7 +3127,7 @@ Q: How is Lambda priced?
 A: By number of requests, duration, memory
 
 Q: What is the price per Lambda request?
-A: First 1 million requests are free, after that $0.20 per 1 million requests.
+A: First 1 million requests per month are free, after that $0.20 per 1 million requests.
 
 Q: How is Lambda duration calculated?
 A: Time interval from start of invocation to completion or termination, rounded up to nearest 100ms.
@@ -3156,7 +3156,23 @@ A: Architecture can get extremely complicated.
 Q: What AWS service helps you debug serverless applications based on Lambda?
 A: X-Ray.
 
+SubTopic: Lab: Build a Serverless Webpage
 
+Lab: Build a Serverless Webpage
+Step: Download index.html, error.html, and hellocloudgurus.py from the ACloudGuru lesson resources.
+Step: Author a Lambda function from scratch ... (continued)
+Step: ... using Python 3.6 as the language (continued)
+Step: ... with a new role from template Simple Microsservice Permissions.
+Step: Copy the code in hellocloudgurus.py into the Lambda function.
+Step: Add an API gateway trigger.
+Step: Observe the URL for the newly created API gateway.
+Step: In the API gateway, remove method ANY and replace it with method GET ... (continued)
+Step: ... to call a Lambda function with proxy integration (continued)
+Step: Deloy the API.
+Step: Click on the invoke URL for the API and verify it works.
+Step: Edit index.html to put the invoke URL in.
+Step: Create a bucket and upload index.html and error.html (make them publicly readable).
+Step: Test the website by clicking on the public URL for index.html in the bucket.
 
 
 
