@@ -2924,4 +2924,51 @@ A: curl http://169.254.169.254/latest/meta-data/
 Q: What is the command for retrieving a specific metadata item, e.g. the public IPv4 address?
 A: curl http://169.254.169.254/latest/meta-data/public-ipv4
 
+SubTopic: Lab: Launch Configurations and Auto Scaling Groups
+
+Lab: Launch Configurations and Auto Scaling Groups
+Step: Create a bucket and upload a simple index.html and healthcheck.html into it.
+Step: Create a load balancer with aggressive timeouts.
+Step: Create a launch configuration that uses a bootstrap script to start a web server.
+Step: Create an auto scaling group that ... (continued)
+Step: ... starts with 3 instances (continued)
+Step: ... uses all AZs in the region (continued)
+Step: ... uses the load balancer we just created (continued)
+Step: ... dynmically adjusts between 3 and 5 instances (continued)
+Step: ... grows after 5 minutes of >90% CPU utilization (continued)
+Step: ... shrinks after 5 minutes of <40% CPU utilization.
+Step: Terminate an instance and verify a replacement is automatically launched.
+Step: Force high CPU usage using "dd if=/dev/zero of=/dev/null" and verify that the auto scaling group behaves correctly.
+Step: Clean up.
+
+Q: What is an Auto Scaling Group?
+A: A load balancer with a group of instances behind it that grows and shrinks automatically based on load.
+
+Q: What is a Launch Configuration?
+A: A configuration template that is used when a new instance is launched for an Auto Scaling Group.
+
+Q: What does creating a Launch Configuration look like?
+A: It looks exactly like launching an EC2 instance, except that the instance is not actually launched.
+
+Q: Where will an Auto Scaling Group place the member instances?
+A: It will automatically spread them out acress all member AZs as much as possible.
+
+Q: What is the health check grace period?
+A: The length of time (after launching the instance) before the auto scaling group starts checking the health.
+
+Q: What are the two options for the auto scaling group scaling policy?
+A: Keep group at initial size, or adjust capacity of group dynamically.
+
+Q: What is used as the trigger to increase or decrease the auto scaling group size?
+A: An alarm.
+
+Q: What is the warm up period for an auto scaling group?
+A: After growing the group size, wait this long before even considering another grow action.
+
+Q: When you delete an auto scaling group, are the member instances automatically deleted as well?
+A: Yes.
+
+
+
+
 
