@@ -3263,11 +3263,128 @@ A: A phrasing that Alexa can recognize. An utturance is part of an intent.
 Q: What is an Alexa slot?
 A: A step in a multi-step conversation with Alex.
 
-Q: What is an Alexa model?
-A: 
-
 Q: How long does it take to build the Alexa model?
 A: A long time, up to 5 minutes.
 
 Q: What happens when an Amazon skill is triggered?
 A: An AWS Lambda function is invoked.
+
+Topic: Route53
+
+SubTopic: DNS 101
+
+Q: What does DNS stand for?
+A: Domain Name System (DNS).
+
+Q: What does DNS do?
+A: Resolve domain names to IP addresses.
+
+Q: Does AWS support IPv6?
+A: Yes, there has been good IPv6 support across most services since 2016.
+
+Q: What is a top-level domain name ?
+A: The last part of the domain name, e.g. .com in www.cnn.com
+
+Q: What is a second-level domain name?
+A: The optional second-to-last part in some domain names, e.g. .co in www.bbc.co.uk
+
+Q: Who controls the database of top-level domains?
+A: IANA which is a department of ICANN.
+
+Q: What does IANA stand for?
+A: Internet Assigned Numbers Authority
+
+Q: What does ICANN stand for?
+A: Internet Coorporation for Assigned Names and Numbers.
+
+Q: What is a domain registrar?
+A: An authority that registers domains names directly under one or more top-level domains.
+
+Q: Who guarantees uniques of domain names across the Internet?
+A: InterNIC (a service of ICANN).
+
+Q: How does InterNIC guarantee the uniqueness of domain names?
+A: By registering each domain name in the WHOIS database.
+
+Q: What is WHOIS?
+A: A database for registerd Internet resources (domain names, address blocks, AS numbers, ...) and a protocol for accessing it.
+
+Q: What is a DNS zone?
+A: A distinct, contiguous portion of the domain name space managed by a single manager.
+
+Q: Name some types of DNS resource records.
+A: SOA, NS, A, AAAA, CNAME, ALIAS, and others.
+
+Q: What does SOA stand for in DNS?
+A: Start of Authority
+
+Q: What is the purpose of a SOA record in DNS?
+A: It contains administrative information about a zone.
+
+Q: What fields are in a SOA record in DNS?
+A: Name, class, primary master name, administrator email, serial number, refresh interval, retry interval, expire interval, TTL.
+
+Q: What is the purpose of a SOA serial number?
+A: To detect changes (newer versions) and initiate a zone transfer.
+
+Q: What does NS stand for in DNS?
+A: Name Server
+
+Q: What is the purpose of a NS record in DNS?
+A: Delegate a subdomain to a set of authoritative name servers.
+
+Q: Who provides DSN NS records to whom?
+A: The owner of the domain provides the NS records to the registrar where the domain was registered.
+
+Q: Is Amazon a domain registrar?
+A: Yes.
+
+Q: Can you buy domain names directly from Amazon?
+A: Yes, Amazon is a domain registrar.
+
+Q: Can you use a domain registered with a 3rd party registrar (e.g. GoDaddy) in Amazon?
+A: Yes. Register the domain name with GoDaddy, create the Zone in AWS, get the NS records from AWS, provide the NS records to GoDaddy.
+
+Q: What is the purpose of an A record in DNS?
+A: Map a domain name to an IPv4 address 
+
+Q: What is the purpose of an AAAA record in DNS?
+A: Map a domain name to an IPv6 address 
+
+Q: What fields are in an A or AAAA record in DNS?
+A: Host name, Points to IP address, TTL.
+
+Q: What is the purpose of the TTL field in a DNS record?
+A: How long should the client cache the information.
+
+Q: What is the advantage of a small TTL in DNS?
+A: DNS changes propagate faster through the Internet.
+
+Q: What is the advantage of a large TTL in DNS?
+A: Fewer queries to DNS servers, the clients use cached information longer.
+
+Q: What should you do before you migrate a service from (say) Azure to AWS?
+A: Set the DNS TTL to a low value (e.g. 5 minutes) and wait for the current TTL to expire (typically 2 days) before doing the migration.
+
+Q: What is the purpose of an CNAME record in DNS?
+A: Maps a domain name to a canonical domain name (e.g. www.example.com -> example.com).
+
+Q: Is a CNAME record allowed for a naked domain name (a zone apex)?
+A: No, in a CNAME record, you must use an A or AAAA record for the naked domain name. Use an ALIAS record instead.
+
+Q: What is the purpose of an ALIAS record in DNS?
+A: Similar to CNAME, except it supports naked domains. Introduced by AWS to map naked domain names to ELB load balancers.
+
+Q: Does an ELB load balancer have an IP address.
+A: Yes, of course, but the address is not provided and can change. Always use the domain name of the load balancer instead.
+
+Q: What happens if you used an ALIAS record to map your domain name to a load balancer domain name, and the IP address of the load balancer changes.
+A: Amazon will automatically update the DNS responses for your domain name to the new address of the load balancer. You don't need to do anything.
+
+Q: What is the difference between an ALIAS record and a CNAME record in terms of Route53 charging?
+A: You are charged for queries to CNAME records, but not for queries to ALIAS records. If possible, always prefer ALIAS over CNAME.
+
+Q: If it is possible to use either ALIAS or CNAME records in a given scenario, which should you pick?
+A: ALIAS, since queries to ALIAS are free (queries to CNAME are not).
+
+
