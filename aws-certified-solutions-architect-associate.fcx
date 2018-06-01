@@ -3082,6 +3082,79 @@ A: If you need a central repository of files (a file system) that needs to be si
 Q: What file protections does EFS provide?
 A: NFSv4 has per-file and per-directory user permissions that are synchronized and enforced across all attached instances.
 
+SubTopic: Lambda Concepts
+
+Q: What is Lambda?
+A: Event-driven serverless compute as a service.
+
+Q: What is the buzzword for the type of application that is built on AWS Lambda?
+A: Serverless application.
+
+Q: What is the main advantage of serverless (Lambda)?
+A: You don't have to manage infrastructure anymore - neither physical nor virtual infrastructure. You don't worry about patching, scaling, etc.
+
+Q: What are you responsible for managing and deploying into the cloud with Lambda?
+A: You upload code to create Lambda functions.
+ 
+Q: What causes Lambda functions to be executed?
+A: Events or API calls.
+
+Q: What generates events that cause Lambda functions to be executed?
+A: Most AWS services generate a large repertoire of events, e.g. data changes in S3 buckets of Dynamo databases.
+
+Q: What AWS service is responsible for invoking a Lambda function as a result of an HTTP API requirest?
+A: API Gateway.
+
+Q: Who manages Lambda scaling?
+A: Amazon does.
+
+Q: Are all Lambda triggers available in all regions?
+A: No, some triggers are only available in certain regions. North Virginia will always have the most up-to-date features.
+
+Q: Name 3 workflows for creating a Lambda function.
+A: Author from scratch, Blueprints, Serverless Application Repository.
+
+Q: Name 5 programming languages that are supported for writing Lambda functions.
+A: Python (2.7 and 3.6), NodeJS, Java, Go, C#.
+
+Q: What is the most common role template for a Lambda function?   @@@ is the the right question?
+A: Simple Microservice Permission.
+
+Q: Name 11 services that can generate triggers for Lambda functions.
+A: API gateway, AWS IoT, Alexa Skills Kit, Alexa Smart Home, CloudWatch Events, CloudWatch Logs, Cognito Sync Trigger, DynamoDB, Kinesis, S3, SNS.
+
+Q: How is Lambda priced?
+A: By number of requests, duration, memory
+
+Q: What is the price per Lambda request?
+A: First 1 million requests are free, after that $0.20 per 1 million requests.
+
+Q: How is Lambda duration calculated?
+A: Time interval from start of invocation to completion or termination, rounded up to nearest 100ms.
+
+Q: How does the price depend on duration and memory?
+A: Some extremely small amount ($0.00001667 currently) per Gigabyte-second used.
+
+Q: What is the upper threshold for the duration of a single Lambda invocation?
+A: 5 minutes.
+
+Q: What if you want to have a Lambda function that runs longer than 5 minutes?
+A: Break it up into 5 minute chunks, and have each chunk trigger the next one.
+
+Q: Does lambda scale up or out?
+A: It scales out (more resource instances, not bigger resource instances).
+
+Q: How to event triggers relate to Lambda functions?
+A: Each event trigger creates a new Lambda invocation.
+
+Q: Can a lambda function trigger another Lambda function?
+A: Yes.
+
+Q: What is the main disadvantage of Lambda?
+A: Architecture can get extremely complicated.
+
+Q: What AWS service helps you debug serverless applications based on Lambda?
+A: X-Ray.
 
 
 
