@@ -3009,6 +3009,79 @@ A: No.
 Q: Can you move an already running instance into a placement group?
 A: Not directly. But you can create an AMI and spin up a new instance from the AMI in the placement group.
 
+SubTopic: Lab: Elastic File System
+
+Lab: Elastic File System
+Step: Go to the EFS console.
+Step: Create an EFS file system with a mount target in each AZ.
+Step: Create an EC2 instance in each AZ.
+Step: Create an ELB load balancer with aggressive timers and assign all EC2 instances to it. Use healthcheck.html as the health check.
+Step: For each instance do the following ... (continued)
+Step: ... SSH into the instance
+Step: ... Install Apache and start it
+Step: ... Mount the EFS file system to the directory /var/www/html directory.
+Step: On ONE of the instances, create the file /var/www/html/healthcheck.html and /var/www/html/index.html
+Step: Verify that the files appear on all instances
+Step: Verify that the load balancer declares all instances as healthy
+Step: Clean up.
+
+Q: What does EFS stand for?
+A: Elastic File System.
+
+Q: What storage does Elastic File System (EFS) provide?
+A: Virtual file system.
+
+Q: What protocol does EFS support?
+A: Network File System version 4 (NFSv4).
+
+Q: In EFS, do you pay for the pre-provisioned capacity or only for the actually used capacity?
+A: Only for the actually used capacity. There is no need to pre-provision capacity.
+
+Q: Do you need to pre-provision capacity for an EFS volume?
+A: No.
+
+Q: How far up can EFS scale?
+A: Up to petabytes of storage capacity and thousands of concurrent NFS connections.
+
+Q: Is EFS data stored in a single AZ or spread across multiple AZs?
+A: Spread across multiple AZs within a region, but you need a separate mount target in each AZ.
+
+Q: What is the durability SLA for EFS?
+A: AWS currently does not provide a durability guarantee (yet).
+
+Q: Can you mount a single EBS volume to different EC2 instances simultaniously?
+A: No, use EFS instead if you need that.
+
+Q: What consistency model does EFS provide?
+A: Read after write consistency.
+
+Q: What is an EFS mount target.
+A: EC2 instances connect to an EFS file system using a mount target. A mount target has an IP address and is located in a specific AZ.
+
+Q: Can you have multiple mount targets per EFS file system?
+A: Yes, in fact this is common. You typically have one file system across all AZs, and one mount point per AZ.
+
+Q: Is the IP address for an EFS mount point automatically chosed by AWS, or do you specify the IP address manually?
+A: Both options are available.
+
+Q: What is the security group requirement for an EC2 instance that is attached to an EFS file system?
+A: The EC2 instance and the EFS file system must both be members of the same security group.
+
+Q: How do you get help on how to mount an EFS file system?
+A: Click on the mount instructions link for the file system in the console.
+
+Q: How do you install an NFS client on Linux?
+A: "sudo yum install -y nfs-utils" on Amazon Linux / Redhat / SuSE. "sudo apt-get install nfs-common" on Ubuntu. However, it is typically already pre-installed.
+
+Q: How do you mount an NFS file system?
+A: Create a directory (e.g. "sudo mkdir efs"). Execute the (complex) mount command provided in the help text.
+
+Q: What is the main use case for EFS?
+A: If you need a central repository of files (a file system) that needs to be simultaniously accessed by multiple EC2 instances.
+
+Q: What file protections does EFS provide?
+A: NFSv4 has per-file and per-directory user permissions that are synchronized and enforced across all attached instances.
+
 
 
 
