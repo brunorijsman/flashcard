@@ -3466,3 +3466,37 @@ Step: ... with both instances as members
 Step: ... test the load balancer using a browser
 Step: Do NOT clean up YET; we use these instances for the other Route53 labs.
 
+SubTopic: Lab: Simple Routing Policy
+
+Lab: Simple Routing Policy
+Step: Open the hosted zone for your domain name in the Route53 console
+Step: Create a new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which in Alias
+Step: ... which has target load-balancer-oregon
+Step: ... and which has evaluate target health disabled.
+Step: Use a browser to test the domain name.
+Step: Clean up: delete the record set that we just created.
+
+Q: Name 5 routing policies in Route53.
+A: Simple, weighted, latency, failover, geolocation.
+
+Q: What is a Route53 record set?
+A: A set of DNS records of the same type.
+
+Q: Why does the default NS record set for the hosted zone point to 4 name servers in different top-level domains?
+A: For maximum redundancy.
+
+Q: What is the default routing policy when you create a new record set.
+A: The simple routing policy.
+
+Q: How are requests routed by the Route53 simple routing policy?
+A: You are only allowed to enter one target, and all requests are routed to it.
+
+Q: What is the typical use case for the Route53 simple routing policy?
+A: You have a single server that serves the content; it should receive all requests.
+
+Q: How do you force Chrome to "empty cache and hard refresh" on a Mac
+A: View developer tools, click on the refresh icon with two fingers on the trackpad, select "empty cache and hard refresh".
+
