@@ -3174,5 +3174,69 @@ Step: Edit index.html to put the invoke URL in.
 Step: Create a bucket and upload index.html and error.html (make them publicly readable).
 Step: Test the website by clicking on the public URL for index.html in the bucket.
 
+SubTopic: Lab: Using Polly To Help You Pass Your Exam
 
+Lab: Using Polly To Help You Pass Your Exam
+Step: Download the resources from ACloudGuru for this lab.
+Step: Create a DynamoDB table for posts with primary key id.
+Step: Create two S3 buckets: one for hosting the website and one for storing the MP3 files.
+Step: Create an SNS topic for new posts.
+Step: Create and IAM role for Lambda
+Step: ... with a new user-created policy
+Step: ... using a using the lambdapolicy.json in the resources to define the permissions.
+Step: Create the 1st Lambda function to post a new posting
+Step: ... from scratch 
+Step: ... written in Python 2.7
+Step: ... using the role we created above
+Step: ... no trigger (yet)
+Step: ... copy the newpost.py code from the resources (read and understand the code)
+Step: ... set the environment variables DB_TABLE_NAME and SNS_TOPIC
+Step: Create a test event for the new Lambda function
+Step: ... using sample.json from the resources as the test event data
+Step: Execute the test function, check the results, and check the contents of the DynamoDB table.
+Step: Create the 2nd Lambda function to convert a posting to audio
+Step: ... from scratch 
+Step: ... written in Python 2.7
+Step: ... using the role we created above
+Step: ... using the SNS notification as the trigger
+Step: ... copy the converttoaudio.py code from the resources (read and understand the code)
+Step: ... set the environment variables DB_TABLE_NAME and BUCKET_NAME (for the mp3 bucket)
+Step: ... set the timeout to 5 minutes
+Step: Create the 3rd Lambda function to get posts
+Step: ... from scratch 
+Step: ... written in Python 2.7
+Step: ... using the role we created above
+Step: ... using the SNS notification as the trigger
+Step: ... copy the getposts.py code from the resources (read and understand the code)
+Step: ... set the environment variables DB_TABLE_NAME
+Step: ... set the timeout to 5 minutes
+Step: Create a test event for the new Lambda function
+Step: ... using {"PostId": "*"} as the test event data
+Step: Execute the test function and check the results.
+Step: Create a new API in API Gateway for the application.
+Step: Create a new GET method in the API
+Step: ... integrate with the Lambda function to get posts
+Step: ... add a PostId parameter to the URL query string
+Step: ... set request body passthrough to when there are no templates defined
+Step: ... add a mapping template for application/json using mappings.json from the resources
+Step: Create a new POST method in the API
+Step: ... integrating with the Lambda function to create a new posts
+Step: Enable Cross Origin Resource Sharing (CORS) for the API
+Step: Deploy the API
+Step: ... save the invoke URL for the API in a note
+Step: Create a bucket policy for the website bucket to make everything in the bucket publicly accessible
+Step: ... use bucketpolicypermissions.json from the resources (edit the BUCKET_NAME)
+Step: Edit the scripts.js file in the resources to edit the API endpoint (noted before)
+Step: Upload the website files into the bucket
+Step: ... files index.html, scripts.js, styles.css from the resources
+Step: Test the website by clicking on the URL for the index.html object in S3
+Step: Clean up OR continue with the Alexa Skill lab
 
+Q: What does CORS stand for?
+A: Cross Origin Resource Sharing.
+
+Q: When is Cross Origin Resource Sharing (CORS) needed?
+A: When one domain name accesses resources in another domain.
+
+Q: Give a practical example of when Cross Origin Resource Sharing (CORS) is needed.
+A: Website is stored in one bucket, and resources (e.g. images) in another bucket.
