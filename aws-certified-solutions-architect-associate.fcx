@@ -2968,6 +2968,48 @@ A: After growing the group size, wait this long before even considering another 
 Q: When you delete an auto scaling group, are the member instances automatically deleted as well?
 A: Yes.
 
+SubTopic: EC2 Placement Groups
+
+Q: What are the two types of placement groups?
+A: Clustered placement group, spread placement group.
+
+Q: What is a clustered placement group?
+A: A grouping of instances within a single AZ, minimizing network latency and maximizing network throughput.
+
+Q: Can a clustered placement group span multiple AZs?
+A: No.
+
+Q: Name some typical use cases for clustered placement groups?
+A: Big data, Cassandra, ...
+
+Q: Can all types of instances be places in a clustered placement group?
+A: No, only certain types of instances, typically large instance type, for example not t2.micro or t2.nano.
+
+Q: What is a spread placement group?
+A: A grouping of instances that are each placed on distinct underlying hardware.
+
+Q: What is a typical use case for a spread placement group?
+A: Applications that have a small number of separate instances that should be kept separate from each other (avoid fate sharing).
+
+Q: When the exam talks about a placement group, what type of placement group is it generally talking about?
+A: It probably talks about a clustered placement group; spread placement groups are very new.
+
+Q: Can a spread placement group span multiple AZs?
+A: Yes.
+
+Q: The name of a placement group must be unique within what scope?
+A: The name must be unique for the AWS account.
+
+Q: Can you place instances of different types or sizes in a placement group?
+A: Yes, but it is not recommended.
+
+Q: Can you merge placement groups?
+A: No.
+
+Q: Can you move an already running instance into a placement group?
+A: Not directly. But you can create an AMI and spin up a new instance from the AMI in the placement group.
+
+
 
 
 
