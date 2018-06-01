@@ -2897,7 +2897,10 @@ Q: How do you indicate that the boot script is a bash script?
 A: By making the first line #!/bin/bash
 
 Q: At what priviledge level is the boot script run?
-A: Root.
+A: Root (you do not need sudo in the script).
+
+Q: Where can you see the output of the boot script for debugging?
+A: /var/log/cloud-init-output.log
 
 SubSection: Lab: Using Instance Metadata.
 
@@ -3416,4 +3419,50 @@ A: A hosted zone.
 Q: What are the types of the two records in the automatically created hosted zone?
 A: One SOA record, one NS record.
 
+Q: What is the scope of Route53 registered domains?
+A: Global.
+
+Q: What is the scope of Route53 hosted zones?
+A: Global.
+
+SubTopic: Lab: Setup Our EC2 Instance
+
+Lab: Setup Our EC2 Instance
+Step: Create one instance 
+Step: ... in region us-west-2 (Oregon)
+Step: ... named web-server-1-oregon
+Step: ... with the bootscript from the resources (change X to web-server-1-oregon)
+Step: ... with a security group that allows SSH, HTTP, and HTTPS.
+Step: ... test the server using a browser
+Step: Create one instance 
+Step: ... in region us-west-2 (Oregon)
+Step: ... named web-server-2-oregon
+Step: ... with the bootscript from the resources (change X to web-server-1-oregon)
+Step: ... with a security group that allows SSH, HTTP, and HTTPS.
+Step: ... test the server using a browser
+Step: Create an ELB classic load balancer
+Step: ... in region us-west-2 (Oregon)
+Step: ... named load-balancer-oregon
+Step: ... with a health check for index.html,timeout 5, interval 10, unhealthy threshol 2, healthy threashold 3
+Step: ... with both instances as members
+Step: ... test the load balancer using a browser
+Step: Create one instance 
+Step: ... in region us-east-1 (Virginia)
+Step: ... named web-server-1-virginia
+Step: ... with the bootscript from the resources (change X to web-server-1-virginia)
+Step: ... with a security group that allows SSH, HTTP, and HTTPS.
+Step: ... test the server using a browser
+Step: Create one instance 
+Step: ... in region us-east-1 (Virginia)
+Step: ... named web-server-2-virginia
+Step: ... with the bootscript from the resources (change X to web-server-2-virginia)
+Step: ... with a security group that allows SSH, HTTP, and HTTPS.
+Step: ... test the server using a browser
+Step: Create an ELB classic load balancer
+Step: ... in region us-east-1 (Virginia)
+Step: ... named load-balancer-virginia
+Step: ... with a health check for index.html,timeout 5, interval 10, unhealthy threshol 2, healthy threashold 3
+Step: ... with both instances as members
+Step: ... test the load balancer using a browser
+Step: Do NOT clean up YET; we use these instances for the other Route53 labs.
 
