@@ -3425,6 +3425,21 @@ A: Global.
 Q: What is the scope of Route53 hosted zones?
 A: Global.
 
+Q: Name 5 routing policies in Route53.
+A: Simple, weighted, latency, failover, geolocation. 
+
+Q: What is a Route53 record set?
+A: A set of DNS records of the same type.
+
+Q: Why does the default NS record set for the hosted zone point to 4 name servers in different top-level domains?
+A: For maximum redundancy.
+
+Q: What is the default routing policy when you create a new record set.
+A: The simple routing policy.
+
+Q: How do you force Chrome to "empty cache and hard refresh" on a Mac (to test Route53 routing policies).
+A: View developer tools, click on the refresh icon with two fingers on the trackpad, select "empty cache and hard refresh".
+
 SubTopic: Lab: Setup Our EC2 Instance
 
 Lab: Setup Our EC2 Instance
@@ -3473,23 +3488,12 @@ Step: Open the hosted zone for your domain name in the Route53 console
 Step: Create a new record set
 Step: ... for the naked domain name
 Step: ... of type A
-Step: ... which in Alias
+Step: ... which is an Alias
 Step: ... which has target load-balancer-oregon
+Step: ... with routing policy simple
 Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name.
 Step: Clean up: delete the record set that we just created.
-
-Q: Name 5 routing policies in Route53.
-A: Simple, weighted, latency, failover, geolocation.
-
-Q: What is a Route53 record set?
-A: A set of DNS records of the same type.
-
-Q: Why does the default NS record set for the hosted zone point to 4 name servers in different top-level domains?
-A: For maximum redundancy.
-
-Q: What is the default routing policy when you create a new record set.
-A: The simple routing policy.
 
 Q: How are requests routed by the Route53 simple routing policy?
 A: You are only allowed to enter one target, and all requests are routed to it.
@@ -3497,6 +3501,32 @@ A: You are only allowed to enter one target, and all requests are routed to it.
 Q: What is the typical use case for the Route53 simple routing policy?
 A: You have a single server that serves the content; it should receive all requests.
 
-Q: How do you force Chrome to "empty cache and hard refresh" on a Mac
-A: View developer tools, click on the refresh icon with two fingers on the trackpad, select "empty cache and hard refresh".
+SubTopic: Lab: Weighted Routing Policy
 
+Lab: Weighted Routing Policy
+Step: Open the hosted zone for your domain name in the Route53 console
+Step: Create a new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-oregon
+Step: ... with routing policy weighted, weight 70, and set ID Oregon
+Step: ... and which has evaluate target health disabled.
+Step: Create another new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-virginia
+Step: ... with routing policy weighted, weight 30, and set ID Virginia
+Step: ... and which has evaluate target health disabled.
+Step: Use a browser to test the domain name (be patient)
+Step: Clean up: delete the record sets that we just created.
+
+Q: How are requests routed by the Route53 weighted routing policy?
+A: Distribute requests to multiple targets, sending a fixed percentage of requests to each target.
+
+Q: What is the typical use case for the Route53 simple routing policy?
+A: A/B testing, gradual roll out of new web features.
+
+Q: Why does it seem that my weighted routing policy does not work?
+A: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
