@@ -3240,3 +3240,34 @@ A: When one domain name accesses resources in another domain.
 
 Q: Give a practical example of when Cross Origin Resource Sharing (CORS) is needed.
 A: Website is stored in one bucket, and resources (e.g. images) in another bucket.
+
+SubTopic: Lab: Build an Alexa Skill
+
+Todo: Add the Build an Alexa Skill lab (order an Echo first)
+
+Q: What is Amazon Alexa?
+A: Amazon's voice service.
+
+Q: What is an Amazon Echo?
+A: An Amazon speaker that supports Alexa.
+
+Q: What is an Alexa skill?
+A: A installable "app" for Alexa that provides a new capability. One skill contains N intents.
+
+Q: What is an Alexa intent?
+A: A specific request that Alexa can answer. An intent is part of a skill. An intent regognizes N utterances.
+
+Q: What is an Alexa utterance?
+A: A phrasing that Alexa can recognize. An utturance is part of an intent.
+
+Q: What is an Alexa slot?
+A: A step in a multi-step conversation with Alex.
+
+Q: What is an Alexa model?
+A: 
+
+Q: How long does it take to build the Alexa model?
+A: A long time, up to 5 minutes.
+
+Q: What happens when an Amazon skill is triggered?
+A: An AWS Lambda function is invoked.
