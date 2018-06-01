@@ -3387,4 +3387,33 @@ A: You are charged for queries to CNAME records, but not for queries to ALIAS re
 Q: If it is possible to use either ALIAS or CNAME records in a given scenario, which should you pick?
 A: ALIAS, since queries to ALIAS are free (queries to CNAME are not).
 
+SubTopic: Lab: Route 53 Register a Domain Name
+
+Lab: Route 53 Register a Domain Name
+Step: Note - don't do this lab unless you are willing to spend real money (at least $12).
+Step: Note - it takes up to 3 days to complete the registration of a domain.
+Step: Register a new domain.
+Step: Wait for the e-mail address confirmation mail, and confirm it.
+Step: Wait for the registration complete confirmation mail.
+Step: Observe that a hosted zone has automatically been created.
+Step: Do NOT clean up (you paid for it!)
+
+Q: What does registering a .com domain cost at Amazon (basic usage)?
+A: $12 per year for the registration, plus the $0.50 per month for the hosted zone, plus $0.40 per million queries.
+
+Q: Is auto-renew automatically enabled for a domain name registered in AWS?
+A: Yes.
+
+Q: Is privacy-protection automatically enabled for a domain name registered in AWS?
+A: Yes, and unlike GoDaddy, AWS does not charge extra for this.
+
+Q: How long does it take to complete registering a domain name in Amazon?
+A: Up to 3 days, but typically much shorter (less than an hour).
+
+Q: What does Amazon automatically create after registering a domain name?
+A: A hosted zone.
+
+Q: What are the types of the two records in the automatically created hosted zone?
+A: One SOA record, one NS record.
+
 
