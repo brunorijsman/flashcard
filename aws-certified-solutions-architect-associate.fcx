@@ -3523,10 +3523,42 @@ Step: Use a browser to test the domain name (be patient)
 Step: Clean up: delete the record sets that we just created.
 
 Q: How are requests routed by the Route53 weighted routing policy?
-A: Distribute requests to multiple targets, sending a fixed percentage of requests to each target.
+A: Send a fixed percentage of requests to each target.
 
-Q: What is the typical use case for the Route53 simple routing policy?
+Q: What is the typical use case for the Route53 weighted routing policy?
 A: A/B testing, gradual roll out of new web features.
 
 Q: Why does it seem that my weighted routing policy does not work?
+A: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
+
+SubTopic: Lab: Latency Routing Policy
+
+Lab: Latency Routing Policy
+Step: Open the hosted zone for your domain name in the Route53 console
+Step: Create a new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-oregon
+Step: ... with routing policy latency, region us-west-2, and set ID Oregon
+Step: ... and which has evaluate target health disabled.
+Step: Create another new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-virginia
+Step: ... with routing policy latency, region us-east-2, and set ID Virginia
+Step: ... and which has evaluate target health disabled.
+Step: Use a browser to test the domain name and verify it goes to the closer load balancer.
+Step: Use a VPN to connect to a place close to the other load balancer.
+Step: Use a browser to test the domain name and verify it goes to the other load balancer.
+Step: Clean up: delete the record sets that we just created.
+
+Q: How are requests routed by the Route53 latency routing policy?
+A: Send the requests to the target that provides the lowest latency from the user.
+
+Q: What is the typical use case for the Route53 latency routing policy?
+A: A/B testing, gradual roll out of new web features.
+
+Q: Why does it seem that my latency routing policy does not work?
 A: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
