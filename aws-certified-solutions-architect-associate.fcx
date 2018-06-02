@@ -3772,6 +3772,8 @@ Q: What service does Redshift provide?
 A: Data warehousing.
 
 SubTopic: Lab: Create our first RDS instance
+
+Lab: Create our first RDS instance
 Step: Launch a DB instance in RDS:
 Step: ... engine = MySQL
 Step: ... use case = dev/test (free tier)
@@ -3815,3 +3817,154 @@ A: Yes, not not on all instance types, typically only on the larger ones (e.g. n
 
 Q: What is a convenient place to see all security groups?
 A: In the VPC console.
+
+Q: How many DB instances are you allowed to create?
+A: 40 DB instances per account by default, but it can be increased using a support request.
+
+SubTopic: Lab: RDS - Back Ups, Multi-AZ, and Read Replicas
+
+Lab: RDS - Back Ups, Multi-AZ, and Read Replicas
+Step: Launch a DB instance in RDS:
+Step: ... engine = MySQL
+Step: ... use case = dev/test (free tier)
+Step: ... DB instance identifier = acloudguru
+Step: ... Master user name = acloudguru
+Step: ... Master password = acloudguru
+Step: ... Public accessibility = no
+Step: ... Database name = acloudguru
+Step: ... and default values for everything else.
+Step: Wait 5 minutes.
+Step: Look at the snapshot list and observe that there is an automated snapshot.
+Step: Go to the UI for restoring the DB to a specific point in time (but don't actually do it).
+Step: Take a manual snapshot of the DB instance.
+Step: Create an encrypted copy of the non-encrypted snapshot that we just created.
+Step: Restore the encrypted snapshot, created a new encrypted DB instance.
+Step: Create a read replica for the DB instance acloudguru:
+Step: ... Public accessibility = no
+Step: ... DB instance identifier = acloudguru-replica-1
+Step: ... and default values for everything else.
+Step: Modify DB instance acloudguru to enable multi-AZ.
+Step: Clean up: delete DB instances, snapshots, EC2 instances.
+
+Q: What are the two types of backups in RDS?
+A: Automated backup and snapshot backup.
+
+Q: What is an RDS automated backup?
+A: A automatic and continuous backup your DB instance.
+
+Q: To what point in time does an automated backup allow you to recover your database?
+A: To any point in time within the retention period, down to a second precision. 
+
+Q: What is the allowed range for the retention period for automated backups in RDS?
+A: Between 1 and 35 days.
+
+Q: How does automated backup store the backup data?
+A: It takes a daily full snapshot and stores transaction logs throughout the day.
+
+Q: Does does recovery of an automated backup reconstruct the database to any point in time?
+A: It recovers the most recent previous full snapshot and then applies the transaction log up to the desired point in time.
+
+Q: Are RDS automated backups enabled or disabled by default?
+A: Enabled with a default retention period of 7 days.
+
+Q: Where is the backup data for RDS automated backups stored?
+A: In S3?
+
+Q: Do you have to pay for the storage for RDS automated backups?
+A: Usually not (depends on how big the transaction log is). You get as much free S3 storage as the size of your database.
+
+Q: When does the full snapshot for the RDS automated backup take place?
+A: In the defined backup window for the DB instance (not to be confused with the maintenance window)
+
+Q: How does taking a full snapshot for RDS automated backup affect availability and performance?
+A: The DB instance remains available to clients. Disk I/O is suspended, transactions are queued, and transaction latency may increase.
+
+Q: Are RDS automated backups retained after the DB instance is deleted?
+A: No.
+
+Q: What is an RDS snapshot?
+A: A user-initiated snapshot of a DB instance at a specific point in time.
+
+Q: Are RDS manual snapshots retained after the DB instance is deleted?
+A: Yes.
+
+Q: What happens to the original DB instance when you restore an automatic backup or manual snapshot?
+A: It continues to exist as-is. The restoration creates a new DB instance with a new DNS endpoint.
+
+Q: Does RDS support encryption at rest of a DB instance?
+A: Yes, for all DB engines.
+
+Q: How does RDS manage keys for DB encryption?
+A: Using the AWS Key Management Service (KMS).
+
+Q: If the DB instance is encrypted, what about backups?
+A: Underlying storage, automated backups, manual snapshots, and read replicas are all also encrypted.
+
+Q: Can you encrypt an already running DB instance?
+A: Currently, no. You must enable encryption at creation time. Or you can create a snapshot, copy it, encrypt the copy, and restore it.
+
+Q: What is Multi-AZ in RDS?
+A: Synchronously replicate changes to the primary DB instance in one AZ to a standby DB instance in another AZ in the same region.
+
+Q: What is the use case for Multi-AZ in RDS?
+A: Disaster recovery.
+
+Q: What happens if the primary DB instance fails in Multi-AZ?
+A: The clients are automatically switched over to the standby DB instance.
+
+Q: What mechanism does AWS use to switch from the primary to the standby DB instance in Muti-AZ.
+A: It automatically updates the DNS name for the DB instance endpoint. 
+
+Q: Why do you never use an IP address for an DN instance endpoint?
+A: You use a DNS name because it is automatically updated to the standby DB instance in case of a failure when Multi-AZ is enabled.
+
+Q: With Multi-AZ, how close (how similar) is the data in the standby DB instance to the data in the primary DB instance?
+A: It is an exact copy, the replication is synchronous.
+
+Q: What RDS mechanism do you use for disaster recovery?
+A: Multi-AZ.
+
+Q: Does Multi-AZ improve performance?
+A: No, use read replicas for that.
+
+Q: For which RDS database types is Multi-AZ available?
+A: All of them (technically not for Aurora, but the same functionality is implemented otherwise)
+
+Q: What is an RDS read replica?
+A: Asynchronously replicates changes to a primary DB instance to one or more replica DB instances, and directs reads to the replicas for improved read performance.
+
+Q: How many read replicas can a DB instance have?
+A: Up to 5.
+
+Q: What RDS mechanism do you use for improving performance?
+A: Read replicas.
+
+Q: Can read replicas be used for disaster recovery?
+A: No, use Multi-AZ for that.
+
+Q: Is it possible to chain read replicas (have a read replica of a read replica)?
+A: Yes, but it increases replication latency.
+
+Q: Does the read replica have to be in same region as the DB instance from which it is replicated?
+A: No, it can be in a different region.
+
+Q: With read replicas, how close (how similar) is the data in the replica DB instance to the data in the primary DB instance?
+A: It is close, but not an exact copy; the replication is asynchronous.
+
+Q: For which database engines is read replicas available?
+A: Available for MySQL, PostgreSQL, MariaDB, Aurora. Not available for Oracle and SQL Server.
+
+Q: What is a pre-condition for enabling read replicas?
+A: Automatic backups must be enabled.
+
+Q: How does an RDS application chose whether it reads from the primary or a read replica?
+A: Each replica has its own DNS endpoint.
+
+Q: Can Multi-AZ be enabled for a replica?
+A: Yes (this is a very recent feature).
+
+Q: Can you enable read replicas for a primary DB instance that has Multi-AZ enabled?
+A: Yes.
+
+Q: What does promotion of a read replica mean?
+A: It means turning a read replace into a fully stand-alone instance DB, which stops the replication.
