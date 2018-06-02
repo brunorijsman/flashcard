@@ -3339,6 +3339,24 @@ A: Delegate a subdomain to a set of authoritative name servers.
 Q: Who provides DSN NS records to whom?
 A: The owner of the domain provides the NS records to the registrar where the domain was registered.
 
+Q: What is the purpose of an MX record in DNS?
+A: Specifies the mail server (e.g. mail.example.com) for a domain (e.g. example.com).
+
+Q: Does Route53 support MX records?
+A: Yes.
+
+Q: Which record types does Route53 support?
+A: A, AAAA, CNAME, CAA, MX, NAPTR, NS, PTR, SOA, SPF, SRV, TXT (and ALIAS which is Route53 proprietary). More are expected.
+
+Q: What is a DNS wildcard entry?
+A: *.example.com where * will match and subdomain (e.g. www.example.com and subdomain.example.com)
+
+Q: Does Route53 support wildcard entries?
+A: Yes, except for NS records.
+
+Q: Does Route53 support DNSSEC.
+A: Partially. Yes for domain registration. But no, not currently for DSN queries.
+
 Q: Is Amazon a domain registrar?
 A: Yes.
 
@@ -3389,6 +3407,12 @@ A: You are charged for queries to CNAME records, but not for queries to ALIAS re
 
 Q: If it is possible to use either ALIAS or CNAME records in a given scenario, which should you pick?
 A: ALIAS, since queries to ALIAS are free (queries to CNAME are not).
+
+Q: Many many domain names can you have in a single Route53 account?
+A: 50 maximum by default, but it can be increased by contacting support.
+
+Q: Many many hosted zones can you have in a single Route53 account?
+A: 500 maximum by default, but it can be increased by contacting support.
 
 SubTopic: Lab: Route 53 Register a Domain Name
 
@@ -3533,6 +3557,12 @@ A: A/B testing, gradual roll out of new web features.
 Q: Why does it seem that my weighted routing policy does not work?
 A: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
 
+Q: What does WRR stand for?
+A: Weighted Round Robin.
+
+Q: Does Route53 support WRR routing?
+A: Yes, use the weighted routing policy.
+
 SubTopic: Lab: Latency Routing Policy
 
 Lab: Latency Routing Policy
@@ -3562,6 +3592,12 @@ A: Send the requests to the target that provides the lowest latency from the use
 
 Q: What is the typical use case for the Route53 latency routing policy?
 A: A/B testing, gradual roll out of new web features.
+
+Q: What does LBR stand for?
+A: Latency Based Routing?
+
+Q: Does Route53 support LBR?
+A: Yes, use the latency routing policy.
 
 SubTopic: Lab: Failover Routing Policy
 
@@ -3649,3 +3685,93 @@ A: Allows you to configure which geographic regions are router to which target.
 
 Q: What is the typical use case for the Route53 failover routing policy?
 A: When the content served by a particular server is customized for a geographical region (language, currency, ...)
+
+Topic: Databases on AWS
+
+SubTopic: Databases 101
+
+Q: What is a relational database?
+A: A database that uses the relational model with tables, rows and columns. It typically supports ACID transactions.
+
+Q: What does RDS stand for?
+A: Relational Database System.
+
+Q: What does ACID stand for?
+A: Atomicity, Consistentency, Isolation, Durability.
+
+Q: Name 6 popular relational database products?
+A: Commercial: Microsoft SQL Server, Oracle. Open source: MySQL, MariaDB, PostgreSQL. Amazon-only: Aurora.
+
+Q: What services does AWS offer for relational databases?
+A: Relational Database Service (RDS), DynamoDB.
+
+Q: What database engines does AWS RDS support?
+A: Aurora, MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server.
+
+Q: What is the relational database service heavily pushed by AWS?
+A: Aurora, which is their own.
+
+Q: What does RDS stand for?
+A: Relational Database Service.
+
+Q: What is the typical structure of a non-relational database?
+A: Collections containing Documents containing Key Value Pairs.
+
+Q: What service does AWS offer for non-relational databases?
+A: DynamoDB.
+
+Q: What is a Data Warehouse (DW or DWH) aka Enterprise Data Warehouse (EDW)?
+A: A centralized repository of integrated data from one or more disparate sources, storing current and historical data, used for analytical reporting and business intelligence.
+
+Q: Name some commercial products for business intelligence.
+A: IBM Cognos, Jaspersoft, SQL Server Reporting Services, Oracle Hyperion, SAP NetWeaver.
+
+Q: What service does AWS offer for data warehousing?
+A: Redshift.
+
+Q: What does OLTP stand for?
+A: On Line Transaction Processing.
+
+Q: What type of transaction processing does a relational database provide?
+A: On Line Transation Processing (OLTP).
+
+Q: What does OLAP stand for?
+A: On Line Analytics Processing.
+
+Q: What type of transaction processing does a data warehouse provide?
+A: On Line Analytics Processing (OLAP).
+
+Q: What is the difference between OLTP and OLAP?
+A: OLTP typically uses a large volume of fast and simple on-line transactions. OLAP typically uses a low volume of very complex transaction involving aggregation.
+
+Q: What do caching products such as Redis and Memcached do?
+A: In-memory (RAM) key-value stores that typically used as a cache in front of an on-disk database.
+
+Q: What service does AWS offer for caching?
+A: ElastiCache.
+
+Q: Which caching engines does ElastiCache support?
+A: Redis and memcached.
+
+Q: What is the complete list of database services in AWS?
+A: RDS, DynamoDB, ElastiCache, Neptune, Redshift.
+
+Q: What service does RDS provide?
+A: Relational database.
+
+Q: What service does DynamoDB provide?
+A: Non-relational database.
+
+Q: What service does ElastiCache provide?
+A: Caching.
+
+Q: What service does Neptune provide?
+A: Graph database.
+
+Q: What service does Redshift provide?
+A: Data warehousing.
+
+
+
+
+
