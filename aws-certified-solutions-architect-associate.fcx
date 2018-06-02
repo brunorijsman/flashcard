@@ -2905,7 +2905,7 @@ A: /var/log/cloud-init-output.log
 SubSection: Lab: Using Instance Metadata.
 
 Lab: Using Instance Metadata.
-Step: Launch an EC2 instance @@@ with a simple boot script to echo some text into a file.
+Step: Launch an EC2 instance.
 Step: SSH into the EC2 instance.
 Step: Display the metadata index for the instace from inside the instance.
 Step: Display the IPv4 public address of the intsance using the metadata.
@@ -3771,7 +3771,47 @@ A: Graph database.
 Q: What service does Redshift provide?
 A: Data warehousing.
 
+SubTopic: Lab: Create our first RDS instance
+Step: Launch a DB instance in RDS:
+Step: ... engine = MySQL
+Step: ... use case = dev/test (free tier)
+Step: ... DB instance identifier = acloudguru
+Step: ... Master user name = acloudguru
+Step: ... Master password = acloudguru
+Step: ... Publicly accessible = no
+Step: ... Database name = acloudguru
+Step: ... and default values for everything else.
+Step: Launch an Amazon Linux t2.micro instance in EC2:
+Step: ... with the bootstrap script from the ACG resources that installs Apache, PHP, PHP MySQL, and a demo webpage.
+Step: ... a security group that allows SSH, HTTP, and HTTPS
+Step: ... and default values for everything else.
+Step: SSH into the EC2 instance.
+Step: Verify that the bootstrap script ran succesfully:
+Step: ... check that Apache is running,
+Step: ... check that index.php and connect.php are present in /var/www/html.
+Step: Open a browser and enter the IP address of the EC2 instance. Verify you see the PHP info page.
+Step: On the browser go to <ec2-ip-address>/connect.php. Verify you get a "Unable to connect to MySQL" error.
+Step: On the EC2 instance, edit /var/www/html/connect.php and replace yourhostnameaddress with the endpoint domain name of the DB instance.
+Step: Fix the security group of the DB instance to allow the EC2 instance to connect to it:
+Step: ... Make a note of the security group of the EC2 instance
+Step: ... Add an inbound rule to the security group of the DB instance to allow MySQL traffic from the security group of the EC2 instance
+Step: On the browser go to <ec2-ip-address>/connect.php again. Verify it works this time.
+Step: Clean up: delete the DB instance, the EC2 instance, and the RDS security group.
 
+Q: What is the typical cost of a default parameters dev/test MySQL database in RDS?
+A: Approximately $15 per month (eligible for free tier).
 
+Q: Can you use magnetic storage for MySQL?
+A: No, only SSD (general purpose SSD or provisioned IOPS SSD).
 
+Q: What port does MySQL use?
+A: Port 3306.
 
+Q: What port does Aurora use?
+A: Port 3306.
+
+Q: Does MySQL support encryption at rest?
+A: Yes, not not on all instance types, typically only on the larger ones (e.g. not on t2.micro).
+
+Q: What is a convenient place to see all security groups?
+A: In the VPC console.
