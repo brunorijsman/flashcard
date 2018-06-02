@@ -4034,3 +4034,59 @@ A: Yes.
 
 Q: What does "push-button scaling" mean in DynamoDB?
 A: You can increase the scaling of a DynamoDB database, without downtime, and without limits.
+
+SubTopic: Redshift
+
+Q: What service does Redshift provide?
+A: Data warehousing and Online Analytics Processing (OLAP).
+
+Q: What are the two possible configurations for Redshift?
+A: Single node or multi-node.
+
+Q: What is the size of a single node Redshift configuration?
+A: Up to 160GB.
+
+Q: What types of nodes exist in a multi-node Redshift configuration?
+A: Leader node, compute node.
+
+Q: What does the leader node do in a multi-node Redshift configuration?
+A: Manage client connections and process queries.
+
+Q: What does a compute node do in a multi-node Redshift configuration?
+A: Store data, perform queuries and computations.
+
+Q: How many compute nodes can there be in a multi-node Redshift configuration?
+A: Up to 128.
+
+Q: Why is the architecture for OLAP databases different than the architecture for OLTP databases?
+A: OLTP tends to process many fields for one record, OLAP tends to process one field for many records.
+
+Q: What is columnar data storage in Redshift?
+A: Columns (rather than rows) are stored sequentially on disk, for faster OLAP processing.
+
+Q: What is advanced compression in Redshift?
+A: Columns (rather than rows) are stored sequentially on disk, for more similar data and hence better compression.
+
+Q: What is Massively Parallel Processing (MPP) in Redshift?
+A: Redshift automatically distributes a complex query across many compute nodes, resuling in faster query response time.
+
+Q: Redshift pricing depends on which metrics?
+A: Compute node hours, backups, data transfer within a VPC (not outside)
+
+Q: In multi-node Redshift, are you charged for the leader node?
+A: No, only for the compute nodes.
+
+Q: How is Redshift data in-transit secured?
+A: SSL
+
+Q: How is Redshift data at-rest secured?
+A: AES-256 encryption
+
+Q: Who manages the keys for Redshift at-rest encryption?
+A: By default, Redshift. Or you can manage your own keys using HSM or KMS.
+
+Q: Can Redshift be distributed across multiple AZs for high availability?
+A: Currently not.
+
+Q: What can you do if the AZ in which you run Redshift goes down?
+A: You can restore the Redshift snapshot to another AZ.
