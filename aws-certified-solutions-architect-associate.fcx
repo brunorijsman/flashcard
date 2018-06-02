@@ -3494,6 +3494,7 @@ Step: ... with routing policy simple
 Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name.
 Step: Clean up: delete the record set that we just created.
+Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
 
 Q: How are requests routed by the Route53 simple routing policy?
 A: You are only allowed to enter one target, and all requests are routed to it.
@@ -3521,6 +3522,7 @@ Step: ... with routing policy weighted, weight 30, and set ID Virginia
 Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name (be patient)
 Step: Clean up: delete the record sets that we just created.
+Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
 
 Q: How are requests routed by the Route53 weighted routing policy?
 A: Send a fixed percentage of requests to each target.
@@ -3553,6 +3555,7 @@ Step: Use a browser to test the domain name and verify it goes to the closer loa
 Step: Use a VPN to connect to a place close to the other load balancer.
 Step: Use a browser to test the domain name and verify it goes to the other load balancer.
 Step: Clean up: delete the record sets that we just created.
+Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
 
 Q: How are requests routed by the Route53 latency routing policy?
 A: Send the requests to the target that provides the lowest latency from the user.
@@ -3560,5 +3563,59 @@ A: Send the requests to the target that provides the lowest latency from the use
 Q: What is the typical use case for the Route53 latency routing policy?
 A: A/B testing, gradual roll out of new web features.
 
-Q: Why does it seem that my latency routing policy does not work?
-A: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
+SubTopic: Lab: Failover Routing Policy
+
+Lab: Latency Failover Policy
+Step: Open the hosted zone for your domain name in the Route53 console
+Step: Create a health check for the Oregon load balancer
+Step: ... with name health-check-oregon
+Step: ... checking an end-point
+Step: ... checking the domain name of load-balancer-oregon
+Step: ... for path /index.html
+Step: ... with a fast check interval (10 seconds)
+Step: ... with failure threshold of 1
+Step: ... without an alarm
+Step: Create a health check for the entire website
+Step: ... with name health-check-website
+Step: ... checking an end-point
+Step: ... checking the domain name of the entire website
+Step: ... for path /index.html
+Step: ... with a fast check interval (10 seconds)
+Step: ... with failure threshold of 1
+Step: ... with an alarm for a new SNS topic website-down
+Step: Note: the health check for the entire website will be unhealthy because we don't have any record sets yet.
+Step: Create a new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-oregon
+Step: ... with routing failover latency, primary target, 
+Step: ... and which uses health check health-check-oregon
+Step: Create another new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-virginia
+Step: ... with routing failover latency, secondary target, 
+Step: ... and which uses no health check
+Step: Use a browser to test the domain name and verify it goes to Oregon (be patient)
+Step: Stop (don't terminate, but stop) both Oregon EC2 instances
+Step: Observe the health checks in Route53 and observe that Oregon is down
+Step: Use a browser to test the domain name and verify it goes to Virginia now
+Step: Stop (don't terminate, but stop) both Virginia EC2 instances
+Step: Observe the health checks in Route53 and observe that the website is down
+Step: Verify you get an alarm e-mal
+Step: Clean up: restart all stopped instances
+Step: Verify the website is back up
+Step: Clean up: delete the record sets that we just created.
+Step: Clean up: delete the health checks and the SNS topic
+Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+
+Q: How are requests routed by the Route53 failover routing policy?
+A: Send all requests to the primary target by default. If the healthcheck for the primary fails, send all traffic to the secondary target.
+
+Q: Does the Route53 failover routing policy check the health of the primary target only?
+A: No, it is possible to also check the secondary target.
+
+Q: What is the typical use case for the Route53 failover routing policy?
+A: Any sitation where you can have only one target, but you want a failover backup.
