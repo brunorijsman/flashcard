@@ -3589,14 +3589,14 @@ Step: ... for the naked domain name
 Step: ... of type A
 Step: ... which is an Alias
 Step: ... which has target load-balancer-oregon
-Step: ... with routing failover latency, primary target, 
+Step: ... with routing policy failover, primary target
 Step: ... and which uses health check health-check-oregon
 Step: Create another new record set
 Step: ... for the naked domain name
 Step: ... of type A
 Step: ... which is an Alias
 Step: ... which has target load-balancer-virginia
-Step: ... with routing failover latency, secondary target, 
+Step: ... with routing policy failover, secondary target
 Step: ... and which uses no health check
 Step: Use a browser to test the domain name and verify it goes to Oregon (be patient)
 Step: Stop (don't terminate, but stop) both Oregon EC2 instances
@@ -3605,8 +3605,8 @@ Step: Use a browser to test the domain name and verify it goes to Virginia now
 Step: Stop (don't terminate, but stop) both Virginia EC2 instances
 Step: Observe the health checks in Route53 and observe that the website is down
 Step: Verify you get an alarm e-mal
-Step: Clean up: restart all stopped instances
 Step: Verify the website is back up
+Step: Clean up: restart all stopped instances
 Step: Clean up: delete the record sets that we just created.
 Step: Clean up: delete the health checks and the SNS topic
 Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
@@ -3619,3 +3619,33 @@ A: No, it is possible to also check the secondary target.
 
 Q: What is the typical use case for the Route53 failover routing policy?
 A: Any sitation where you can have only one target, but you want a failover backup.
+
+SubTopic: Lab: Geolocation Routing Policy
+
+Lab: Geolocation Failover Policy
+Step: Create another new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-oregon
+Step: ... with routing policy geolocation, for location Europe
+Step: ... with ID oregon-serves-europe
+Step: ... without a healthcheck
+Step: Create another new record set
+Step: ... for the naked domain name
+Step: ... of type A
+Step: ... which is an Alias
+Step: ... which has target load-balancer-virginia
+Step: ... with routing policy geolocation, for location Default
+Step: ... with ID oregon-serves-everything-else
+Step: ... without a healthcheck
+Step: Use a browser to test from the US and verify it goes to Virginia
+Step: Use a browser and VPN to test from the Europe and verify it goes to Oregon
+Step: Clean up: delete the record sets that we just created.
+Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+
+Q: How are requests routed by the Route53 geolocation routing policy?
+A: Allows you to configure which geographic regions are router to which target.
+
+Q: What is the typical use case for the Route53 failover routing policy?
+A: When the content served by a particular server is customized for a geographical region (language, currency, ...)
