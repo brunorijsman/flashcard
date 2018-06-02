@@ -3968,3 +3968,69 @@ A: Yes.
 
 Q: What does promotion of a read replica mean?
 A: It means turning a read replace into a fully stand-alone instance DB, which stops the replication.
+
+SubTopic: Lab: DynamoDB
+
+Lab: DynamoDB
+Step: Create a DynamoDB table:
+Step: ... Table name = students
+Step: ... Primary key, partition key = StudentId (number)
+Step: ... Disable auto-scaling
+Step: ... Read capacity unit = 1
+Step: ... Write capacity units = 1
+Step: ... Leave everything else as default value.
+Step: Create an item in the table:
+Step: ... StudentId = 100
+Step: ... FirstName (string) = John
+Step: ... LastName (string) = Smith
+Step: Create another item in the table:
+Step: ... StudentId = 100
+Step: ... FirstName (string) = Jane
+Step: ... LastName (string) = Rogers
+Step: ... Age (number) = 16
+Step: Scan the table with filter LastName = Smith
+Step: Remove the filter and show the whole table again
+Step: Have a look at the metrics and see how the actual capacity compares to the provisioned capacity.
+Step: Clean up: delete the table.
+
+Q: What is AmazonDB?
+A: It is the no-SQL (non-relational) database service provided by AWS.
+
+Q: What data models does AmazonDB support?
+A: Document and key-value.
+
+Q: Can a DynamoDB be stored on magnetic storage?
+A: No, only on SSD.
+
+Q: Use a DynamoDB spread over multipe AZs?
+A: Amazon does not use that language exactly; they say "across 3 geographically distinct data centers".
+
+Q: What consistency models does DynamoDB support?
+A: Eventual consistent reads (the default) and strongly consistent reads.
+
+Q: Which consistency model in DynamoDB has the best performance?
+A: Eventual consistent reads.
+
+Q: What does eventual consistent reads consistency mean in DynamoDB?
+A: After a write, read may return the old data for some time, but eventually return the new data.
+
+Q: How long does it take for the data to become consistent in the DynamoDB eventual consistent reads model?
+A: Usually within a second.
+
+Q: What does strongly consistent reads consistency mean in DynamoDB?
+A: After a write that received a succes response, a read will always return the new data, no matter how fast the read is after the completed write.
+
+Q: DynamoDB pricing depends on which metrics?
+A: Provisioned throughput capacity, used storage capacity, 
+
+Q: Is there a difference in pricing for reading vs writing DynamoDBs?
+A: Writing is 5x more expensive than reading.
+
+Q: What is reserved capacity in DynamoDB
+A: You enter into a 1 or 3 year contract to purchase DynamoDB capacity in advance at a greatly reduced price.
+
+Q: Can you change the provisioned capacity of a DynamoDB table on the fly?
+A: Yes.
+
+Q: What does "push-button scaling" mean in DynamoDB?
+A: You can increase the scaling of a DynamoDB database, without downtime, and without limits.
