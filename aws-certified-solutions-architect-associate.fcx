@@ -4200,3 +4200,252 @@ A: Writer and reader.
 
 Q: What is the difference between the cluster endpoint and the instance endpoint in Aurora?
 A: There is only one cluster endpoint and it fails over automatically. Use the instance endpoint for reading from a specific read replica.
+
+Topic: VPC
+
+SubTopic: VPC Intoduction and Overview
+
+Q: What does VPC stand for?
+A: Virtual Private Cloud.
+
+Q: What is a good metaphor for a VPC?
+A: A virtual data center.
+
+Q: You have one default VPC for every what?
+A: For every region.
+
+# TODO: I think all the topics discussed around offset 5:00 will be discussed in much greater detail later, so no questions yet
+
+Q: Which prefixes does Amazon allow you to use for subnets?  @@@ What? Private? Internal?
+A: 10/8, 172.16/12, 192.168/16
+
+Q: What is the maximum number of VPC per account?   @@@ or per region?
+A: 5 by default, but it can be increased with a support request.
+
+Q: What is the scope of a VPC?
+A: A region.
+
+Q: What is a subnet?
+A: A network abstraction with an IP prefix (IP address range).
+
+Q: Can a subnet span multiple AZs?
+A: No.
+
+Q: What are EC2 instances attached to, from a networking point of view?
+A: Subnets.
+
+Q: A subnet is contained in what, from a networking point of view?
+A: In a VPC.
+
+Q: What is the smallest (most specific) prefix AWS allows for a subnet?
+A: /28
+
+Q: How to you direct the flow of traffic between subnets?
+A: With route tables.
+
+Q: How do you connect a VPC to the Internet?
+A: Using an Internet Gateway?
+
+Q: What is an Internet Gateway?
+A: It connects a VPC to the Internet.
+
+Q: How many Internet Gateways can you have per VPC?
+A: One.
+
+Q: Is an Internet Gateway a single point of failure?
+A: No, it is highly available and spread across all AZs the region.
+
+Q: What is the scope of an Internet Gateway?
+A: A region. It spans all AZs within that region.
+
+Q: What is a security group?
+A: @@@
+
+Q: Can a security group span multiple AZs?
+A: Yes.
+
+Q: Can a security group span multiple subnsets?
+A: Yes.
+
+Q: Is a security group stateful or stateless?
+A: Stateful.
+
+Q: What does it mean for a security group to be stateful?
+A: If an inbound rule allows a flow, the outbound reverse flow is automatically also allowed, even if there is no explicit rule. And vice versa.
+
+Q: What is Network Access Control List (NACL)?
+A: @@@
+
+Q: What does NACL stand for?
+A: Network Access Control List.
+
+Q: Is a NACL stateful or stateless?
+A: Stateless.
+
+Q: What is a VPC route table?
+A: @@@
+
+Q: What is the difference between a default VPC and a custom VPC in terms of how they are created?
+A: AWS automatically creates one default VPC per region. You manually create custom VPCs.
+
+Q: What is the difference between a default VPC and a custom VPC in terms of Internet reachability.
+A: Default VPCs automatically have a default route to the Internet. In custom VPCs, you have to add one explicitly.
+
+Q: How many IP addresses does each EC2 instance get in a default VPC?
+A: Four. One public IPv4, one private IPv4, one public IPv6, one private IPv6.   @@@ check
+
+Q: How many IP addresses does each EC2 instance get in a custom VPC?
+A: Two or four. One private IPv4 and IPv6? It also gets public IPv4 and IPv6, but only if the subnet is public???  @@@ check
+
+Q: What is VPC peering?
+A: Connect one VPC to another VPC.
+# ... @@@ via a direct network route, using private IP addresses.  What does that mean?
+# ... @@@ 
+
+Q: Can VPC peering connect to a VPC owned by a different AWS account?
+A: Yes.
+
+Q: Can VPC peering be transitive (A -> B -> C)?
+A: No.
+
+SubTopic: Lab: Build your own custom VPC.
+
+Lab: Build your own custom VPC.
+Step: Go to the VPC console in the Oregon region.
+Step: Create a VPC without using the wizard:
+Step: ... Name tag = vpc-1
+Step: ... IPv4 CIDR block = 10.0.0.0/16
+Step: ... IPv6 CIDR block = Amazon provided
+Step: ... everything else default.
+Step: Create a subnet:
+Step: ... Name tag = vpc-1-subnet-1
+Step: ... VPC = vpc-1
+Step: ... Availability Zone = us-west-2a
+Step: ... IPv4 CIDR block = 10.0.1.0/24
+Step: ... IPv6 CIDR block = Specify a custom IPv6 CIDR: 01
+Step: Create a subnet:
+Step: ... Name tag = vpc-1-subnet-2
+Step: ... VPC = vpc-1
+Step: ... Availability Zone = us-west-2b
+Step: ... IPv4 CIDR block = 10.0.2.0/24
+Step: ... IPv6 CIDR block = Specify a custom IPv6 CIDR: 02
+Step: Create an Internet gateway with name vpc-1-igw
+Step: Attach Internet gateway vpc-1-igw to VPC vpc-1
+Step: Edit the name of the main route table for VPC vpc-1 to be vpc-1-route-table-main
+Step: Create a route table:
+Step: ... Name tag = vpc-1-route-table-internet
+Step: ... VPC = vpc-1
+Step: Add an IPv4 default route to route table vpc-1-route-table-internet:
+Step: ... Destination = 0.0.0.0/0
+Step: ... Target = vpc-1-igw
+Step: Add an IPv6 default route to route table vpc-1-route-table-internet:
+Step: ... Destination = ::0/0
+Step: ... Target = vpc-1-igw
+Step: Associate subnet vpc-1-subnet-1 with route table vpc-1-route-table-internet
+Step: Enable auto-assign public IPv4 and IPv6 address for subnet vpc-1-subnet-1
+Step: Launch an EC2 instance:
+Step: ... AMI = Amazon Linux
+Step: ... Instance type = t2.tiny
+Step: ... Network = vpc-1
+Step: ... Subnet = vpc-1-subnet-1
+Step: ... Tag = Name: vm-1-public
+Step: ... Create a new security group vpc-1-security-group-web-server that allows SSH, HTTP, and HTTPS
+Step: Launch an EC2 instance:
+Step: ... AMI = Amazon Linux
+Step: ... Instance type = t2.tiny
+Step: ... Network = vpc-1
+Step: ... Subnet = vpc-1-subnet-2
+Step: ... Tag = Name: vm-2-private
+Step: ... Security group = vpc-1-security-group-web-server
+Step: Observe that vm-1-public gets a public IP address, but vm-2-private does not.
+Step: SSH into vm-1-public. It works.
+Step: Do a yum update to prove Internet connectivity. It works.
+Step: Don't clean up -- next lab continues from here.
+
+Q: Can you choose your own IPv4 CIDR block for a VPC?
+A: Yes, as long as its within 10/16, 172.16/12, or 192.168/1.   @@@ check this
+
+Q: Do VPCs support IPv6?
+A: Yes.
+
+Q: Is IPv6 enabled by default for VPCs?
+A: No, it is disabled by default.
+
+Q: Can you choose your own IPv6 CIDR block for a VPC?
+A: No, Amazon assigns a /56 IPv6 CIDR block for you.
+
+Q: What is the difference between default tenancy and dedicated tenancy?
+A: Dedicated means that EC2 instances always use dedicated hadrware, regardless of what the EC2 instance tenancy says.
+
+Q: What other objects are automatically also created when you create a VPC?
+A: One route table, one Network Access Control List (NACL), and one security group.
+
+Q: Is AZ us-east-1a in your account the same AZ as AZ us-east-1a in my account?
+A: No, AZ names are randomized to avoid oversubscription of the first one (...-1a).
+
+Q: Can you choose your own IPv4 CIDR block for a subnet?
+A: Yes, as long as it is a subnet of the VPC CIDR block.
+
+Q: Can you choose your own IPv6 CIDR block for a subnet?
+A: Not quite, Amazon will select a /64 IPv6 CIDR for you that is a subnet of the VPC IPv5 CIDR, but you can choose one byte.
+
+Q: What IP addresses in the subnet CIDR block are reserverd, and what for?
+A: .0 network, .1 default router, .2 DNS server in primary subnet, .3 future use, .255 network broadcast (not supported, hence reserved).
+
+Q: When you create an Internet gateway, to which VPC is it attached by default?
+A: To none, it is detached by default, you have to explicitly attach it to a VPC.
+
+Q: Can an Internet gateway be attached to multiple VPCs?
+A: No.
+
+Q: How many Internet gateways can be attachd to a VPC?
+A: Zero or one.
+
+Q: When you attach an Internet gateway to a VPC, does that automatically add a default route to the route table?
+A: No, you have to manually add a default route (IPv4 and/or IPv6).
+
+Q: What is a main route table?
+A: The route table that was automatically created when the VPC was created. It has "Main = yes" in the summary.
+
+Q: What does it mean if the target of a route in the route table is set to local?
+A: Traffic is sent to a subnet associated with the route table.
+
+Q: What route table is a subnet associated with by default if your don't create an explicit association?
+A: With the main route table of the VPC.
+
+Q: If a route table has a default route pointing to the Internet gateway, will all associated subnets be able to reach the Internet?
+A: Yes.
+
+Q: What if you only want certain subnets in a VPC to be able to reach the Internet?
+A: Create a separate route table, add a default route to that route table, and associate the desired set of subnets with that route table.
+
+Q: For automatically created default subnets, what is the default setting for auto-assign public IP address?
+A: Yes (enabled) for IPv4 only (not for IPv6)
+
+Q: For manually created custom subnets, what is the default setting for auto-assign public IP address?
+A: No (disabled) for both IPv4 and IPv6.
+
+Q: How to you enable auto-assign public IP addresses (IPv4 and/or IPv6) for a manually created custom subnet?
+A: Using the Subnet Actions -> Modify auto-assign IP settings. Confusingly, it is not a field in the create subnet form.
+
+Q: Do security groups span VPCs?
+A: No, security groups are scoped within a VPC.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
