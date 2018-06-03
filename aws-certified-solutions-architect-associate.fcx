@@ -1277,7 +1277,7 @@ A: Server-Side Encryption with amazon S3 managed keys.
 Q: What does SSE-KMS stand for?
 A: Server-Side Encryption with amazon Key Management Service managed keys.
 
-Q; What is an additional benefit of SSE-KMS?
+Q: What is an additional benefit of SSE-KMS?
 A: It provides an audit trail of when your keys were used and by whom.
 
 Q: What does SSE-C stand for?
@@ -1624,8 +1624,8 @@ A: It enables URL signing and Cookie signing.
 Q: What is "Restrict Viewer Access" typically used for in CloudFront?
 A: To make sure that only authorized (paying) customers can access content.
 
-A: How would you make sure that only authorized (paying) customers can access content?
-Q: Enable "Restrict Viewer Access" in CloudFront to enable URL signing and cookie signing.
+Q: How would you make sure that only authorized (paying) customers can access content?
+A: Enable "Restrict Viewer Access" in CloudFront to enable URL signing and cookie signing.
 
 Q: What is "Price Class" in a CloudFront distribution distribution settings?
 A: Determines the set of edge locations that will cache the content (US, Canada, Europe only, or also Asia, or all locations).
@@ -1992,7 +1992,7 @@ A: Charges for the amount of storage per month, bandwidth, requests, early delet
 Q: What is a key difference between EC2 and S3 One-Zone-IA in terms of how they use AZs?
 A: EC2 lets you pick the AZ, S3 One-Zone-IA picks the AZ for you.
 
-Todo: Finish the S3 Storage FAQ, starting from S3
+# TODO Finish the S3 Storage FAQ, starting from S3
 
 Topic: EC2
 
@@ -2803,7 +2803,7 @@ A: Roles.
 Q: What should you do if you accidentally upload the access key secret to GitHub?
 A: Immediately delete the user who owns that access key secret or regenerate the access key for that user.
 
-SubSection: Lab: Using IAM Roles with EC2.
+SubTopic: Lab: Using IAM Roles with EC2.
 
 Lab: Identity Access Management (IAM) Roles.
 Step: Create a new service role for EC2 that provides full access to S3.
@@ -2844,7 +2844,7 @@ A: Global.
 Q: Is it possible to add or change a role on an already running EC2 instance?
 A: Yes, it is, but this was only very recently added and the exam may be out of date (catch-22 situation).
 
-SubSection: Lab: S3 CLI and Regions.
+SubTopic: Lab: S3 CLI and Regions.
 
 Lab: S3 CLI and Regions.
 Step: Create an Amazon Linux EC2 instance without any role.
@@ -2867,7 +2867,7 @@ A: aws s3 cp --recursive s3://<bucket-name> .
 Q: What is the AWS CLI command to download all objects from a bucket in a different region from the EC2 instance from where the CLI command is invoked?
 A: aws s3 cp --recursive --region <bucket-region> s3://<bucket-name> .
 
-SubSection: Lab: Using Bootstrap Scripts.
+SubTopic: Lab: Using Bootstrap Scripts.
 
 Lab: Using Bootstrap Scripts.
 Step: Create a bucket.
@@ -2902,7 +2902,7 @@ A: Root (you do not need sudo in the script).
 Q: Where can you see the output of the boot script for debugging?
 A: /var/log/cloud-init-output.log
 
-SubSection: Lab: Using Instance Metadata.
+SubTopic: Lab: Using Instance Metadata.
 
 Lab: Using Instance Metadata.
 Step: Launch an EC2 instance.
@@ -3246,7 +3246,7 @@ A: Website is stored in one bucket, and resources (e.g. images) in another bucke
 
 SubTopic: Lab: Build an Alexa Skill
 
-Todo: Add the Build an Alexa Skill lab (order an Echo first)
+# TODO: Add the Build an Alexa Skill lab (order an Echo first)
 
 Q: What is Amazon Alexa?
 A: Amazon's voice service.
@@ -4090,3 +4090,113 @@ A: Currently not.
 
 Q: What can you do if the AZ in which you run Redshift goes down?
 A: You can restore the Redshift snapshot to another AZ.
+
+Q: What is a Redshift cluster.
+A: A group of nodes.
+
+Topic: Elasticache
+
+Q: What service does Elasticache provide?
+A: In-memory caching, to improve the performance of on-disk databases.
+
+Q: What type of application is most suited for Elasticache?
+A: Read-heavy applications that require high read throughput and low read latency, and where the data does not change often.
+
+Q: What two caching engines are available in Elasticache?
+A: Memcached and Redis.
+
+Q: What mechanism does Elasticache Redis provide for multi-AZ high availability?
+A: Master / Slave replication across multiple AZs.
+
+Q: How do Memcached and Redis compare in terms of redundancy?
+A: Redis provides multi-AZ redundancy using master / slave replication. Memcached does not.
+
+Q: What Amazon services would you consider if the database is stressed due to heavy OLTP reads?
+A: Elasticache or RDS read replicas or DynamoDB.
+
+Q: What Amazon service would you use if the database is stressed due to heavy OLAP reads?
+A: Redshift.
+
+SubTopic: Lab: Aurora
+
+Lab: Aurora
+Step: Note this is an expensive lab, up to $5, not covered by free tier.
+Step: Launch an Aurora DB instance:
+Step: ... DB instance class = db.r3.large
+Step: ... Multi-AZ deployment = no
+Step: ... DB instance identifier = acloudguruaurora
+Step: ... Master username = acloudguruaurora
+Step: ... Master password = acloudguruaurora
+Step: ... Failover priority = Tier-0
+Step: ... DB cluster identifier = acloudguru-cluster
+Step: ... Database name = acloudguruaurora
+Step: ... defaults for everything else.
+Step: Create an Aurora replica:
+Step: ... Aurora replica source = acloudguruaurora
+Step: ... DB instance identifier = acloudguru-replica
+Step: ... Failover priority = Tier-1
+Step: ... defaults for everything else.
+Step: Manually force a failover.
+
+Q: Who created Aurora?
+A: Amazon did. It is only available as an AWS service. It is not an open source project.
+
+Q: Is Aurora compatible with MySQL?
+A: Yes. You can import a MySQL database into Aurora. An application can communicate with Aurora using the MySQL APIs and protocols.
+
+Q: What are the minimum size and maximum size for Aurora storage?
+A: It starts at 10GB and grows upto 6TB in 10GB increments.
+
+Q: Do you manually manage the disk storage resources for an Aurora database?
+A: No, it auto-scales.
+
+Q: What are the maximum compute resources for an Aurora database?
+A: Up to 32 vCPUs and 224GB of RAM.
+
+Q: Do you manually manage compute resources for an Aurora database?
+A: Yes. You manually change them and there are a few minutes of downtime when you do.
+
+Q: How does Aurora replicate your data?
+A: Two copies in each AZ, across at least 3 AZs, for a total of 6 copies.
+
+Q: Does the fact that there are 6 copies of the data mean that Aurora is highly available?
+A: It is not sufficient. The engine still run in a virtual machine which is a single point of failure. Create replicas to avoid this.
+
+Q: How many failures can Aurora sustain?
+A: Loss of 2 copies without affecting write availability, loss of 3 copies without affecting read availability.
+
+Q: What does it mean that Aurora storage is self-healing?
+A: Data blocks and disks are automatically and continuously scanned for errors and repaired automatically.
+
+Q: What are the two types of replicas in Aurora?
+A: Aurora replicas and MySQL read replicas.
+
+Q: What is an Aurora replica?
+A: A separte Aurora database which replicates a primary Aurora database.
+
+Q: What is the maximum number of Aurora replicas?
+A: 15.
+
+Q: What is a MySQL read replica in Aurora?
+A: A MySQL database instance which replates a primary Aurora database.
+
+Q: What is the maximum number of MySQL replicas in Aurora?
+A: 5.
+
+Q: What is the key difference between an Aurora replica and an MySQL read replica in Aurora?
+A: Failover is automatic for an Aurora replica, but not for a MySQL read replica.
+
+Q: Is Aurora available in all regions?
+A: No, it is only available in certain regions.
+
+Q: What is an Aurora failover tier?
+A: When the master DB instance fails, the standby DB instance with the lowest failover tier value becomes the new master.
+
+Q: How long does it take to create a new Aurora database?
+A: A long time, up to 5 minutes.
+
+Q: What replication roles exist in Aurora?
+A: Writer and reader.
+
+Q: What is the difference between the cluster endpoint and the instance endpoint in Aurora?
+A: There is only one cluster endpoint and it fails over automatically. Use the instance endpoint for reading from a specific read replica.

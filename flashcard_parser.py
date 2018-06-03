@@ -1,8 +1,7 @@
 import sys
-from flashcard_test import Test
+from flashcard_db import Test
 
 # TODO: Add support for continuations (...) in lab steps
-# TODO: Add support for TODOs
 
 class Parser:
 
@@ -15,9 +14,9 @@ class Parser:
         self._arg = None
         self._pushed_back = False
         self._test = None
-        self._topic = None
-        self._sub_topic = None
-        self._sub_sub_topic = None
+        self._topic_name = None
+        self._sub_topic_name = None
+        self._sub_sub_topic_name = None
 
     def __init__(self):
         self._reset()
@@ -60,26 +59,26 @@ class Parser:
         self._pushed_back = True
 
     def _parse_topic(self):
-        self._topic = self._arg
-        self._sub_topic = None
-        self._sub_sub_topic = None
-        self._test.add_topic(self._topic)
+        self._topic_name = self._arg
+        self._sub_topic_name = None
+        self._sub_sub_topic_name = None
+        self._test.add_topic(self._topic_name)
 
     def _parse_sub_topic(self):
-        if self._topic == None:
+        if self._topic_name == None:
             self._fatal_error('SubTopic without Topic')
-        self._sub_topic = self._arg
-        self._sub_sub_topic = None
-        self._test.add_sub_topic(self._sub_topic)
+        self._sub_topic_name = self._arg
+        self._sub_sub_topic_name = None
+        self._test.add_sub_topic(self._sub_topic_name)
 
     def _parse_sub_sub_topic(self):
-        if self._sub_topic == None:
+        if self._sub_topic_name == None:
             self._fatal_error('SubSubTopic without SubTopic')
-        self._sub_sub_topic = self._arg
-        self._test.add_sub_sub_topic(self._sub_sub_topic)
+        self._sub_sub_topic_name = self._arg
+        self._test.add_sub_sub_topic(self._sub_sub_topic_name)
 
     def _parse_question(self):
-        if self._topic == None:
+        if self._topic_name == None:
             self._fatal_error('Question without Topic')
         question_text = self._arg
         if not self._next_command():
@@ -87,18 +86,14 @@ class Parser:
         if self._tag not in ['answer', 'a']:
             self._fatal_error('Question missing Answer')
         answer_text = self._arg
-        print('      *** Question:', question_text)
-        print('          Answer  :', answer_text)
 
     def _parse_lab(self):
         lab_name = self._arg
-        print('      *** Lab  :', lab_name)
         while self._next_command():
             if self._tag != 'step':
                 self._prev_command()
                 break
             step_text = self._arg
-            print('          Step :', step_text)
 
     def _parse_all_questions(self):
         while self._next_command():
@@ -119,7 +114,6 @@ class Parser:
         if not self._next_command():
             self._fatal_error('Missing test')
         if self._tag == 'test':
-            print('*** Test:', self._arg)
             self._test = Test(self._arg)
             self._parse_all_questions()
         else:
@@ -137,4 +131,4 @@ class Parser:
 
 parser = Parser()
 test = parser.parse_file("aws-certified-solutions-architect-associate.fcx")
-print(test)
+test.print_topic_tree()
