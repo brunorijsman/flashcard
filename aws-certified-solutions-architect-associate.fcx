@@ -2419,8 +2419,11 @@ A: No, that is not guaranteed, neither for the public nor the private IP address
 Q: What can you do if you want the public IP address of an EC2 instance to remain the same across a reboot?
 A: Use an elastic IP address.
 
+Q: What can you do if you want the public IP address of an EC2 instance to remain the same across a reboot?
+A: Attach the instance to a custom VPC or use an Elastic IP address.
+
 Q: What can you do if you want the private IP address of an EC2 instance to remain the same across a reboot?
-A: Attach the instance to a custom VPC.  @@@ Check this
+A: Attach the instance to a custom VPC.
 
 Q: Can you encrypt the root volume when you create an EC2 instance?
 A: No, not for standard AMIs. You can encrypt the root volume when you create your own AMI by taking a snapshot. Or you can use 3rd party software such as bitlocker.
@@ -2761,7 +2764,7 @@ Q: What are CloudWatch logs?
 A: They allow you to monitor EC2 instances at the application level by looking at the application logs.
 
 Q: How does CloudWatch logs monitor applications logs inside the virtual machine?
-A: You need to install an agent inside the instance (@@@ is it already installed in Amazon Linux?)
+A: You need to install an agent inside the instance.
 
 Q: What is the difference between CloudWatch and CloudTrail?
 A: CloudWatch monitors performance metrics, CloudTrail provides an audit trail for API calls.
@@ -3120,7 +3123,7 @@ A: Author from scratch, Blueprints, Serverless Application Repository.
 Q: Name 5 programming languages that are supported for writing Lambda functions.
 A: Python (2.7 and 3.6), NodeJS, Java, Go, C#.
 
-Q: What is the most common role template for a Lambda function?   @@@ is the the right question?
+Q: What is the most common role template for a Lambda function?
 A: Simple Microservice Permission.
 
 Q: Name 11 services that can generate triggers for Lambda functions.
@@ -4094,7 +4097,7 @@ A: You can restore the Redshift snapshot to another AZ.
 Q: What is a Redshift cluster.
 A: A group of nodes.
 
-Topic: Elasticache
+SubTopic: Elasticache
 
 Q: What service does Elasticache provide?
 A: In-memory caching, to improve the performance of on-disk databases.
@@ -4216,17 +4219,20 @@ A: For every region.
 
 # TODO: I think all the topics discussed around offset 5:00 will be discussed in much greater detail later, so no questions yet
 
-Q: Which prefixes does Amazon allow you to use for subnets?  @@@ What? Private? Internal?
+Q: Which prefixes does Amazon recommend you to use for subnets?
 A: 10/8, 172.16/12, 192.168/16
 
-Q: What is the maximum number of VPC per account?   @@@ or per region?
-A: 5 by default, but it can be increased with a support request.
+Q: What is the maximum number of VPCs?
+A: 5 per region by default, but it can be increased with a support request.
 
 Q: What is the scope of a VPC?
 A: A region.
 
 Q: What is a subnet?
 A: A network abstraction with an IP prefix (IP address range).
+
+Q: What is the maximum number of subnets?
+A: 200 per VPC by default, but it can be increased with a support request.
 
 Q: Can a subnet span multiple AZs?
 A: No.
@@ -4259,7 +4265,7 @@ Q: What is the scope of an Internet Gateway?
 A: A region. It spans all AZs within that region.
 
 Q: What is a security group?
-A: @@@
+A: A virtual stateful layer-4 firewall.
 
 Q: Can a security group span multiple AZs?
 A: Yes.
@@ -4274,7 +4280,7 @@ Q: What does it mean for a security group to be stateful?
 A: If an inbound rule allows a flow, the outbound reverse flow is automatically also allowed, even if there is no explicit rule. And vice versa.
 
 Q: What is Network Access Control List (NACL)?
-A: @@@
+A: A virtual stateless layer-4 firewall.
 
 Q: What does NACL stand for?
 A: Network Access Control List.
@@ -4282,8 +4288,8 @@ A: Network Access Control List.
 Q: Is a NACL stateful or stateless?
 A: Stateless.
 
-Q: What is a VPC route table?
-A: @@@
+Q: What is a route table?
+A: A virtual layer-3 route table.
 
 Q: What is the difference between a default VPC and a custom VPC in terms of how they are created?
 A: AWS automatically creates one default VPC per region. You manually create custom VPCs.
@@ -4291,16 +4297,8 @@ A: AWS automatically creates one default VPC per region. You manually create cus
 Q: What is the difference between a default VPC and a custom VPC in terms of Internet reachability.
 A: Default VPCs automatically have a default route to the Internet. In custom VPCs, you have to add one explicitly.
 
-Q: How many IP addresses does each EC2 instance get in a default VPC?
-A: Four. One public IPv4, one private IPv4, one public IPv6, one private IPv6.   @@@ check
-
-Q: How many IP addresses does each EC2 instance get in a custom VPC?
-A: Two or four. One private IPv4 and IPv6? It also gets public IPv4 and IPv6, but only if the subnet is public???  @@@ check
-
 Q: What is VPC peering?
 A: Connect one VPC to another VPC.
-# ... @@@ via a direct network route, using private IP addresses.  What does that mean?
-# ... @@@ 
 
 Q: Can VPC peering connect to a VPC owned by a different AWS account?
 A: Yes.
@@ -4318,13 +4316,13 @@ Step: ... IPv4 CIDR block = 10.0.0.0/16
 Step: ... IPv6 CIDR block = Amazon provided
 Step: ... everything else default.
 Step: Create a subnet:
-Step: ... Name tag = vpc-1-subnet-1
+Step: ... Name tag = vpc-1-subnet-dmz
 Step: ... VPC = vpc-1
 Step: ... Availability Zone = us-west-2a
 Step: ... IPv4 CIDR block = 10.0.1.0/24
 Step: ... IPv6 CIDR block = Specify a custom IPv6 CIDR: 01
 Step: Create a subnet:
-Step: ... Name tag = vpc-1-subnet-2
+Step: ... Name tag = vpc-1-subnet-backend
 Step: ... VPC = vpc-1
 Step: ... Availability Zone = us-west-2b
 Step: ... IPv4 CIDR block = 10.0.2.0/24
@@ -4341,29 +4339,36 @@ Step: ... Target = vpc-1-igw
 Step: Add an IPv6 default route to route table vpc-1-route-table-internet:
 Step: ... Destination = ::0/0
 Step: ... Target = vpc-1-igw
-Step: Associate subnet vpc-1-subnet-1 with route table vpc-1-route-table-internet
-Step: Enable auto-assign public IPv4 and IPv6 address for subnet vpc-1-subnet-1
+Step: Associate subnet vpc-1-subnet-dmz with route table vpc-1-route-table-internet
+Step: Enable auto-assign public IPv4 and IPv6 address for subnet vpc-1-subnet-dmz
 Step: Launch an EC2 instance:
 Step: ... AMI = Amazon Linux
 Step: ... Instance type = t2.tiny
 Step: ... Network = vpc-1
-Step: ... Subnet = vpc-1-subnet-1
-Step: ... Tag = Name: vm-1-public
+Step: ... Subnet = vpc-1-subnet-dmz
+Step: ... Tag = Name: vm-web-server
 Step: ... Create a new security group vpc-1-security-group-web-server that allows SSH, HTTP, and HTTPS
 Step: Launch an EC2 instance:
 Step: ... AMI = Amazon Linux
 Step: ... Instance type = t2.tiny
 Step: ... Network = vpc-1
-Step: ... Subnet = vpc-1-subnet-2
-Step: ... Tag = Name: vm-2-private
+Step: ... Subnet = vpc-1-subnet-backend
+Step: ... Tag = Name: vm-db-server
 Step: ... Security group = vpc-1-security-group-web-server
-Step: Observe that vm-1-public gets a public IP address, but vm-2-private does not.
-Step: SSH into vm-1-public. It works.
+Step: ... Create a new keypair = keypair-brunorijsmanaws1-oregon-temporary
+Step: Observe that vm-web-server gets a public IP address, but vm-2-private does not.
+Step: SSH into vm-web-server. It works.
 Step: Do a yum update to prove Internet connectivity. It works.
-Step: Don't clean up -- next lab continues from here.
+Step: Create a security group vpc-1-security-group-db-server that allows SSH, HTTP, HTTPS, MYSQL, and ICMP from subnet vpc-1-subnet-public only.
+Step: Attach EC2 instance vm-db-server to the newly created security group vpc-1-security-group-db-server
+Step: Verify that vm-web-server can ping vm-db-server
+Step: Copy and paste the private key file for keypair-brunorijsmanaws1-oregon-temporary to ~/.ssh on vm-web-server and change permissions
+Step: Verify that vm-web-server can SSH to vm-db-server
+Step: Try a "sudo yum update" on vm-db-server (I does not work)
+Step: Do not clean up: continue with lab "Network Address Translation (NAT) instance"
 
 Q: Can you choose your own IPv4 CIDR block for a VPC?
-A: Yes, as long as its within 10/16, 172.16/12, or 192.168/1.   @@@ check this
+A: Yes.
 
 Q: Do VPCs support IPv6?
 A: Yes.
@@ -4430,6 +4435,88 @@ A: Using the Subnet Actions -> Modify auto-assign IP settings. Confusingly, it i
 
 Q: Do security groups span VPCs?
 A: No, security groups are scoped within a VPC.
+
+SubTopic: Lab: Network Address Translation (NAT)
+
+Lab: Network Address Translation (NAT) instance
+Step: This is a continuation of lab "Build your own custom VPC".
+Step: Launch a NAT instance:
+Step: ... Network = vpc-1
+Step: ... Subnet = vpc-1-subnet-dmz
+Step: ... Name tag = vm-nat
+Step: ... Security group = vpc-1-security-group-web-server
+Step: Disable source / destination check for instance vm-nat.
+Step: Add a default route to the main route table for vpc-1, pointing to the NAT instance
+Step: SSH into vm-web-server, and then SSH into vm-db-server
+Step: Do a "sudo yum update -y". Now it works.
+Step: Terminate the vm-nat instance.
+Step: Do not clean up: continue with lab "Network Address Translation (NAT) gateway"
+
+Lab: Network Address Translation (NAT) instance
+Step: This is a continuation of lab "Network Address Translation (NAT) instance".
+Step: Create a NAT gateway:
+Step: ... Subnet = vpc-1-subnet-dmz
+Step: ... Create New Elastic IP
+Step: Wait for the NAT gateway to become available (takes up to 15 minutes).
+Step: In route table vpc-1-route-table-main, change the default route to point to the NAT gateway.
+Step: On vm-db-server, verify that "sudo yum update -y" works.
+
+Q: What are the two mechanisms for NAT?
+A: NAT instance and NAT gateway.
+
+Q: Which NAT mechanism is deprecated?
+A: NAT instances; they are being replaced by NAT gateways.
+
+Q: What does NAT stand for?
+A: Network Address Translation.
+
+Q: What is a typical use case for NAT?
+A: Give EC2 instances on private subnets outbound access to the public Internet.
+
+Q: What is source / destination check?
+A: Only allow traffic whose source or destination address is the IP address of the EC2 instance.
+
+Q: What must you not forget to do after you launch a NAT instance?
+A: Disable source / destination check.
+
+Q: What subnet should you put a NAT instance in?
+A: A public subnet; the NAT instance needs to be reachable from the public Internet.
+
+Q: How should routing be configured for a NAT instance?
+A: The route table for the private subnets that want outbound reachability to the Internet should have a default route to the NAT instance.
+
+Q: Why do you need to disable source / destination check for NAT instances?
+A: Because it is forwarding traffic on behalf of other EC2 instances.
+
+Q: What happens if a NAT instance fails?
+A: You lose Internet connectivity; the NAT instance is a single point of failure and a throughput bottleneck (unless you use complex scripts).
+
+Q: What is the difference between a NAT gateway and an Egress Only Internet Gateway?
+A: A NAT gateway is for IPv4, an Egress Only Internet Gateway is for IPv6 (which doesn't need NAT).
+
+Q: What would you use instead of a NAT gateway for IPv6?
+A: An Egress Only Internet Gateway.
+
+Q: Is a NAT gateway a single point of failure?
+A: No, NAT gateways are highly available with redundancy within a single AZ but not across AZs.
+
+Q: Do NAT gateways span AZs?
+A: No. For high availability across AZs, you need to instantiate a NAT gateway in each AZ.
+
+Q: How should routing be configured for a NAT gateway?
+A: The route table for the private subnets that want outbound reachability to the Internet should have a default route to the NAT gateway.
+
+Q: Can you use a NAT gateway as a bastion server?
+A: No, use a NAT instance for that.
+
+Q: What is the difference between a NAT instance and NAT gateway in terms of patching and upgrading?
+A: You are responsible for patching and upgrading NAT instances. Amazon is responsible for patching and upgrading NAT gateways.
+
+Q: What is the difference between a NAT instance and NAT gateway in terms of bandwidth.
+A: The bandwidth of a NAT instance depends on the instance type. A NAT gateway supports bursts of up to 10Gbps.
+
+Q: What is the difference between a NAT instance and NAT gateway in terms of security groups?
+A: You associate a security group with a NAT instance. You do not associate a security group with a NAT gateway (associate it with the resources behind the NAT gateway instead.)
 
 
 
