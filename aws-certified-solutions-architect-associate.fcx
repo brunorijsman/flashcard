@@ -2443,7 +2443,7 @@ Step: Create an additional security group with additional rules, and also attach
 Step: Clean up: delete EC2 instance, security group, and keypair.
 
 Q: What is a security group?
-A: A virtual layer 4 firewall: a set of rules that allows traffic in or out of instances based on protocol, port, and IP address.
+A: A virtual stateful layer-4 firewall attached to EC2 instances.
 
 Q: Can an EC2 instance be attached to multiple security groups?
 A: Yes.
@@ -4265,7 +4265,7 @@ Q: What is the scope of an Internet Gateway?
 A: A region. It spans all AZs within that region.
 
 Q: What is a security group?
-A: A virtual stateful layer-4 firewall.
+A: A virtual stateful layer-4 firewall attached to EC2 instances.
 
 Q: Can a security group span multiple AZs?
 A: Yes.
@@ -4276,11 +4276,17 @@ A: Yes.
 Q: Is a security group stateful or stateless?
 A: Stateful.
 
+Q: What do security groups protect?
+A: EC2 instances.
+
 Q: What does it mean for a security group to be stateful?
 A: If an inbound rule allows a flow, the outbound reverse flow is automatically also allowed, even if there is no explicit rule. And vice versa.
 
-Q: What is Network Access Control List (NACL)?
-A: A virtual stateless layer-4 firewall.
+Q: What is a Network Access Control List (NACL)?
+A: A virtual stateless layer-4 firewall attached to subnets.
+
+Q: What do NACLs protect?
+A: Subnets.
 
 Q: What does NACL stand for?
 A: Network Access Control List.
@@ -4452,7 +4458,7 @@ Step: Do a "sudo yum update -y". Now it works.
 Step: Terminate the vm-nat instance.
 Step: Do not clean up: continue with lab "Network Address Translation (NAT) gateway"
 
-Lab: Network Address Translation (NAT) instance
+Lab: Network Address Translation (NAT) gateway
 Step: This is a continuation of lab "Network Address Translation (NAT) instance".
 Step: Create a NAT gateway:
 Step: ... Subnet = vpc-1-subnet-dmz
@@ -4460,6 +4466,7 @@ Step: ... Create New Elastic IP
 Step: Wait for the NAT gateway to become available (takes up to 15 minutes).
 Step: In route table vpc-1-route-table-main, change the default route to point to the NAT gateway.
 Step: On vm-db-server, verify that "sudo yum update -y" works.
+Step: Do not clean up: continue with lab "Network Access Control Lists (NACL)"
 
 Q: What are the two mechanisms for NAT?
 A: NAT instance and NAT gateway.
@@ -4518,21 +4525,65 @@ A: The bandwidth of a NAT instance depends on the instance type. A NAT gateway s
 Q: What is the difference between a NAT instance and NAT gateway in terms of security groups?
 A: You associate a security group with a NAT instance. You do not associate a security group with a NAT gateway (associate it with the resources behind the NAT gateway instead.)
 
+SubTopic: Lab: Network Access Control Lists (NACL)
 
+Lab: Network Access Control Lists (NACL)
+Step: This is a continuation of lab "Network Address Translation (NAT) gateway".
+Step: Create a NACL:
+Step: ... Name tag = vpc-1-nacl-dmz
+Step: ... VPC = vpc-1
+Step: Observe that by default all inbound and outbound traffic is denied.
+Step: Associate NACL vpc-1-nacl-dmz with subnet vpc-1-subnet-dmz.
+Step: Observe that we cannot ping or SSH to vm-web-server anymore.
+Step: Add an inbound rule to NACL vpc-1-nacl-dmz to allow ICMP.
+Step: Observe that we still cannot ping or SSH to vm-web-server anymore.
+Step: Add an outbound rule to NACL vpc-1-nacl-dmz to allow ICMP.
+Step: Observe that we can ping vm-web-server, but we can still not SSH to it.
+Step: Add both an inbounad and outbound rule to NACL vpc-1-nacl-dmz to allow SSH.
+Step: Observe that we still cannot (!) SSH into vm-web-server.
+Step: Clean up.
 
+Q: What is the difference between a Security Group and a NACL in terms of statefulnes?
+A: A Security Group is stateful, a NACL is stateless.
 
+Q: What is the difference between a Security Group and a NACL in terms of what they protect?
+A: A Security Group protects EC2 instances (first level of defence), a NACL protects subnets (second level of defence).
 
+Q: What is the difference between a Security Group and a NACL in terms of types of rules?
+A: A Security Group only has allow rules, a NACL has allow and deny rules.
 
+Q: What is the difference between a Security Group and a NACL in terms of rule ordering?
+A: A Security Group always applies all rules, a NACL applies rules in a numbered order and stops at the first matching rule.
 
+Q: What is the difference between a Security Group and a NACL in terms of which EC2 instances they apply to?
+A: A Security Group has to be excplitly associated with an EC2 instance, a NACL applies to all EC2 instances attached to the subnet.
 
+Q: What is the difference between a Security Group and a NACL in terms of default bevavior?
+A: Both an empty Security Group and an empty NACL deny everything by default. However, the default NACL for VPC comes pre-populated with allow-everything rules.
 
+Q: Can you associate a subnet with multiple NACLs?
+A: No, it can only be associated with a single NACL.
 
+Q: Can you have a subnet that is not associated with a NACL?
+A: No, every subnet must have exactly one NACL associated with it. If you don't choose one explicitly, the subnet is associated with the VPC's default NACL.
 
+Q: Can you associate a single NACL with multiple subnets?
+A: Yes.
 
+Q: Which NACLs are created automatically and what is their default behavior?
+A: One NACL is automatically created for each VPC. It allows all inbound and outbound traffic.
 
+Q: What common mistake in NACL configuration prevents client-server TCP connections from working?
+A: Add a custom TCP rule allowing ephemeral ports (1024-65535) for inbound and/or outbound traffic depending on which side the client is.
 
+Q: In what order are the rules in a NACL applied?
+A: In numerical order, lowest number first, stopping at the first match.
 
+Q: For inbound traffic, which is applied first: the Security Group or the NACL?
+A: NACL first, it is associated with the subnet.
 
+Q: For outbound traffic, which is applied first: the Security Group or the NACL?
+A: Security Group first, it is associated with the EC2 instance.
 
-
-
+Q: If you want to block a specific block of IP addresses, would you use a Security Group or NACL?
+A: NACL.
