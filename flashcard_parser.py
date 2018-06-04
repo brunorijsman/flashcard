@@ -86,6 +86,7 @@ class Parser:
         if self._tag not in ['answer', 'a']:
             self._fatal_error('Question missing Answer')
         answer_text = self._arg
+        self._test.add_question(question_text, answer_text)
 
     def _parse_lab(self):
         lab_name = self._arg
