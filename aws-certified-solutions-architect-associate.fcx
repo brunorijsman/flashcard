@@ -4620,7 +4620,7 @@ Q: Can Flow Log also log the rejected flow, or only the accepted flows?
 A: It can do both, you choose when you create the flow log.
 
 Q: What can you stream flow logs to?
-A: To AWS Lambda and AWS Elastic Search to real-time analysis of the flows.
+A: To AWS Lamba and AWS Elastic Search to real-time analysis of the flows.
 
 Q: Can you create a flow log for a VPC that is peered with your VPC?
 A: Only if that VPC is in your account.
@@ -4633,3 +4633,29 @@ A: No.
 
 Q: Which traffic is NOT monitered by flow log?
 A: Traffic to the Amazon DNS server, Windows license traffic, Metadata traffic to 169.254.169.254, traffic to the default VPC router.
+
+SubTopic: NATs vs Bastions
+
+Q: Does a NAT instance allow inbound TCP connections from the Internet to an EC2 instance behind the NAT?
+A: No, only outbound TCP connections can be initiated from the EC2 instance.
+
+Q: Does a bastion server allow inbound SSH or RDP session from the Internet to an EC2 instance behind the bastion server?
+A: Yes, indirectly. First SSH/RDP to the bastion server, and then from there SSH/RDP to the EC2 instance behind it.
+
+Q: Should a bastion server be in a public or a private subnet?
+A: The bastion server itself should be in a public subnet, the EC2 instances behind it should be in a private subnet.
+
+Q: Should the EC2 instances behind a bastion server be in a public or a private subnet?
+A: The EC2 instances behind it should be in a private subnet, the bastion server itself should be in a public subnet.
+
+Q: What is another word for a bastion server?
+A: Jump box.
+
+Q: What is another word for a jump box?
+A: Bastion server.
+
+Q: What is the advantage of using a bastion server?
+A: You only have to harden one server, the bastion server, instead of all EC2 instances.
+
+Q: How do you make a bastion server highly available?
+A: Multiple instances, each in a different AZ (subnet), potentially auto-scaling group to keep a minimum number up, Route53 health-checks.
