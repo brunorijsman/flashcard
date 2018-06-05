@@ -4541,7 +4541,7 @@ Step: Add an outbound rule to NACL vpc-1-nacl-dmz to allow ICMP.
 Step: Observe that we can ping vm-web-server, but we can still not SSH to it.
 Step: Add both an inbounad and outbound rule to NACL vpc-1-nacl-dmz to allow SSH.
 Step: Observe that we still cannot (!) SSH into vm-web-server.
-Step: Clean up.
+Step: Do not clean up: continue with lab "VPC Flow Logs"
 
 Q: What is the difference between a Security Group and a NACL in terms of statefulnes?
 A: A Security Group is stateful, a NACL is stateless.
@@ -4587,3 +4587,49 @@ A: Security Group first, it is associated with the EC2 instance.
 
 Q: If you want to block a specific block of IP addresses, would you use a Security Group or NACL?
 A: NACL.
+
+SubTopic: Custom VPCs and ELBs
+
+Q: Can you attach a load balancer to a single subnet?
+A: No, it is mandatory to attach it to at least two subnets (and hence two AZs) to achieve high availability.
+
+Q: Can you attach a load balancer to a private subnet?
+A: No, the subnet must be public, i.e. it must have an Internet Gateway.
+
+SubTopic: Lab: VPC Flow Logs
+
+Lab: VPC Flow Logs
+Step: This is a standalone lab. @@@
+Step: Create an EC2 instance:
+Step: ... Name = vm
+Step: ... Security group = new group security-group-web-server-oregon, allowing SSH, HTTP, HTTPS, and ICMP.
+Step: Create a log group with name log-group
+Step: Create a flow log for the default VPC
+Step: Generate some traffic to and from EC2 instance vm (e.g. ping, ssh, yum update, yum install, etc.)
+Step: What for a log stream to appear.
+Step: Observe the traffic flows in the log stream.
+Step: Clean up.
+
+Q: What is VPC Flow Logs?
+A: Capture IP traffic flow information in a log that can be viewed using CloudWatch Logs.
+
+Q: At what three levels can VPC Flow Logs be created?
+A: At the VPC level, at the subnet level, at the interface level.
+
+Q: Can Flow Log also log the rejected flow, or only the accepted flows?
+A: It can do both, you choose when you create the flow log.
+
+Q: What can you stream flow logs to?
+A: To AWS Lambda and AWS Elastic Search to real-time analysis of the flows.
+
+Q: Can you create a flow log for a VPC that is peered with your VPC?
+A: Only if that VPC is in your account.
+
+Q: Can you tag a flow log?
+A: No (not yet).
+
+Q: Can you change the configuration of a flow log after you have created it?
+A: No.
+
+Q: Which traffic is NOT monitered by flow log?
+A: Traffic to the Amazon DNS server, Windows license traffic, Metadata traffic to 169.254.169.254, traffic to the default VPC router.
