@@ -4599,7 +4599,7 @@ A: No, the subnet must be public, i.e. it must have an Internet Gateway.
 SubTopic: Lab: VPC Flow Logs
 
 Lab: VPC Flow Logs
-Step: This is a standalone lab. @@@
+Step: This is a standalone lab.
 Step: Create an EC2 instance:
 Step: ... Name = vm
 Step: ... Security group = new group security-group-web-server-oregon, allowing SSH, HTTP, HTTPS, and ICMP.
