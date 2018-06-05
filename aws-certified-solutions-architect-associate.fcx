@@ -4731,3 +4731,128 @@ A: A gateway that serves as a service entry point; you must create a route in a 
 Q: What does ENI stand for?
 A: Elastic Network Interface.
 
+Topic: Application Services
+
+SubTopic: Simple Queue Service (SQS)
+
+Q: What does SQS stand for?
+A: Simple Queue Service.
+
+Q: What service does SQS provide?
+A: A distribute message queue that allows application components to reliably queue messages to each other.
+
+Q: What was the first AWS service?
+A: SQS
+
+Q: Is SQS pull-based or push-based.
+A: Pull-based, it uses polling.
+
+Q: Which service would you use if you want a push-based message queueing service?
+A: Simple Notification Services (SNS) or Message Queue (MQ).
+
+Q: What is the SNS visibility time-out window?
+A: When a message is delivered to a consumer, it is marked invisible. If the consumer fails to process it within the timeout, it is marked visible again and re-delivered.
+
+Q: What is the maximum visbility time-out?
+A: 12 hours.
+
+Q: What is the main purpose of SQS in terms of application systems architecture?
+A: Decouple the components of an application from each other, so that they can run independently.
+
+Q: What is the maximum size of an SQS message?
+A: The maximum size is configurable per queue between 1024 bytes and 256K. 
+
+Q: What kind of data does an SQS message contain?
+A: Text data in any format (XML, JSON, unformated text, ...)
+
+Q: Does an SQS message contain binary data?
+A: No, it contains text data.
+
+Q: How does SQS interact with EC2 auto-scaling?
+A: EC2 auto-scaling groups can grow based on the number of messages in an SQS queue.
+
+Q: How are SQS messages delivered to an application?
+A: Applications use the SQS API to poll a message queue and retrieve messages.
+
+Q: How can SQS help to provide elasticity for bursty workloads?
+A: You can create an auto-scaling group of EC2 instances that consume the messages and make the auto-scaling group grow when the queue becomes too long.
+
+Q: What are the two types of SQS queues?
+A: Standard queues and FIFO queues.
+
+Q: What is the default queue type in SQS?
+A: Standard queue.
+
+Q: How does an SQS standard queue differ from a FIFO queue?
+A: Maximum throughput, delivery guarantee, ordering guarantee
+
+Q: How does an SQS standard queue differ from a FIFO queue in terms of number of maximum throughput?
+A: Standard queues have no pre-determined limit on the throughput, FIFO queues limit throughput to 300 transaction per second (TPS).
+
+Q: How does an SQS standard queue differ from a FIFO queue in terms of delivery guarantee?
+A: Standard queues deliver the message at least one (but sometimes multiple times), FIFO queues guarantee exactly one delivery. 
+
+Q: How does an SQS standard queue differ from a FIFO queue in terms of ordered guarantee?
+A: Standard queues usually deliver the messages in-order (but sometimes out-of-order), FIFO queues guarantee in-order delivery.
+
+Q: What is a message group in SQS?
+A: Messages within a message group are delivered in-order. Messages in different message groups may be delivered out-of-order.
+
+Q: Do SQS standard queues support message groups?
+A: No, only FIFO queues.
+
+Q: How long can an SQS message stay in the queue?
+A: You can configure the retention time between 1 minute and 14 days; the default is 4 days. 
+
+Q: What is the SQS retention time?
+A: The maximum time a message can spend in a queue. One the retention limit is reached, the message is deleted.
+
+Q: What is the difference between SQS short polling and long polling?
+A: Short polling returns immediately, even if there is no message. Long polling blocks util a message is available (or until a time-out occurs).
+
+SubTopic: Simple Workflow Service
+
+Q: What does SWF standfor?
+A: Simple Work Flow.
+
+Q: What service does Simple WorkFlow (SWF) provide?
+A: Manage the workflow of tasks that include various processing steps: execute code, call web service, invoke script, human action.
+
+Q: What is a SWF domain?
+A: A scope of workflow types, activity types, and workflow executions within an AWS domain.
+
+Q: What is a SWF workflow?
+A: A set of actitivities plus the logic that coordinates those activities.
+
+Q: What is the maximum duration of an SWF workflow?
+A: One year.
+
+Q: What is a SWF activity type (or simply activity)?
+A: An atomic step that is part of a workflow (e.g.) along with its attributes (name, version, time-out values, etc.)
+
+Q: What is a SWF activity task (or simply task)?
+A: An execution of an activity type along with a set of input parameters.
+
+Q: What is a SWF workflow execution (or simply execution)?
+A: An execution of a workflow.
+
+Q: What is a SWF event?
+A: A milestone in the workflow execution that happens at a particular moment in time and can be logged.
+
+Q: What is a SWF decider?
+A: A decider interacts with SWF to orchestrate the execution of activities, i.e. decide ordering, concurrency, etc. of tasks according to application logic.
+
+Q: What is a SWF activity work (or simply worker)?
+A: A worker imlements acitivities: it gets tasks from SWF, performs processing, and provides results.
+
+Q: What are the responsibilities of the SWF infrastructure?
+A: Store tasks, assign tasks to workers, guarantees tasks are executed exactly once, monitors task progress, provides consistent view of task to deciders.
+
+Q: How does SQS (standard queue) differ from SWF in terms of abstract concepts?
+A: SWF manages workflows of tasks; SQS manages queues of messages.
+
+Q: How does SQS (standard queue) differ from SWF in terms of execution guarantees?
+A: SWF assigns every task exactly once (it never loses or dupplicates tasks); SQS may lose or dupplicate message delivery.
+
+
+
