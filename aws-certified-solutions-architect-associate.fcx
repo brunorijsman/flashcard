@@ -4541,7 +4541,7 @@ Step: Add an outbound rule to NACL vpc-1-nacl-dmz to allow ICMP.
 Step: Observe that we can ping vm-web-server, but we can still not SSH to it.
 Step: Add both an inbounad and outbound rule to NACL vpc-1-nacl-dmz to allow SSH.
 Step: Observe that we still cannot (!) SSH into vm-web-server.
-Step: Do not clean up: continue with lab "VPC Flow Logs"
+Step: Clean up. There is no continuation for this lab.
 
 Q: What is the difference between a Security Group and a NACL in terms of statefulnes?
 A: A Security Group is stateful, a NACL is stateless.
@@ -4599,7 +4599,6 @@ A: No, the subnet must be public, i.e. it must have an Internet Gateway.
 SubTopic: Lab: VPC Flow Logs
 
 Lab: VPC Flow Logs
-Step: This is a standalone lab.
 Step: Create an EC2 instance:
 Step: ... Name = vm
 Step: ... Security group = new group security-group-web-server-oregon, allowing SSH, HTTP, HTTPS, and ICMP.
@@ -4659,3 +4658,76 @@ A: You only have to harden one server, the bastion server, instead of all EC2 in
 
 Q: How do you make a bastion server highly available?
 A: Multiple instances, each in a different AZ (subnet), potentially auto-scaling group to keep a minimum number up, Route53 health-checks.
+
+SubTopic: Lab: VPC Endpoints
+
+Lab: VPC Endpoints
+Step: Create a role named role-ec2-full-access-to-s3 that provides EC2 full access to S3.
+Step: Create an s3 bucket named bucket-bruno-rijsman-test
+Step: Create a VPC:
+Step: ... Name tag = vpc-1
+Step: ... CIDR block = 10.0.0.0/16
+Step: Create a subnet:
+Step: ... Name tag = vpc-1-subnet-public
+Step: ... VPC = vpc-1
+Step: ... Availability zone = us-west-2a
+Step: ... CIDR block = 10.0.1.0/24
+Step: Modify Auto-assign Public IP for subnet vpc-1-subnet-public to yes for IPv4.
+Step: Create a subnet:
+Step: ... Name tag = vpc-1-subnet-private
+Step: ... VPC = vpc-1
+Step: ... Availability zone = us-west-2b
+Step: ... CIDR block = 10.0.2.0/24
+Step: Create an Internet Gateway:
+Step: ... Name tag = vpc-1-internet-gateway
+Step: Attach the Internet Gateway to VPC vpc-1
+Step: Create a Route Table:
+Step: ... Name tag = vpc-1-route-table-internet
+Step: ... VPC = vpc-1
+Step: Add a route to Route Table vpc-1-route-table-internet
+Step: ... Destination = 0.0.0.0/0
+Step: ... Target = vpc-1-internet-gateway
+Step: Associate Route Table vpc-1-route-table-internet with subnet vpc-1-subnet-public
+Step: Create an EC2 instance:
+Step: ... Network = vpc-1
+Step: ... Subnet = vpc-1-public
+Step: ... Role = role-ec2-full-access-to-s3
+Step: ... Name tag = vm-public
+Step: ... Security group = create new vpc-1-security-group (allows SSH, HTTP, HTTPS, ICMP)
+Step: ... Keypair = brunorijsmanaws1-oregon
+Step: Create an EC2 instance:
+Step: ... Network = vpc-1
+Step: ... Subnet = vpc-1-private
+Step: ... Role = role-ec2-full-access-to-s3
+Step: ... Name tag = vm-private
+Step: ... Security group = vpc-1-security-group
+Step: ... Keypair = brunorijsmanaws1-oregon-temporary
+Step: Turn vm-public into a jump server for vm-private
+Step: SSH into vm-public and list all S3 buckets using the "aws s3 ls --region us-west-2" (it works).
+Step: SSH into vm-private using vm-public as a jump server and attempt to list all S3 buckets using "aws s3 ls --region us-west-2" (it does not work).
+Step: Create a VPC Endpoint:
+Step: ... Service category = AWS Services
+Step: ... Service name = com.amazonaws.us-west-2.s3
+Step: ... Type = gateway
+Step: ... VPC = vpc-1
+Step: ... Configure Route Table = route table associated with vpc-1-subnet-private
+Step: ... Policy = Full access
+Step: Observe that the route table vpc-1-route-table-main now contains a "service route (pl-xxx)" to the end point (vpce-xxx)
+Step: SSH into vm-private using vm-public as a jump server and attempt to list all S3 buckets using the "aws s3 ls --region us-west-2" (now it does work).
+Step: Clean up
+
+Q: What is a VPC endpoint
+A: A virtual gateway that allows EC2 instances to access other AWS services (e.g. S3) without going over the public Internet (e.g. via a NAT gateway or Internet gateway).
+
+Q: What are the two types of VPC Endpoints?
+A: Interface Endpoints and Gateway Endpoints
+
+Q: What is an Interface Endpoint?
+A: An Elastic Network Interface (ENI) that is directly attached to S3 instances and that serves as a service entry point.
+
+Q: What is a Gateway Endpoint?
+A: A gateway that serves as a service entry point; you must create a route in a route table that points to it.
+
+Q: What does ENI stand for?
+A: Elastic Network Interface.
+
