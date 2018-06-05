@@ -4854,5 +4854,45 @@ A: SWF manages workflows of tasks; SQS manages queues of messages.
 Q: How does SQS (standard queue) differ from SWF in terms of execution guarantees?
 A: SWF assigns every task exactly once (it never loses or dupplicates tasks); SQS may lose or dupplicate message delivery.
 
+SubTopic: Simple Notification Service (SNS)
+
+Q: What service does Simple Notification Service (SNS) provide?
+A: Send messages to subscribing endpoints (e.g email or SMS).
+
+Q: What service sends messages to subscribing endpoints (e.g. email or SMS)?
+A: Simple Notification Service (SNS).
+
+Q: What does SNS stand for?
+A: Simple Notification Service.
+
+Q: Is SNS push-based or pull-based?
+A: Push based. SNS uses the pub-sub paradigm and pushes notifications to subscribers. Subscribers do not need to poll.
+
+Q: What is the difference between SQS and SNS in terms of push- or pull-based model?
+A: SQS is pull-based (polling), SNS is push-based (pub-sub).
+
+Q: What types of notification delivery mechanisms does SNS support?
+A: Mobile notifications, SMS text, e-mail, AWS SQS, HTTP endpoint.
+
+Q: What types of devices does SNS support?
+A: Apple, Google, FireOS, Windows, Baidu.
+
+Q: Is SNS highly available?
+A: Yes, SNS messages are stored redundantly across multiple AZs.
+
+Q: What is an SNS topic?
+A: A topic is an "access point" allowing multiple recipients to dynamically subscribe to notifications published on the topic.
+
+Q: Do all subscribers to a topic use the same delivery method?
+A: No, a mixture of multiple delivery methods can be used (e.g. SMS messages, e-mail, etc.)
+
+Q: How is SNS priced?
+A: Per request ($0.50 per million). Per delivery notification (price depends on delivery type: HTTP, SMS, e-mail, etc.)
+
+
+
+
+
+
 
 
