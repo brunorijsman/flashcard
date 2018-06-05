@@ -4889,10 +4889,19 @@ A: No, a mixture of multiple delivery methods can be used (e.g. SMS messages, e-
 Q: How is SNS priced?
 A: Per request ($0.50 per million). Per delivery notification (price depends on delivery type: HTTP, SMS, e-mail, etc.)
 
+SubTopic: Elastic Transcoder
 
+Q: What service does Elastic Transcoder provide?
+A: File-based media transcoding.
 
+Q: What services provide file-based media transcoding?
+A: Elastic Transcoder and MediaConvert.
 
+Q: What is transcoding?
+A: Convert a media content file from one format to another format?
 
+Q: Why would you want to transcode content?
+A: To optimize it for a particular delivery platform (smartfone, tablet, PC, TV, etc.)
 
-
-
+Q: What is the pricing model for Elastic Transcode?
+A: Based on content duration (minutes) and content resolution.
