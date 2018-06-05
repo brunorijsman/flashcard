@@ -4905,3 +4905,77 @@ A: To optimize it for a particular delivery platform (smartfone, tablet, PC, TV,
 
 Q: What is the pricing model for Elastic Transcode?
 A: Based on content duration (minutes) and content resolution.
+
+SubTopic: API Gateway
+
+Q: What service does API gateway provide?
+A: Publish, maintain, monitor, and secure public APIs to access data, logic, or functionality on back-end applications.
+
+Q: With what backends can Amazon API Gateway communicate?
+A: Function in AWS Lambda, State machine in AWS Step Functions, HTTP endpoint hosted on EC2, Beanstalk, or 3rd party server.
+
+Q: How does API Gateway support mocking?
+A: Return static content.
+
+Q: What is a resource in API Gateway?
+A: A typed object in the API domain. It has a data model, relations with other resources, and can respond to methods.
+
+Q: What is a method in API Gateway?
+A: The a method implements the execution for one of more verbs (GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS) for a resource.
+
+Q: What is the pricing model for API gateway?
+A: Number of API calls, amount of data transferred, size of cache.
+
+Q: What is usage plan in API gateway?
+A: Defines allowed API usage (subset of APIs, throttling, quota limits) for users based on API key. Also can generate usage reports.
+
+Q: What is an API lifecycle in API gateway?
+A: The stages an API goes through (dev, test, prod, ...)
+
+Q: Does API gateway support versioning of APIs?
+A: Yes, multiple versions of the same API (v1, v2, ...) can run concurrently.
+
+Q: Can Amazon API Gateway work within an Amazon VPC?
+A: No. Amazon API Gateway endpoints are always public to the Internet. However, you can use private integrations or require client-side certificates.
+
+Q: How do I authorize access to my APIs?
+A: You can optionally enable authorization on API methods, using AWS signature version 4 or Lambda authorizers.
+
+Q: How does AWS signature version 4 work?
+A: Sign a request using the access key ID and secret, or using temporary credentials provided by Amazon Cognito.
+
+Q: What is caching in API gateway?
+A: An optional cache for storing API call results.
+
+Q: How does API caching protect your backend application?
+A: It reduces the number of calls to the backend application by returning cached results.
+
+Q: How does API caching improve the user experience?
+A: By reducing latency.
+
+Q: What can you configure about an API cache?
+A: The cache size and the TTL.
+
+Q: What is the scope for enabling or disabling API caching?
+A: Per deployment stage.
+
+Q: Can API gateway log all API calls for an audit trail?
+A: Yes, for auditing API executions use CloudWatch, for auditing API gateway management actions use CloudTrail.
+
+Q: What is the same-origin policy?
+A: Browsers only allows scripts in a web page to access resources in another web page if the other web page is from the same origin.
+
+Q: What is an origin?
+A: URI scheme + hostname + port number.
+
+Q: What is Cross Origin Resource Sharing (CORS)?
+A: A mechanism that allows the server (not the client) to relax same-origin policy requirements.
+
+Q: What does CORS stand for?
+A: Cross Origin Resource Sharing.
+
+Q: Why would you need CORS in the context of API gateway?
+A: Allows APIs to be called from a domain other than the API's own domain.
+
+Q: How do you fix error message "Origin policy cannot be read at the remote resource" in API Gateway.
+A: Enable CORS.
