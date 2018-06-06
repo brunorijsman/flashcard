@@ -5052,7 +5052,85 @@ A: Yes.
 Q: What is Kinesis Analytics?
 A: Kinesis Analytics allows you to run SQL queries on the data stored in Kinesis Streams or Kinesis Firehose and store the results in S3, Redshift, or ElasticSearch.
 
+Topic: Lab: Creating a fault tolerant Word Press Site
 
-
+Lab: Creating a fault tolerant WordPress Site
+Step: Note, use the us-east-1 (North Virginia) region for this lab; the ACG scripts assume this.
+Step: Create a role, named S3-Admin-Access that provides EC2 with full access to S3.
+Step: Create a security group in the default VPC, named Web-DMZ that allows inbound SSH and HTTP from anywhere   
+Step: Create a security group in the default VPC, named RDS-SG that allows MySQL from Web-DMZ
+Step: Create an application load balancer:
+Step: ... in the default VPC
+Step: ... named My-ALB
+Step: ... in every AZ
+Step: ... in security group Web-DMZ
+Step: ... with target group name MyWebServers
+Step: ... with /healthy.html for the healthcheck
+Step: Create a bucket named brunorijsman-wpcode
+Step: Create a bucket named brunorijsman-wpmedia
+Step: Create a CloudFront web distribution:
+Step: ... with the wpmedia S3 bucket as the origin
+Step: ... restrict bucket access = yes
+Step: ... origin access identity = create new identity
+Step: ... update the S3 policy to grant read permissions
+Step: Create a RDS MySQL instance:
+Step: ... make it a production instance (we need multi-AZ)
+Step: ... DB instance class = t2.micro
+Step: ... Storage type = General Purpose SSD
+Step: ... DB instance identifier = acloudguru
+Step: ... Master username = acloudguru
+Step: ... Master password = acloudguru
+Step: ... In the default VPC
+Step: ... Publicly accessible = No
+Step: ... VPC security group = RDS-SG
+Step: ... Database name = acloudguru
+Step: Configure Route53 to point your domain name to the Application Load Balancer
+Step: Launch an EC2 instance:
+Step: ... AMI = Amazon Linux
+Step: ... Instance Type = t2.micro
+Step: ... IAM Role = S3-Admin-Access
+Step: ... Optional: Boostrap script = copy from ACG resources (if you do, you can skip steps marked [*])
+Step: ... Tag Name = MyEC2WebServer
+Step: ... Security group = Web-DMZ
+Step: SSH into MyEC2WebServer and escalate priviledges
+Step: [*] Do an update: yum update -y
+Step: [*] Install PHP, Apache, and stress: yum install -y php php-mysql httpd stress
+Step: [*] Go to the Apache configuration directory: cd /etc/httpd/conf (have a look at httpd.conf)
+Step: [*] Create a backup of the configuration file: cp httpd.conf httpd.conf.backup
+Step: [*] Edit httpd.conf as follows (needed for URL rewrites to serve media out of S3): 
+Step: ... [*] <<Directory "/var/www/html">
+Step: ... [*]     Options FollowSymLinks
+Step: ... [*]     AllowOverride All
+Step: ... [*] </Directory>
+Step: Go to the web server content directory: cd /var/www/html
+Step: [*] Edit healthy.html to contain "I am healthy"
+Step: [*] Install WordPress: wget https://wordpress.org/latest.tar.gz
+Step: [*] Untar WordPress: tar -xzf latest.tar.gz
+Step: [*] Move the WordPress files to the top level: cp -r wordpress/* /var/www/html
+Step: [*] Cleanup: rm -rf wordpress latest.tar.gz
+Step: [*] Set the permissions: chmod -R 755 wp-content
+Step: [*] Set the owner: chown -R apache.apache wp-content
+Step: [*] Start Apache: service httpd start
+Step: [*] Configure Apache to start at boot time: chkconfig httpd on
+Step: Modify load balancer target group MyWebServers:
+Step: ... Set health check: healthy threshold 2, unhealthy theshold 2, timeout 2, interval 5, status code 200
+Step: ... Add EC2 instance MyEC2WebServer to the registered target list
+Step: Using a browser, go to your domain name. You should see the WordPress screen, asking you to configure the database:
+Step: ... Click Let's Go!
+Step: ... Configure the database:
+Step: ...   Database name = acloudguru
+Step: ...   Username = acloudguru
+Step: ...   Password = acloudguru
+Step: ...   Database host = Copy and past the RDS endpoint domain name
+Step: ...   Table prefix = wp_
+Step: ... Copy and past the generated PHP code
+Step: ... In the terminal for the EC2 instance, edit wp-config.php, and paste the PHP code
+Step: ... Click on Run Installation
+Step: ... Configure the blog:
+Step: ...   Site Title = Hello Cloud Gurus
+Step: ...   Username = acloudguru
+Step: ...   Password = acloudguru
+Step: ...   Your email = foo@bar.com
+Step: ... Login to WordPress
 
 
