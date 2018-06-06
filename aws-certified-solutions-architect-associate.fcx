@@ -5131,6 +5131,24 @@ Step: ...   Site Title = Hello Cloud Gurus
 Step: ...   Username = acloudguru
 Step: ...   Password = acloudguru
 Step: ...   Your email = foo@bar.com
-Step: ... Login to WordPress
-
-
+Step: ... Login to WordPress and configure it.
+Step: Create a backup of the website to S3 using the AWS CLI on MyEC2WebServer: aws s3 cp --recursive /var/www/html s://brunorijsman-wpcode
+Step: Go to the WordPress website and upload an image, and observe that the file appears in /var/www/html/wp-content/uploads
+Step: Insert the image in a Post, open the post, and copy the URL for the embedded image. Observe that the image is served out of the EC2 instance.
+Step: Manually copy all WordPress media uploads to S3 bucket brunorijsman-wpmedia: aws s3 cp --recursive /var/www/html/wp-content/uploads s3://brunorijsman-wpmedia
+Step: Go to the WordPress website and upload another image
+Step: Manually copy all WordPress media uploads to S3 bucket brunorijsman-wpmedia again
+Step: Go to the WordPress website and upload a third image
+Step: Synchronize the uploads directory with the S3 bucket (including deletes): aws s3 sync --delete /var/www/html/wp-content/uploads s3://brunorijsman-wpmedia
+Step: Look at an uploaded image by manually editing the URL in the browser: http://34.201.33.13/wp-content/uploads/2018/06/621k-airplane.jpg
+Step: Create URL rewrite files by:
+Step: ... Copy the ACG resource file into /var/www/html/.htaccess 
+Step: ... Replace the CloudFront URL in the .htaccess file with ours
+Step: Restart Apache: service httpd restart
+Step: Rivisit an image in your browser, and observe the URL is automatically rewritten to use CloudFront
+Step: Create a cron job to sync the media files automaticall:
+Step: ... cd /etc
+Step: ... Edit crontab
+Step: ... */1 * * * * root aws s3 sync --delete /var/www/html/wp-content/uploads s3://brunorijsman-wpmedia
+Step: ... */5 * * * * root aws s3 sync --delete /var/www/html/wp-content s3://brunorijsman-wpcode
+Step: (optional) Force cron to restart: service crond restart
