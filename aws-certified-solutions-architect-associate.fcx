@@ -4854,9 +4854,8 @@ A: SWF manages workflows of tasks; SQS manages queues of messages.
 Q: How does SQS (standard queue) differ from SWF in terms of execution guarantees?
 A: SWF assigns every task exactly once (it never loses or dupplicates tasks); SQS may lose or dupplicate message delivery.
 
-Q: Name 3 SWF actors?
+Q: Name 3 SWF actors.
 A: Workflow starter, Deciders, Activity Workers.
-
 
 SubTopic: Simple Notification Service (SNS)
 
@@ -5519,3 +5518,129 @@ A: By creating a standardized set of service offerings.
 
 Q: What AWS services help you build a CI/CD pipeline?
 A: CodeCommit, CodeDeploy, CodePipeline, CloudTrail.
+
+Topic: Additional Exam Tips
+
+SubTopic: Exam Tips Based on Student Feedback
+
+Q: What is Kinesis?
+A: A managed service for processing streaming data at massive scale (consume "big data" e.g. clickstreams or social media feeds).
+
+Q: After how much time is data written into Kinesis available to readers?
+A: Less than a second.
+
+Q: What service would you use to consume and process large streams of data such as social media streams?
+A: Kinesis.
+
+Q: What service would you use to consume and process large volumes of data for business intelligence?
+A: RedShift
+
+Q: What service would you use to consume and process large volumes of data big data processing?
+A: Elastic Map Reduce (EMR).
+
+Q: What is the difference between Kinesis and EMR?
+A: Kinesis processes large streams of in-flight data. EMR provides large volumes of stored data.
+
+Q: Are EBS-backed volumes persistent or ephemeral?
+A: They are persistent. If delete-on-termination is set to false, the EBS volume continues to exists after the EC2 instance has been terminated.
+
+Q: Are instance store backed volumes persistent or ephemeral?
+A: They are ephemeral. The instance store volume ceases to exist when the EC2 instance is terminated.
+
+Q: What type of EC2 volume can be detached and reattached to other EC2 instances?
+A: Only EBS-backed volumes, not instance store backed volumes.
+
+Q: What happens if you stop an EC2 instance with a EBS-backed volume?
+A: The volume and the data on it continue to exist.
+
+Q: What happens if you stop an EC2 instance with a instance store backed volume?
+A: You cannot stop an EC2 instance with instance-backed root store. You can only reboot or terminate it. If the instance store back volume is secondary it will be lost (is this even possible?)
+
+Q: If you want the data stored on an EC2 volume to persist longer than the life of the EC2 instance itself, which type of storage should you use?
+A: EBS-backed volume (not an instance store backed volume)
+
+Q: What service does OpsWorks provide?
+A: Orchestration using Chef.
+
+Q: What Chef (OpsWorks) cookbooks and recipes?
+A: The code that describes how to orchestrate infrastructure.
+
+Q: What service does Elastic Transcoder provide?
+A: Convert media files from their original format to other format that are optimized for particular devices (phone, tablet, laptop, TV, ...)
+
+Q: What level of detailed parameters do you need to specify for Elastic Transcoder to convert a file?
+A: It has presets for pupular devices so that you don't have to guess about which settings work best.
+
+Q: What is the pricing model for Elastic Transcode?
+A: You are charged for the duration (minutes) and resolution of the transcoded video file.
+
+Q: Name 3 SWF actors.
+A: Workflow starter, Deciders, Activity Workers.
+
+Q: What is an SWF workflow starter?
+A: An application that initiates a workflow.
+
+Q: What is an SWF decider?
+A: Controls the flow of activity tasks in a workflow.
+
+Q: What is an SWF activity worker?
+A: Carries out an activity task.
+
+Q: What is the URL for retrieving the instance meta-data from inside the instance?
+A: http://169.254.169.254/latest/meta-data/
+
+SubTopic: AWS organizations and consolidated billing
+
+Q: What is an AWS organization?
+A: An account management service that enables you to consolidate multiple AWS accounts into a centrally managed organization.
+
+Q: What are the two feature sets for AWS organizations?
+A: Consolidated billing and all features.
+
+Q: What additional features are available in "all features" above and beyond consolidated billing?
+A: Hierarchical organizational units, and policy-based controls.
+
+Q: What an AWS Organization policy?
+A: It allows (whitelist) or blocks (blacklists) a specified set of actions for a specified set of services in the accounts to which the policy is attached.
+
+Q: What are the 3 types of nodes in an organizational tree in AWS Organizations?
+A: The root, Organizational Units (OUs), and accounts.
+
+Q: What can policies be attached to in AWS Organizations?
+A: The root, Organizational Units (OUs), and accounts.
+
+Q: What are the 2 types of accounts in consolidated billing?
+A: The paying account (aka root account) and linked accounts.
+
+Q: How many bills do you received when consolidated billing is enabled?
+A: One bill with a single total amount to pay, but broken out by each linked account.
+
+Q: Can the paying account access the resources owned by the linked account?
+A: No.
+
+Q: Can one linked account access the resources of another linked account?
+A: No.
+
+Q: What is the maximum number of linked accounts per paying account?
+A: 20, but you can request more.
+
+Q: What are the 2 advantages of consolidated billing?
+A: Simpler billing (one bill) and better volume discounts (over the grand total across all linked accounts).
+
+Q: In consolidated billing, what is special about the billing related to reserved instances?
+A: If you create an on-demand instance in linked account A, and you have an unused reserved instance in account B, you will not be charged for the on-demand instance in A.
+
+Q: Name 3 practices for securting the paying account (root account)?
+A: Use strong passwords. Use MFA. Use the paying account only for billing, not for deploying resources.
+
+Q: If you want a billing alert for the total spent in the organization, where should you create it?
+A: On the paying account.
+
+Q: If you want a billing alert for amount spent in a single department, where should you create it?
+A: On the linked account for that department.
+
+Q: What is the scope of CloudTrail audit logs?
+A: Per account and per region.
+
+Q: How can you get a consolidated CloudTrail log across all linked accounts in an S3 bucket
+A: Turn on CloudTrail in the paying account, create a bucket policy that allows cross-account access, turn on CloudTrail in the linked accounts, and use the bucket in the paying account.
