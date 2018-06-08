@@ -5644,3 +5644,44 @@ A: Per account and per region.
 
 Q: How can you get a consolidated CloudTrail log across all linked accounts in an S3 bucket
 A: Turn on CloudTrail in the paying account, create a bucket policy that allows cross-account access, turn on CloudTrail in the linked accounts, and use the bucket in the paying account.
+
+SubTopic: Cross Account Access
+
+Q: What is cross-account access?
+A: It allows you to loging to the console using one account, and then switch to another account without having to log out and in again.
+
+Q: How can you allows a user group in account A to access the files in a bucket in account B?
+A: In account B, create a policy that allows access to the bucket, create a cross-account access role for account A and attach the policy to it. In account A, create an in-line custom policy for the user group that allows action assume-role for the role in account B.
+
+Q: Once the proper cross-account access has been setup, how does a user actually access resources in another account using the console?
+A: Click on the account link in the top right of the menu bar, select switch role, and select the other account and role.
+
+SubTopic: Lab: Tagging and resource groups
+
+Lab: Tagging and resource groups
+Step: Create an instance with tags Name = vm-1, Department = Development, Team = TeamA
+Step: Create a resource group:
+Step: ... Group name = Development team A resources
+Step: ... Tag = Department, Value = Development
+Step: ... Tag = Team, Value = TeamA
+Step: Observe all the resources in the resource group (there should be an EC2 instance)
+Step: Export the list of resources in the resource group as a CSV file.
+Step: Start the tag editor to explore tags and resources.
+
+Q: What is a tag?
+A: A name-value pair attached to a resource, also known as meta-data.
+
+Q: When are tags inherited?
+A: In cases where resources are created automatically, e.g. auto-scaling, CloudFormation, Elastic Beanstalk, etc.
+
+Q: What is a resource group?
+A: A grouping of resources based on one or more tags.
+
+Q: Can you create a resource group for all untagged resources?
+A: Yes.
+
+Q: What is a convenient tool to explore and edit the tagging of resources?
+A: The tag editor.
+
+Q: Name 3 good tools to help you not lose track of resources that you are paying for?
+A: Tags, resource groups, and the tag editor.
