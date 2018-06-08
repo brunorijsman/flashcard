@@ -5685,3 +5685,32 @@ A: The tag editor.
 
 Q: Name 3 good tools to help you not lose track of resources that you are paying for?
 A: Tags, resource groups, and the tag editor.
+
+SubTopic: VPC peering
+
+Q: What is VPC peering?
+A: A connection between to VPCs that allows you to route traffic between them using private IP addresses.
+
+Q: Can you create a VPC peering across different regions?
+A: The course says no, but Amazon recently announced that this is now supported.
+
+Q: Can you create a VPC peering between a VPC in your account and a VPC in another account?
+A: Yes, but only if they are in the same region.
+
+Q: Is there a gateway for VPC peering?
+A: No, there is no abstract or physical resource to represent the VPC peering. It happens "under the hood".
+
+Q: Is there a single point of failure for VPC peering?
+A: No.
+
+Q: Is there a single bandwidth bottleneck for VPC peering?
+A: No.
+
+Q: Is it possible to create a VPC peering between two VPCs with overlapping private address blocks?
+A: No.
+
+Q: Is VPC peering transitive? If A peers with B, and B peers with C, can A talk to C?
+A: No, for this to work, there must be an explicit VPC peering between A and C.
+
+Q: Name 3 limitations for VPC peering.
+A: Not across regions, not between VPCs with overlapping private IP address blocks, not transitive.
