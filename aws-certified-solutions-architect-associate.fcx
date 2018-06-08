@@ -5746,3 +5746,84 @@ A: Ethernet VLAN trunking (802.1Q).
 
 Q: What service would you use to connect to the AWS cloud without traversing the public Internet?
 A: Direct Connect.
+
+SubTopic: Security Token Service
+
+Q: What does STS stand for?
+A: Security Token Service.
+
+Q: What service does Security Token Service (STS) provide?
+A: It grants users limited and temporary access to AWS resources.
+
+Q: Name 3 possible sources for users in STS:
+A: Federation (uses SAML, typically Active Directory), Federation with mobile apps (Uses OpenID, typically Facebook, Amazon, Google, ...), Cross-account access.
+
+Q: What does SAML stand for?
+A: Security Access Markup Language
+
+Q: Does STS federation require that the user exists in IAM?
+A: No.
+
+Q: Using STS federation can you login to the console using single sign-on without providing IAM credentials?
+A: Yes.
+
+Q: What does federation mean?
+A: Combining a list of users in one domain (e.g. IAM) with the list of users in another domain (e.g. Active Director or Facebook).
+
+Q: What is an Identity Broker?
+A: A service that allows you take an identify from point A and joint it (federate it) to point B.
+
+Q: What is an identity store?
+A: A place where user credentials are stored, e.g. IAM, Active Directory, Facebook, Google, etc.
+
+Q: What is an identity?
+A: A user who can be authenticated.
+
+Q: Who provides the Identity Broker (aka Federation Proxy)?
+A: You have to implement it yourself because it is specific to your environment, but Amazon provides examples.
+
+Q: What is the difference between delegation and federation?
+A: Delegation provides users in other AWS accounts access to resources in your AWS account. Federation provides users in other identity stores access to resources in your AWS account.
+
+Q: Does IAM federation support access to the console or to the APIs?
+A: Both.
+
+Q: What are the two types of identities in IAM federation?
+A: Corporate identities and social identities.
+
+Q: What is the use case for corprorate identities in IAM federation?
+A: Allow corporate users to access resources in your AWS account using single sign-on.
+
+Q: What technologies are (typically) used for corporate identities in IAM federation?
+A: Active Directory, SAML, a custom federation proxy.
+
+Q: What is the use case for social identities in IAM federation?
+A: Allow apps to access resource in your AWS account using social (Facebook, Google, etc.) identities.
+
+Q: What technologies are (typically) used for social identities in IAM federation?
+A: OpenID, Amazon Cognito.
+
+Q: What are the two types of policies that you can set on roles?
+A: Trust policies: who (which principal) do you trust (e.g. all identities asserted by a SAML provider). Access policy: what actions are allowed (e.g. read an S3 bucket).
+
+Q: What is a session in the context of STS?
+A: A session grants temporary access to AWS resources.
+
+Q: Who generates sessions?
+A: The Simple Token Service (STS).
+
+Q: What causes STS to generate a session?
+A: The application calls an STS API (e.g. GetFederationToken).
+
+Q: Name the 4 elements in an STS session.
+A: Access key ID, access key secret, session token, expiration.
+
+Q: How does AWS know which identity providers to trust?
+A: The meta-data of identity providers is stored in IAM.
+
+Q: What are the three main steps for identity federation?
+A: You build identity broker (IB). App or user requests temporary AWS resources access from IB. IB authenticas user using identity provides (e.g. AD). IB requests session token from AWS STS and passes it on to app or user. App or user provides session token to AWS services.
+
+
+
+
