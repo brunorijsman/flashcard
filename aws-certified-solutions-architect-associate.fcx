@@ -5714,3 +5714,35 @@ A: No, for this to work, there must be an explicit VPC peering between A and C.
 
 Q: Name 3 limitations for VPC peering.
 A: Not across regions, not between VPCs with overlapping private IP address blocks, not transitive.
+
+SubTopic: Direct Connect 
+
+Q: What is Direct Connect?
+A: A dedicated network connection from your premises to the AWS cloud.
+
+Q: Name 3 benefits of direct connect over Internet-based connections.
+A: Reduce cost, increase throughput, hiher reliability.
+
+Q: What is the difference between Direct Connect and a VPN Connection in terms of setup time?
+A: A VPN connection can be established on-demand in a matter of minutes; it can take months to setup the dedicated line for Direct Connect.
+
+Q: What is the difference between Direct Connect and a VPN Connection in terms of bandwidth and reliability?
+A: A VPN connection provides most and variable bandwidth because it runs over the public Internet, Direct Connect can provide guaranteed and high bandwidth because it uses a private connection.
+
+Q: What is the difference between Direct Connect and a VPN Connection in terms of underlying transport?
+A: A VPN connection is a secure tunnel over the public Internet, Direct Connect uses a dedicated transport connection separate from the Internet.
+
+Q: Does Amazon provide the private transport link that is needed for Direct Connect?
+A: No, you have to get this from your Telco.
+
+Q: How is the Direct Connect terminated at the Amazon site?
+A: You put your router in a cage at an Amazon Direct Connect (DX) facility to terminate the circuit. Amazon will cross-connect it to an Amazon router in a different cage. The Amazon router in the DX facility connects to an Amazon datacenter over dark fiber.
+
+Q: In what capacities is Direct Connect available?
+A: 10 Gbps and 1 Gbps directly from Amazon. Below 1 Gbps from Amazon direct connect partners.
+
+Q: What transport is used to cross-connect your router to the Amazon router for Direct Connect?
+A: Ethernet VLAN trunking (802.1Q).
+
+Q: What service would you use to connect to the AWS cloud without traversing the public Internet?
+A: Direct Connect.
