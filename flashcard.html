@@ -2,151 +2,149 @@
 <html lang="en">
 
 <head>
-    <title>Flashcard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://127.0.0.1:5500/course_model.js"></script>
-    <script src="http://127.0.0.1:5500/course_parser.js"></script>
+  <title>Flashcard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://127.0.0.1:5500/course-model.js"></script>
+  <script src="http://127.0.0.1:5500/course-parser.js"></script>
+  <script src="http://127.0.0.1:5500/topic-tab.js"></script>
 </head>
 
 <body>
 
-    <div class="container">
+  <div class="container">
 
-        <br>
+    <br>
 
-        <div class="panel panel-default">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-toggle="tab" href="#topic-tab">Topic</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#quiz-tab">Quiz</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#lab-tab">Lab</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#results-tab">Results</a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#options-tab">Options</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div id="topic-tab" class="tab-pane active">
+        <div class="container">
+
+          <br>
+
+          <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h4>Course:
-                    <span id="course-name"></span>
-                </h4>
+              <h4>Course:
+                <span id="course-name"></span>
+              </h4>
             </div>
 
             <div class="panel-body">
 
-                <form action="javascript:void(0);">
+              <form action="javascript:void(0);">
 
-                    <div class="form-group">
+                <div class="form-group" id="topic-group">
+                  <label for="topic">Topic</label>
+                  <select class="form-control" id="topic-select" onchange="changeTopic()"></select>
+                </div>
 
-                        <div class="form-group" id="topic-group">
-                            <label for="topic">Topic</label>
-                            <select class="form-control" id="topic" onchange="changeTopic()"></select>
-                        </div>
+                <div class="form-group" id="sub-topic-group" style="display:none">
+                  <label for="sub-topic">Sub-topic</label>
+                  <select class="form-control" id="sub-topic-select" onchange="changeSubTopic()"></select>
+                </div>
 
-                        <div class="form-group" id="sub-topic-group" style="display:none">
-                            <label for="sub-topic">Sub-topic</label>
-                            <select class="form-control" id="sub-topic" onchange="changeSubTopic()"></select>
-                        </div>
-
-                        <div class="form-group" id="sub-sub-topic-group" style="display:none">
-                            <label for="sub-sub-topic">Sub-sub-topic</label>
-                            <select class="form-control" id="sub-sub-topic"></select>
-                        </div>
-
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Start quiz</button>
+                <div class="form-group" id="sub-sub-topic-group" style="display:none">
+                  <label for="sub-sub-topic">Sub-sub-topic</label>
+                  <select class="form-control" id="sub-sub-topic-select"></select>
+                </div>
 
             </div>
 
-        </div>
+          </div>
 
-        </form>
+          </form>
+
+        </div>
+      </div>
+
+      <div id="quiz-tab" class="tab-pane">
+        <div class="container">
+
+          <br>
+
+          <row>
+            <div class="panel panel-default">
+
+              <div class="panel-heading">
+                <h4>
+                  <span id="question-text"></span>
+                </h4>
+              </div>
+              <div class="panel-body" id="answer" style="display:none">
+                <h4>
+                  <span id="answer-text"></span>
+                </h4>
+              </div>
+            </div>
+          </row>
+
+          <row>
+            <button type="button" class="btn btn-default" onclick="recordDontKnowIt()">
+              <span class="glyphicon glyphicon glyphicon-remove" style="color:red"></span>
+              <span id="i-dont-know-this-text">I do not know this</span>
+            </button>
+            <button type="button" class="btn btn-default" onclick="reverseAnswer()">
+              <span class="glyphicon glyphicon glyphicon-repeat"></span>
+              <span id="show-hide-text">Show answer</span>
+            </button>
+            <button type="button" class="btn btn-default" onclick="recordKnowIt()">
+              <span class="glyphicon glyphicon glyphicon-ok" style="color:green"></span>
+              <span id="i-know-this-text">I know this</span>
+            </button>
+          </row>
+
+        </div>
+      </div>
+
+      <div id="lab-tab" class="tab-pane">
+        <h3>Lab</h3>
+        <p>Some content in lab.</p>
+      </div>
+
+      <div id="results-tab" class="tab-pane">
+        <h3>Results</h3>
+        <p>Some content in results.</p>
+      </div>
+
+      <div id="options-tab" class="tab-pane">
+        <h3>Options</h3>
+        <p>Some content in options.</p>
+      </div>
 
     </div>
 
-    <script type="text/javascript">
+  </div>
 
-        function getCourse() {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://127.0.0.1:5500/aws-certified-solutions-architect-associate.fcx', false);
-            xhr.send(null);
-            if (xhr.status !== 200) {
-                return null
-            }
-            const courseDefinition = xhr.responseText
-            const parser = new Parser()
-            return parser.parse(courseDefinition)
-        }
-
-        function updateTopicsVisibility() {
-            const selectedTopicIndex = $("#topic option:selected").index();
-            if (selectedTopicIndex == 0) {
-                $('#sub-topic-group').hide()
-                $('#sub-sub-topic-group').hide()
-            } else {
-                $('#sub-topic-group').show()
-                const selectedSubTopicIndex = $("#sub-topic option:selected").index();
-                if (selectedSubTopicIndex == 0) {
-                    $('#sub-sub-topic-group').hide()
-                } else {
-                    $('#sub-sub-topic-group').show()
-                }
-            }
-        }
-
-        function updateCourseName() {
-            $('#course-name').text(course.name)
-        }
-
-        function updateTopicOptions() {
-            const topicSelect = $('#topic')[0]
-            topicSelect.options.length = 0
-            topicNames = ["All topics"].concat(course.topicNames)
-            for (topicName of topicNames) {
-                topicSelect.append(new Option(topicName))
-            }
-        }
-
-        function updateSubTopicOptions() {
-            const subTopicSelect = $('#sub-topic')[0]
-            subTopicSelect.options.length = 0
-            const selectedTopicIndex = $("#topic option:selected").index();
-            if (selectedTopicIndex > 0) {
-                subTopicNames = ["All sub-topics"].concat(course.getSubTopicNames(selectedTopicIndex-1))
-                for (subTopicName of subTopicNames) {
-                    subTopicSelect.append(new Option(subTopicName))
-                }
-            }
-        }
-
-        function updateSubSubTopicOptions() {
-            const subSubTopicSelect = $('#sub-sub-topic')[0]
-            subSubTopicSelect.options.length = 0
-            const selectedTopicIndex = $("#topic option:selected").index();
-            const selectedSubTopicIndex = $("#sub-topic option:selected").index();
-            if (selectedTopicIndex > 0 && selectedSubTopicIndex > 0) {
-                subSubTopicNames = ["All sub-sub-topics"].concat(course.getSubSubTopicNames(selectedTopicIndex-1, selectedSubTopicIndex-1))
-                for (subSubTopicName of subSubTopicNames) {
-                    subSubTopicSelect.append(new Option(subSubTopicName))
-                }
-            }
-        }
-
-        function changeTopic () {
-            updateSubTopicOptions()
-            updateTopicsVisibility()            
-        }
-
-        function changeSubTopic () {
-            updateSubSubTopicOptions()
-            updateTopicsVisibility()            
-        }
-
-        var course = null
-
-        $(document).ready(function () {
-
-            course = getCourse()
-            updateCourseName()
-            updateTopicOptions()
-
-        });
-    </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      course = getCourse()
+      updateCourseName()
+      updateTopicOptions()
+    });
+  </script>
 
 </body>
 
