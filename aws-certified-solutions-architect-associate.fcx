@@ -513,7 +513,7 @@ A: SageMaker, Comprehend, DeepLens, Lex, Machine Learning, Polly, Rekognition, T
 SubSubTopic: Analytics services
 
 Q: What service does Athena provide?
-A: Analyze data in S2 using SQL.
+A: Analyze data in S3 using SQL.
 
 Q: What service analyzes data in S2 using SQL?
 A: Athena.
@@ -1604,7 +1604,7 @@ Q: What are the possible values for "Viewer Protocol Policy" in a CloudFront dis
 A: HTTP and HTTPS, Redirect HTTP to HTTPS, HTTPS Only.
 
 Q: What do you need to do if you want to allow users to upload content?
-A: Incude PUT, POST, PATCH, DELETE in "Allowed HTTP Methods" in a CloudFront distribution behavior.
+A: Include PUT, POST, PATCH, DELETE in "Allowed HTTP Methods" in a CloudFront distribution behavior.
 
 Q: Name 2 options for controlling the TTL of cached objects.
 A: Using the cache headers provided by the origin server, or customized values specified in the CloudFront configuration.
@@ -1874,7 +1874,10 @@ Q: How is Snowball Edge different from regular Snowball?
 A: It also provides compute in addition to storage. It provides 100 TB of storage. 
 
 Q: How is Snowmobile different from regular Snowball?
-A: Snowmobile is container mounted on a truck. It provides up to 100 Petabyte (= 100,000 TB) of storage.
+A: Snowmobile is container mounted on a truck. 
+
+Q: How much capacity to SnowMobile provide?
+A: Up to 100 Petabyte (= 100,000 Terrabyte = 0.1 Exabyte) of storage.
 
 Q: Where does Snowball store the imported data?
 A: In S3.
@@ -4091,7 +4094,7 @@ A: By default, Redshift. Or you can manage your own keys using HSM or KMS.
 Q: Can Redshift be distributed across multiple AZs for high availability?
 A: Currently not.
 
-Q: What can you do if the AZ in which you run Redshift goes down?
+Q: What can you do if Redshift goes down in the AZ where you run it?
 A: You can restore the Redshift snapshot to another AZ.
 
 Q: What is a Redshift cluster.
