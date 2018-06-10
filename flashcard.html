@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://127.0.0.1:5500/course_model.js"></script>
+    <script src="http://127.0.0.1:5500/course_parser.js"></script>
 </head>
 
 <body>
@@ -19,7 +21,9 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                <h4>Course: AWS Certified Solutions Architect Associate</h4>
+                <h4>Course:
+                    <span id="course-name"></span>
+                </h4>
             </div>
 
             <div class="panel-body">
@@ -30,32 +34,17 @@
 
                         <div class="form-group" id="topic-group">
                             <label for="topic">Topic</label>
-                            <select class="form-control" id="topic">
-                                <option>All topics in the course</option>
-                                <option>Topic 1</option>
-                                <option>Topic 2</option>
-                                <option>Topic 3</option>
-                            </select>
+                            <select class="form-control" id="topic" onchange="changeTopic()"></select>
                         </div>
 
                         <div class="form-group" id="sub-topic-group" style="display:none">
                             <label for="sub-topic">Sub-topic</label>
-                            <select class="form-control" id="sub-topic">
-                                <option>All sub-topics</option>
-                                <option>Sub-topic 1</option>
-                                <option>Sub-topic 2</option>
-                                <option>Sub-topic 3</option>
-                            </select>
+                            <select class="form-control" id="sub-topic" onchange="changeSubTopic()"></select>
                         </div>
 
                         <div class="form-group" id="sub-sub-topic-group" style="display:none">
                             <label for="sub-sub-topic">Sub-sub-topic</label>
-                            <select class="form-control" id="sub-sub-topic">
-                                <option>All sub-sub-topics</option>
-                                <option>Sub-sub-topic 1</option>
-                                <option>Sub-sub-topic 2</option>
-                                <option>Sub-sub-topic 3</option>
-                            </select>
+                            <select class="form-control" id="sub-sub-topic"></select>
                         </div>
 
                     </div>
@@ -72,14 +61,26 @@
 
     <script type="text/javascript">
 
+        function getCourse() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:5500/aws-certified-solutions-architect-associate.fcx', false);
+            xhr.send(null);
+            if (xhr.status !== 200) {
+                return null
+            }
+            const courseDefinition = xhr.responseText
+            const parser = new Parser()
+            return parser.parse(courseDefinition)
+        }
+
         function updateTopicsVisibility() {
-            var selectedTopicIndex = $("#topic option:selected").index();
+            const selectedTopicIndex = $("#topic option:selected").index();
             if (selectedTopicIndex == 0) {
                 $('#sub-topic-group').hide()
                 $('#sub-sub-topic-group').hide()
             } else {
                 $('#sub-topic-group').show()
-                var selectedSubTopicIndex = $("#sub-topic option:selected").index();
+                const selectedSubTopicIndex = $("#sub-topic option:selected").index();
                 if (selectedSubTopicIndex == 0) {
                     $('#sub-sub-topic-group').hide()
                 } else {
@@ -88,10 +89,61 @@
             }
         }
 
+        function updateCourseName() {
+            $('#course-name').text(course.name)
+        }
+
+        function updateTopicOptions() {
+            const topicSelect = $('#topic')[0]
+            topicSelect.options.length = 0
+            topicNames = ["All topics"].concat(course.topicNames)
+            for (topicName of topicNames) {
+                topicSelect.append(new Option(topicName))
+            }
+        }
+
+        function updateSubTopicOptions() {
+            const subTopicSelect = $('#sub-topic')[0]
+            subTopicSelect.options.length = 0
+            const selectedTopicIndex = $("#topic option:selected").index();
+            if (selectedTopicIndex > 0) {
+                subTopicNames = ["All sub-topics"].concat(course.getSubTopicNames(selectedTopicIndex-1))
+                for (subTopicName of subTopicNames) {
+                    subTopicSelect.append(new Option(subTopicName))
+                }
+            }
+        }
+
+        function updateSubSubTopicOptions() {
+            const subSubTopicSelect = $('#sub-sub-topic')[0]
+            subSubTopicSelect.options.length = 0
+            const selectedTopicIndex = $("#topic option:selected").index();
+            const selectedSubTopicIndex = $("#sub-topic option:selected").index();
+            if (selectedTopicIndex > 0 && selectedSubTopicIndex > 0) {
+                subSubTopicNames = ["All sub-sub-topics"].concat(course.getSubSubTopicNames(selectedTopicIndex-1, selectedSubTopicIndex-1))
+                for (subSubTopicName of subSubTopicNames) {
+                    subSubTopicSelect.append(new Option(subSubTopicName))
+                }
+            }
+        }
+
+        function changeTopic () {
+            updateSubTopicOptions()
+            updateTopicsVisibility()            
+        }
+
+        function changeSubTopic () {
+            updateSubSubTopicOptions()
+            updateTopicsVisibility()            
+        }
+
+        var course = null
+
         $(document).ready(function () {
 
-            $('#topic').change(updateTopicsVisibility)
-            $('#sub-topic').change(updateTopicsVisibility)
+            course = getCourse()
+            updateCourseName()
+            updateTopicOptions()
 
         });
     </script>

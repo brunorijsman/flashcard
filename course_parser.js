@@ -1,13 +1,12 @@
 class Parser {
   reset () {
-    this.fileName = null
-    this.file = null
+    this.definition = null
     this.line = null
     this.lineNr = null
     this.tag = null
     this.arg = null
     this.pushedBack = false
-    this.quiz = null
+    this.course = null
     this.topicName = null
     this.subTopicName = null
     this.subSubTopicName = null
@@ -28,35 +27,34 @@ class Parser {
   nextCommand () {
     if (this.pushedBack) {
       this.pushedBack = false
-      assert(this.tag, 'Missing pushed-back tag')
+      console.assert(this.tag, 'Missing pushed-back tag')
       return true
     }
     let line = null
     while (true) {
-      if (this.file.eof()) {
-        this.line = null
-        this.lineNr = null
+      if (this.lineNr >= this.definition.length) {
         return false
       }
+      line = this.definition[this.lineNr].trim()
       this.lineNr += 1
-      line = this.file.readln().trim()
-      if (line !== '' || line[0] !== '#') {
+      if (line !== '' && line[0] !== '#') {
         this.line = line
         break
       }
     }
-    const split = line.split(':', 1)
+    const split = line.split(':')
     if (split.length === 1) {
       this.fatalError('Syntax error, missing :')
     }
     this.tag = split[0].trim().toLowerCase()
-    this.arg = split[1].trim()
+    split.shift()
+    this.arg = split.join(':').trim()
     return true
   }
 
   prevCommand () {
-    assert(!this.pushedBack, 'Only one push-back allowed')
-    assert(this.tag != null, 'Nothing to push-back')
+    console.assert(!this.pushedBack, 'Only one push-back allowed')
+    console.assert(this.tag != null, 'Nothing to push-back')
     this.pushedBack = true
   }
 
@@ -64,7 +62,7 @@ class Parser {
     this.topicName = this.arg
     this.subTopicName = null
     this.subSubTopicName = null
-    this.quiz.addTopic(this.topicName)
+    this.course.addTopic(this.topicName)
   }
 
   parseSubTopic () {
@@ -73,7 +71,7 @@ class Parser {
     }
     this.subTopicName = this.arg
     this.subSubTopicName = null
-    this.quiz.addSubTopic(this.subTopicName)
+    this.course.addSubTopic(this.subTopicName)
   }
 
   parseSubSubTopic () {
@@ -81,7 +79,7 @@ class Parser {
       this.fatalError('Sub-sub-topic without sub-topic')
     }
     this.subSubTopicName = this.arg
-    this.quiz.addSubSubTopic(this.subTopicName)
+    this.course.addSubSubTopic(this.subTopicName)
   }
 
   parseQuestion () {
@@ -93,7 +91,7 @@ class Parser {
       this.fatalError('Question without answer')
     }
     const answerText = this.tag
-    this.quiz.addQuestion(questionText, answerText)
+    this.course.addQuestion(questionText, answerText)
   }
 
   parseLab () {
@@ -108,15 +106,17 @@ class Parser {
     }
   }
 
-  parseQuiz () {
-    if (!this.nextCommand() || this.tag != 'quiz') {
-      this.fatalError('Missing quiz')
+  parseCourse () {
+    if (!this.nextCommand() || this.tag != 'course') {
+      this.fatalError('Missing course')
     }
+    console.assert(this.course === null)
+    this.course = new Course(this.arg)
     while (this.nextCommand()) {
       if (this.tag === 'topic') {
         this.parseTopic()
       } else if (this.tag === 'subtopic') {
-        this.parseSubSubTopic()
+        this.parseSubTopic()
       } else if (this.tag === 'subsubtopic') {
         this.parseSubSubTopic()
       } else if (['question', 'q'].includes(this.tag)) {
@@ -129,15 +129,11 @@ class Parser {
     }
   }
 
-  parseFile (fileName) {
+  parse (definitionText) {
     this.reset()
-    this.fileName = fileName
-    this.file = fs.open(fileName, 'r')
-    if (this.file == -1) {
-      this.fatalError('Could not open file ' + fileName)
-    }
+    this.definition = definitionText.split('\n')
     this.lineNr = 0
-    this.parseQuiz()
-    fclose(this.file)
+    this.parseCourse()
+    return this.course
   }
 }

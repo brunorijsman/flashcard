@@ -24,7 +24,7 @@ class QuestionSet {
     }
   }
 
-  nrQuestions() {
+  get nrQuestions () {
     return this.questions.length()
   }
 }
@@ -49,23 +49,23 @@ class Topic {
     }
   }
 
-  nrQuestions () {
+  get nrQuestions () {
     return this.questionSet.nrQuestions()
   }
 }
 
-class Quiz {
-  constructor (quizName) {
-    this.quizPseudoTopic = Topic(quizName, 0, null)
+class Course {
+  constructor (courseName) {
+    this.coursePseudoTopic = new Topic(courseName, 0, null)
     this.currentTopic = null
     this.currentSubTopic = null
     this.currentSubSubTopic = null
-    this.currentTopicAtAnyLevel = this.quizPseudoTopic
+    this.currentTopicAtAnyLevel = this.coursePseudoTopic
   }
 
   addTopic (topicName) {
-    const topic = new Topic(topicName, 1, this.quizPseudoTopic)
-    this.quizPseudoTopic.addChildTopic(topic)
+    const topic = new Topic(topicName, 1, this.coursePseudoTopic)
+    this.coursePseudoTopic.addChildTopic(topic)
     this.currentTopic = topic
     this.currentSubTopic = null
     this.currentSubSubTopic = null
@@ -73,16 +73,16 @@ class Quiz {
   }
 
   addSubTopic (subTopicName) {
-    assert(this.currentTopic, 'Tried to add sub-topic without parent topic')
+    console.assert(this.currentTopic, 'Tried to add sub-topic without parent topic')
     const topic = new Topic(subTopicName, 2, this.currentTopic)
     this.currentTopic.addChildTopic(topic)
-    this.currentSubTopic = null
+    this.currentSubTopic = topic
     this.currentSubSubTopic = null
     this.currentTopicAtAnyLevel = topic
   }
 
   addSubSubTopic (subSubTopicName) {
-    assert(this.currentSubTopic, 'Tried to add sub-sub-topic without parent sub-topic')
+    console.assert(this.currentSubTopic, 'Tried to add sub-sub-topic without parent sub-topic')
     const topic = new Topic(subSubTopicName, 3, this.currentSubTopic)
     this.currentSubTopic.addChildTopic(topic)
     this.currentSubSubTopic = topic
@@ -90,8 +90,42 @@ class Quiz {
   }
 
   addQuestion (questText, answerText) {
-    assert(this.currentTopicAtAnyLevel, 'Tried to add question without current topic')
-    question = new Question(this.currentTopicAtAnyLevel)
+    console.assert(this.currentTopicAtAnyLevel, 'Tried to add question without current topic')
+    const question = new Question(this.currentTopicAtAnyLevel)
     this.currentTopicAtAnyLevel.addQuestion(question)
+  }
+
+  get name () {
+    return this.coursePseudoTopic.name
+  }
+
+  get topicNames () {
+    const topicNames = []
+    for (const topic of this.coursePseudoTopic.children) {
+      topicNames.push(topic.name)
+    }
+    return topicNames
+  }
+
+  getSubTopicNames (topicIndex) {
+    const topics = this.coursePseudoTopic.children
+    const subTopics = topics[topicIndex].children
+    const subTopicNames = []
+    for (const subTopic of subTopics) {
+      subTopicNames.push(subTopic.name)
+    }
+    return subTopicNames
+  }
+
+  /* TODO: There is a bug related to the sub-sub-topid dropdown menu */
+  getSubSubTopicNames (topicIndex, subTopicIndex) {
+    const topics = this.coursePseudoTopic.children
+    const subTopics = topics[topicIndex].children
+    const subSubTopics = subTopics[subTopicIndex].children
+    const subSubTopicNames = []
+    for (const subSubTopic of subSubTopics) {
+      subSubTopicNames.push(subSubTopic.name)
+    }
+    return subSubTopicNames
   }
 }

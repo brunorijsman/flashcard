@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://127.0.0.1:5500/quiz_model.js"></script>
+    <script src="http://127.0.0.1:5500/course_model.js"></script>
+    <script src="http://127.0.0.1:5500/course_parser.js"></script>
 </head>
 
 <body>
@@ -20,23 +21,23 @@
 
     <script type="text/javascript">
 
-        function getText() {
+        function getCourse() {
+
+            /* TODO: Synchronous calls are deprecated */
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://127.0.0.1:5500/aws-certified-solutions-architect-associate.fcx', true);
-            xhr.send();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var type = xhr.getResponseHeader('Content-Type');
-                    if (type.indexOf("text") !== 1) {
-                        console.info("Got it!")
-                    }
-                }
+            xhr.open('GET', 'http://127.0.0.1:5500/aws-certified-solutions-architect-associate.fcx', false);
+            xhr.send(null);
+            if (xhr.status !== 200) {
+                return false
             }
+            const courseDefinition = xhr.responseText
+
+            const parser = new Parser()
+            return parser.parse(courseDefinition)
+
         }
 
-        console.info("Starting request...")
-        getText()
-        console.info("Started request...")
+        const course = getCourse()
     </script>
 
 </body>

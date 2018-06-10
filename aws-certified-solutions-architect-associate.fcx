@@ -1,4 +1,4 @@
-Test: AWS Certified Solutions Architect Associate
+Course: AWS Certified Solutions Architect Associate
 
 Topic: Introduction to the course
 
@@ -34,7 +34,7 @@ A: Solutions architect, devops.
 Q: Give three examples of AWS speciality certifications.
 A: Security, big data, advanced networking
 
-SubTopic: 10,000 Foot Overview - Part 2
+SubTopic: 10,000 Foot Overview - Part 1
 
 SubSubTopic: Global Infrastructure
 
@@ -71,7 +71,7 @@ A: CloudFront, which is the AWS Content Delivery Network (CDN).
 Q: How many edge locations are there?
 A: Over 96 edge locations as of 2017.
 
-SubTopic: 10,000 Foot Overview - Part 1
+SubTopic: 10,000 Foot Overview - Part 2
 
 SubSubTopic: Compute services
 
@@ -3733,7 +3733,7 @@ Q: What service does AWS offer for data warehousing?
 A: Redshift.
 
 Q: What does OLTP stand for?
-A: On Line Transaction Processing.
+A: On Transaction Processing.
 
 Q: What type of transaction processing does a relational database provide?
 A: On Line Transation Processing (OLTP).
@@ -5028,7 +5028,6 @@ A: Sum of the shards.
 
 Q: How long is data stored in Kinesis Streams?
 A: Up to 7 days, 24 hours by default.
-@@@ retention
 
 Q: What is Kinesis Firehose?
 A: @@@
