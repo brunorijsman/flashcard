@@ -11,6 +11,7 @@
   <script src="http://127.0.0.1:5500/course-model.js"></script>
   <script src="http://127.0.0.1:5500/course-parser.js"></script>
   <script src="http://127.0.0.1:5500/topic-tab.js"></script>
+  <script src="http://127.0.0.1:5500/question-tab.js"></script>
 </head>
 
 <body>
@@ -45,6 +46,9 @@
           <br>
 
           <div class="panel panel-default">
+
+            <!--- TODO: Make the core a select box in form as well-->
+            <!--- TODO: Don't show sub-sub-topic select box if there no sub-sub-topics (and same for sub-topic) -->
 
             <div class="panel-heading">
               <h4>Course:
@@ -102,17 +106,17 @@
           </row>
 
           <row>
-            <button type="button" class="btn btn-default" onclick="recordDontKnowIt()">
-              <span class="glyphicon glyphicon glyphicon-remove" style="color:red"></span>
-              <span id="i-dont-know-this-text">I do not know this</span>
-            </button>
-            <button type="button" class="btn btn-default" onclick="reverseAnswer()">
+            <button type="button" class="btn btn-default" id="show-answer-button" onclick="showAnswer()">
               <span class="glyphicon glyphicon glyphicon-repeat"></span>
-              <span id="show-hide-text">Show answer</span>
+              <span>Show answer</span>
             </button>
-            <button type="button" class="btn btn-default" onclick="recordKnowIt()">
+            <button type="button" class="btn btn-default" id="dont-know-button" onclick="recordDontKnowIt()">
+              <span class="glyphicon glyphicon glyphicon-remove" style="color:red"></span>
+              <span>I did not know this</span>
+            </button>
+            <button type="button" class="btn btn-default" id="do-know-button" onclick="recordKnowIt()">
               <span class="glyphicon glyphicon glyphicon-ok" style="color:green"></span>
-              <span id="i-know-this-text">I know this</span>
+              <span>I did know this</span>
             </button>
           </row>
 
@@ -140,9 +144,8 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      course = getCourse()
-      updateCourseName()
-      updateTopicOptions()
+      initTopicTab()
+      initQuestionTab()
     });
   </script>
 

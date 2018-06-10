@@ -90,7 +90,7 @@ class Parser {
     if (!this.nextCommand() || !['answer', 'a'].includes(this.tag)) {
       this.fatalError('Question without answer')
     }
-    const answerText = this.tag
+    const answerText = this.arg
     this.course.addQuestion(questionText, answerText)
   }
 

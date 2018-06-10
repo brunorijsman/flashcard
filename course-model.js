@@ -1,8 +1,8 @@
 class Question {
-  constructor (topic, QuestionText, answerText) {
-    this.topic = topic
+  constructor (QuestionText, answerText, topic) {
     this.questionText = QuestionText
     this.answerText = answerText
+    this.topic = topic
   }
 }
 
@@ -20,7 +20,7 @@ class QuestionSet {
       const randomIndex = Math.floor(Math.random() * this.questions.length)
       return this.questions[randomIndex]
     } else {
-      return undefined
+      return null
     }
   }
 
@@ -89,9 +89,9 @@ class Course {
     this.currentTopicAtAnyLevel = topic
   }
 
-  addQuestion (questText, answerText) {
+  addQuestion (questionText, answerText) {
     console.assert(this.currentTopicAtAnyLevel, 'Tried to add question without current topic')
-    const question = new Question(this.currentTopicAtAnyLevel)
+    const question = new Question(questionText, answerText, this.currentTopicAtAnyLevel)
     this.currentTopicAtAnyLevel.addQuestion(question)
   }
 
@@ -127,5 +127,11 @@ class Course {
       subSubTopicNames.push(subSubTopic.name)
     }
     return subSubTopicNames
+  }
+
+  /* TODO: Also add parameters to restrict the set of candidate questions to a particular topic, sub-topic, sub-sub-topic */
+  /* TODO: Add a pick context with strategy and history, so we can make the picking smarter, e.g. avoid repeated questions */
+  pickRandomQuestion () {
+    return this.coursePseudoTopic.questionSet.pickRandomQuestion()
   }
 }

@@ -74,4 +74,13 @@ function changeSubTopic () {
   updateTopicsVisibility()
 }
 
+function initTopicTab () {
+  course = getCourse()
+  updateCourseName()
+  updateTopicOptions()
+}
+
+<!-- TODO: Create a special object for holding the global state -->
+
 var course = null
+
