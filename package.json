@@ -1,0 +1,30 @@
+{
+  "name": "flashcard",
+  "version": "1.0.0",
+  "description": "Flashcard application for my self-studies",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunorijsman/flashcard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunorijsman/flashcard/issues"
+  },
+  "homepage": "https://github.com/brunorijsman/flashcard#readme",
+  "devDependencies": {
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0"
+  },
+  "dependencies": {
+    "eslint": "^4.19.1"
+  }
+}

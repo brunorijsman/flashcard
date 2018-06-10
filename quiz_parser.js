@@ -1,0 +1,143 @@
+class Parser {
+  reset () {
+    this.fileName = null
+    this.file = null
+    this.line = null
+    this.lineNr = null
+    this.tag = null
+    this.arg = null
+    this.pushedBack = false
+    this.quiz = null
+    this.topicName = null
+    this.subTopicName = null
+    this.subSubTopicName = null
+  }
+
+  constructor () {
+    this.reset()
+  }
+
+  fatalError (errorMsg) {
+    console.error('Error   :', errorMsg)
+    console.error('File    :', this.fileName)
+    console.error('Line nr :', this.lineNr)
+    console.error('Line    :', this.line)
+    throw new Error(errorMsg)
+  }
+
+  nextCommand () {
+    if (this.pushedBack) {
+      this.pushedBack = false
+      assert(this.tag, 'Missing pushed-back tag')
+      return true
+    }
+    let line = null
+    while (true) {
+      if (this.file.eof()) {
+        this.line = null
+        this.lineNr = null
+        return false
+      }
+      this.lineNr += 1
+      line = this.file.readln().trim()
+      if (line !== '' || line[0] !== '#') {
+        this.line = line
+        break
+      }
+    }
+    const split = line.split(':', 1)
+    if (split.length === 1) {
+      this.fatalError('Syntax error, missing :')
+    }
+    this.tag = split[0].trim().toLowerCase()
+    this.arg = split[1].trim()
+    return true
+  }
+
+  prevCommand () {
+    assert(!this.pushedBack, 'Only one push-back allowed')
+    assert(this.tag != null, 'Nothing to push-back')
+    this.pushedBack = true
+  }
+
+  parseTopic () {
+    this.topicName = this.arg
+    this.subTopicName = null
+    this.subSubTopicName = null
+    this.quiz.addTopic(this.topicName)
+  }
+
+  parseSubTopic () {
+    if (this.topicName === null) {
+      this.fatalError('Sub-topic without topic')
+    }
+    this.subTopicName = this.arg
+    this.subSubTopicName = null
+    this.quiz.addSubTopic(this.subTopicName)
+  }
+
+  parseSubSubTopic () {
+    if (this.subTopicName === null) {
+      this.fatalError('Sub-sub-topic without sub-topic')
+    }
+    this.subSubTopicName = this.arg
+    this.quiz.addSubSubTopic(this.subTopicName)
+  }
+
+  parseQuestion () {
+    if (this.topicName === null) {
+      this.fatalError('Question without topic')
+    }
+    const questionText = this.arg
+    if (!this.nextCommand() || !['answer', 'a'].includes(this.tag)) {
+      this.fatalError('Question without answer')
+    }
+    const answerText = this.tag
+    this.quiz.addQuestion(questionText, answerText)
+  }
+
+  parseLab () {
+    const labName = this.arg
+    while (this.nextCommand()) {
+      if (this.tag !== 'step') {
+        this.prevCommand()
+        break
+      }
+      const stepText = this.arg
+      /* TODO: Add to model */
+    }
+  }
+
+  parseQuiz () {
+    if (!this.nextCommand() || this.tag != 'quiz') {
+      this.fatalError('Missing quiz')
+    }
+    while (this.nextCommand()) {
+      if (this.tag === 'topic') {
+        this.parseTopic()
+      } else if (this.tag === 'subtopic') {
+        this.parseSubSubTopic()
+      } else if (this.tag === 'subsubtopic') {
+        this.parseSubSubTopic()
+      } else if (['question', 'q'].includes(this.tag)) {
+        this.parseQuestion()
+      } else if (this.tag === 'lab') {
+        this.parseLab()
+      } else {
+        this.fatalError('Unrecognized tag: ' + this.tag)
+      }
+    }
+  }
+
+  parseFile (fileName) {
+    this.reset()
+    this.fileName = fileName
+    this.file = fs.open(fileName, 'r')
+    if (this.file == -1) {
+      this.fatalError('Could not open file ' + fileName)
+    }
+    this.lineNr = 0
+    this.parseQuiz()
+    fclose(this.file)
+  }
+}

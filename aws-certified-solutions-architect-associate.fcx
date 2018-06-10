@@ -5824,6 +5824,207 @@ A: The meta-data of identity providers is stored in IAM.
 Q: What are the three main steps for identity federation?
 A: You build identity broker (IB). App or user requests temporary AWS resources access from IB. IB authenticas user using identity provides (e.g. AD). IB requests session token from AWS STS and passes it on to app or user. App or user provides session token to AWS services.
 
+SubTopic: Active Directory integration
 
+Q: Can you authenticate for the AWS console using Active Directory?
+A: Yes, using Active Directory Federation Services (ADFS) and SAML (Security Assertion Markup Language).
 
+Q: When you login to the AWS console using AD, do you authenticate with AD first or do you get the temporary security credential from AWS first?
+A: You authhenticate with AD first.
+
+SubTopic: Workspaces
+
+Q: What service does AWS Workspaces provide?
+A: Virtual Desktop Infrastructure (VDI).
+
+Q: How does a user access AWS Workspaces?
+A: Using a free thin-client application that runs on PC, Mac, Chromobook, iPad, Kindle Fire, Android tablet, ...
+
+Q: What does AWS Workspaces provide on the server side?
+A: A complete desktop environment including compute, storage, and multiple applications. (Note: AppStream 2.0 provides a single application.)
+
+Q: How does AWS Workspaces authenticate users?
+A: Using credentials configured by the administrator, or using Active Directory integration.
+
+Q: Does an end-user need an AWS IAM account to access Workspaces applications?
+A: No, Active Directory integration allows them to login using their company credentials.
+
+Q: What operating system expedience does Workspaces provide to the end-user?
+A: Windows 7 (provided by Windows Server 2008 R2 on the backend).
+
+Q: Can Workspaces end-users customize their preferences (wallpaper, icons, shortcuts, etc.)?
+A: By default yes, can be disabled by the administrator.
+
+Q: Dp Workspaces end-users have administrator privileges to install new applications?
+A: By default yes, can be disabled by the administrator.
+
+Q: Are Workspaces instances persistent or ephemeral?
+A: Persistent.
+
+Q: How is Workspaces data backed up?
+A: Data on the D:\ drive is automatically backed up every 12 hours.
+
+SubTopic: Elastic Container Service (ECS)
+
+Q: What does ECS stand for?
+A: Elastic Container Service.
+
+Q: What service does Elastic Container Service (ECS) provide?
+A: Docker containers.
+
+Q: Name the 3 layers of an application stack.
+A: Operating system, dependencies, and application.
+
+Q: What underlying technology is docker based on?
+A: Linux Containers (LXC)
+
+Q: What is the difference between a Virtual Machine (VM) and a container?
+A: A VM contains an independent copy of the OS (the guest OS), the container uses the Linux host OS.
+
+Q: What is a benefit of containers over VMs in terms of resource usage?
+A: Containers are lighter-weight than VMs; the use less disk, RAM, and they startup faster.
+
+Q: What is a benfit of containers over running applications natively in terms of dependencies?
+A: The dependencies are packaged along with the application, thus simplifying dependency management. Applications are more portable.
+
+Q: What is a benfit of containers over running applications natively in terms of reliability?
+A: The running applications are strongly isolated from each other.
+
+Q: What is a benefit of containers in terms of deployment pipelines?
+A: You can use the exact same container image in development, test, and production.
+
+Q: What mechanisms are used to isolated containers from each other?
+A: Linux namespaces and cgroups.
+
+Q: What architecture style are containers associated with?
+A: Micro-services.
+
+Q: What is a Docker image?
+A: An immutable file that is a snapshot of a container, containg the application and all its dependencies (but no guest OS).
+
+Q: What is a Docker container?
+A: A running instantition of a Docker image.
+
+Q: What is the difference between a Docker image and a Docker container?
+A: A Docker image is a non-running file, a Docker container is a running instance of a Docker image. There can be multiple containers for an image.
+
+Q: What are Docker layers?
+A: Each Docker layer contains a set of changes on top of the layer below it. All layers except the top one are immutable. 
+
+Q: What is the underlying technology for Docker layers?
+A: The Union File System (UFS).
+
+Q: What does UFS stand for?
+A: Union File System.
+
+Q: What is a DockerFile?
+A: A text document that contains instructions on how to assemble a Docker image.
+
+Q: What is a Docker instruction?
+A: A DockerFile contains a sequence of instructions (e.g. FROM, RUN, ADD, COPY), each of which adds a layer to the Docker image.
+
+Q: What is a Docker build?
+A: The Docker build process executes the instructions in a DockerFile and constructs a DockerImage.
+
+Q: What is the Docker daemon?
+A: A long running process that manages the lifecycle of Docker resources (images, containers, networks, etc.)
+
+Q: What is the Docker engine?
+A: A client-server application that hosts the Docker daemon, provides a CLI and an API.
+
+Q: What host OS does the Docker engine run on natively?
+A: On Linux.
+
+Q: Is Docker supported on Windows and MacOS?
+A: Yes, in those cases the Docker engine runs in a VM that runs Linux, and the Docker containers are nested within that VM.
+
+Q: What is the Docker client?
+A: A Command Line Interface (CLI) that you use to interact with the Docker engine (start and stop container, add and delete images, etc.)
+
+Q: What is a Docker registry?
+A: A central repository where you can store and retrieve Docker images, available in multiple tagged versions.
+
+Q: Are Docker registries public or private?
+A: Both are availble.
+
+Q: What does ECR stand for?
+A: Elastic Container Registry.
+
+Q: What service does AWS Elastic Container Registry (ECR) povide?
+A: It is the container registry in AWS ECR.
+
+Q: What is the Docker Hub?
+A: A cloud-based Docker registry run by docker.com.
+
+Q: What does EKS stand for?
+A: Elastic Kubernetes Service.
+
+Q: What is Kubernetes?
+A: An orchestration system for containers.
+
+Q: What is the difference between ECS and EKS?
+A: ECS is docker containers as a service does not come with Kubernetes but instead provides some AWS-proprietary orchestration features. EKS is AWS Kubernetes-as-a-Service integrated with other AWS services.
+
+Q: What is AWS Fargate?
+A: Amazon's proprietary container orchestration system. It is the technology behind ECS and EKS.
+
+Q: What is the scope of ECS?
+A: Region.
+
+Q: In ECS, who manages the cluster configuration and management system?
+A: Amazon does.
+
+Q: What are the main ECS abstractions?
+A: Clusters, services, task definition, task.
+
+Q: What is an ECS cluster?
+A: A pool of compute resources, available to host a logical grouping of services and tasks.
+
+Q: What is the scope of an ECS cluster?
+A: Region.
+
+Q: What are the 2 launch type for ECS clusters
+A: Fargate and EC2.
+
+Q: What is an ECS service?
+A: A logical grouping of tasks that collectively provide a service in micro services architecture. The desired number of tasks is determined by the scaling and redundancy requirements.
+
+Q: What is an ECS task definition?
+A: All the information that is needed to launch a task (which docker image, how much memory and CPU, what networking mode, etc.)
+
+Q: What is a task?
+A: A grouping of running container (defined by a task definition, and running as part of a service hosted in a cluster).
+
+Q: How is a task started?
+A: It can be started manually (for batch jons) or automatically "scheduled" by a scheduler (for long-running services).
+
+Q: What are the two types of task schedulers in ECS?
+A: The Amazon-provided service scheduler or custom (3rd party) schedulers.
+
+Q: What the the Amazon-provided service scheduler do?
+A: It ensures that the appropriate number of tasks is running to provide a long-running service. It can dynamically restart failed tasks and scale up or down.
+
+Q: How does ECS integrated with ELB?
+A: The Service Scheduler can automatically register tasks in a service with a load balancer.
+
+Q: What happens if a task fails?
+A: The service scheduler can automatically restart the task to maintain the desired count of tasks in the service
+
+Q: What is the ECS Container Agent?
+A: An agent that must be installed in the Virtual Machine (i.e. EC2 instance) that hosts the containers. The agent communicates with Amazon's cluster management system.
+
+Q: Is the ECS Container Agent open source?
+A: Yes, it is written in Go and available on Github.
+
+Q: For which EC2 instances does Amazon officially support the Container Agent?
+A: Amazon only supports running the unmodified Container Agent on Linux EC2 instances (not Windows). The agent is included in certain Amazon-provided AMIs.
+
+Q: Can you attach a security group to an individual container or task or service?
+A: No, security groups are applied to EC2 instances that host the containers.
+
+Q: What are the ECS soft limits (and their defaults)?
+A: Clusters per region (1000), instances per cluster (1000), services per cluster (500).
+
+Q: What are the ECS hard limits?
+A: One load balancer per service, 1000 desired taks per service, 10 containers per task, 10 tasks per instance.
 
