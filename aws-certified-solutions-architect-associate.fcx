@@ -96,13 +96,13 @@ A: EC2 container service.
 Q: What service does Elastic Beanstalk provide?
 A: Simplified web application deployment.
 
-Q: What service provides simplified web application deployment?
+Q: Which AWS service provides simplified web application deployment?
 A: Elastic Beanstalk.
 
 Q: What service does Lambda provide?
 A: Serverless compute service.
 
-Q: What service provides serverless compute?
+Q: Which AWS service provides serverless compute?
 A: Lambda.
 
 Q: What service does does LightSail provide?
@@ -117,7 +117,7 @@ A: LightSail.
 Q: What service does Batch provide?
 A: Batch computing.
 
-Q: What service provides batch computing?
+Q: Which AWS service provides batch computing?
 A: Batch.
 
 Q: Name 6 compute services.
@@ -128,7 +128,7 @@ SubSubTopic: Storage services
 Q: What service does S3 provide?
 A: Object storage.
 
-Q: What service provides object storage?
+Q: Which AWS service provides object storage?
 A: Simple Storage Service (S3).
 
 Q: What does S3 stand for?
@@ -137,7 +137,7 @@ A: Simple Storage Service.
 Q: What service does EFS provide?
 A: Network Attached Storage (NAS).
 
-Q: What service provides Network Attached Storage (NAS)?
+Q: Which AWS service provides Network Attached Storage (NAS)?
 A: Elastic File Service (EFS).
 
 Q: What does EFS stand for?
@@ -149,10 +149,10 @@ A: Network Attached Storage.
 Q: What service does Glacier provide?
 A: Data archival (low-cost long-term storage).
 
-Q: What service provides data archival?
+Q: Which AWS service provides data archival?
 A: Glacier.
 
-Q: What service provides low-cost long-term storage?
+Q: Which AWS service provides low-cost long-term storage?
 A: Glacier.
 
 Q: What service does Snowball provide?
@@ -175,7 +175,7 @@ SubSubTopic: Database services
 Q: What services does RDS provide?
 A: Relational databases.
 
-Q: What service provides relational databases?
+Q: Which AWS service provides relational databases?
 A: Relational Database Service (RDS).
 
 Q: What does RDS stand for?
@@ -184,19 +184,19 @@ A: Relational Database Service.
 Q: What service does DynamoDB provide?
 A: Non-relational databases.
 
-Q: What service provides non-relational databases?
+Q: Which AWS service provides non-relational databases?
 A: DynamoDB.
 
 Q: What service does Elasticache provide?
 A: Database caching.
 
-Q: What service provides database caching?
+Q: Which AWS service provides database caching?
 A: Elasticache.
 
 Q: What services does Redshift provide?
 A: Data warehousing and business intelligence.
 
-Q: What service provides data warehousing and business intelligence?
+Q: Which AWS service provides data warehousing and business intelligence?
 A: Redshift
 
 Q: Name 4 database services.
@@ -239,10 +239,10 @@ SubSubTopic: Networking and content delivery services
 Q: What service does VPC provide?
 A: Virtual data centers and advanced virtual networking.
 
-Q: What service provides virtual data centers?
+Q: Which AWS service provides virtual data centers?
 A: Virtual Private Cloud (VPC).
 
-Q: What service provides advanced virtual networking?
+Q: Which AWS service provides advanced virtual networking?
 A: Virtual Private Cloud (VPC).
 
 Q: What does VPC stand for?
@@ -251,10 +251,10 @@ A: Virtual Private Cloud.
 Q: What service does CloudFront provide?
 A: Content Delivery Network (CDN) and content caching.
 
-Q: What service provides a Content Delivery Network (CDN)?
+Q: Which AWS service provides a Content Delivery Network (CDN)?
 A: CloudFront.
 
-Q: What service provides a content caching?
+Q: Which AWS service provides a content caching?
 A: CloudFront.
 
 Q: What does CDN stand for?
@@ -263,7 +263,7 @@ A: Content Delivery Network.
 Q: What service does Route53 provide?
 A: Domain Name Service (DNS).
 
-Q: What service provides Domain Name Service (DNS)?
+Q: Which AWS service provides Domain Name Service (DNS)?
 A: Route53.
 
 Q: What does DNS stand for?
@@ -281,7 +281,7 @@ A: API Gateway.
 Q: What service does Direct Connect provide?
 A: Direct connection from on-premises data center to VPC in cloud.
 
-Q: What service provides a direct connection from on-premises data center to VPC in cloud?
+Q: Which AWS service provides a direct connection from on-premises data center to VPC in cloud?
 A: Direct Connect.
 
 Q: Name 5 networking and content delivery services.
@@ -292,16 +292,16 @@ SubSubTopic: Developer tools services
 Q: What service does CodeStar provide?
 A: Software development project management.
 
-Q: What service provides software development project management?
+Q: Which AWS service provides software development project management?
 A: CodeStar.
 
 Q: What service does CodeCommit provide?
 A: Asset version control (Git).
 
-Q: What service provides asset version control?
+Q: Which AWS service provides asset version control?
 A: CodeCommit.
 
-Q: What service provides Git?
+Q: Which AWS service provides Git?
 A: CodeCommit.
 
 Q: What service does CodeBuild provide?
@@ -319,7 +319,7 @@ A: CodeDeploy.
 Q: What service does CodePipeline provide?
 A: Continuous delivery.
 
-Q: What service provides continuous delivery?
+Q: Which AWS service provides continuous delivery?
 A: CodePipeline.
 
 Q: What service does X-Ray provide?
@@ -359,7 +359,7 @@ A: CloudFormation.
 Q: What service does CloudTrail provide?
 A: Audit trail for AWS API calls.
 
-Q: What service provides an audit trail for AWS API calls?
+Q: Which AWS service provides an audit trail for AWS API calls?
 A: CloudTrail.
 
 Q: What service will tell you what happened when you AWS account gets hacked?
@@ -377,10 +377,10 @@ A: Config.
 Q: What services does OpsWorks provide?
 A: Chef and Puppet.
 
-Q: What service provides Chef and Puppet?
+Q: Which AWS service provides Chef and Puppet?
 A: OpsWorks.
 
-Q: What service provides automation configuration, deployment, and management of servers?
+Q: Which AWS service provides automation configuration, deployment, and management of servers?
 A: OpsWorks.
 
 Q: What service does Service Catalog provide?
@@ -398,7 +398,7 @@ A: Systems Manager.
 Q: What service does Trusted Advisor provide?
 A: Provide advise on how to save money, improve performance, improve security, etc.
 
-Q: What service provides advise on how to save money, improve performance, improve security, etc.?
+Q: Which AWS service provides advise on how to save money, improve performance, improve security, etc.?
 A: Trusted Advisor.
 
 Q: What service does Managed Services provide?
@@ -424,19 +424,19 @@ A: Elastic Transcoder and MediaConvert.
 Q: What service does MediaLive provide?
 A: Broadcast-grade live video processing.
 
-Q: What service provides broadcast-grade live video processing?
+Q: Which AWS service provides broadcast-grade live video processing?
 A: MediaLive.
 
 Q: What service does MediaPackage provide?
 A: Just-in-time video packaging and origination.
 
-Q: What service provides just-in-time video packaging and origination?
+Q: Which AWS service provides just-in-time video packaging and origination?
 A: MediaPackage.
 
 Q: What service does MediaStore provide?
 A: Video origination and storage.
 
-Q: What service provides video origination and storage?
+Q: Which AWS service provides video origination and storage?
 A: MediaStore.
 
 Q: What service does MediaTailor provide?
@@ -453,13 +453,13 @@ SubSubTopic: Machine learning services
 Q: What service does SageMaker provide?
 A: Deep learning using neural networks.
 
-Q: What service provides deep learning using neural networks?
+Q: Which AWS service provides deep learning using neural networks?
 A: SageMaker.
 
 Q: What service does Comprehend provide?
 A: Natural Language Processing (NLP) for sentiment analysis of text.
 
-Q: What service provides Natural Language Processing (NLP) for sentiment analysis of text?
+Q: Which AWS service provides Natural Language Processing (NLP) for sentiment analysis of text?
 A: Comprehend.
 
 Q: What does NLP stand for?
@@ -468,25 +468,25 @@ A: Natural Language Processing.
 Q: What service does DeepLens provide?
 A: A physical wireless video camera device with built-in image recognition.
 
-Q: What service provides a physical wireless video camera device with built-in image recognition?
+Q: Which AWS service provides a physical wireless video camera device with built-in image recognition?
 A: DeepLens.
 
 Q: What service does Lex provide?
 A: Conversational application interfaces using voice and text.
 
-Q: What service provides conversational application interfaces using voice and text?
+Q: Which AWS service provides conversational application interfaces using voice and text?
 A: Lex.
 
 Q: What service does Machine Learning provide?
 A: Machine learning using traditional (non neural-network) methods.
 
-Q: What service provides machine learning using traditional (non neural-network) methods?
+Q: Which AWS service provides machine learning using traditional (non neural-network) methods?
 A: Machine Learning.
 
 Q: What service does Polly provide?
 A: Text to speech conversion.
 
-Q: What service provides text to speech conversion?
+Q: Which AWS service provides text to speech conversion?
 A: Polly.
 
 Q: What service does Rekognition provide?
@@ -498,13 +498,13 @@ A: Rekognition.
 Q: What service does Translate provide?
 A: Text language translation.
 
-Q: What service provides text language translation?
+Q: Which AWS service provides text language translation?
 A: Translate.
 
 Q: What service does Transcribe provide?
 A: Speech to text conversion.
 
-Q: What service provides speech to text conversion.
+Q: Which AWS service provides speech to text conversion.
 A: Transcribe.
 
 Q: Name 9 machine learning services.
@@ -521,7 +521,7 @@ A: Athena.
 Q: What service does Elastic Map Reduce (EMR) provide?
 A: Big data analysis.
 
-Q: What service provides big data analysis?
+Q: Which AWS service provides big data analysis?
 A: Elastic Map Reduce (EMR).
 
 Q: What does EMR stand for?
@@ -530,43 +530,43 @@ A: Elastic Map Reduce.
 Q: What service does CloudSearch provide?
 A: Provide search capability to applications.
 
-Q: What service provides search capability to applications?
+Q: Which AWS service provides search capability to applications?
 A: CloudSearch.
 
 Q: What service does ElasticSearch provide?
 A: Operational search and analysis (e.g. logs).
 
-Q: What service provides operational search and analysis (e.g. logs)?
+Q: Which AWS service provides operational search and analysis (e.g. logs)?
 A: ElasticSearch.
 
 Q: What service does Kinesis provide?
 A: Real-time collection, processing, and analysis of data streams.
 
-Q: What service provides real-time collection, processing, and analysis of data streams?
+Q: Which AWS service provides real-time collection, processing, and analysis of data streams?
 A: Kinesis.
 
 Q: What service does Kinesis Video Streams provide?
 A: Real-time collection, processing, and analysis of video streams.
 
-Q: What service provides real-time collection, processing, and analysis of video streams?
+Q: Which AWS service provides real-time collection, processing, and analysis of video streams?
 A: Kinesis Video Streams.
 
 Q: What service does QuickSight provide?
 A: Business intelligence.
 
-Q: What service provides business intelligence.
+Q: Which AWS service provides business intelligence.
 A: QuickSight.
 
 Q: What service does Data Pipeline provide?
 A: Data-driven workflows to automate the movement and transformation of data.
 
-Q: What service provides data-driven workflows to automate the movement and transformation of data?
+Q: Which AWS service provides data-driven workflows to automate the movement and transformation of data?
 A: Data Pipeline.
 
 Q: What service does Glue provide?
 A: Extract, Transform, and Load (ETL) for cleaning up date.
 
-Q: What service provides Extract, Transform, and Load (ETL) for cleaning up date?
+Q: Which AWS service provides Extract, Transform, and Load (ETL) for cleaning up date?
 A: Glue.
 
 Q: What doe ETL stand for?
@@ -591,19 +591,19 @@ A: Identity Access Management.
 Q: What service does Cognito provide?
 A: User authentication and access for mobile applications on internet-connected devices.
 
-Q: What service provides user authentication and access for mobile applications on internet-connected devices?
+Q: Which AWS service provides user authentication and access for mobile applications on internet-connected devices?
 A: Cognito.
 
 Q: What service does GuardDuty provide?
 A: Threat detection for AWS account.
 
-Q: What service provides threat detection for AWS account?
+Q: Which AWS service provides threat detection for AWS account?
 A: GuardDuty.
 
 Q: What service does Inspector provide?
 A: Agent in virtual machines for security and compliance assessment.
 
-Q: What service provides an agent in virtual machines for security and compliance assessment?
+Q: Which AWS service provides an agent in virtual machines for security and compliance assessment?
 A: Inspector.
 
 Q: What service does Macie provide?
@@ -621,7 +621,7 @@ A: Certificate Manager.
 Q: What service does CloudHSM provide?
 A: Access to a Hardware Security Module (HSM) for storing sensitive data (e.g. private keys).
 
-Q: What service provides access to a Hardware Security Module (HSM) for storing sensitive data (e.g. private keys)?
+Q: Which AWS service provides access to a Hardware Security Module (HSM) for storing sensitive data (e.g. private keys)?
 A: CloudHSM.
 
 Q: What does HSM stand for?
@@ -630,7 +630,7 @@ A: Hardware Security Module.
 Q: What service does Directory Service Provide
 A: Microsoft Active Directory (AD).
 
-Q: What service provides Microsoft Active Directory (AD)?
+Q: Which AWS service provides Microsoft Active Directory (AD)?
 A: Service Directory.
 
 Q: What does AD stand for?
@@ -639,7 +639,7 @@ A: (Microsoft) Active Directory.
 Q: What service does Web Application Firewall (WAF) provide?
 A: Application layer firewall.
 
-Q: What service provides an application layer firewall?
+Q: Which AWS service provides an application layer firewall?
 A: Web Application Firewall (WAF).
 
 Q: What does WAF stand for?
@@ -648,7 +648,7 @@ A: Web Application Firewall.
 Q: What service does Shield provide?
 A: DDoS mitigation.
 
-Q: What service provides DDoS mitigation?
+Q: Which AWS service provides DDoS mitigation?
 A: Shield.
 
 Q: What is the difference between Shield and Shield Advanced?
@@ -668,19 +668,19 @@ SubSubTopic: Mobile services
 Q: What service does Mobile Hub provide?
 A: A collection of tools to build, test, configure and release mobile applications.
 
-Q: What service provides a collection of tools to build, test, configure and release mobile applications?
+Q: Which AWS service provides a collection of tools to build, test, configure and release mobile applications?
 A: Mobile hub.
 
 Q: What service does Pinpoint provide?
 A: Multi-channel user engagement messaging.
 
-Q: What service provides multi-channel user engagement messaging?
+Q: Which AWS service provides multi-channel user engagement messaging?
 A: Pinpoint
 
 Q: What service does AppSync provide?
 A: GraphQL and on-line off-line data synchronization.
 
-Q: What service provides GraphQL and on-line off-line data synchronization?
+Q: Which AWS service provides GraphQL and on-line off-line data synchronization?
 A: AppSync.
 
 Q: What service does DeviceFarm provide?
@@ -703,7 +703,7 @@ SubSubTopic: Augmented Reality (AR) and Virtual Reality (VR)
 Q: What service does Sumerian provide?
 A: Set of tools for creating AR/VR applications.
 
-Q: What service provides a set of tools for creating AR/VR applications?
+Q: Which AWS service provides a set of tools for creating AR/VR applications?
 A: Sumerian.
 
 Q: What does AR/VR stand for?
@@ -761,7 +761,7 @@ SubSubTopic: Customer engagement services.
 Q: What service does Connect provide?
 A: Contact center (call center) that integrates with CRM.
 
-Q: What service provides a contact center (call center) that integrates with CRM.
+Q: Which AWS service provides a contact center (call center) that integrates with CRM.
 A: Connect.
 
 Q: What does CRM stand for?
@@ -796,7 +796,7 @@ A: Chime.
 Q: What service does WorkDocs provide?
 A: File storage and sharing (Amazon's version of Dropbox).
 
-Q: What service provides file storage and sharing?
+Q: Which AWS service provides file storage and sharing?
 A: WorkDocs.
 
 Q: What service is Amazon's version of Dropbox?
@@ -805,7 +805,7 @@ A: WorkDocs.
 Q: What service does WorkMail provide?
 A: Email and calendar. Amazon's version of Gmail.
 
-Q: What service provides email and calendar?
+Q: Which AWS service provides email and calendar?
 A: WorkMail.
 
 Q: What service is Amazon's version of Gmail?
@@ -819,7 +819,7 @@ SubSubTopic: Desktop and app streaming
 Q: What service does Workspaces provide?
 A: Virtual Desktop Infrastructure (VDI).
 
-Q: What service provides Virtual Desktop Infrastructure (VDI)?
+Q: Which AWS service provides Virtual Desktop Infrastructure (VDI)?
 A: Workspaces.
 
 Q: What does VDI stand for?
@@ -854,19 +854,19 @@ A: IoT Device Management.
 Q: What service does Greengrass provide?
 A: Edge computing for IoT: run local compute, messaging, data caching, sync, and ML inference capabilities for connected devices in a secure way).
 
-Q: What service provides edge computing for IoT: run local compute, messaging, data caching, sync, and ML inference capabilities for connected devices in a secure way)?
+Q: Which AWS service provides edge computing for IoT: run local compute, messaging, data caching, sync, and ML inference capabilities for connected devices in a secure way)?
 A: Greengrass.
 
 Q: What service does IoT analytics provide?
 A: Analytics for IoT data.
 
-Q: What service provides analytics for IoT data?
+Q: Which AWS service provides analytics for IoT data?
 A: IoT Analytics.
 
 Q: What service does FreeRTOS provide?
 A: Operating system for microcontrollers.
 
-Q: What service provides an operating system for microcontrollers?
+Q: Which AWS service provides an operating system for microcontrollers?
 A: FreeRTOS.
 
 Q: Name 5 IoT services.
@@ -877,7 +877,7 @@ SubSubTopic: Game development services
 Q: What service does GameLift provide?
 A: Gameserver hosting.
 
-Q: What service provides gameserver hosting?
+Q: Which AWS service provides gameserver hosting?
 A: GameLift.
 
 Q: Name 1 game development service.
@@ -1338,7 +1338,7 @@ A: aws configure.
 Q: What do you need to run the command line "aws configure"?
 A: The access key id and the access key secret.
 
-Q: What can you do if you want to use the command line tools but don't have the access key secret?
+Q: What can you do if you want to use the command line tools but you lost the access key secret?
 A: Create a new user for the command line tools.
 
 Q: What is the command line to show all buckets?
@@ -3753,7 +3753,7 @@ A: OLTP typically uses a large volume of fast and simple on-line transactions. O
 Q: What do caching products such as Redis and Memcached do?
 A: In-memory (RAM) key-value stores that typically used as a cache in front of an on-disk database.
 
-Q: What service does AWS offer for caching?
+Q: What service does AWS offer for database caching?
 A: ElastiCache.
 
 Q: Which caching engines does ElastiCache support?
