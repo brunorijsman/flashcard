@@ -686,10 +686,10 @@ A: AppSync.
 Q: What service does DeviceFarm provide?
 A: Test mobile apps on real mobile devices.
 
-Q: What service tests mobile apps on real mobile devices?
+Q: Which AWS service allows you to test mobile application on real mobile devices?
 A: DeviceFarm.
 
-Q: What service does Mobile Analytic provide?
+Q: What service does Mobile Analytics provide?
 A: Collect and analyze mobile application usage data.
 
 Q: What service collects and analyzes mobile application usage data?
@@ -834,7 +834,7 @@ A: AppStream 2.0
 Q: What is the difference between Workspaces and AppStream 2.0?
 A: Workspaces stream an entire desktop environment, AppStream 2.0 streams individual applications.
 
-Q: Name 2 desktop and app streaming services.
+Q: Name 2 desktop and application streaming services.
 A: Workspaces, AppStream 2.0.
 
 SubSubTopic: Internet of Things (IoT)
@@ -2116,7 +2116,7 @@ Q: What is the speciality of an T family instance type in EC2?
 A: Lowest cost general purpose (T for Tiny).
 
 Q: What EC2 instance type provides the lowest cost general compute?
-A: T family.
+A: T family (T for Tiny).
 
 Q: What are some use cases for T family instance type in EC2?
 A: Web servers, small databases.
@@ -2125,7 +2125,7 @@ Q: What is the speciality of an D family instance type in EC2?
 A: Dense storage (D for Dense).
 
 Q: What EC2 instance type provides dense storage?
-A: D family.
+A: D family (D for Dense).
 
 Q: What are some use cases for D family instance type in EC2?
 A: File servers, data warehousing, Hadoop, ...
@@ -2134,7 +2134,7 @@ Q: What is the speciality of an R family instance type in EC2?
 A: Memory optimized (R for RAM).
 
 Q: What EC2 instance type provides optimized (large) memory?
-A: R family.
+A: R family (R for RAM).
 
 Q: What are some use cases for R family instance type in EC2?
 A: Memory intensive applications, databases, ...
@@ -2143,7 +2143,7 @@ Q: What is the speciality of an M family instance type in EC2?
 A: General purpose (M for Main).
 
 Q: What EC2 instance type provides production-quality general purpose compute?
-A: M family.
+A: M family (M for Main).
 
 Q: What are some use cases for M family instance type in EC2?
 A: Application servers.
@@ -2158,19 +2158,19 @@ Q: What are some use cases for C family instance type in EC2?
 A: CPU intensive applications, databases.
 
 Q: What is the speciality of an P family instance type in EC2?
-A: Graphics, general purpose GPU.
+A: Parallel computing applications that using CUDA and OpenCL to access general-purpose GPUs. (P for Parallel.)
 
-Q: What EC2 instance type provides genal purpose GPUs?
-A: P family.
+Q: What EC2 instance type targets parallel computing applications that using CUDA and OpenCL to access general-purpose GPU?
+A: P family (P for Parallel).
 
 Q: What are some use cases for P family instance type in EC2?
-A: Machine learning, BitCoin mining, ....
+A: Machine learning, computational fluid dynamics, computational finance, seismic analysis, molecular modeling, genomics, BitCoin mining, ....
 
 Q: What is the speciality of an X family instance type in EC2?
 A: Memory very optimized (X for Xtreme RAM).
 
 Q: What EC2 instance type provides very optimized (extreme) memory?
-A: X family.
+A: X family (X for eXtreme RAM).
 
 Q: What are some use cases for X family instance type in EC2?
 A: SAP, Apache Spark, ...
@@ -2353,7 +2353,7 @@ A: Stop or terminate.
 Q: What is the default EC2 instance shutdown behavior?
 A: Stop.
 
-Q: What are the options for monitoring EC2 instances with CloudWatch?
+Q: What 2 levels of monitoring EC2 instances are available in CloudWatch?
 A: Standard (5 minute samples) or detailed (1 minute samples) at an extra cost.
 
 Q: What is termination protection?
@@ -2500,11 +2500,11 @@ A: No.
 Q: How can you see which volume in the volume list is the root volume?
 A: It is based of a snapshot.
 
-Q: Can you change the size of a volume on-the-fly (without affecting a running attached EC2 instance)?
-A: Yes, but not for Magnetic (= Standard) volumes.
+Q: Can you change the size of a volume on-the-fly without affecting a running attached EC2 instance?
+A: Yes, but not for magnetic (= standard) volumes.
 
-Q: Can you change the type of a volume on-the-fly (without affecting a running attached EC2 instance)?
-A: Yes, but not for Magnetic (= Standard) volumes.
+Q: Can you change the type of a volume on-the-fly without affecting a running attached EC2 instance?
+A: Yes, but not for magnetic (= standard) volumes.
 
 Q: How can you copy an EBS volume to a different AZ in the same region?
 A: Create a snapshot of the volume, and create a new volume from the snapshot in the other AZ.
@@ -2673,7 +2673,7 @@ A: Application Load Balancer.
 Q: What end-points can an Application Load Balancer route traffic to?
 A: EC2 virtual machines and containers.
 
-Q: What end-points can a Classic Load Balancer route traffic to?
+Q: What end-points can a classic Load Balancer route traffic to?
 A: EC2 virtual machines but not containers.
 
 Q: What is the difference between an internal and external load balancer?
@@ -2918,8 +2918,8 @@ Step: Display the IPv4 public address of the intsance using the metadata.
 Step: Display the boot script of the intsance using the metadata.
 Step: Clean up.
 
-Q: What is instance metadata?
-A: Data about an instance that can be retrieved from the command line.
+Q: What is instance meta-data?
+A: Data about an instance (e.g. it's IP address) that can be retrieved from inside the instance using a URL.
 
 Q: What is the link-local IP address for retrieving the metadata?
 A: 169.254.169.254
@@ -3966,7 +3966,7 @@ A: Automatic backups must be enabled.
 Q: How does an RDS application chose whether it reads from the primary or a read replica?
 A: Each replica has its own DNS endpoint.
 
-Q: Can Multi-AZ be enabled for a replica?
+Q: In RDS, can multi-AZ be enabled for a read replica?
 A: Yes (this is a very recent feature).
 
 Q: Can you enable read replicas for a primary DB instance that has Multi-AZ enabled?
@@ -4923,7 +4923,7 @@ SubTopic: API Gateway
 Q: What service does API gateway provide?
 A: Publish, maintain, monitor, and secure public APIs to access data, logic, or functionality on back-end applications.
 
-Q: With what backends can Amazon API Gateway communicate?
+Q: Name 5 backends that Amazon API Gateway can communicate with.
 A: Function in AWS Lambda, State machine in AWS Step Functions, HTTP endpoint hosted on EC2, Beanstalk, or 3rd party server.
 
 Q: How does API Gateway support mocking?
@@ -5781,7 +5781,7 @@ A: No.
 Q: Using STS federation can you login to the console using single sign-on without providing IAM credentials?
 A: Yes.
 
-Q: What does federation mean?
+Q: What does security federation mean?
 A: Combining a list of users in one domain (e.g. IAM) with the list of users in another domain (e.g. Active Director or Facebook).
 
 Q: What is an Identity Broker?
