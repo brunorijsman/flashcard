@@ -79,7 +79,7 @@ class Parser {
       this.fatalError('Sub-sub-topic without sub-topic')
     }
     this.subSubTopicName = this.arg
-    this.course.addSubSubTopic(this.subTopicName)
+    this.course.addSubSubTopic(this.subSubTopicName)
   }
 
   parseQuestion () {

@@ -34,7 +34,7 @@ A: Solutions architect, devops.
 Q: Give three examples of AWS speciality certifications.
 A: Security, big data, advanced networking
 
-SubTopic: 10,000 Foot Overview - Part 1
+SubTopic: Part 1
 
 SubSubTopic: Global Infrastructure
 
@@ -71,7 +71,7 @@ A: CloudFront, which is the AWS Content Delivery Network (CDN).
 Q: How many edge locations are there?
 A: Over 96 edge locations as of 2017.
 
-SubTopic: 10,000 Foot Overview - Part 2
+SubTopic: Part 2
 
 SubSubTopic: Compute services
 
@@ -337,7 +337,7 @@ A: Cloud9.
 Q: Name 7 developer tool services.
 A: CodeStar, CodeCommit, CodeBuid, CodeDeploy, CodePipeline, X-Ray, Cloud9.
 
-SubTopic: 10,000 Foot Overview - Part 3
+SubTopic: Part 3
 
 SubSubTopic: Management tools services
 
@@ -575,7 +575,7 @@ A: Extract, Transform, and Load.
 Q: Name 9 analytics services.
 A: Athena, EMR, CloudSearch, ElasticSearch, Kinesis, Kinesis Video Streams, QuickSight, Data Pipeline, Glue.
 
-SubTopic: 10,000 Foot Overview - Part 4
+SubTopic: Part 4
 
 SubSubTopic: Security, identity, and compliance services
 
@@ -1725,7 +1725,7 @@ A: HTTPS, which relies on SSL/TLS
 Q: What are the two locations where at-rest encryptions can be performed?
 A: Client-side encyrption and Server-Side Encryption (SSE)
 
-Q: What 3 forms of Server Side Encryption (SEE) does S3 support?
+Q: What 3 forms of Server Side Encryption (SSE) does S3 support?
 A: S3 managed keys (SSE-S3), S3 Key Management Service (KMS) managed keys (SSE-KMS), Customer managed keys (SSE-C).
 
 Q: What encryption algorithm does AWS SSE use?
@@ -4633,7 +4633,7 @@ A: No (not yet).
 Q: Can you change the configuration of a flow log after you have created it?
 A: No.
 
-Q: Which traffic is NOT monitered by flow log?
+Q: Which 4 types of traffic are NOT monitered by flow log?
 A: Traffic to the Amazon DNS server, Windows license traffic, Metadata traffic to 169.254.169.254, traffic to the default VPC router.
 
 SubTopic: NATs vs Bastions
@@ -4830,10 +4830,10 @@ A: A set of actitivities plus the logic that coordinates those activities.
 Q: What is the maximum duration of an SWF workflow?
 A: One year.
 
-Q: What is a SWF activity type (or simply activity)?
+Q: What is a SWF activity type (also known as activity)?
 A: An atomic step that is part of a workflow (e.g.) along with its attributes (name, version, time-out values, etc.)
 
-Q: What is a SWF activity task (or simply task)?
+Q: What is a SWF activity task (also known as task)?
 A: An execution of an activity type along with a set of input parameters.
 
 Q: What is a SWF workflow execution (or simply execution)?
@@ -4932,7 +4932,7 @@ A: The a method implements the execution for one of more verbs (GET, POST, PUT, 
 Q: What is the pricing model for API gateway?
 A: Number of API calls, amount of data transferred, size of cache.
 
-Q: What is usage plan in API gateway?
+Q: What is a usage plan in API gateway?
 A: Defines allowed API usage (subset of APIs, throttling, quota limits) for users based on API key. Also can generate usage reports.
 
 Q: What is an API lifecycle in API gateway?
@@ -5189,9 +5189,9 @@ Step: On the production server,go into the wp-admin portal for write.remoteauton
 Step: Stop the production instance, take a snapshot named My-Prod-Web-Server, wait for it to be available, and restart the instance.
 Step: @@@ continue from here
 
-Topic: Whitepapers & The Well Architected Framework
+Topic: Whitepapers and The Well Architected Framework
 
-SubTopic: Whitepapers & The Well Architected Framework: Security
+SubTopic: Security
 
 Q: Name 5 business benefits of using cloud infrastructure.
 A: Almost zero upfront infrastructure investment, just-in-time infrastructure, more efficient resource utilization, usage-based costing, reduced time to market
@@ -5312,7 +5312,7 @@ A: Encryption
 Q: What are security considerations for VPC subnets
 A: Public or private, Internet gateway, NAT gateway, Service gateway, Security Groups, ACLs, Bastion hosts
 
-SubTopic: Whitepapers & The Well Architected Framework: Reliability
+SubTopic: Reliability
 
 Q: An application in AWS is considered reliable if it exhibits which 2 characteristics?
 A: The ability to recover from infrastructure or service outages. The ability to dynamically acquire resources to meet demand.
@@ -5356,7 +5356,7 @@ A: You should have well defined processes and owners for escalations and for rai
 Q: Name 3 services that can help you automate change management.
 A: CloudWatch, EC2 auto-scaling, Lambda.
 
-SubTopic: Whitepapers & The Well Architected Framework: Performance Efficiency
+SubTopic: Performance Efficiency
 
 Q: What does performance efficiency mean?
 A: To use computing resources efficiently to meet your requiremets, and to maintain that efficiency over time as demand changes and technology evolves.
@@ -5403,7 +5403,7 @@ A: You can deploy your service on more regions or deploy CloudFront caching for 
 Q: Give an example of space-time tradeoff for databases.
 A: You can deploy ElastiCache to improve database performance.
 
-SubTopic: Whitepapers & The Well Architected Framework: Cost Optimization
+SubTopic: Cost Optimization
 
 Q: Name 5 design principles for cost optimization.
 A: Transparently attribute expenditure, use managed services to reduce the cost of ownership, trade capital expense for operating expense, benefit from economies of scale, stop spending money on datacenter operations.
@@ -5453,7 +5453,7 @@ A: Data transfer charges.
 Q: Name 2 mechanisms to help you stay on top of the latest service offerings from Amazon and make sure you use the best service for each business goal.
 A: AWS blog, Trusted Advisor service.
 
-SubTopic: Whitepapers & The Well Architected Framework: Operational Excellence
+SubTopic: Operational Excellence
 
 Q: What does operational excellence cover?
 A: Operational practices and procedures used to manage production workloads, including both planned changes and reacting to unplanned incidents.

@@ -34,6 +34,7 @@ function hideAnswer () {
 function nextQuestion () {
   hideAnswer()
   const question = course.pickRandomQuestion()
+  $('#topic-for-question').text(question.topicPath())
   $('#question-text').text(question.questionText)
   $('#answer-text').text(question.answerText)
 }
