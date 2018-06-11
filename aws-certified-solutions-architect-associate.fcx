@@ -307,13 +307,13 @@ A: CodeCommit.
 Q: What service does CodeBuild provide?
 A: Compile, test, and package software.
 
-Q: What services compiles, tests, and packages software?
+Q: Which AWS service compiles, tests, and packages software?
 A: CodeBuild.
 
 Q: What service does CodeDeploy provide?
 A: Automates application deployment.
 
-Q: What service automates application deployment?
+Q: Which AWS service automates application deployment?
 A: CodeDeploy.
 
 Q: What service does CodePipeline provide?
@@ -331,7 +331,7 @@ A: X-Ray.
 Q: What service does Cloud9 provide?
 A: Cloud-based Integrated Development Environment (IDE).
 
-Q: What services provides a cloud-based Integrated Development Environment (IDE).
+Q: Which AWS services provides a cloud-based Integrated Development Environment (IDE).
 A: Cloud9.
 
 Q: Name 7 developer tool services.
@@ -652,7 +652,7 @@ Q: Which AWS service provides DDoS mitigation?
 A: Shield.
 
 Q: What is the difference between Shield and Shield Advanced?
-A: Shield Advanced provides a 24/7 team and does not charge you for extra resource usage due to a DDoS attack.
+A: Shield Advanced provides a 24/7 support team and does not charge you for extra resource usage due to a DDoS attack.
 
 Q: What service does Artifact provide?
 A: Generate compliance reports.
@@ -689,7 +689,7 @@ A: Test mobile apps on real mobile devices.
 Q: Which AWS service allows you to test mobile application on real mobile devices?
 A: DeviceFarm.
 
-Q: What service does Mobile Analytics provide?
+Q: What service does Mobile Analytics    provide?
 A: Collect and analyze mobile application usage data.
 
 Q: What service collects and analyzes mobile application usage data?
@@ -911,11 +911,11 @@ A: A document that defines one or more permissions.
 Q: What language is used to define policy document?
 A: JSON.
 
-Q: What is the root account?
-A: The default account created when the AWS account was setup.
+Q: In IAM, what is the root account?
+A: The default account created when the AWS account was setup. It has full permissions on every resource.
 
 Q: What are the default permissions for a user?
-A: Full administrator access for root. No permissions for all other users.
+A: The root has full administrator access by default. All other users have no permissions by default.
 
 SubTopic: IAM Lab
 
@@ -925,7 +925,7 @@ A: Proximity, available services.
 Q: Is IAM global or per-region?
 A: Global.
 
-Q: What is the IAM users sign-in link?
+Q: What is the URL format for an IAM users sign-in link?
 A: https://xxx.signin.aws.amazon.com/console where xxx is the account ID or alias.
 
 Q: What are the 5 recommended security practices for a new account?
@@ -1085,7 +1085,7 @@ A: Availability is probability of losing access to a file temporarily, durabilit
 Q: What is tiered storage?
 A: There are multiple storage classes (aka storage tiers) with different cost, retrieval latency, and reliability characteristics.
 
-Q: What is lifecycle management?
+Q: In AWS storage, what is lifecycle management?
 A: Automatically move a file from one tier to another, based on age of the file etc.
 
 Q: What is versioning?
@@ -1333,7 +1333,7 @@ Q: What are the options for installing the AWS command line tools on Mac?
 A: A bundled installer or pip instal.
 
 Q: What is the first step after installing the AWS command line tools?
-A: aws configure.
+A: Run "aws configure" to configure the access key ID, the access key secret, and other parameters.
 
 Q: What do you need to run the command line "aws configure"?
 A: The access key id and the access key secret.
@@ -2184,7 +2184,7 @@ A: A virtual disk (block store).
 Q: What is an EBS volume attached to?
 A: An EC2 instance.
 
-Q: What are EBS volumes used for?
+Q: What are the typical use cases for EBS volumes?
 A: Virtual disk (block store) use cases: boot operating systems, databases.
 
 Q: What is the scope of an EBS volume?
@@ -3018,9 +3018,9 @@ A: No.
 Q: Can you move an already running instance into a placement group?
 A: Not directly. But you can create an AMI and spin up a new instance from the AMI in the placement group.
 
-SubTopic: Elastic File System
+SubTopic: Elastic File Storage
 
-Lab: Elastic File System
+Lab: Elastic File Storage
 Step: Go to the EFS console.
 Step: Create an EFS file system with a mount target in each AZ.
 Step: Create an EC2 instance in each AZ.
@@ -3035,9 +3035,9 @@ Step: Verify that the load balancer declares all instances as healthy
 Step: Clean up.
 
 Q: What does EFS stand for?
-A: Elastic File System.
+A: Elastic File Storage.
 
-Q: What storage does Elastic File System (EFS) provide?
+Q: What storage does Elastic File Storage (EFS) provide?
 A: Virtual file system.
 
 Q: What protocol does EFS support?
@@ -3321,7 +3321,7 @@ A: A database for registerd Internet resources (domain names, address blocks, AS
 Q: What is a DNS zone?
 A: A distinct, contiguous portion of the domain name space managed by a single manager.
 
-Q: Name some types of DNS resource records.
+Q: Name 6 or more types of DNS resource records.
 A: SOA, NS, A, AAAA, CNAME, ALIAS, and others.
 
 Q: What does SOA stand for in DNS?
@@ -4017,7 +4017,7 @@ A: Eventual consistent reads (the default) and strongly consistent reads.
 Q: Which consistency model in DynamoDB has the best performance?
 A: Eventual consistent reads.
 
-Q: What does eventual consistent reads consistency mean in DynamoDB?
+Q: What does "eventually consistent reads" consistency mean in DynamoDB?
 A: After a write, read may return the old data for some time, but eventually return the new data.
 
 Q: How long does it take for the data to become consistent in the DynamoDB eventual consistent reads model?
@@ -4418,7 +4418,7 @@ A: To none, it is detached by default, you have to explicitly attach it to a VPC
 Q: Can an Internet gateway be attached to multiple VPCs?
 A: No.
 
-Q: How many Internet gateways can be attachd to a VPC?
+Q: How many Internet Gateways can be attachd to a VPC?
 A: Zero or one.
 
 Q: When you attach an Internet gateway to a VPC, does that automatically add a default route to the route table?
@@ -4808,7 +4808,7 @@ Q: What is a message group in SQS?
 A: Messages within a message group are delivered in-order. Messages in different message groups may be delivered out-of-order.
 
 Q: Do SQS standard queues support message groups?
-A: No, only FIFO queues.
+A: No, only FIFO queues support message groups.
 
 Q: How long can an SQS message stay in the queue?
 A: You can configure the retention time between 1 minute and 14 days; the default is 4 days. 
@@ -5249,8 +5249,8 @@ A: Encrypt all data both at-rest and in-transit. AWS makes it easy to encrypt da
 Q: For data protection, what mechanisms are in place to ensure data is not lost.
 A: AWS customers maintain full control over their data. Amazon storage systems (S3, Glacier, ...) are resislient (e.g. 5 nines durability). Versionong and lifecycle management protect agains accidental overwrites etc.
 
-Q: For data protection, what mechanism allows you to keep track of what is goig one?
-A: Detailed logging is available (CloudTrail). 
+Q: For data protection, which AWS service allows you to keep track of who did what and when?
+A: CloudTrail. 
 
 Q: For data protection, how can you be sure data is stored in the region where you want it?
 A: You chose the region, Amazon never moves data to another region unless excplitly requested by the user.
@@ -5350,7 +5350,7 @@ A: Amazon is responsible, and provides essentially limitless physical capacity.
 Q: What is your responsibility to ensure that you have enough capacity?
 A: You are responsible for allocating the right number and size of resources (e.g. EC2 instancs, databases) for the required capacity.
 
-Q: What do you need to be careful of when you attempt to allocate the right number and size of resources to meet your required capacity?
+Q: What limits do you need to take into account when you attempt to allocate the right number and size of resources to meet your required capacity?
 A: Amazon has soft limits on the number and size of certain resources to protect you against accidental over-provisioning. You can raise these using a support request but it takes time.
 
 Q: What is a reliability practice related to service limits?
@@ -5403,8 +5403,8 @@ A: With auto-scaling you can deploy more EC2 instances to improve performance.
 Q: Give an example of space-time tradeoff in networking.
 A: You can deploy direct connect to improve network performance.
 
-Q: Give an example of space-time tradeoff for global coverage.
-A: You can deploy your service on more regions or deploy CloudFront caching for better performance.
+Q: Give 2 examples of space-time tradeoff for global coverage.
+A: For more performant global coverage, you can deploy your service in multiple regions or you can deploy CloudFront caching.
 
 Q: Give an example of space-time tradeoff for databases.
 A: You can deploy ElastiCache to improve database performance.
@@ -5635,7 +5635,7 @@ A: 20, but you can request more.
 Q: What are the 2 advantages of consolidated billing?
 A: Simpler billing (one bill) and better volume discounts (over the grand total across all linked accounts).
 
-Q: In consolidated billing, what is special about the billing related to reserved instances?
+Q: How can consolidated billing save you money when you use reserved instances?
 A: If you create an on-demand instance in linked account A, and you have an unused reserved instance in account B, you will not be charged for the on-demand instance in A.
 
 Q: Name 3 practices for securting the paying account (root account)?
@@ -5658,8 +5658,9 @@ SubTopic: Cross Account Access
 Q: What is cross-account access?
 A: It allows you to loging to the console using one account, and then switch to another account without having to log out and in again.
 
-Q: How can you allows a user group in account A to access the files in a bucket in account B?
-A: In account B, create a policy that allows access to the bucket, create a cross-account access role for account A and attach the policy to it. In account A, create an in-line custom policy for the user group that allows action assume-role for the role in account B.
+# TODO: Add support for multi-line answers
+Q: How can you allow a user group in account A to access the files in a bucket in account B?
+A: (1) In account B, create a policy that allows access to the bucket. (2) In account B, create a cross-account access role for account A and attach the policy to it. (3) In account A, create an in-line custom policy for the user group that allows action assume-role for the role in account B.
 
 Q: Once the proper cross-account access has been setup, how does a user actually access resources in another account using the console?
 A: Click on the account link in the top right of the menu bar, select switch role, and select the other account and role.
@@ -5812,7 +5813,7 @@ Q: What technologies are (typically) used for corporate identities in IAM federa
 A: Active Directory, SAML, a custom federation proxy.
 
 Q: What is the use case for social identities in IAM federation?
-A: Allow apps to access resource in your AWS account using social (Facebook, Google, etc.) identities.
+A: Allow applications running on an end-user's device (mobile phone, tablet, desktop, ...) to access resources in your AWS account using the end-user's social (Facebook, Google, etc.) identities.
 
 Q: What technologies are (typically) used for social identities in IAM federation?
 A: OpenID, Amazon Cognito.
