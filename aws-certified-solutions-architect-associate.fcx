@@ -1,6 +1,6 @@
 Course: AWS Certified Solutions Architect Associate
 
-Topic: Introduction to the course
+Topic: Introduction
 
 SubTopic: Introduction & overview
 
@@ -10,13 +10,13 @@ A: Technology partners and consulting partners.
 Q: What are the three levels of AWS consulting partners?
 A: Standard, advanced, and premier.
 
-Q: What are the certs requirements for a standard level AWS consulting partner?
+Q: What are the certification requirements for a standard level AWS consulting partner?
 A: 2 associate and 0 professional.
 
-Q: What are the certs requirements for a advanced level AWS consulting partner?
+Q: What are the certification requirements for a advanced level AWS consulting partner?
 A: 4 associate and 4 professional.
 
-Q: What are the certs requirements for a premier level AWS consulting partner?
+Q: What are the certification requirements for a premier level AWS consulting partner?
 A: 20 associate and 8 professional.
 
 Q: What are the four tiers of AWS certification?
@@ -979,7 +979,7 @@ Step: Enable monitoring of estimated charges.
 Step: Enable billing alerts.
 Step: Create a billing alarm for estimated charges more than $10.
 
-Topic: AWS object storage and CDN - S3, Glacier, and CloudFront
+Topic: Object storage and Content Delivery Networks (S3, Glacier, and CloudFront)
 
 SubTopic: S3 101
 
@@ -1022,8 +1022,8 @@ A: Global, i.e. it must be globally unique.
 Q: What are the naming rules for buckets?
 A: Globally unique (universal namespace), must follow DNS naming rules.
 
-Q: What does the URL for a bucket look like?
-A: https://s3-<region-name>.amazonaws.com/<bucket-name> 
+Q: What does the URL for an S3 bucket look like?
+A: https://s3-<region-name>.amazonaws.com/<bucket-name> or https://<bucket-name>.s3-<region-name>.amazonaws.com
 
 Q: How do you know uploading a file to S3 was succesful?
 A: HTTP response code 200.
@@ -1202,7 +1202,7 @@ A: Storage capacity, number of requests, storage management (e.g. tags), data tr
 Q: What is S3 transfer acceleration?
 A: Users transfer data to and from edge locations, and transfer to the region is accelerated over the AWS backbone. It is faster.
 
-SubTopic: Lab: Create an S3 Bucket
+SubTopic: Create an S3 Bucket
 
 Lab: Create an S3 bucket
 Step: Log into the AWS console.
@@ -1283,7 +1283,7 @@ A: It provides an audit trail of when your keys were used and by whom.
 Q: What does SSE-C stand for?
 A: Server-Side Encryption with Customer managed keys.
 
-SubTopic: Lab: S3 Version Control
+SubTopic: S3 Version Control
 
 Lab: S3 Version Control
 Step: Log into the AWS console.
@@ -1318,7 +1318,7 @@ A: Show all versions and delete the delete marker.
 Q: What is MFA delete?
 A: Require Multi Factor Authentication (MFS) for permanently deleting an object and changing the versioning state of a bucket.
 
-SubTopic: Lab: Cross-region Replication
+SubTopic: Cross-region Replication
 
 Q: What is the requirement for cross-region replication?
 A: Versioning must be anabled on both the source and destination bucket.
@@ -1416,7 +1416,7 @@ Step: Observe that in bucket B1, only versions 1 and 2 remain.
 Step: Observe that this change has NOT been replicated to bucket B2; there are still 3 versions there.
 Step: Clean up: delete objects and buckets in both regions.
 
-SubTopic: Lab: Lifecyle Management, S3-IA, and Glacier
+SubTopic: Lifecyle Management, S3-IA, and Glacier
 
 Lab: Lifecyle Management, S3-IA, and Glacier
 Step: Log into the AWS console.
@@ -1526,7 +1526,7 @@ A: Yes, you can, but you will be charged for it.
 Q: Why would you manually clear an object from a CloudFront edge location cache?
 A: To make sure that end-users see the most recent version of the object.
 
-SubTopic: Lab: Create a CloudFront CDN
+SubTopic: Create a CloudFront CDN
 
 Lab: Create a CloudFront CDN
 Step: Log into the AWS console.
@@ -1997,7 +1997,7 @@ A: EC2 lets you pick the AZ, S3 One-Zone-IA picks the AZ for you.
 
 # TODO Finish the S3 Storage FAQ, starting from S3
 
-Topic: EC2
+Topic: Elastic Compute Cloud (EC2)
 
 SubTopic: EC2 101
 
@@ -2277,7 +2277,7 @@ A: Legacy only; use GP2 instead.
 Q: Can a Magnetic type volume be a boot device for an EC2 instance?
 A: Yes.
 
-SubTopic: Lab: Launch an EC2 instance
+SubTopic: Launch an EC2 instance
 
 Lab: Launch an EC2 instance
 Step: Launch one Amazon Linux t2.micro instance, termination protected (everything else default).
@@ -2377,7 +2377,7 @@ A: Set source to My IP for SSH in the security group for the instance (only if y
 Q: Where and with what permissions should the private key file (pem file) be stored?
 A: In ~/.ssh, read-only by owner (400).
 
-Q: What command-line option to you use the specify the private key file?
+Q: In the ssh command, what command-line option specifies the private key file?
 A: -i <private-key-file>.
 
 Q: What is the username for Amazon Linux instances?
@@ -2405,7 +2405,7 @@ Q: What is the difference between the private and public DNS/IP of an EC2 instan
 A: The public is globally reachable, the private is only reachable from inside AWS.
 
 Q: What is the difference between the system status and the instance status in EC2?
-A: System status checks the health of the underlying amazon infra, instance status checks the instance itself.
+A: System status checks the health of the underlying amazon infrastructure, instance status checks the instance itself.
 
 Q: What does the EC2 system status check verify?
 A: Whether traffic can make it to the instance (does not check that the instance processes the traffic).
@@ -2434,7 +2434,7 @@ A: No, not for standard AMIs. You can encrypt the root volume when you create yo
 Q: Can you encrypt a non-root volume when you create an EC2 instance?
 A: Yes.
 
-SubTopic: Lab: Security Group basics
+SubTopic: Security Group basics
 
 Lab: Security Group basics
 Step: Create a t2.micro Amazon Linux instance with a new security group that allows HTTP, HTTPS, and SSL from any IP address.
@@ -2481,7 +2481,7 @@ A: It specifies the rules for communications between instances that are attached
 Q: Can you block a specific IP address using a security group?
 A: No, use an Access Control List (ACL) instead.
 
-SubTopic: Lab: Upgrading EBS Volume Types
+SubTopic: Upgrading EBS Volume Types
 
 Lab: Upgrading EBS Volume Types
 Step: Create a t2.micro Amazon Linux instance with 3 extra volumes: Magnetic, ST1, SC1.
@@ -2548,7 +2548,7 @@ A: Yes, you can share it with another account or make it completely public.
 Q: Can you share an encrypted snapshot with another user?
 A: No, they will not be able to restore a volume from it.
 
-SubTopic: Lab: Encrypt Root Device Volume and Create an AMI
+SubTopic: Encrypt Root Device Volume and Create an AMI
 
 Lab: Encrypt Root Device Volume and Create an AMI
 Step: Create a t2.micro Amazon Linux instance.
@@ -2637,7 +2637,7 @@ A: By default the data is lost, but you can configure EC2 to keep the root devic
 Q: What happens if you terminate an Instance Store Backed EC2 Instance?
 A: The data is always lost, you cannot configure EC2 to keep the root device volume.
 
-SubTopic: Lab: Load Balancers and Health Checks
+SubTopic: Load Balancers and Health Checks
 
 Lab: Load Balancers and Health Checks
 Step: Create an Amazon Linux t2.micro EC2 instance with an Apache web server that is configured to start at boot time.
@@ -2706,7 +2706,7 @@ A: Yes and no. An ELB load balancer will have a public IP address, but AWS manag
 Q: Can you use your own DNS domain name for an ELB load balancer?
 A: Yes, using Route53.
 
-SubTopic: Lab: CloudWatch with EC2.
+SubTopic: CloudWatch with EC2.
 
 Lab: CloudWatch with EC2.
 Step: Create an EC2 instance with basic monitoring and let it run for some time.
@@ -2772,7 +2772,7 @@ A: You need to install an agent inside the instance.
 Q: What is the difference between CloudWatch and CloudTrail?
 A: CloudWatch monitors performance metrics, CloudTrail provides an audit trail for API calls.
 
-SubTopic: Lab: The AWS Command Line and EC2
+SubTopic: The AWS Command Line and EC2
 
 Lab: The AWS Command Line and EC2
 Step: Install the AWS CLI ("aws") on the Mac (use Google for instructions).
@@ -2809,7 +2809,7 @@ A: Roles.
 Q: What should you do if you accidentally upload the access key secret to GitHub?
 A: Immediately delete the user who owns that access key secret or regenerate the access key for that user.
 
-SubTopic: Lab: Using IAM Roles with EC2.
+SubTopic: Using IAM Roles with EC2.
 
 Lab: Identity Access Management (IAM) Roles.
 Step: Create a new service role for EC2 that provides full access to S3.
@@ -2850,7 +2850,7 @@ A: Global.
 Q: Is it possible to add or change a role on an already running EC2 instance?
 A: Yes, it is, but this was only very recently added and the exam may be out of date (catch-22 situation).
 
-SubTopic: Lab: S3 CLI and Regions.
+SubTopic: S3 CLI and Regions.
 
 Lab: S3 CLI and Regions.
 Step: Create an Amazon Linux EC2 instance without any role.
@@ -2873,7 +2873,7 @@ A: aws s3 cp --recursive s3://<bucket-name> .
 Q: What is the AWS CLI command to download all objects from a bucket in a different region from the EC2 instance from where the CLI command is invoked?
 A: aws s3 cp --recursive --region <bucket-region> s3://<bucket-name> .
 
-SubTopic: Lab: Using Bootstrap Scripts.
+SubTopic: Using Bootstrap Scripts.
 
 Lab: Using Bootstrap Scripts.
 Step: Create a bucket.
@@ -2908,7 +2908,7 @@ A: Root (you do not need sudo in the script).
 Q: Where can you see the output of the boot script for debugging?
 A: /var/log/cloud-init-output.log
 
-SubTopic: Lab: Using Instance Metadata.
+SubTopic: Using Instance Metadata.
 
 Lab: Using Instance Metadata.
 Step: Launch an EC2 instance.
@@ -2933,7 +2933,7 @@ A: curl http://169.254.169.254/latest/meta-data/
 Q: What is the command for retrieving a specific metadata item, e.g. the public IPv4 address?
 A: curl http://169.254.169.254/latest/meta-data/public-ipv4
 
-SubTopic: Lab: Launch Configurations and Auto Scaling Groups
+SubTopic: Launch Configurations and Auto Scaling Groups
 
 Lab: Launch Configurations and Auto Scaling Groups
 Step: Create a bucket and upload a simple index.html and healthcheck.html into it.
@@ -3018,7 +3018,7 @@ A: No.
 Q: Can you move an already running instance into a placement group?
 A: Not directly. But you can create an AMI and spin up a new instance from the AMI in the placement group.
 
-SubTopic: Lab: Elastic File System
+SubTopic: Elastic File System
 
 Lab: Elastic File System
 Step: Go to the EFS console.
@@ -3165,7 +3165,7 @@ A: Architecture can get extremely complicated.
 Q: What AWS service helps you debug serverless applications based on Lambda?
 A: X-Ray.
 
-SubTopic: Lab: Build a Serverless Webpage
+SubTopic: Build a Serverless Webpage
 
 Lab: Build a Serverless Webpage
 Step: Download index.html, error.html, and hellocloudgurus.py from the ACloudGuru lesson resources.
@@ -3183,7 +3183,7 @@ Step: Edit index.html to put the invoke URL in.
 Step: Create a bucket and upload index.html and error.html (make them publicly readable).
 Step: Test the website by clicking on the public URL for index.html in the bucket.
 
-SubTopic: Lab: Using Polly To Help You Pass Your Exam
+SubTopic: Using Polly To Help You Pass Your Exam
 
 Lab: Using Polly To Help You Pass Your Exam
 Step: Download the resources from ACloudGuru for this lab.
@@ -3250,7 +3250,7 @@ A: When one domain name accesses resources in another domain.
 Q: Give a practical example of when Cross Origin Resource Sharing (CORS) is needed.
 A: Website is stored in one bucket, and resources (e.g. images) in another bucket.
 
-SubTopic: Lab: Build an Alexa Skill
+SubTopic: Build an Alexa Skill
 
 # TODO: Add the Build an Alexa Skill lab (order an Echo first)
 
@@ -3278,7 +3278,7 @@ A: A long time, up to 5 minutes.
 Q: What happens when an Amazon skill is triggered?
 A: An AWS Lambda function is invoked.
 
-Topic: Route53
+Topic: Domain Name Service (Route53)
 
 SubTopic: DNS 101
 
@@ -3297,7 +3297,7 @@ A: The last part of the domain name, e.g. .com in www.cnn.com
 Q: What is a second-level domain name?
 A: The optional second-to-last part in some domain names, e.g. .co in www.bbc.co.uk
 
-Q: Who controls the database of top-level domains?
+Q: Which organiation manages the database of top-level DNS domains?
 A: IANA which is a department of ICANN.
 
 Q: What does IANA stand for?
@@ -3420,7 +3420,7 @@ A: 50 maximum by default, but it can be increased by contacting support.
 Q: Many many hosted zones can you have in a single Route53 account?
 A: 500 maximum by default, but it can be increased by contacting support.
 
-SubTopic: Lab: Route 53 Register a Domain Name
+SubTopic: Route 53 Register a Domain Name
 
 Lab: Route 53 Register a Domain Name
 Step: Note - don't do this lab unless you are willing to spend real money (at least $12).
@@ -3470,7 +3470,7 @@ A: The simple routing policy.
 Q: How do you force Chrome to "empty cache and hard refresh" on a Mac (to test Route53 routing policies).
 A: View developer tools, click on the refresh icon with two fingers on the trackpad, select "empty cache and hard refresh".
 
-SubTopic: Lab: Setup Our EC2 Instance
+SubTopic: Setup Our EC2 Instance
 
 Lab: Setup Our EC2 Instance
 Step: Create one instance 
@@ -3511,7 +3511,7 @@ Step: ... with both instances as members
 Step: ... test the load balancer using a browser
 Step: Do NOT clean up YET; we use these instances for the other Route53 labs.
 
-SubTopic: Lab: Simple Routing Policy
+SubTopic: Simple Routing Policy
 
 Lab: Simple Routing Policy
 Step: Open the hosted zone for your domain name in the Route53 console
@@ -3532,7 +3532,7 @@ A: You are only allowed to enter one target, and all requests are routed to it.
 Q: What is the typical use case for the Route53 simple routing policy?
 A: You have a single server that serves the content; it should receive all requests.
 
-SubTopic: Lab: Weighted Routing Policy
+SubTopic: Weighted Routing Policy
 
 Lab: Weighted Routing Policy
 Step: Open the hosted zone for your domain name in the Route53 console
@@ -3569,7 +3569,7 @@ A: Weighted Round Robin.
 Q: Does Route53 support WRR routing?
 A: Yes, use the weighted routing policy.
 
-SubTopic: Lab: Latency Routing Policy
+SubTopic: Latency Routing Policy
 
 Lab: Latency Routing Policy
 Step: Open the hosted zone for your domain name in the Route53 console
@@ -3605,7 +3605,7 @@ A: Latency Based Routing?
 Q: Does Route53 support LBR?
 A: Yes, use the latency routing policy.
 
-SubTopic: Lab: Failover Routing Policy
+SubTopic: Failover Routing Policy
 
 Lab: Latency Failover Policy
 Step: Open the hosted zone for your domain name in the Route53 console
@@ -3662,7 +3662,7 @@ A: No, it is possible to also check the secondary target.
 Q: What is the typical use case for the Route53 failover routing policy?
 A: Any sitation where you can have only one target, but you want a failover backup.
 
-SubTopic: Lab: Geolocation Routing Policy
+SubTopic: Geolocation Routing Policy
 
 Lab: Geolocation Failover Policy
 Step: Create another new record set
@@ -3692,7 +3692,7 @@ A: Allows you to configure which geographic regions are router to which target.
 Q: What is the typical use case for the Route53 failover routing policy?
 A: When the content served by a particular server is customized for a geographical region (language, currency, ...)
 
-Topic: Databases on AWS
+Topic: Databases
 
 SubTopic: Databases 101
 
@@ -3777,7 +3777,7 @@ A: Graph database.
 Q: What service does Redshift provide?
 A: Data warehousing.
 
-SubTopic: Lab: Create our first RDS instance
+SubTopic: Create our first RDS instance
 
 Lab: Create our first RDS instance
 Step: Launch a DB instance in RDS:
@@ -3827,7 +3827,7 @@ A: In the VPC console.
 Q: How many DB instances are you allowed to create?
 A: 40 DB instances per account by default, but it can be increased using a support request.
 
-SubTopic: Lab: RDS - Back Ups, Multi-AZ, and Read Replicas
+SubTopic: RDS - Back Ups, Multi-AZ, and Read Replicas
 
 Lab: RDS - Back Ups, Multi-AZ, and Read Replicas
 Step: Launch a DB instance in RDS:
@@ -3975,7 +3975,7 @@ A: Yes.
 Q: What does promotion of a read replica mean?
 A: It means turning a read replace into a fully stand-alone instance DB, which stops the replication.
 
-SubTopic: Lab: DynamoDB
+SubTopic: DynamoDB
 
 Lab: DynamoDB
 Step: Create a DynamoDB table:
@@ -4040,6 +4040,12 @@ A: Yes.
 
 Q: What does "push-button scaling" mean in DynamoDB?
 A: You can increase the scaling of a DynamoDB database, without downtime, and without limits.
+
+Q: What is the maximum size for DynamoDB names and values?
+A: The name and value combined must not exceed 400KB.
+
+Q: You receive a ProvisionedThroughputExceededException error. However, the DynamoDB metrics show that your table or Index has not been operating at maximum provisioned throughput. What could the error be caused by?
+A: The throughut is not balanced across your partitions. One partition is being subjected to a disproportionate amount of the traffic and, therefore, exceeding limits.
 
 SubTopic: Redshift
 
@@ -4123,7 +4129,7 @@ A: Elasticache or RDS read replicas or DynamoDB.
 Q: What Amazon service would you use if the database is stressed due to heavy OLAP reads?
 A: Redshift.
 
-SubTopic: Lab: Aurora
+SubTopic: Aurora
 
 Lab: Aurora
 Step: Note this is an expensive lab, up to $5, not covered by free tier.
@@ -4207,7 +4213,7 @@ A: Writer and reader.
 Q: What is the difference between the cluster endpoint and the instance endpoint in Aurora?
 A: There is only one cluster endpoint and it fails over automatically. Use the instance endpoint for reading from a specific read replica.
 
-Topic: VPC
+Topic: Virtual Private Cloud (VPC)
 
 SubTopic: VPC Intoduction and Overview
 
@@ -4315,7 +4321,7 @@ A: Yes.
 Q: Can VPC peering be transitive (A -> B -> C)?
 A: No.
 
-SubTopic: Lab: Build your own custom VPC.
+SubTopic: Build your own custom VPC.
 
 Lab: Build your own custom VPC.
 Step: Go to the VPC console in the Oregon region.
@@ -4445,7 +4451,7 @@ A: Using the Subnet Actions -> Modify auto-assign IP settings. Confusingly, it i
 Q: Do security groups span VPCs?
 A: No, security groups are scoped within a VPC.
 
-SubTopic: Lab: Network Address Translation (NAT)
+SubTopic: Network Address Translation (NAT)
 
 Lab: Network Address Translation (NAT) instance
 Step: This is a continuation of lab "Build your own custom VPC".
@@ -4528,7 +4534,7 @@ A: The bandwidth of a NAT instance depends on the instance type. A NAT gateway s
 Q: What is the difference between a NAT instance and NAT gateway in terms of security groups?
 A: You associate a security group with a NAT instance. You do not associate a security group with a NAT gateway (associate it with the resources behind the NAT gateway instead.)
 
-SubTopic: Lab: Network Access Control Lists (NACL)
+SubTopic: Network Access Control Lists (NACL)
 
 Lab: Network Access Control Lists (NACL)
 Step: This is a continuation of lab "Network Address Translation (NAT) gateway".
@@ -4599,7 +4605,7 @@ A: No, it is mandatory to attach it to at least two subnets (and hence two AZs) 
 Q: Can you attach a load balancer to a private subnet?
 A: No, the subnet must be public, i.e. it must have an Internet Gateway.
 
-SubTopic: Lab: VPC Flow Logs
+SubTopic: VPC Flow Logs
 
 Lab: VPC Flow Logs
 Step: Create an EC2 instance:
@@ -4662,7 +4668,7 @@ A: You only have to harden one server, the bastion server, instead of all EC2 in
 Q: How do you make a bastion server highly available?
 A: Multiple instances, each in a different AZ (subnet), potentially auto-scaling group to keep a minimum number up, Route53 health-checks.
 
-SubTopic: Lab: VPC Endpoints
+SubTopic: VPC Endpoints
 
 Lab: VPC Endpoints
 Step: Create a role named role-ec2-full-access-to-s3 that provides EC2 full access to S3.
@@ -4813,7 +4819,7 @@ A: The maximum time a message can spend in a queue. One the retention limit is r
 Q: What is the difference between SQS short polling and long polling?
 A: Short polling returns immediately, even if there is no message. Long polling blocks util a message is available (or until a time-out occurs).
 
-SubTopic: Simple Workflow Service
+SubTopic: Simple Workflow Service (SWF)
 
 Q: What does SWF standfor?
 A: Simple Work Flow.
@@ -5053,7 +5059,7 @@ A: Yes.
 Q: What is Kinesis Analytics?
 A: Kinesis Analytics allows you to run SQL queries on the data stored in Kinesis Streams or Kinesis Firehose and store the results in S3, Redshift, or ElasticSearch.
 
-Topic: Lab: Creating a fault tolerant Word Press Site
+Topic: Creating a fault tolerant WordPress site
 
 Lab: Creating a fault tolerant WordPress Site
 Step: Note, use the us-east-1 (North Virginia) region for this lab; the ACG scripts assume this.
@@ -5189,7 +5195,7 @@ Step: On the production server,go into the wp-admin portal for write.remoteauton
 Step: Stop the production instance, take a snapshot named My-Prod-Web-Server, wait for it to be available, and restart the instance.
 Step: @@@ continue from here
 
-Topic: Whitepapers and The Well Architected Framework
+Topic: Whitepapers and the well architected framework
 
 SubTopic: Security
 
@@ -5217,7 +5223,7 @@ A: One component failure does not affect other components directly. Components c
 Q: Name 3 types of elasticity.
 A: Proactice cyclic scaling, proactive event-based scaling, auto-scaling based on demand.
 
-SubTopic: The Well Architected Framework, Pillar One: Security
+SubTopic: Security
 
 Q: Name 5 design principles for security.
 A: Apply security at all layers, enable traceability, automate responses to security incidents, focus on securing your system, automate security best practices.
@@ -5385,7 +5391,7 @@ A: Use the right type and size of EC2 instance that is optimized for the task (e
 Q: Name 7 factors that you need to take into consideration to choosing the most performance efficient storage option.
 A: Access method (block, file, object), access pattern (random, sequential), throughput, access frequency (online, offline, archival), update frequency (WORM, frequently), availability constraints, durability constraints.
 
-Q: Name 7 factors that you need to take into consideration to choosing the most performance efficient database option.
+Q: Name 4 factors that you need to take into consideration to choosing the most performance efficient database option.
 A: SQL or no-SQL, consistency requirements, high availability requirements, disaster recovery requirements.
 
 Q: What does AWS typically mean with space-time tradeoff?
@@ -5521,7 +5527,7 @@ A: By creating a standardized set of service offerings.
 Q: What AWS services help you build a CI/CD pipeline?
 A: CodeCommit, CodeDeploy, CodePipeline, CloudTrail.
 
-Topic: Additional Exam Tips
+Topic: Additional exam tips
 
 SubTopic: Exam Tips Based on Student Feedback
 
@@ -5658,7 +5664,13 @@ A: In account B, create a policy that allows access to the bucket, create a cros
 Q: Once the proper cross-account access has been setup, how does a user actually access resources in another account using the console?
 A: Click on the account link in the top right of the menu bar, select switch role, and select the other account and role.
 
-SubTopic: Lab: Tagging and resource groups
+Q: Name the 4 levels of support that AWS can provide.
+A: Basic (free tier), Developer, Business, Enterprise.
+
+Q: When editing permissions (policies and ACLs), to whom does the concept of the "Owner" refer?
+A: The "Owner" refers to the identity and email address used to create the AWS account.
+
+SubTopic: Tagging and resource groups
 
 Lab: Tagging and resource groups
 Step: Create an instance with tags Name = vm-1, Department = Development, Team = TeamA

@@ -7,13 +7,13 @@ class Question {
 
   topicPath () {
     let topic = this.topic
-    let concatenatedNames = topic.name
+    let path = [topic.name]
     topic = topic.parent
     while (topic !== null && topic.level !== 0) {
-      concatenatedNames = topic.name + '  |  ' + concatenatedNames
+      path.unshift(topic.name)
       topic = topic.parent
     }
-    return concatenatedNames
+    return path
   }
 }
 

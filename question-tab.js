@@ -34,7 +34,7 @@ function hideAnswer () {
 function nextQuestion () {
   hideAnswer()
   const question = course.pickRandomQuestion()
-  $('#topic-for-question').text(question.topicPath())
+  $('#topic-for-question').text(question.topicPath().join(' | '))
   $('#question-text').text(question.questionText)
   $('#answer-text').text(question.answerText)
 }
@@ -50,6 +50,7 @@ function recordDontKnowIt () {
 }
 
 function handleKeyPress (key) {
+  /* TODO: Only look for the keys allowed in the current context */
   if ((key.which === lowerCaseX) || (key.which === upperCaseX)) {
     recordDontKnowIt()
   } else if ((key.which === lowerCaseC) || (key.which === upperCaseC)) {
