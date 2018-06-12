@@ -971,7 +971,7 @@ Step: Attach glacier read-only access directly to john.
 Step: De-active john's access key and create a new one.
 Step: Change the password policy.
 Step: Create a role that allows EC2 instances to write to S3.
-Step: Cleanup: delete the created users, groups, and roles.
+Step: Clean up.
 
 SubTopic: Create a billing alarm lab
 
@@ -1239,7 +1239,7 @@ Step: Look at the storage class properties for the object.
 Step: Look at the encryption properties for the object.
 Step: Look at the Metadata properties for the object.
 Step: Look at the Tags properties for the object.
-Step: Clean up: delete objects and bucket.
+Step: Clean up.
 
 Q: What is the default permission for a bucket?
 A: Only the owner (the creator) has full access, and everyone else has no access.
@@ -1304,7 +1304,7 @@ Step: Observe the delete marker version.
 Step: Restore the object by deleting the delete marker.
 Step: Make a change in the text file, and upload the changed version.
 Step: Observe the total size of all versions (you will be charged for the total)
-Step: Clean up: delete objects and bucket.
+Step: Clean up.
 
 Q: How do you disable versioning on a bucket?
 A: You cannot. Once versioning is enabled, you can only suspend it.
@@ -1417,7 +1417,7 @@ Step: Observe that the change has been replicated to bucket B2, and that bucket 
 Step: In bucket B1, delete version 3 of object F1.
 Step: Observe that in bucket B1, only versions 1 and 2 remain.
 Step: Observe that this change has NOT been replicated to bucket B2; there are still 3 versions there.
-Step: Clean up: delete objects and buckets in both regions.
+Step: Clean up.
 
 SubTopic: Lifecyle Management, S3-IA, and Glacier
 
@@ -1435,7 +1435,7 @@ Step: Configure the lifecyle rule to transition previous versions to Glacier aft
 Step: Configure the lifecyle rule to expire the current version after 465 days.
 Step: Configure the lifecyle rule to expire previous versions after 425 days.
 Step: Note that we cannot observe the lifecycle rule in action because it would require us to wait 30 days.
-Step: Clean up: delete the bucket.
+Step: Clean up.
 
 Q: What does lifecycle management do?
 A: Move old files to a lower storage tier or delete them, based on a defined policy.
@@ -1549,8 +1549,7 @@ Step: Remove read access for all users for the image in the bucket.
 Step: Observe that retrieving the image using the URL for the S3 bucket returns an error.
 Step: Observe that retrieving the image using the URL for the CloudFront distribution succeeds.
 Step: Observe that retrieving the image using the URL for the CloudFront redirects HTTP to HTTPS.
-Step: Clean up: delete the CloudFront distribution.
-Step: Clean up: delete the S3 bucket.
+Step: Clean up.
 
 Q: What type of CloudFront distribution would you use for static web content (e.g. HTML, CSS, client-side JavaScript, graphics)?
 A: Web distribution.
@@ -1933,7 +1932,7 @@ Step: Using a browser, open the website home page.
 Step: (optional) Using Route53, point a DNS domain name to the website. Test using the browser.
 Step: Force an error by making the index not publicly readable.
 Step: Using a browser, open the website home page again and observe the error page.
-Step: Clean up: delete the bucket.
+Step: Clean up.
 
 Q: Who manages the web servers and load balancers when hosting a static website on S3?
 A: Amazon does.
@@ -2296,7 +2295,7 @@ Step: Check both the system status and the instance status.
 Step: Look at the CloudWatch metrics for the instance.
 Step: Terminate the instance (demonstrate that you have to turn termination protection off first).
 Step: Go through the steps to purchase a reserved instance (but don't complete).
-Step: Clean up: delete EC2 instance, security group, and keypair.
+Step: Clean up.
 
 Q: What does AMI stand for?
 A: Amazon Machine Image.
@@ -2448,7 +2447,7 @@ Step: Instal Apache, create a little website, start Apache, configure Apache to 
 Step: Inspect the inbound and outbound rules for the security group.
 Step: Remove HTTP from the security group and verify that the webpage stops working. Add it back.
 Step: Create an additional security group with additional rules, and also attach it to the instance. Show the resulting union of rules that apply.
-Step: Clean up: delete EC2 instance, security group, and keypair.
+Step: Clean up.
 
 Q: What is a security group?
 A: A virtual stateful layer-4 firewall attached to EC2 instances.
@@ -2497,7 +2496,7 @@ Step: Pick a non-root volume and create a copy of it in another region.
 Step: Install and configure Apache to start at boot. Create a small website and verify it works.
 Step: Create an AMI from the instance.
 Step: Launch a new EC2 instance from the new AMI, and verify it behaves as a web server.
-Step: Clean up: delete EC2 instances, security groups, keypairs, snapshots, and images in all regions.
+Step: Clean up.
 
 Q: Can you mount an EBS volume in one AZ to an EC2 instance in a different AZ?
 A: No.
@@ -2563,7 +2562,7 @@ Step: In the destination region, create an image from the snapshot.
 Step: Create an image from the newly created image.
 Step: Observe that the root volume of the newly created instance is encrypted.
 Step: SSH into the newly created instance.
-Step: Clean up: delete EC2 instances, security groups, keypairs, snapshots, and images in all regions.
+Step: Clean up.
 
 Q: Why are public and community AMIs never encrypted?
 A: Because encrypted images and volumes use a key that is tied to the user.
@@ -3245,7 +3244,7 @@ Step: Edit the scripts.js file in the resources to edit the API endpoint (noted 
 Step: Upload the website files into the bucket
 Step: ... files index.html, scripts.js, styles.css from the resources
 Step: Test the website by clicking on the URL for the index.html object in S3
-Step: Clean up OR continue with the Alexa Skill lab
+Step: Clean up.
 
 Q: What does CORS stand for?
 A: Cross Origin Resource Sharing.
@@ -3529,8 +3528,7 @@ Step: ... which has target load-balancer-oregon
 Step: ... with routing policy simple
 Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name.
-Step: Clean up: delete the record set that we just created.
-Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+Step: Clean up.
 
 Q: How are requests routed by the Route53 simple routing policy?
 A: You are only allowed to enter one target, and all requests are routed to it.
@@ -3557,8 +3555,7 @@ Step: ... which has target load-balancer-virginia
 Step: ... with routing policy weighted, weight 30, and set ID Virginia
 Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name (be patient)
-Step: Clean up: delete the record sets that we just created.
-Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+Step: Clean up.
 
 Q: How are requests routed by the Route53 weighted routing policy?
 A: Send a fixed percentage of requests to each target.
@@ -3596,8 +3593,7 @@ Step: ... and which has evaluate target health disabled.
 Step: Use a browser to test the domain name and verify it goes to the closer load balancer.
 Step: Use a VPN to connect to a place close to the other load balancer.
 Step: Use a browser to test the domain name and verify it goes to the other load balancer.
-Step: Clean up: delete the record sets that we just created.
-Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+Step: Clean up.
 
 Q: How are requests routed by the Route53 latency routing policy?
 A: Send the requests to the target that provides the lowest latency from the user.
@@ -3655,10 +3651,7 @@ Step: Stop (don't terminate, but stop) both Virginia EC2 instances
 Step: Observe the health checks in Route53 and observe that the website is down
 Step: Verify you get an alarm e-mal
 Step: Verify the website is back up
-Step: Clean up: restart all stopped instances
-Step: Clean up: delete the record sets that we just created.
-Step: Clean up: delete the health checks and the SNS topic
-Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+Step: Clean up.
 
 Q: How are requests routed by the Route53 failover routing policy?
 A: Send all requests to the primary target by default. If the healthcheck for the primary fails, send all traffic to the secondary target.
@@ -3690,8 +3683,7 @@ Step: ... with ID oregon-serves-everything-else
 Step: ... without a healthcheck
 Step: Use a browser to test from the US and verify it goes to Virginia
 Step: Use a browser and VPN to test from the Europe and verify it goes to Oregon
-Step: Clean up: delete the record sets that we just created.
-Step: Clean up: also clean up instances and load balancers in oregon and virginia if this was the last Route53 lab.
+Step: Clean up.
 
 Q: How are requests routed by the Route53 geolocation routing policy?
 A: Allows you to configure which geographic regions are router to which target.
@@ -3811,7 +3803,7 @@ Step: Fix the security group of the DB instance to allow the EC2 instance to con
 Step: ... Make a note of the security group of the EC2 instance
 Step: ... Add an inbound rule to the security group of the DB instance to allow MySQL traffic from the security group of the EC2 instance
 Step: On the browser go to <ec2-ip-address>/connect.php again. Verify it works this time.
-Step: Clean up: delete the DB instance, the EC2 instance, and the RDS security group.
+Step: Clean up.
 
 Q: What is the typical cost of a default parameters dev/test MySQL database in RDS?
 A: Approximately $15 per month (eligible for free tier).
@@ -3857,7 +3849,7 @@ Step: ... Public accessibility = no
 Step: ... DB instance identifier = acloudguru-replica-1
 Step: ... and default values for everything else.
 Step: Modify DB instance acloudguru to enable multi-AZ.
-Step: Clean up: delete DB instances, snapshots, EC2 instances.
+Step: Clean up.
 
 Q: What are the two types of backups in RDS?
 A: Automated backup and snapshot backup.
@@ -4004,7 +3996,7 @@ Step: ... Age (number) = 16
 Step: Scan the table with filter LastName = Smith
 Step: Remove the filter and show the whole table again
 Step: Have a look at the metrics and see how the actual capacity compares to the provisioned capacity.
-Step: Clean up: delete the table.
+Step: Clean up.
 
 Q: What is DynamoDB?
 A: It is the no-SQL (non-relational) database service provided by AWS.
@@ -4557,7 +4549,7 @@ Step: Add an outbound rule to NACL vpc-1-nacl-dmz to allow ICMP.
 Step: Observe that we can ping vm-web-server, but we can still not SSH to it.
 Step: Add both an inbounad and outbound rule to NACL vpc-1-nacl-dmz to allow SSH.
 Step: Observe that we still cannot (!) SSH into vm-web-server.
-Step: Clean up. There is no continuation for this lab.
+Step: Clean up.
 
 Q: What is the difference between a Security Group and a NACL in terms of statefulnes?
 A: A Security Group is stateful, a NACL is stateless.
@@ -4730,7 +4722,7 @@ Step: ... Configure Route Table = route table associated with vpc-1-subnet-priva
 Step: ... Policy = Full access
 Step: Observe that the route table vpc-1-route-table-main now contains a "service route (pl-xxx)" to the end point (vpce-xxx)
 Step: SSH into vm-private using vm-public as a jump server and attempt to list all S3 buckets using the "aws s3 ls --region us-west-2" (now it does work).
-Step: Clean up
+Step: Clean up.
 
 Q: What is a VPC endpoint
 A: A virtual gateway that allows EC2 instances to access other AWS services (e.g. S3) without going over the public Internet (e.g. via a NAT gateway or Internet gateway).
@@ -5016,7 +5008,7 @@ Step: ... Observe the Kinesis Stream list
 Step: ... Observe the details of the one and only created Kinesis Stream
 Step: ... Observe the monitoring tab for the Kinesis Stream
 Step: In DynamoDB observe the database in which the data is stored
-Step: Clean up: Delete the stack in CloudFormation.
+Step: Clean up.
 
 Q: What service does Kinesis provide?
 A: Real-time collection, processing, and analysis of data streams.
