@@ -362,7 +362,7 @@ A: Audit trail for AWS API calls.
 Q: Which AWS service provides an audit trail for AWS API calls?
 A: CloudTrail.
 
-Q: What service will tell you what happened when you AWS account gets hacked?
+Q: Which AWS service provides an audit trail to help you figure out what happened when you AWS account gets hacked?
 A: CloudTrail.
 
 Q: What service does Config provide?
@@ -1049,7 +1049,7 @@ A: After writing a change, reading may for some time return the old state, but e
 Q: What is the underlying cause for eventual consistency?
 A: It takes time to propagate a change across a devices where the data is replicated.
 
-Q: What are the components of an S3 object?
+Q: Name the 5 components of an S3 object.
 A: Key, value, version ID, metadata, sub-resources.
 
 Q: What is the S3 object key?
@@ -1088,7 +1088,7 @@ A: There are multiple storage classes (aka storage tiers) with different cost, r
 Q: In AWS storage, what is lifecycle management?
 A: Automatically move a file from one tier to another, based on age of the file etc.
 
-Q: What is versioning?
+Q: What is S3 versioning?
 A: After changes, keep multiple versions of a file, plus the ability to restore older versions.
 
 Q: Name 2 mechanisms for securing S3 data.
@@ -1146,7 +1146,7 @@ Q: What does IA stand for?
 A: Infrequently Accessed.
 
 Q: What is the main difference between the S3 standard and IA storage tiers?
-A: Lower capacity cost, but adds retrieval cost.
+A: IA (Infrequently Accessed) has lower capacity cost, but adds retrieval cost.
 
 Q: What is the target availability of the S3 one-zone IA storage tier?
 A: 99.5%.
@@ -1356,8 +1356,8 @@ A: This change is NOT replicated, the delete marker is still there in the destin
 Q: If cross-region replication is enabled, and you delete a version, what happens?
 A: This change is NOT replicated, the version is still there in the destination bucket.
 
-Q: If cross-regione replication is enabled, what happens with the permissions?
-A: The permissions are also replicated.
+Q: If S3 cross-regione replication is enabled, are the permissions also replicated?
+A: Yes.
 
 Q: Does cross-region replication allow you to replicate from one bucket to another bucket in the same region?
 A: No, the regions must be different.
@@ -1610,7 +1610,7 @@ Q: Name 2 options for controlling the TTL of cached objects.
 A: Using the cache headers provided by the origin server, or customized values specified in the CloudFront configuration.
 
 Q: What is the advantage of using a long TTL in CloudFront?
-A: Fewer trips to the origin server.
+A: Better cache hit rate (fewer requests to the origin server).
 
 Q: What is the disadvantage of using a long TTL in CloudFront?
 A: It takes longer for end-users to see an updated version of the content.
@@ -1704,6 +1704,7 @@ A: Both buckets and objects.
 Q: Whose access can be controlled by an S3 ACL?
 A: The owner account, other accounts, public access, and (for buckets) the S3 log delivery group.
 
+# TODO: Check if the answer is correct
 Q: What types of access are controlled by a an S3 bucket ACL?
 A: List object, write objects, read bucket permissions, write bucket permissions.
 
@@ -1823,7 +1824,7 @@ A: It periodically stores snapshots as objects in S3.
 Q: What disk sizes does Cached volume gateway support?
 A: 1 GB - 16 TB.
 
-Q: What service does the tape gateway provide:
+Q: What service does the tape gateway provide?
 A: The gateway offers a virtual tape device and a virtual media changer device. Tape contents are stored in S3 objects.
 
 Q: Can you continue to use your existing tape backup software (such as NetBackup, Backup Exec, Veeam) with Tape gateway?
@@ -1989,7 +1990,7 @@ A: 20%
 Q: How do the S3 Standard, Standard-IA, One-Zone-IA differ in terms of performace?
 A: They are all similar.
 
-Q: What are the types of charges for S3 storage?
+Q: Name 5 types of charges for S3 storage.
 A: Charges for the amount of storage per month, bandwidth, requests, early delete and small object fees.
 
 Q: What is a key difference between EC2 and S3 One-Zone-IA in terms of how they use AZs?
@@ -2037,13 +2038,13 @@ A: Term duration (1 or 3 year), how much is paid up-front (all or part), and con
 Q: How do you achieve maximal savings with EC2 reserved instances?
 A: 3 year contract, pay everything up-front, non-convertible.
 
-Q: What is a convertible EC2 reserved instance?
+Q: What is a "convertible" EC2 reserved instance?
 A: The type of EC2 instance can be changed (increased value, not decreased value).
 
 Q: How much can you expect to save by using EC2 reserved instances relative to standard instances?
 A: Up to 75% for standard up to 54% for convertible.
 
-Q: What is a scheduled EC2 reserved instance?
+Q: What is a "scheduled" EC2 reserved instance?
 A: Reservation is only for certain times and certains days of week or month.
 
 Q: What is the pricing model for EC2 spot instances?
@@ -2604,6 +2605,7 @@ A: Non-redundantly (ephemerally) only on the same physical server that hosts the
 Q: Name 2 reasons for stopping an EC2 instance.
 A: To take a snapshot, to move it to another hypervisor in an attempt to resolve a failed status check.
 
+# TODO: Also needed for very high performance data instance types?
 Q: What is the main reason that Instance Store Backed Volumes exist?
 A: For historical reasons: this was the only type of volume that AWS used to support before EBS Backed Volumes were introduced later.
 
@@ -3363,13 +3365,13 @@ A: Yes, except for NS records.
 Q: Does Route53 support DNSSEC.
 A: Partially. Yes for domain registration. But no, not currently for DSN queries.
 
-Q: Is Amazon a domain registrar?
-A: Yes.
+Q: Is Amazon a DNS domain registrar?
+A: Yes, you can register a DNS domain name directly from Amazon, or transfer an existing domain name to Amazon.
 
 Q: Can you buy domain names directly from Amazon?
 A: Yes, Amazon is a domain registrar.
 
-Q: Can you use a domain registered with a 3rd party registrar (e.g. GoDaddy) in Amazon?
+Q: Can you use a domain registered with a 3rd party registrar (e.g. GoDaddy) in Amazon without transfering it?
 A: Yes. Register the domain name with GoDaddy, create the Zone in AWS, get the NS records from AWS, provide the NS records to GoDaddy.
 
 Q: What is the purpose of an A record in DNS?
@@ -4260,7 +4262,7 @@ Q: How to you direct the flow of traffic between subnets?
 A: With route tables.
 
 Q: How do you connect a VPC to the Internet?
-A: Using an Internet Gateway?
+A: Use an Internet Gateway.
 
 Q: What is an Internet Gateway?
 A: It connects a VPC to the Internet.
@@ -4803,7 +4805,7 @@ Q: How does an SQS standard queue differ from a FIFO queue in terms of delivery 
 A: Standard queues deliver the message at least one (but sometimes multiple times), FIFO queues guarantee exactly one delivery. 
 
 Q: How does an SQS standard queue differ from a FIFO queue in terms of ordered guarantee?
-A: Standard queues usually deliver the messages in-order (but sometimes out-of-order), FIFO queues guarantee in-order delivery.
+A: Standard queues usually deliver the messages in-order (but sometimes out-of-order), FIFO queues guarantee in-order delivery within a message group.
 
 Q: What is a message group in SQS?
 A: Messages within a message group are delivered in-order. Messages in different message groups may be delivered out-of-order.
@@ -5720,7 +5722,7 @@ Q: Is there a single point of failure for VPC peering?
 A: No.
 
 Q: Is there a single bandwidth bottleneck for VPC peering?
-A: No.
+A: No, VPC peering is implemented in the underlying infrastructure, not in a single instance or gateway.
 
 Q: Is it possible to create a VPC peering between two VPCs with overlapping private address blocks?
 A: No.
