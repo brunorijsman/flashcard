@@ -54,7 +54,7 @@ Q: How many regions are there?
 A: 16 regions in 2017, 6 more planned for 2018.
 
 Q: How many availability zones are there?
-A: 44 availability zones in 2017, 17 more planned for 2018.
+A: Each region has at least two availability zone. In total there are 44 availability zones in 2017, 17 more planned for 2018.
 
 Q: Name 6 regions in North America
 A: US East (Northern Virginia), US East (Ohio), US West (Oregon), US West (Northern California), US West (GovCloud), Canada (Central).
@@ -709,7 +709,7 @@ A: Sumerian.
 Q: What does AR/VR stand for?
 A: Augmented Reality / Virtual Reality.
 
-Q: Name 1 AR/VR service.
+Q: Which AWS service provides Augented Reality / Virtual Reality (AR/VR)?
 A: Sumerian.
 
 SubSubTopic: Application integration
@@ -970,9 +970,9 @@ Step: Change the password policy.
 Step: Create a role that allows EC2 instances to write to S3.
 Step: Cleanup: delete the created users, groups, and roles.
 
-SubTopic: Create a Billing Alarm Lab
+SubTopic: Create a billing alarm lab
 
-Lab: Create a Billing Alarm
+Lab: Create a billing alarm
 Step: Log into AWS console as root.
 Step: Open billing dashboard.
 Step: Enable monitoring of estimated charges.
@@ -1178,7 +1178,7 @@ A: Not specified.
 Q: What is the durability of the Glacier?
 A: 99.999999999% (11 nines).
 
-Q: What is the redundancy of the Glacier?
+Q: What level of redundancy does Glacier provide?
 A: Replicated across at least 3 availability zones.
 
 Q: What is the retrieval latency of the Glacier?
@@ -3596,6 +3596,7 @@ Step: Clean up: also clean up instances and load balancers in oregon and virgini
 Q: How are requests routed by the Route53 latency routing policy?
 A: Send the requests to the target that provides the lowest latency from the user.
 
+# TODO: Is the following correct?
 Q: What is the typical use case for the Route53 latency routing policy?
 A: A/B testing, gradual roll out of new web features.
 
@@ -3999,10 +4000,10 @@ Step: Remove the filter and show the whole table again
 Step: Have a look at the metrics and see how the actual capacity compares to the provisioned capacity.
 Step: Clean up: delete the table.
 
-Q: What is AmazonDB?
+Q: What is DynamoDB?
 A: It is the no-SQL (non-relational) database service provided by AWS.
 
-Q: What data models does AmazonDB support?
+Q: What data models does DynamoDB support?
 A: Document and key-value.
 
 Q: Can a DynamoDB be stored on magnetic storage?
@@ -5824,7 +5825,7 @@ A: Trust policies: who (which principal) do you trust (e.g. all identities asser
 Q: What is a session in the context of STS?
 A: A session grants temporary access to AWS resources.
 
-Q: Who generates sessions?
+Q: Which AWS service generates temporary security tokens?
 A: The Simple Token Service (STS).
 
 Q: What causes STS to generate a session?
