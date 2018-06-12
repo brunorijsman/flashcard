@@ -93,6 +93,14 @@
             <p>
               <small>
                 <span id="topic-for-question"></span>
+                <span class="pull-right">
+                  <span id="hist-know-2" style="color:green" class="glyphicon glyphicon-ok-circle"></span>
+                  <span id="hist-dont-know-2" style="color:red" class="glyphicon glyphicon-remove-circle"></span>
+                  <span id="hist-know-1" style="color:green" class="glyphicon glyphicon-ok-circle"></span>
+                  <span id="hist-dont-know-1" style="color:red" class="glyphicon glyphicon-remove-circle"></span>
+                  <span id="hist-know-0" style="color:green" class="glyphicon glyphicon-ok-circle"></span>
+                  <span id="hist-dont-know-0" style="color:red" class="glyphicon glyphicon-remove-circle"></span>
+                </span>
               </small>
             </p>
           </row>
@@ -116,15 +124,15 @@
 
           <row>
             <button type="button" class="btn btn-default" id="show-answer-button" onclick="showAnswer()">
-              <span class="glyphicon glyphicon glyphicon-repeat"></span>
+              <span class="glyphicon glyphicon-repeat"></span>
               <span>Show answer</span>
             </button>
             <button type="button" class="btn btn-default" id="dont-know-button" onclick="recordDontKnowIt()">
-              <span class="glyphicon glyphicon glyphicon-remove" style="color:red"></span>
+              <span class="glyphicon glyphicon-remove" style="color:red"></span>
               <span>I did not know this</span>
             </button>
             <button type="button" class="btn btn-default" id="do-know-button" onclick="recordKnowIt()">
-              <span class="glyphicon glyphicon glyphicon-ok" style="color:green"></span>
+              <span class="glyphicon glyphicon-ok" style="color:green"></span>
               <span>I did know this</span>
             </button>
           </row>

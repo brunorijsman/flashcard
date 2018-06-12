@@ -1,8 +1,15 @@
+const historyLength = 3
+
 class Question {
+
   constructor (QuestionText, answerText, topic) {
     this.questionText = QuestionText
     this.answerText = answerText
     this.topic = topic
+    this.askCount = 0
+    this.knowCount = 0
+    this.knowRunCount = 0
+    this.knowHistory = []
   }
 
   topicPath () {
@@ -15,6 +22,29 @@ class Question {
     }
     return path
   }
+
+  recordKnowIt () {
+    this.askCount += 1
+    this.knowCount += 1
+    this.knowRunCount += 1
+    this.knowHistory.unshift(true)
+    while (this.knowHistory > historyLength) {
+      this.knowHistory.pop()
+    }
+  }
+
+  recordDontKnowIt () {
+    this.askCount += 1
+    this.knowRunCount = 0
+    this.knowHistory.unshift(false)
+    while (this.knowHistory > historyLength) {
+      this.knowHistory.pop()
+    }
+  }
+
+  /* TODO: Also update topic counts */
+  /* TODO: Also track counts per day */
+  /* TODO: Also write to local storage (for now, web service later on) */
 }
 
 class QuestionSet {
