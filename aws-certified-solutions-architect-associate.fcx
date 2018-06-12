@@ -917,6 +917,9 @@ A: The default account created when the AWS account was setup. It has full permi
 Q: What are the default permissions for a user?
 A: The root has full administrator access by default. All other users have no permissions by default.
 
+Q: In IAM, what is the difference between a PowerUser and an Administrator?
+A: An Administrator has access to all AWS services and resources. A PowerUser has access to all AWS services and resources except the management of users and groups.
+
 SubTopic: IAM Lab
 
 Q: Name two considerations for choosing a region.
@@ -1920,13 +1923,14 @@ A: Multipart upload.
 
 SubTopic: Create a Static Website using S3.
 
-Lab: Create a Static Website using S3.
+Lab: Create a static website using S3.
 Step: Create a bucket.
 Step: Enable static website hosting for the bucket.
 Step: Create an HTML page index.html and upload it into the bucket.
 Step: Create an HTML page error.html and upload it into the bucket.
 Step: Upload both pages to the bucket.
 Step: Using a browser, open the website home page.
+Step: (optional) Using Route53, point a DNS domain name to the website. Test using the browser.
 Step: Force an error by making the index not publicly readable.
 Step: Using a browser, open the website home page again and observe the error page.
 Step: Clean up: delete the bucket.
@@ -3762,7 +3766,7 @@ A: ElastiCache.
 Q: Which caching engines does ElastiCache support?
 A: Redis and memcached.
 
-Q: What is the complete list of database services in AWS?
+Q: Name 5 AWS services that provide a database service.
 A: RDS, DynamoDB, ElastiCache, Neptune, Redshift.
 
 Q: What service does RDS provide?
