@@ -1226,9 +1226,9 @@ Step: Look at replication management for the bucket.
 Step: Look at analytics management for the bucket.
 Step: Look at metrics management for the bucket.
 Step: Look at inventory management for the bucket.
-Step: Set tag department to value engineering, and tag environment to value development for the bucket.
+Step: Set tag department to value engineering, and tag stage to value development for the bucket.
 Step: Give another AWS account read-write access to the bucket.
-Step: Make the bucket publicly readable.
+Step: Provide public list-objects access to the bucket.
 Step: Upload two files to the bucket.
 Step: Monitor the progress of the upload.
 Step: Try to download the contents of an object using its URL and get an access denied error.
@@ -1242,7 +1242,10 @@ Step: Look at the Tags properties for the object.
 Step: Clean up.
 
 Q: What is the default permission for a bucket?
-A: Only the owner (the creator) has full access, and everyone else has no access.
+A: Only the owner (the account in which it was created) has full access, and everyone else has no access.
+
+Q: What is the owner of a bucket or an object?
+A: The "owner" of a bucket or an object in a bucket is not an individual IAM user, but rather the AWS account to which that user belongs.
 
 Q: What is the default permission for an object?
 A: Only the owner (the creator) has full access, and everyone else has no access.
@@ -1288,7 +1291,7 @@ A: Server-Side Encryption with Customer managed keys.
 
 SubTopic: S3 Version Control
 
-Lab: S3 Version Control
+Lab: S3 version control
 Step: Log into the AWS console.
 Step: Choose a region.
 Step: Go to the S3 console.
@@ -1389,7 +1392,7 @@ A: Asynchronous; the replication happens can take some time after the change, de
 Q: How can you be sure that objects are actually replicated in a timely manner to meet the RPO?
 A: Use cross-region replication monitor (CRR monitor).
 
-Lab: S3 Version Control
+Lab: S3 Cross-Region Replication (CRR)
 Step: Log into the AWS console.
 Step: Go to the S3 console.
 Step: Create a bucket B1 in one region and enable versioning.
@@ -1426,14 +1429,14 @@ Step: Log into the AWS console.
 Step: Go to the S3 console.
 Step: Make sure you are in a region where Glacier is available.
 Step: Create a bucket.
-Step: Initiate the creation of a lifecyle rule (details in next steps)
-Step: Configure the lifecyle rule to apply to both current and previous versions.
-Step: Configure the lifecyle rule to transition the current version to Standard-IA after 50 days.
-Step: Configure the lifecyle rule to transition the current version to Glacier after 100 days.
-Step: Configure the lifecyle rule to transition previous versions to Standard-IA after 30 days.
-Step: Configure the lifecyle rule to transition previous versions to Glacier after 60 days.
-Step: Configure the lifecyle rule to expire the current version after 465 days.
-Step: Configure the lifecyle rule to expire previous versions after 425 days.
+Step: Initiate the creation of a lifecyle rule:
+Step: ... Configure the lifecyle rule to apply to both current and previous versions.
+Step: ... Configure the lifecyle rule to transition the current version to Standard-IA after 50 days.
+Step: ... Configure the lifecyle rule to transition the current version to Glacier after 100 days.
+Step: ... Configure the lifecyle rule to transition previous versions to Standard-IA after 30 days.
+Step: ... Configure the lifecyle rule to transition previous versions to Glacier after 60 days.
+Step: ... Configure the lifecyle rule to expire the current version after 465 days.
+Step: ... Configure the lifecyle rule to expire previous versions after 425 days.
 Step: Note that we cannot observe the lifecycle rule in action because it would require us to wait 30 days.
 Step: Clean up.
 
@@ -1536,10 +1539,12 @@ Step: Log into the AWS console.
 Step: Create an S3 bucket in a very remote region (e.g. Syndney).
 Step: Upload a very large image into the remote bucket. Make it publicly readable.
 Step: Open the image (using force refresh on the browser). Observe it takes a long time to download.
-Step: Initiate creation of a CloudFront distribution (details follow in next steps).
-Step: Choose the S3 bucket as the origin.
-Step: Enable Restrict Bucket Access. Create a new origin access identity. Update the bucket policy to grant read access.
-Step: Redirect HTTP to HTTPS.
+Step: Initiate creation of a CloudFront distribution:
+Step: ... Choose the S3 bucket as the origin.
+Step: ... Enable Restrict Bucket Access. 
+Step: ... Create a new origin access identity. 
+Step: ... Update the bucket policy to grant read access.
+Step: ... Redirect HTTP to HTTPS.
 Step: Monitor the distribution to observe when the Status reaches Deployed.
 Step: Observe that retrieving the image through S3 still is slow (remember to force the browser to hard refresh)
 Step: Construct the URL to retrieve the image using the CDN
