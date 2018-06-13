@@ -1,3 +1,82 @@
 #!/usr/bin/env node
 
+const fs = require('fs')
+const minimist = require('minimist')
+const courseParser = require('./course-parser.js')
 
+function extractFileNameFromPath (path) {
+  return path.split('\\').pop().split('/').pop()
+}
+
+function commandLineError (errorMsg) {
+  console.error(errorMsg)
+  reportUsageAndExit(1)
+}
+
+function reportUsageAndExit (exitCode) {
+  command = extractFileNameFromPath(process.argv[1])
+  console.error('Usage:')
+  console.error('  ' + command + ' --help')
+  console.error('  ' + command + ' check <filename>')
+  console.error('  ' + command + ' annotate <filename>')
+  process.exit(exitCode)
+}
+
+function unknownOption (option) {
+  if (option[0] == '-') {
+    commandLineError('Unknown option ' + option)
+  }
+  return true
+}
+
+function parseJustFileName (xargs) {
+  if (xargs._.length < 1) {
+    commandLineError('Missing <filename>')
+  }  
+  const fileName = xargs._.shift()
+  if (xargs._.length > 0) {
+    commandLineError('Unexpected extra arguments after <filename>')
+  }  
+  return fileName
+}
+
+function main () {
+  const options = {alias: {h: 'help'}, stopEarly: true, unknown: unknownOption}
+  const xargs = minimist(process.argv.slice(2), options)
+  if (xargs.help) {
+    reportUsageAndExit(0)
+  }
+  if (xargs._.length < 1) {
+    commandLineError('Missing command; valid commands are: check, annotate')
+  }
+  const command = xargs._.shift()
+  const lowerCommand = command.toLowerCase()
+  if (lowerCommand === 'check') {
+    check(parseJustFileName(xargs))    
+  } else if (lowerCommand === 'annotate') {
+    annotate(parseJustFileName(xargs))    
+  } else {
+    commandLineError('Unrecognized command ' + command)
+  }
+}
+
+function check (fileName) {
+  const parser = new courseParser.Parser()
+  const courseDefinition = String(fs.readFileSync(fileName))
+  const course = parser.parse(courseDefinition)
+  console.info('No errors in course definition ' + fileName)
+}
+
+function annotate (fileName) {
+
+}
+
+
+function placeHolders () {
+  const parser = new courseParser.Parser()
+  const courseDefinition = String(fs.readFileSync('aws-certified-solutions-architect-associate.fcx'))
+  const course = parser.parse(courseDefinition)
+}
+
+
+main()

@@ -1,3 +1,8 @@
+if (typeof exports != 'undefined') {
+  const courseModel = require('./course-model.js')
+  Course = courseModel.Course
+}
+
 class Parser {
   reset () {
     this.definition = null
@@ -136,4 +141,8 @@ class Parser {
     this.parseCourse()
     return this.course
   }
+}
+
+if (typeof exports != 'undefined') {
+  module.exports.Parser = Parser
 }

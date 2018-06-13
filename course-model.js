@@ -176,3 +176,7 @@ class Course {
     return this.coursePseudoTopic.questionSet.pickRandomQuestion()
   }
 }
+
+if (typeof exports != 'undefined') {
+  module.exports.Course = Course
+}
