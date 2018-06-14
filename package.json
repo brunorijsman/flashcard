@@ -25,6 +25,7 @@
     "eslint-plugin-standard": "^3.1.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.257.1",
     "eslint": "^4.19.1",
     "fs": "0.0.1-security",
     "minimist": "^1.2.0"

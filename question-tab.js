@@ -8,11 +8,6 @@ const upperCaseV = 'V'.charCodeAt(0)
 const lowerCaseX = 'x'.charCodeAt(0)
 const upperCaseX = 'X'.charCodeAt(0)
 
-const questions = [
-  { q: 'What skin pattern does a zebra have?', a: 'Stripes.' },
-  { q: 'Who is the president of the United States?', a: 'Donald Trump.' },
-  { q: 'How many eggs are there in a dozen?', a: 'Twelve' }
-]
 var currentQuestionNr = null
 var currentQuestion = null
 

@@ -1,6 +1,13 @@
 function getCourse () {
+  let url = null
+  const fcxFile = 'aws-certified-solutions-architect-associate.fcx'
+  if (location.href.includes('flashcard.html')) {
+    url = location.href.replace('flashcard.html', fcxFile)
+  } else {
+    url = location.href + fcxFile
+  }
   const xhr = new XMLHttpRequest()
-  xhr.open('GET', 'http://127.0.0.1:5500/aws-certified-solutions-architect-associate.fcx', false)
+  xhr.open('GET', url, false)
   xhr.send(null)
   if (xhr.status !== 200) {
     return null
