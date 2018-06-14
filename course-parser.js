@@ -147,9 +147,11 @@ class Parser {
 
   parseLab() {
     const labName = this.arg
+    const id = this.parseId()
+    this.course.addLab(id, labName)
     while (this.optionalNextCommand(['step', 's'])) {
       const stepText = this.arg
-      /* TODO: Add to model */
+      this.course.addStep(stepText)
     }
   }
 
@@ -191,11 +193,25 @@ class Parser {
     return text
   }
 
+  generateDefinitionTextForLab(lab) {
+    let text = ''
+    text += 'Lab: ' + lab.name + '\n'
+    text += 'Id: ' + lab.id + '\n'
+    for (const stepText of lab.steps) {
+      text += 'Step: ' + stepText + '\n'
+    }
+    text += '\n'
+    return text
+  }
+
   generateDefinitionTextForTopic(topic) {
     let text = ''
     const levelToTagMap = { 0: 'Course', 1: 'Topic', 2: 'SubTopic', 3: 'SubSubTopic' }
     text += levelToTagMap[topic.level] + ': ' + topic.name + '\n'
     text += 'Id: ' + topic.id + '\n\n'
+    for (const lab of topic.localLabs) {
+      text += this.generateDefinitionTextForLab(lab)
+    }
     for (const question of topic.localQuestions) {
       text += this.generateDefinitionTextForQuestion(question)
     }
