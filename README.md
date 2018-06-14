@@ -64,11 +64,14 @@ The teacher uses a plain text editor to edit a course definition file that conta
 
 Current features:
 
-* All the information a "course definition" such as questions, answers, labs is stored in a plain text file, which can be easily edited without any special tools.
+* All the information a "course definition" such as questions, answers, labs is stored in a plain text file, which can be easily edited without any special tools. 
+* Note: it is my conscious decision to use a text file instead of a database. I built this application for myself (scratch my own itch), and this is the way I like it. I much prefer the simplicity of editing a text file over using a database. Also, it makes it easier to version control the questions.
 
 Planned features:
 
-* A command-line interface to pr
+* A command-line interface to:
+  * Check a course definition for correctness.
+  * Annotate the course definition with automatically generated meta-data (e.g. unique question identifiers). This meta-data is needed for the correct operation of the system, but we don't want to bother the teacher with grunt work.
 
 ## Features for the operator role
 
