@@ -93,7 +93,7 @@ function readCourse (parser, fileName) {
   try {
     buffer = fs.readFileSync(fileName)
   } catch (error) {
-    fatalError('Could not open file ' + fileName, error.message)
+    fatalError('Could not read file ' + fileName, error.message)
   }
   const courseDefinition = String(buffer)
   const course = parser.parse(courseDefinition)
@@ -112,10 +112,33 @@ function runCheckCommand (fileName) {
   }
 }
 
+function makeBackupFile (fileName) {
+  // TODO: command line option for not creating a backup file
+  // TODO: command line option for reading from stdin and writing to stdout
+  let buffer = null
+  try {
+    buffer = fs.readFileSync(fileName)
+  } catch (error) {
+    fatalError('Could not read file ' + fileName, error.message)
+  }
+  const backupFileName = fileName + '.backup-' + new Date().toISOString()
+  try {
+    fs.writeFileSync(backupFileName, buffer)
+  } catch (error) {
+    fatalError('Could not write to backup file ' + backupFileName, error.message)
+  }
+}
+
 function runAnnotateCommand (fileName) {
+  makeBackupFile(fileName)
   const parser = new courseParser.Parser()
   const course = readCourse(parser, fileName)
-  console.info(parser.generateDefinitionText())
+  const annotatedDefinitionText = parser.generateDefinitionText()
+  try {
+    fs.writeFileSync(fileName, annotatedDefinitionText)
+  } catch (error) {
+    fatalError('Could not update file ' + fileName, error.message)
+  }
   return 0
 }
 
