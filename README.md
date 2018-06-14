@@ -2,7 +2,17 @@
 
 A web application for using flashcards to practice a subject.
 
-Current end-user features:
+## Features for the student role
+
+The student role represents the person who practices their skills using a web-based flashcard application. 
+
+The flashcard application allows the student to review questions and answers. It also provides the student step-by-step instructions for hands-on lab excercises. 
+
+The student can keep track of their progress in terms of which questions have been covered, which answers are known, and how much effort was put in every day.
+
+The student is not responsible for putting together the list of questions and answers; this is the responsibility of the teacher role.
+
+Current features:
 
 * The topic tab:
   * Show the hierarchical organization of the course into topics, sub-topics, etc.
@@ -14,7 +24,7 @@ Current end-user features:
   * A visual indication showing whether the question was asked before and whether the answer was known.
   * Fast learning cycle, enabled by fast response times and keyboard short-cuts.
   
-Planned end-user features:
+Planned features:
 * Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, but it does not yet influence which questions are asked)
 * Store question coverage history. For each question, keep track of:
   * How often the question was asked.
@@ -46,14 +56,36 @@ Planned end-user features:
   * On the y-axis the percentage of questions that are well-known (dark green), known (yellow), not-known (red), and not-covered (white).
 * A coverage by topic table, listing for each topic what percentage of questions are well-known (dark green), known (yellow), not-known (red), and not-covered (white).
   
+## Features for the teacher role
 
-Current technical attributes:
+The teacher role represents the person who prepares the list of questions and answers, and the step-by-step instructions for hands-on labs.
+
+The teacher uses a plain text editor to edit a course definition file that contains all this information, and then uses a command-line interface to check the course definition file for correctness and to annotate the file with additional meta-data (such as unique question identifiers) that is needed to make the system work as intended.
+
+Current features:
+
+* All the information a "course definition" such as questions, answers, labs is stored in a plain text file, which can be easily edited without any special tools.
+
+Planned features:
+
+* A command-line interface to pr
+
+## Features for the operator role
+
+The operator role represents the person who is responsible for hosting the web application.
+
+The operator cares about the day-to-day operational maintenance of the application, such as making sure that all resources (hosted files, web servers, etc.) are properly functioning.
+
+If anything is not working, the students and teachers will turn to the operator for support.
+
+Current features:
+
 * Responsive application built using bootstrap. Works well on laptops, tablets, and phones.
 * This is a purely static web application, written entirely using client-side Javascript. It requires no active backend application.
-* All the information a "course definition" such as questions, answers, labs is stored in a plain text file, which can be easily edited without any special tools.
 * Do not lose progress history when questions are added, deleted, or modified.
 
-Planned technical attributes:
+Planned features:
+
 * All information learning progress (which questions were asked, which were answered correct, which were not, etc.) is stored in local storage on the client-side. No information is sent to the server; in fact, there is no active back-end server application. The upsides are better privacy, the ability to work offline, and better performance when the Internet is slow. The downsides are that learning progress cannot be tracked across multiple devices and that clearing browser state will erase test progress, but these are conscious decissions.
 
 
