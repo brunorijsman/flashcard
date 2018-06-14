@@ -15,7 +15,7 @@ Current end-user features:
   * Fast learning cycle, enabled by fast response times and keyboard short-cuts.
   
 Planned end-user features:
-* Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, the it does not influence which questions are asked)
+* Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, but it does not yet influence which questions are asked)
 * Store question coverage history. For each question, keep track of:
   * How often the question was asked.
   * How often the answer was known and how often not.
