@@ -58,13 +58,10 @@ The teacher role represents the person who prepares the list of questions and an
 
 The teacher uses a plain text editor to edit a course definition file that contains all this information, and then uses a command-line interface to check the course definition file for correctness and to annotate the file with additional meta-data (such as unique question identifiers) that is needed to make the system work as intended.
 
-Current features:
+ Features:
 
 * All the information a "course definition" such as questions, answers, labs is stored in a plain text file, which can be easily edited without any special tools. 
 * Note: it is my conscious decision to use a text file instead of a database. I built this application for myself (scratch my own itch), and this is the way I like it. I much prefer the simplicity of editing a text file over using a database. Also, it makes it easier to version control the questions.
-
-Planned features:
-
 * A command-line interface to:
   * Check a course definition for correctness.
   * Annotate the course definition with automatically generated meta-data (e.g. unique question identifiers). This meta-data is needed for the correct operation of the system, but we don't want to bother the teacher with grunt work.
@@ -79,6 +76,7 @@ If anything is not working, the students and teachers will turn to the operator 
 
 Current features:
 
+* A deploy script that automatically deploys the web application to Amazon Web Services
 * The student web application:
   * Responsive Javascript application built using bootstrap. 
   * Works well on laptops, tablets, and phones.
