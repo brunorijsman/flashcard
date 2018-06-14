@@ -4,13 +4,18 @@ A web application for using flashcards to practice a subject.
 
 Current end-user features:
 
-* Display a sequence of questions.
-* Allow the user to expose the user to expose the correct answer for each question.
-* Allow the user to indicate whether or not they knew the answer before it was exposed.
-* Fast learning cycle, enabled by fast response times and keyboard short-cuts.
-
+* The topic tab:
+  * Show the hierarchical organization of the course into topics, sub-topics, etc.
+  * The user can choose to practice all questions, or a subset of the questions by topic.
+* The quiz tab:
+  * Display a sequence of questions.
+  * The user can expose the correct answer for each question.
+  * The user can indicate whether or not they knew the answer to the question.
+  * A visual indication showing whether the question was asked before and whether the answer was known.
+  * Fast learning cycle, enabled by fast response times and keyboard short-cuts.
+  
 Planned end-user features:
-* Chose a topic to study and ask only questions from the selected topic.
+* Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, the it does not influence which questions are asked)
 * Store question coverage history. For each question, keep track of:
   * How often the question was asked.
   * How often the answer was known and how often not.
