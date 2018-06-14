@@ -33,9 +33,9 @@ function updateCourseName () {
 function updateTopicOptions () {
   const topicSelect = $('#topic-select')[0]
   topicSelect.options.length = 0
-  const topicNames = ['All topics'].concat(course.topicNames)
-  for (const topicName of topicNames) {
-    topicSelect.append(new Option(topicName))
+  topicSelect.append(new Option('All topics'))
+  for (const topic of course.topics) {
+    topicSelect.append(new Option(topic.name))
   }
 }
 
@@ -44,9 +44,10 @@ function updateSubTopicOptions () {
   subTopicSelect.options.length = 0
   const selectedTopicIndex = $('#topic-select option:selected').index()
   if (selectedTopicIndex > 0) {
-    const subTopicNames = ['All sub-topics'].concat(course.getSubTopicNames(selectedTopicIndex - 1))
-    for (const subTopicName of subTopicNames) {
-      subTopicSelect.append(new Option(subTopicName))
+    selectedTopic = course.topics[selectedTopicIndex - 1]
+    subTopicSelect.append(new Option('All sub-topics'))
+    for (const subTopic of selectedTopic.childTopics) {
+      subTopicSelect.append(new Option(subTopic.name))
     }
   }
 }
@@ -57,9 +58,11 @@ function updateSubSubTopicOptions () {
   const selectedTopicIndex = $('#topic-select option:selected').index()
   const selectedSubTopicIndex = $('#sub-topic-select option:selected').index()
   if (selectedTopicIndex > 0 && selectedSubTopicIndex > 0) {
-    const subSubTopicNames = ['All sub-sub-topics'].concat(course.getSubSubTopicNames(selectedTopicIndex - 1, selectedSubTopicIndex - 1))
-    for (const subSubTopicName of subSubTopicNames) {
-      subSubTopicSelect.append(new Option(subSubTopicName))
+    selectedTopic = course.topics[selectedTopicIndex - 1]
+    selectedSubTopic = selectedTopic.childTopics[selectedSubTopicIndex - 1]
+    subSubTopicSelect.append(new Option('All sub-sub-topics'))
+    for (const subSubTopic of selectedSubTopic.childTopics) {
+      subSubTopicSelect.append(new Option(subSubTopic.name))
     }
   }
 }

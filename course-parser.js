@@ -4,7 +4,7 @@ if (typeof exports != 'undefined') {
 }
 
 class Parser {
-  reset () {
+  reset() {
     this.definition = null
     this.line = null
     this.lineNr = null
@@ -15,13 +15,15 @@ class Parser {
     this.topicName = null
     this.subTopicName = null
     this.subSubTopicName = null
+    this.allowMissingAnnotations = true
+    this.nextId = 1
   }
 
-  constructor () {
+  constructor() {
     this.reset()
   }
 
-  fatalError (errorMsg) {
+  fatalError(errorMsg) {
     console.error('Error   :', errorMsg)
     console.error('File    :', this.fileName)
     console.error('Line nr :', this.lineNr)
@@ -29,7 +31,7 @@ class Parser {
     throw new Error(errorMsg)
   }
 
-  nextCommand () {
+  nextCommand() {
     if (this.pushedBack) {
       this.pushedBack = false
       console.assert(this.tag, 'Missing pushed-back tag')
@@ -57,66 +59,105 @@ class Parser {
     return true
   }
 
-  prevCommand () {
+  mandatoryNextCommand(expectedCommands, errorMsg) {
+    if (!this.nextCommand()) {
+      this.fatalError(errorMsg)
+    }
+    if (!expectedCommands.includes(this.tag)) {
+      this.fatalError(errorMsg)
+    }
+  }
+
+  optionalNextCommand(expectedCommands) {
+    if (!this.nextCommand()) {
+      return false
+    }
+    if (expectedCommands.includes(this.tag)) {
+      return true
+    }
+    this.prevCommand()
+    return false
+  }
+
+  prevCommand() {
     console.assert(!this.pushedBack, 'Only one push-back allowed')
     console.assert(this.tag != null, 'Nothing to push-back')
     this.pushedBack = true
   }
 
-  parseTopic () {
-    this.topicName = this.arg
-    this.subTopicName = null
-    this.subSubTopicName = null
-    this.course.addTopic(this.topicName)
+  allocateId() {
+    const id = this.nextId
+    this.nextId += 1
+    return id
   }
 
-  parseSubTopic () {
+  parseId() {
+    if (this.optionalNextCommand(['id', 'i'])) {
+      // TODO: more stringent check
+      return parseInt(this.arg)
+    } else {
+      if (this.allowMissingAnnotations) {
+        return this.allocateId()
+      } else {
+        this.fatalError('Question without id')
+      }
+    }
+  }
+
+  parseTopic() {
+    const topicName = this.arg
+    const id = this.parseId()
+    this.course.addTopic(id, topicName)
+    this.topicName = topicName
+    this.subTopicName = null
+    this.subSubTopicName = null
+  }
+
+  parseSubTopic() {
     if (this.topicName === null) {
       this.fatalError('Sub-topic without topic')
     }
-    this.subTopicName = this.arg
+    const subTopicName = this.arg
+    const id = this.parseId()
+    this.course.addSubTopic(id, subTopicName)
+    this.subTopicName = subTopicName
     this.subSubTopicName = null
-    this.course.addSubTopic(this.subTopicName)
   }
 
-  parseSubSubTopic () {
+  parseSubSubTopic() {
     if (this.subTopicName === null) {
       this.fatalError('Sub-sub-topic without sub-topic')
     }
-    this.subSubTopicName = this.arg
-    this.course.addSubSubTopic(this.subSubTopicName)
+    const subSubTopicName = this.arg
+    const id = this.parseId()
+    this.course.addSubSubTopic(id, subSubTopicName)
+    this.subSubTopicName = subSubTopicName
   }
 
-  parseQuestion () {
+  parseQuestion() {
     if (this.topicName === null) {
       this.fatalError('Question without topic')
     }
     const questionText = this.arg
-    if (!this.nextCommand() || !['answer', 'a'].includes(this.tag)) {
-      this.fatalError('Question without answer')
-    }
+    const id = this.parseId()
+    this.mandatoryNextCommand(['answer', 'a'], 'Question without answer')
     const answerText = this.arg
-    this.course.addQuestion(questionText, answerText)
+    this.course.addQuestion(id, questionText, answerText)
   }
 
-  parseLab () {
+  parseLab() {
     const labName = this.arg
-    while (this.nextCommand()) {
-      if (this.tag !== 'step') {
-        this.prevCommand()
-        break
-      }
+    while (this.optionalNextCommand(['step', 's'])) {
       const stepText = this.arg
       /* TODO: Add to model */
     }
   }
 
-  parseCourse () {
-    if (!this.nextCommand() || this.tag != 'course') {
-      this.fatalError('Missing course')
-    }
-    console.assert(this.course === null)
-    this.course = new Course(this.arg)
+  parseCourse() {
+    this.mandatoryNextCommand(['course'], 'Missing course')
+    const courseName = this.arg
+    const id = this.parseId()
+    this.course = new Course(id, courseName)
     while (this.nextCommand()) {
       if (this.tag === 'topic') {
         this.parseTopic()
@@ -134,12 +175,39 @@ class Parser {
     }
   }
 
-  parse (definitionText) {
+  parse(definitionText) {
     this.reset()
     this.definition = definitionText.split('\n')
     this.lineNr = 0
     this.parseCourse()
     return this.course
+  }
+
+  generateDefinitionTextForQuestion(question) {
+    let text = ''
+    text += 'Question: ' + question.questionText + '\n'
+    text += 'Id: ' + question.id + '\n'
+    text += 'Answer: ' + question.answerText + '\n\n'
+    return text
+  }
+
+  generateDefinitionTextForTopic(topic) {
+    let text = ''
+    const levelToTagMap = { 0: 'Course', 1: 'Topic', 2: 'SubTopic', 3: 'SubSubTopic' }
+    text += levelToTagMap[topic.level] + ': ' + topic.name + '\n'
+    text += 'Id: ' + topic.id + '\n\n'
+    for (const question of topic.localQuestions) {
+      text += this.generateDefinitionTextForQuestion(question)
+    }
+    for (const childTopic of topic.childTopics) {
+      text += this.generateDefinitionTextForTopic(childTopic)
+    }
+    return text
+  }
+
+  generateDefinitionText() {
+    console.assert(this.course !== null, 'Must not call generateDefinitionText without a parsed course')
+    return this.generateDefinitionTextForTopic(this.course.coursePseudoTopic)
   }
 }
 

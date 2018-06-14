@@ -69,7 +69,7 @@ Planned features:
   * Check a course definition for correctness.
   * Annotate the course definition with automatically generated meta-data (e.g. unique question identifiers). This meta-data is needed for the correct operation of the system, but we don't want to bother the teacher with grunt work.
 
-## Features for the operator role and developer roles
+## Features for the operator and developer roles
 
 The operator role represents the person who is responsible for hosting the web application. The operator is responsible for the day-to-day operational maintenance of the application, such as making sure that all resources (hosted files, web servers, etc.) are properly functioning. They care about things such as simplicity, stability, etc.
 
