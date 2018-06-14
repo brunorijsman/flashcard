@@ -71,20 +71,21 @@ function main () {
   if (xargs.help) {
     reportUsageAndExit(0)
   }
-//  xargs._ = ['annotate', 'aws-certified-solutions-architect-associate.fcx']  // DEBUG
   if (xargs._.length < 1) {
     commandLineError('Missing command; valid commands are: check, annotate')
   }
   verbose = xargs.verbose
   const command = xargs._.shift()
   const lowerCommand = command.toLowerCase()
+  let exitCode = 0
   if (lowerCommand === 'check') {
-    runCheckCommand(parseJustFileName(xargs))    
+    exitCode = runCheckCommand(parseJustFileName(xargs))    
   } else if (lowerCommand === 'annotate') {
-    runAnnotateCommand(parseJustFileName(xargs))    
+    exitCode = runAnnotateCommand(parseJustFileName(xargs))    
   } else {
     commandLineError('Unknown command ' + command)
   }
+  process.exit(exitCode)
 }
 
 function readCourse (parser, fileName) {
@@ -103,13 +104,19 @@ function runCheckCommand (fileName) {
   const parser = new courseParser.Parser()
   const course = readCourse(parser, fileName)
   verboseMsg('Course definition file : ' + fileName)
-  verboseMsg('Correctness            : correct (no errors)')
+  verboseMsg('Missing annotations    : ' + parser.nrMissingAnnotations)
+  if (parser.nrMissingAnnotations > 0) {
+    return 1
+  } else {
+    return 0
+  }
 }
 
 function runAnnotateCommand (fileName) {
   const parser = new courseParser.Parser()
   const course = readCourse(parser, fileName)
   console.info(parser.generateDefinitionText())
+  return 0
 }
 
 main()

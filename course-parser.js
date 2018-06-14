@@ -18,6 +18,7 @@ class Parser {
     this.allowMissingAnnotations = true
     this.storedNextId = null
     this.nextId = 1
+    this.nrMissingAnnotations = 0
   }
 
   constructor() {
@@ -94,18 +95,34 @@ class Parser {
 
   parseId() {
     if (this.optionalNextCommand(['id', 'i'])) {
-      // TODO: more stringent check
       const id = parseInt(this.arg)
-      if (this.storedNextId !== null && id >= this.storedNextId) {
+      if (this.storedNextId === null) {
+        this.fatalError('Stored Id without stored NextId')
+      } else if (id >= this.storedNextId) {
         this.fatalError('Actual Id is greater than or equal to stored NextId')
       }
       return id
     } else {
       if (this.allowMissingAnnotations) {
+        this.nrMissingAnnotations += 1
         return this.allocateId()
       } else {
-        this.fatalError('Question without id')
+        this.fatalError('Missing id')
       }
+    }
+  }
+
+  parseNextId() {
+    if (this.optionalNextCommand(['nextid'])) {
+      this.storedNextId = parseInt(this.arg)
+      this.nextId = this.storedNextId
+    } else {
+      if (!this.allowMissingAnnotations) {
+        this.fatalError('Missing nextid')
+      }
+      this.storedNextId = null
+      this.nextId = 1
+      this.nrMissingAnnotations += 1
     }
   }
 
@@ -163,12 +180,8 @@ class Parser {
   parseCourse() {
     this.mandatoryNextCommand(['course'], 'Missing course')
     const courseName = this.arg
+    this.parseNextId()
     const id = this.parseId()
-    if (this.optionalNextCommand(['nextid'])) {
-      this.storedNextId = parseInt(this.arg)
-      this.nextId = this.storedNextId
-      console.error("this.storedNextId = ", this.storedNextId)
-    }
     this.course = new Course(id, courseName)
     while (this.nextCommand()) {
       if (this.tag === 'topic') {
@@ -218,10 +231,10 @@ class Parser {
     let text = ''
     const levelToTagMap = { 0: 'Course', 1: 'Topic', 2: 'SubTopic', 3: 'SubSubTopic' }
     text += levelToTagMap[topic.level] + ': ' + topic.name + '\n'
-    text += 'Id: ' + topic.id + '\n'
     if (topic.level === 0) {
       text += 'NextId: ' + this.nextId + '\n'
     }
+    text += 'Id: ' + topic.id + '\n'
     text += '\n'
     for (const lab of topic.localLabs) {
       text += this.generateDefinitionTextForLab(lab)
