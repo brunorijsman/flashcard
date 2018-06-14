@@ -35,9 +35,6 @@ Planned features:
     * Not-known = when the question was asked most recently, the answer was not known.
     * Known = when the question was asked most recently, the answer was known.
     * Well-known = the most recent three times the question was asked, the answer was known each time.
-  * For the most recent three exposures of the question, whether the answer was known or not.
-  * Whether the question is known (answer was known in the most recent exposure).
-  * Whether the question is well-known (answer was known each of the three most recent exposures)
 * Store lab coverage history. For each lab, keep track of:
   * How often the lab was executed.
 * Store learning effort history. For each day, keep track of:
