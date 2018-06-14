@@ -38,10 +38,9 @@ Planned features:
 * Store lab coverage history. For each lab, keep track of:
   * How often the lab was executed.
 * Store learning effort history. For each day, keep track of:
-  * How many questions were asked ("exposures")
+  * How many questions were asked
   * For how many questions the answer was known, and how often not.
   * How many labs were executed.
-* Visual feedback during the practice cycle to indicate how well the answer to a question is already known (most recent three answers: known or not known).
 * Automatically ask questions whose answer is know less frequently and ask questions whose answer is not known more frequently.
 * Practice labs, where the user is lead through a sequence of steps to strengthen memory-muscle for some operational task.
 * An effort graph, showing how many questions were practiced and what the results were as a function of time (i.e. for each day).
@@ -70,23 +69,27 @@ Planned features:
   * Check a course definition for correctness.
   * Annotate the course definition with automatically generated meta-data (e.g. unique question identifiers). This meta-data is needed for the correct operation of the system, but we don't want to bother the teacher with grunt work.
 
-## Features for the operator role
+## Features for the operator role and developer roles
 
-The operator role represents the person who is responsible for hosting the web application.
+The operator role represents the person who is responsible for hosting the web application. The operator is responsible for the day-to-day operational maintenance of the application, such as making sure that all resources (hosted files, web servers, etc.) are properly functioning. They care about things such as simplicity, stability, etc.
 
-The operator cares about the day-to-day operational maintenance of the application, such as making sure that all resources (hosted files, web servers, etc.) are properly functioning.
+The developer role is responsible for developing and maintaining the applicaiton. They care about things such as correctness, maintainability, etc.
 
-If anything is not working, the students and teachers will turn to the operator for support.
+If anything is not working, the students and teachers will turn to the operator or developer for support.
 
 Current features:
 
-* Responsive application built using bootstrap. Works well on laptops, tablets, and phones.
+* The student web application:
+  * Responsive Javascript application built using bootstrap. 
+  * Works well on laptops, tablets, and phones.
+* The teacher command line interface:
+  * Node.js application.
+  * Uses common code with the student web application to make sure the two stay in sync.
 * This is a purely static web application, written entirely using client-side Javascript. It requires no active backend application.
 * Do not lose progress history when questions are added, deleted, or modified.
 
 Planned features:
 
 * All information learning progress (which questions were asked, which were answered correct, which were not, etc.) is stored in local storage on the client-side. No information is sent to the server; in fact, there is no active back-end server application. The upsides are better privacy, the ability to work offline, and better performance when the Internet is slow. The downsides are that learning progress cannot be tracked across multiple devices and that clearing browser state will erase test progress, but these are conscious decissions.
-
-
+* Host the application in some public place (most likely AWS).
 
