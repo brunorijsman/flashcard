@@ -1,0 +1,106 @@
+#!/bin/bash
+
+fcx_file=aws-certified-solutions-architect-associate.fcx
+bucket=flashcard.remoteautonomy.com
+log_file=deploy.log
+
+declare -a deploy_files=(
+    "flashcard.html" 
+    "course-model.js"
+    "course-parser.js"
+    "topic-tab.js"
+    "question-tab.js"
+    "aws-certified-solutions-architect-associate.fcx"
+)
+
+function start_log {
+    if echo >> ${log_file}; then
+        ok_progress "Log file ${log_file} is writable"
+    else
+        error "Could not write to log file ${log_file}"
+    fi
+}
+
+function log_msg {
+    msg=$1
+    date=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "${date} ${msg}" >> ${log_file}
+}
+
+function ok_progress {
+    msg=$*
+    echo "$(tput setaf 2)$(tput rev)[OK]$(tput sgr0) ${msg}"
+    log_msg "[OK] ${msg}"
+}
+
+function error {
+    msg=$*
+    echo "$(tput setaf 1)$(tput rev)[ERROR]$(tput sgr0) ${msg}"
+    exit 1
+    log_msg ${msg}
+    log_msg "[ERROR] ${msg}"
+}
+
+function check_readable {
+    file=$1
+    if [[ -r ${file} ]]; then
+        ok_progress "${file} is readable"
+    else
+        error "${file} is not readable"
+    fi
+}
+
+function check_deploy_files_readable {
+    for f in "${deploy_files[@]}"; do
+        check_readable $f
+    done
+}
+
+function check_fcx_file_correct {
+    if ! ./flashcard-cli check ${fcx_file}; then
+        error "${fcx_file} contains error(s)"
+    fi
+    ok_progress "${fcx_file} is correct"
+}
+
+function check_bucket_listable {
+    if aws s3 ls s3://${bucket} >> ${log_file}; then
+        ok_progress "S3 bucket ${bucket} is listable"
+    else
+        error "${bucket} is not listable"
+    fi
+}
+
+function confirm_deploy {
+    read -p 'Ready to deploy; type "deploy" to go ahead: ' confirm
+    if [[ ${confirm} == "deploy" ]]; then
+        ok_progress "Deploying..."
+    else
+        error "Deployment aborted"
+    fi
+}
+
+function copy_file_to_s3 {
+    file=$1
+    grants="--grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers"
+    command="aws s3 cp ${file} s3://${bucket}/ ${grants}"
+    if ${command} >> ${log_file}; then
+        ok_progress "Copied ${file} to S3 bucket ${bucket}"
+    else
+        error "Could not copy ${file} to S3 bucket ${bucket}"
+    fi
+}
+
+function copy_deploy_files_to_s3 {
+    for f in "${deploy_files[@]}"; do
+        copy_file_to_s3 $f
+    done
+}
+
+start_log
+check_deploy_files_readable
+check_fcx_file_correct
+check_bucket_listable
+confirm_deploy
+copy_deploy_files_to_s3
+ok_progress "Deployment completed succesfully"
