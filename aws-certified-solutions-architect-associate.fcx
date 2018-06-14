@@ -2490,9 +2490,9 @@ A: It specifies the rules for communications between instances that are attached
 Q: Can you block a specific IP address using a security group?
 A: No, use an Access Control List (ACL) instead.
 
-SubTopic: Upgrading EBS Volume Types
+SubTopic: Upgrading EBS volume types
 
-Lab: Upgrading EBS Volume Types
+Lab: Upgrading EBS volume types
 Step: Create a t2.micro Amazon Linux instance with 3 extra volumes: Magnetic, ST1, SC1.
 Step: Take a note of the availability zone of the instance and the volumes.
 Step: Try to change the size and type of each attached volume, and observe which changes are allowed and which not.
@@ -2557,9 +2557,30 @@ A: Yes, you can share it with another account or make it completely public.
 Q: Can you share an encrypted snapshot with another user?
 A: No, they will not be able to restore a volume from it.
 
-SubTopic: Encrypt Root Device Volume and Create an AMI
+Q: In Linux, how do you get a list of all volumes (virtual disks) that are attached to your instance?
+A: "lsblk"
 
-Lab: Encrypt Root Device Volume and Create an AMI
+Q: Are the device names (/dev/xxx) in Linux always the same as the ones reported in the AWS console?
+A: Not necessarily. For example, the Console might report /dev/sdb but the actual Linux device name might be /dev/xvdb. Amazon Linux AMIs will always create a symbolic link for the device name reported in the Console.
+
+Q: In Linux, how can you check whether a disk device has a file system on it before you format it?
+A: "file -s /dev/xxx" (if it reports data, it has no file system on it)
+
+Q: On Linux, how can you create an ext4 file system on a disk ("format the disk")?
+A: "mkfs -t ext4 /dev/xxx"
+
+Q: On Linux, what should you do before you format a disk?
+A: Check whether it already has a file system on it using "file -s /dev/xxx".
+
+Q: On Linux, how do you mount a formatted disk xxx to mountpoint yyy right now?
+A: "mkdir /yyy" + "mount /dev/xxx /yyy"
+
+Q: On Linux, how do you make sure that a formatted disk xxx is mounted to mountpoint yyy at boot time?
+A: Edit file /etc/fstab (it is recommended to use the UUID of the disk)
+
+SubTopic: Encrypt root device volume and create an AMI
+
+Lab: Encrypt root device volume and create an AMI
 Step: Create a t2.micro Amazon Linux instance.
 Step: Stop the instance and take a snapshot.
 Step: Copy the snapshot to a different region and encrypt it.
@@ -2647,9 +2668,9 @@ A: By default the data is lost, but you can configure EC2 to keep the root devic
 Q: What happens if you terminate an Instance Store Backed EC2 Instance?
 A: The data is always lost, you cannot configure EC2 to keep the root device volume.
 
-SubTopic: Load Balancers and Health Checks
+SubTopic: Load balancers and health checks
 
-Lab: Load Balancers and Health Checks
+Lab: Load balancers and health checks
 Step: Create an Amazon Linux t2.micro EC2 instance with an Apache web server that is configured to start at boot time.
 Step: Create a simple webpage in index.html and verify it works.
 Step: Create a healthcheck.html file.
@@ -2727,9 +2748,9 @@ Step: Add a text widget.
 Step: Add a line widget for CPU utilization.
 Step: Add a stacked area widget for network in and out.
 Step: Add a number widget for CU utilization.
-Step: Create an alarm (details in next step).
-Step: Threshold is CPU utilization > 50% for 1 consecutive sample.
-Step: Action is send an email in state alarm.
+Step: Create an alarm:
+Step: ... Threshold is CPU utilization > 50% for 1 consecutive sample.
+Step: ... Action is send an email in state alarm.
 Step: Observe that the current alarm state is OK.
 Step: Force high CPU on the instance using "dd if=/dev/zero of=/dev/null"
 Step: Observe that an alarm is generated and an email is sent within 5 minutes.
