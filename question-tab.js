@@ -59,6 +59,7 @@ function recordKnowIt() {
   if (currentQuestion !== null) {
     currentQuestion.recordKnowIt()
   }
+  writeOneQuestionStats(currentQuestion)
   nextQuestion()
 }
 
@@ -66,9 +67,11 @@ function recordDontKnowIt() {
   if (currentQuestion !== null) {
     currentQuestion.recordDontKnowIt()
   }
+  writeOneQuestionStats(currentQuestion)
   nextQuestion()
 }
 
+/* TODO: Only handle keypress if question tab is visible */
 function handleKeyPress(key) {
   if (answerVisible) {
     if ((key.which === lowerCaseX) || (key.which === upperCaseX)) {

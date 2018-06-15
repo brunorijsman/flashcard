@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-31532124-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-31532124-4');
+  </script>
   <title>Flashcard</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +18,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="course-model.js"></script>
   <script src="course-parser.js"></script>
+  <script src="database.js"></script>
   <script src="topic-tab.js"></script>
   <script src="question-tab.js"></script>
 </head>
@@ -31,10 +40,7 @@
         <a data-toggle="tab" href="#lab-tab">Lab</a>
       </li>
       <li>
-        <a data-toggle="tab" href="#results-tab">Results</a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#options-tab">Options</a>
+        <a data-toggle="tab" href="#progress-tab">Progress</a>
       </li>
     </ul>
 
@@ -145,14 +151,9 @@
         <p>Some content in lab.</p>
       </div>
 
-      <div id="results-tab" class="tab-pane">
-        <h3>Results</h3>
-        <p>Some content in results.</p>
-      </div>
-
-      <div id="options-tab" class="tab-pane">
-        <h3>Options</h3>
-        <p>Some content in options.</p>
+      <div id="progress-tab" class="tab-pane">
+        <h3>Progress</h3>
+        <p>Some content in progress.</p>
       </div>
 
     </div>

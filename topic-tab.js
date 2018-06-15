@@ -88,6 +88,7 @@ function initTopicTab () {
   course = getCourse()
   updateCourseName()
   updateTopicOptions()
+  readAllQuestionsStats(course.coursePseudoTopic.allQuestions)
 }
 
 <!-- TODO: Create a special object for holding the global state -->

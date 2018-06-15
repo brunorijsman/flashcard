@@ -23,9 +23,6 @@ Current features:
   * The user can indicate whether or not they knew the answer to the question.
   * A visual indication showing whether the question was asked before and whether the answer was known.
   * Fast learning cycle, enabled by fast response times and keyboard short-cuts.
-  
-Planned features:
-* Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, but it does not yet influence which questions are asked)
 * Store question coverage history. For each question, keep track of:
   * How often the question was asked.
   * How often the answer was known and how often not.
@@ -35,6 +32,9 @@ Planned features:
     * Not-known = when the question was asked most recently, the answer was not known.
     * Known = when the question was asked most recently, the answer was known.
     * Well-known = the most recent three times the question was asked, the answer was known each time.
+  
+Planned features:
+* Chose a topic to study and ask only questions from the selected topic (currently the topic can be selected, but it does not yet influence which questions are asked)
 * Store lab coverage history. For each lab, keep track of:
   * How often the lab was executed.
 * Store learning effort history. For each day, keep track of:
