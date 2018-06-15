@@ -88,10 +88,15 @@ function initTopicTab () {
   course = getCourse()
   updateCourseName()
   updateTopicOptions()
-  readAllQuestionsStats(course.coursePseudoTopic.allQuestions)
+  // TODO: Keep track of activeTopic and updateActiveQuestions accordingly
+  activeQuestions = course.coursePseudoTopic.allQuestions
+  readAllQuestionsStats(activeQuestions)
 }
 
-<!-- TODO: Create a special object for holding the global state -->
+function selectTopicTab () {
+}
 
 var course = null
+var activeQuestions = null
+
 

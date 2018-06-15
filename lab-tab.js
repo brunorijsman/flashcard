@@ -1,0 +1,5 @@
+function initLabTab() {
+}
+
+function selectLabTab() {
+}

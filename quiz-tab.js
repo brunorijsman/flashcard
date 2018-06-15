@@ -86,7 +86,11 @@ function handleKeyPress(key) {
   }
 }
 
-function initQuestionTab() {
+function initQuizTab() {
   nextQuestion()
   $(document).keypress(handleKeyPress)
+}
+
+function selectQuizTab() {
+  // TODO
 }

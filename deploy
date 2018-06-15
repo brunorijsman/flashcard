@@ -9,7 +9,9 @@ declare -a deploy_files=(
     "course-model.js"
     "course-parser.js"
     "topic-tab.js"
-    "question-tab.js"
+    "quiz-tab.js"
+    "lab-tab.js"
+    "progress-tab.js"
     "aws-certified-solutions-architect-associate.fcx"
 )
 

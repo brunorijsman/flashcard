@@ -13,7 +13,6 @@ function writeOneQuestionStats (question) {
     h: question.knowHistory.map(v => v ? 1 : 0)
   }
   const valueStr = JSON.stringify(value)
-  console.info('Write key="' + keyStr + '", value="' + valueStr + '"')
   localStorage.setItem(keyStr, valueStr)
 }
 
@@ -23,7 +22,6 @@ function readOneQuestionStats (questions) {
   if (valueStr) {
     try {
       const value = JSON.parse(valueStr)
-      console.info('Read key="' + keyStr + '", value="' + valueStr + '"')
       question.askCount = value.a
       question.knowCount = value.k
       question.knowRunCount = value.r
