@@ -12,6 +12,7 @@ declare -a deploy_files=(
     "quiz-tab.js"
     "lab-tab.js"
     "progress-tab.js"
+    "database.js"
     "aws-certified-solutions-architect-associate.fcx"
 )
 
