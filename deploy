@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO: Add a check to make sure everything is checked into Git before allowing deployment
+# TODO: Automatically tag git with a version number and include the version number in the webpage if possible
+
 fcx_file=aws-certified-solutions-architect-associate.fcx
 bucket=flashcard.remoteautonomy.com
 log_file=deploy.log
