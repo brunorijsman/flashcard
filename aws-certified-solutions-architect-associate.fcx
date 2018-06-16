@@ -1,5 +1,5 @@
 Course: AWS Certified Solutions Architect Associate
-NextId: 1779
+NextId: 1780
 Id: 1
 
 Topic: Introduction
@@ -1430,8 +1430,9 @@ Question: What is the S3 object metadata?
 Id: 362
 Answer: Data about the S3 object (e.g. Content-Length, Last-Modified, Content-MD5). Note that S3 metadata is a different concept than Tags.
 
-Q: What are the 2 kinds of S3 metadata?
-A: System metadata and user-defined metadata.
+Question: What are the 2 kinds of S3 metadata?
+Id: 1779
+Answer: System metadata and user-defined metadata.
 
 Question: What are S3 object sub-resources?
 Id: 363
@@ -3843,7 +3844,6 @@ Step: Launch a new instance, same as before, except use all the commands collect
 Step: Use a browser to verify the webpage on the newly launched instance works.
 Step: Make sure the bootscript worked as intended by looking at cloud-init-output.log
 
-
 Question: What is stored in the "user data" of an instance?
 Id: 918
 Answer: The boot script (aka configuration script).
@@ -3905,7 +3905,7 @@ Step: Create a bucket and upload a simple index.html and healthcheck.html into i
 Step: Create a load balancer with aggressive timeouts.
 Step: Create a launch configuration that uses a bootstrap script to start a web server.
 Step: Create an auto scaling group:
-Step: ... starts with 3 instances 
+Step: ... starts with 3 instances
 Step: ... uses all AZs in the region
 Step: ... uses the load balancer we just created
 Step: ... dynmically adjusts between 3 and 5 instances
