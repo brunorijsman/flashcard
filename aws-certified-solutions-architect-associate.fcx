@@ -60,7 +60,7 @@ Answer: A geographical area.
 
 Question: What is an availability zone?
 Id: 17
-Answer: One or more data centers that form an independent failure domain.
+Answer: One or more data centers that form an independent failure domain within a region.
 
 Question: What does AZ stand for?
 Id: 18
@@ -80,7 +80,7 @@ Answer: Each region has at least two availability zone. In total there are 44 av
 
 Question: Name 6 regions in North America
 Id: 22
-Answer: US East (Northern Virginia), US East (Ohio), US West (Oregon), US West (Northern California), US West (GovCloud), Canada (Central).
+Answer: us-east-1 (Northern Virginia), us-east-2 (Ohio), us-west-1 (Northern California), us-west-2 (Oregon), us-gov-west-1 (GovCloud US), ca-central-1 (Canada Central).
 
 Question: What is the secret region?
 Id: 23
@@ -148,7 +148,7 @@ Question: What service does does LightSail provide?
 Id: 39
 Answer: Virtual private server deployment (simplified version of EC2).
 
-Question: What server provides virtual private server deployment?
+Question: Which AWS service provides simplified virtual private server deployment?
 Id: 40
 Answer: LightSail.
 
@@ -344,7 +344,7 @@ Question: Which AWS service provides a Content Delivery Network (CDN)?
 Id: 89
 Answer: CloudFront.
 
-Question: Which AWS service provides a content caching?
+Question: Which AWS service provides content caching (as opposed to database caching)?
 Id: 90
 Answer: CloudFront.
 
@@ -935,7 +935,7 @@ Question: What service collects and analyzes mobile application usage data?
 Id: 239
 Answer: Mobile Analytics.
 
-Question: Name 5 mobile services.
+Question: Name 5 mobile AWS services.
 Id: 240
 Answer: Mobile Hub, Pinpoint, AppSync, Device Farm, Mobile Analytics.
 
@@ -1051,7 +1051,7 @@ Question: What service does Alexa for Business provide?
 Id: 269
 Answer: Manage Alexa-enabled devices in a business environment.
 
-Question: What service manages Alexa-enabled devices in a business environment?
+Question: Which AWS service manages Alexa-enabled devices in a business environment?
 Id: 270
 Answer: Alexa for Business.
 
@@ -1059,7 +1059,7 @@ Question: What service does Chime provide?
 Id: 271
 Answer: Video conferencing (unified communications). Amazon's version of Google Hangouts.
 
-Question: What service offers video conferencing (unified communications)?
+Question: Which AWS service offers video conferencing (unified communications)?
 Id: 272
 Answer: Chime.
 
@@ -1428,7 +1428,10 @@ Answer: The contents.
 
 Question: What is the S3 object metadata?
 Id: 362
-Answer: Tags, which are key-value pairs.
+Answer: Data about the S3 object (e.g. Content-Length, Last-Modified, Content-MD5). Note that S3 metadata is a different concept than Tags.
+
+Q: What are the 2 kinds of S3 metadata?
+A: System metadata and user-defined metadata.
 
 Question: What are S3 object sub-resources?
 Id: 363
@@ -1756,7 +1759,7 @@ Answer: Show all versions and delete the delete marker.
 
 Question: What is MFA delete?
 Id: 433
-Answer: Require Multi Factor Authentication (MFS) for permanently deleting an object and changing the versioning state of a bucket.
+Answer: Require Multi Factor Authentication (MFA) for permanently deleting an object and changing the versioning state of a bucket.
 
 SubTopic: Cross-region Replication
 Id: 434
@@ -2240,7 +2243,7 @@ Question: Name 2 mechanisms for securing S3 buckets:
 Id: 540
 Answer: Bucket policies and Access Control Lists (ACLs).
 
-Question: Name 1 mechanism for securing S3 buckets:
+Question: Name 1 mechanism for securing S3 buckets.
 Id: 541
 Answer: Access Control Lists (ACLs).
 
@@ -2256,13 +2259,13 @@ Question: Whose access can be controlled by an S3 ACL?
 Id: 544
 Answer: The owner account, other accounts, public access, and (for buckets) the S3 log delivery group.
 
-Question: What types of access are controlled by a an S3 bucket ACL?
+Question: Name 5 permissions that can be granted in S3 bucket ACL.
 Id: 545
-Answer: List object, write objects, read bucket permissions, write bucket permissions.
+Answer: (1) List objects (2) Create or overwrite or delete object (3) Read bucket ACL (4) Write bucket ACL (5) Full access
 
-Question: What types of access are controlled by a an S3 object ACL?
+Question: Name 4 permissions that can be granted in S3 object ACL.
 Id: 546
-Answer: Read object, read object permissions, write object permissions.
+Answer: (1) Read object data and metada (2) Read object ACL (3) Write object ACL (4) Full access
 
 Question: Where is the permission to write to an object controlled?
 Id: 547
@@ -2579,7 +2582,7 @@ Answer: The bucket name must be exactly the same as the full domain name (e.g. "
 
 Question: What is the default URL for a static website hosted in S3 (not using your own domain name)?
 Id: 624
-Answer: <bucket-name>.s3-website-<region>.amazonws.com
+Answer: <bucket-name>.s3-website-<region>.amazonaws.com
 
 Question: What permissions should be set for S3 objects that are used as content for a static website on S3?
 Id: 625
@@ -2918,7 +2921,7 @@ Question: Can an EC2 instance have multiple EBS volumes?
 Id: 709
 Answer: Yes, it has one root device volume and optionally additional volumes.
 
-Question: What are the EBS volume types (families)?
+Question: Name the 5 EBS volume types (families).
 Id: 710
 Answer: GP2, IO1, ST1, SC1, Magnetic (aka Standard).
 
@@ -3080,7 +3083,7 @@ Question: What is the advantage of Amazon Linux AMIs over other Linux AMIs?
 Id: 747
 Answer: They come with AWS command-line tools, Python, Ruby, Perl, and Java.
 
-Question: What do you need to specify for spot instances?
+Question: Name 4 things you need to specify for spot instance request.
 Id: 748
 Answer: Maximum price, optional launch group, valid from and to time, persitent or not.
 
@@ -3144,7 +3147,7 @@ Question: How do you make sure only your laptop can SSH into an EC2 instance.
 Id: 763
 Answer: Set source to My IP for SSH in the security group for the instance (only if you have a static IP address).
 
-Question: Where and with what permissions should the private key file (pem file) be stored?
+Question: In which directory should the private key file (pem file) be stored, and what permissions should it have?
 Id: 764
 Answer: In ~/.ssh, read-only by owner (400).
 
@@ -3265,7 +3268,7 @@ Question: Name 2 differences between security groups and access control lists (A
 Id: 792
 Answer: Security groups are stateful, ACLs are stateless. Security groups don't support deny rules, ACLs do.
 
-Question: What is the default behavior of a security group traffic in the absence of an explicit allow rule?
+Question: What is the default behavior of a security group in the absence of an explicit allow rule?
 Id: 793
 Answer: Traffic is blocked (denied) by default; a rule is needed to explicitly allow it.
 
@@ -3396,7 +3399,7 @@ Question: On Linux, how do you mount a formatted disk xxx to mountpoint yyy righ
 Id: 823
 Answer: "mkdir /yyy" + "mount /dev/xxx /yyy"
 
-Question: On Linux, how do you make sure that a formatted disk xxx is mounted to mountpoint yyy at boot time?
+Question: On Linux, how do you make sure that a volume (virtual disk) is automatically mounted at boot time?
 Id: 824
 Answer: Edit file /etc/fstab (it is recommended to use the UUID of the disk)
 
@@ -3696,7 +3699,7 @@ Lab: The AWS Command Line and EC2
 Id: 891
 Step: Install the AWS CLI ("aws") on the Mac (use Google for instructions).
 Step: Install the AWS shell ("aws-shell") on the Mac (use Google for instructions).
-Step: *IMPORTANT* If you already have AWS CLI configure, make a backup of ~/.aws/config and ~/.aws/credentials first.
+Step: *IMPORTANT* If you already have run AWS CLI configure, make a backup of ~/.aws/config and ~/.aws/credentials first.
 Step: Create a new user for programmatic access and note its Access Key Secret.
 Step: Do the initial configuration of the AWS CLI using the credentials of this new user.
 Step: Execute some AWS CLI commands on the Mac (.e.g. "aws ec2 describe-instances" or "aws s3 ls")
@@ -3744,8 +3747,9 @@ Step: Create a new service role for EC2 that provides full access to S3.
 Step: Observe all the actions that the role allows to be performed.
 Step: Create an Amazon Linux EC2 instance and assign the role to it.
 Step: SSH into the instance
-Step: Run the AWS CLI command to list all S3 buckets without first configuring the CLI. Observe it works.
+Step: Run the AWS CLI command to list all S3 buckets without first configuring the CLI. Observe that it works.
 Step: Verify that the access key is not stored on the instance.
+Step: Run the AWS CLI command to list all EC2 instances. Observe that it does not work (the role only allows S3 access).
 Step: Clean up.
 
 Question: Why are roles safer than access keys to control access to resources?
@@ -3819,14 +3823,14 @@ Answer: aws s3 cp --recursive --region <bucket-region> s3://<bucket-name> .
 SubTopic: Using Bootstrap Scripts.
 Id: 916
 
-Lab: Using Bootstrap Scripts.
+Lab: Using bootstrap scripts.
 Id: 917
 Step: Create a bucket.
 Step: Create a simple index.html webpage and upload it to the bucket.
 Step: Create a EC2 role that provides full access to S3.
-Step: Launch an Amazon Linux instance... (continued)
-Step: ... with the new role attached ... (continued)
-Step: ... with a boot script that runs yum update ... (continued)
+Step: Launch an Amazon Linux instance:
+Step: ... with the new role attached
+Step: ... with a boot script that runs yum update
 Step: ... and a security group that allows SSH, HTTP, and HHTP.
 Step: As you are performing the next steps on the live instance, copy and paste each executed bash command into a notepad.
 Step: Install the Apache webserver.
@@ -3837,6 +3841,8 @@ Step: Use a browser to verify the webpage works.
 Step: Terminate the instance.
 Step: Launch a new instance, same as before, except use all the commands collected in the notepad as the bootup script.
 Step: Use a browser to verify the webpage on the newly launched instance works.
+Step: Make sure the bootscript worked as intended by looking at cloud-init-output.log
+
 
 Question: What is stored in the "user data" of an instance?
 Id: 918
@@ -3861,13 +3867,13 @@ Answer: /var/log/cloud-init-output.log
 SubTopic: Using Instance Metadata.
 Id: 923
 
-Lab: Using Instance Metadata.
+Lab: Using instance metadata.
 Id: 924
 Step: Launch an EC2 instance.
 Step: SSH into the EC2 instance.
 Step: Display the metadata index for the instace from inside the instance.
 Step: Display the IPv4 public address of the intsance using the metadata.
-Step: Display the boot script of the intsance using the metadata.
+Step: Display the bootscript of the intsance using the userdata.
 Step: Clean up.
 
 Question: What is instance meta-data?
@@ -3880,11 +3886,11 @@ Answer: 169.254.169.254
 
 Question: What is the URL for retrieving the index of the latest metadata?
 Id: 927
-Answer: http://169.254.169.254/latest/meta-data/
+Answer: http://169.254.169.254/latest/meta-data/ (don't forget the slash at the end)
 
-Question: What is the command for retrieving the index the latest metadata?
+Question: What is the command for retrieving the index of the latest metadata?
 Id: 928
-Answer: curl http://169.254.169.254/latest/meta-data/
+Answer: curl http://169.254.169.254/latest/meta-data/ (don't forget the slash at the end)
 
 Question: What is the command for retrieving a specific metadata item, e.g. the public IPv4 address?
 Id: 929
@@ -3898,12 +3904,12 @@ Id: 931
 Step: Create a bucket and upload a simple index.html and healthcheck.html into it.
 Step: Create a load balancer with aggressive timeouts.
 Step: Create a launch configuration that uses a bootstrap script to start a web server.
-Step: Create an auto scaling group that ... (continued)
-Step: ... starts with 3 instances (continued)
-Step: ... uses all AZs in the region (continued)
-Step: ... uses the load balancer we just created (continued)
-Step: ... dynmically adjusts between 3 and 5 instances (continued)
-Step: ... grows after 5 minutes of >90% CPU utilization (continued)
+Step: Create an auto scaling group:
+Step: ... starts with 3 instances 
+Step: ... uses all AZs in the region
+Step: ... uses the load balancer we just created
+Step: ... dynmically adjusts between 3 and 5 instances
+Step: ... grows after 5 minutes of >90% CPU utilization
 Step: ... shrinks after 5 minutes of <40% CPU utilization.
 Step: Terminate an instance and verify a replacement is automatically launched.
 Step: Force high CPU usage using "dd if=/dev/zero of=/dev/null" and verify that the auto scaling group behaves correctly.
@@ -4000,16 +4006,16 @@ Question: Can you move an already running instance into a placement group?
 Id: 954
 Answer: Not directly. But you can create an AMI and spin up a new instance from the AMI in the placement group.
 
-SubTopic: Elastic File Storage
+SubTopic: Elastic File System
 Id: 955
 
-Lab: Elastic File Storage
+Lab: Elastic File System
 Id: 956
 Step: Go to the EFS console.
-Step: Create an EFS file system with a mount target in each AZ.
+Step: Create an EFS file system with a mount target in two AZs.
 Step: Create an EC2 instance in each AZ.
 Step: Create an ELB load balancer with aggressive timers and assign all EC2 instances to it. Use healthcheck.html as the health check.
-Step: For each instance do the following ... (continued)
+Step: For each instance do the following:
 Step: ... SSH into the instance
 Step: ... Install Apache and start it
 Step: ... Mount the EFS file system to the directory /var/www/html directory.
@@ -4020,9 +4026,9 @@ Step: Clean up.
 
 Question: What does EFS stand for?
 Id: 957
-Answer: Elastic File Storage.
+Answer: Elastic File System.
 
-Question: What storage does Elastic File Storage (EFS) provide?
+Question: What storage does Elastic File System (EFS) provide?
 Id: 958
 Answer: Virtual file system.
 
@@ -4038,7 +4044,7 @@ Question: Do you need to pre-provision capacity for an EFS volume?
 Id: 961
 Answer: No.
 
-Question: How far up can EFS scale?
+Question: How far up can EFS scale in terms of throughput and number of concurrent connections?
 Id: 962
 Answer: Up to petabytes of storage capacity and thousands of concurrent NFS connections.
 
@@ -4072,7 +4078,7 @@ Answer: Both options are available.
 
 Question: What is the security group requirement for an EC2 instance that is attached to an EFS file system?
 Id: 970
-Answer: The EC2 instance and the EFS file system must both be members of the same security group.
+Answer: In practice, the easiest thing to do is to make the EC2 instance and the EFS file system both a member of the same security group. Technically, the EFS file system just needs to permit inbound NFS traffic from the EC2 security group.
 
 Question: How do you get help on how to mount an EFS file system?
 Id: 971
@@ -4161,9 +4167,9 @@ Question: How is Lambda duration calculated?
 Id: 992
 Answer: Time interval from start of invocation to completion or termination, rounded up to nearest 100ms.
 
-Question: How does the price depend on duration and memory?
+Question: How does the price of a Lambda function execution depend on duration and memory?
 Id: 993
-Answer: Some extremely small amount ($0.00001667 currently) per Gigabyte-second used.
+Answer: Memory x duration: some extremely small amount ($0.00001667 currently) per Gigabyte-second used.
 
 Question: What is the upper threshold for the duration of a single Lambda invocation?
 Id: 994
@@ -4193,20 +4199,20 @@ Question: What AWS service helps you debug serverless applications based on Lamb
 Id: 1000
 Answer: X-Ray.
 
-SubTopic: Build a Serverless Webpage
+SubTopic: Build a serverless webpage
 Id: 1001
 
-Lab: Build a Serverless Webpage
+Lab: Build a serverless webpage
 Id: 1002
 Step: Download index.html, error.html, and hellocloudgurus.py from the ACloudGuru lesson resources.
-Step: Author a Lambda function from scratch ... (continued)
-Step: ... using Python 3.6 as the language (continued)
-Step: ... with a new role from template Simple Microsservice Permissions.
+Step: Author a Lambda function from scratch:
+Step: ... using Python 3.6 as the language
+Step: ... with a new role from template Simple Microservice Permissions.
 Step: Copy the code in hellocloudgurus.py into the Lambda function.
 Step: Add an API gateway trigger.
 Step: Observe the URL for the newly created API gateway.
-Step: In the API gateway, remove method ANY and replace it with method GET ... (continued)
-Step: ... to call a Lambda function with proxy integration (continued)
+Step: In the API gateway, remove method ANY and replace it with method GET:
+Step: ... to call a Lambda function with proxy integration
 Step: Deloy the API.
 Step: Click on the invoke URL for the API and verify it works.
 Step: Edit index.html to put the invoke URL in.
@@ -4406,7 +4412,7 @@ Question: What is the purpose of a NS record in DNS?
 Id: 1038
 Answer: Delegate a subdomain to a set of authoritative name servers.
 
-Question: Who provides DSN NS records to whom?
+Question: Who provides DNS NS records to whom?
 Id: 1039
 Answer: The owner of the domain provides the NS records to the registrar where the domain was registered.
 
@@ -4430,9 +4436,9 @@ Question: Does Route53 support wildcard entries?
 Id: 1044
 Answer: Yes, except for NS records.
 
-Question: Does Route53 support DNSSEC.
+Question: Does Route53 support DNSSEC?
 Id: 1045
-Answer: Partially. Yes for domain registration. But no, not currently for DSN queries.
+Answer: Partially. Yes for domain registration. But no, not currently for DNS queries.
 
 Question: Is Amazon a DNS domain registrar?
 Id: 1046
@@ -4673,7 +4679,7 @@ Question: What is the typical use case for the Route53 weighted routing policy?
 Id: 1089
 Answer: A/B testing, gradual roll out of new web features.
 
-Question: Why does it seem that my weighted routing policy does not work?
+Question: When use browser to repeatedly access a website, it seem that my weighted routing policy does not work. Why is that?
 Id: 1090
 Answer: The distribution happes mostly across clients. For a given client, it can take more than 5 minutes to switch to a different target because an upstream ISP caches the result.
 
@@ -4716,7 +4722,7 @@ Answer: Send the requests to the target that provides the lowest latency from th
 
 Question: What is the typical use case for the Route53 latency routing policy?
 Id: 1096
-Answer: A/B testing, gradual roll out of new web features.
+Answer: Use when you have resources in multiple locations and you want to route traffic to the resource that provides the best latency.
 
 Question: What does LBR stand for?
 Id: 1097
@@ -4922,7 +4928,7 @@ Answer: Non-relational database.
 
 Question: What service does ElastiCache provide?
 Id: 1134
-Answer: Caching.
+Answer: Database caching using in-memory key-valye store (as opposed to content caching which is provided by CloudFront)
 
 Question: What service does Neptune provide?
 Id: 1135
@@ -5048,7 +5054,7 @@ Answer: Enabled with a default retention period of 7 days.
 
 Question: Where is the backup data for RDS automated backups stored?
 Id: 1155
-Answer: In S3?
+Answer: In S3.
 
 Question: Do you have to pay for the storage for RDS automated backups?
 Id: 1156
@@ -5319,7 +5325,7 @@ Question: What is Massively Parallel Processing (MPP) in Redshift?
 Id: 1218
 Answer: Redshift automatically distributes a complex query across many compute nodes, resuling in faster query response time.
 
-Question: Redshift pricing depends on which metrics?
+Question: Redshift pricing depends on which 3 metrics?
 Id: 1219
 Answer: Compute node hours, backups, data transfer within a VPC (not outside)
 
@@ -5349,7 +5355,7 @@ Answer: You can restore the Redshift snapshot to another AZ.
 
 Question: What is a Redshift cluster.
 Id: 1226
-Answer: A group of nodes.
+Answer: A group of nodes that perform analysis for business intelligence.
 
 SubTopic: Elasticache
 Id: 1227
@@ -6009,7 +6015,7 @@ Question: Can Flow Log also log the rejected flow, or only the accepted flows?
 Id: 1365
 Answer: It can do both, you choose when you create the flow log.
 
-Question: What can you stream flow logs to?
+Question: Name 2 possible destinations for streaming VPC flow logs to.
 Id: 1366
 Answer: To AWS Lamba and AWS Elastic Search to real-time analysis of the flows.
 
@@ -6213,7 +6219,7 @@ Question: What is the default queue type in SQS?
 Id: 1404
 Answer: Standard queue.
 
-Question: How does an SQS standard queue differ from a FIFO queue?
+Question: Name 3 ways in which an SQS standard queue differs from a FIFO queue.
 Id: 1405
 Answer: Maximum throughput, delivery guarantee, ordering guarantee
 
@@ -6306,7 +6312,7 @@ Answer: SWF manages workflows of tasks; SQS manages queues of messages.
 
 Question: How does SQS (standard queue) differ from SWF in terms of execution guarantees?
 Id: 1428
-Answer: SWF assigns every task exactly once (it never loses or dupplicates tasks); SQS may lose or dupplicate message delivery.
+Answer: SWF assigns every task exactly once (it never loses or dupplicates tasks); SQS may dupplicate message delivery.
 
 Question: Name 3 SWF actors.
 Id: 1429
@@ -6538,7 +6544,7 @@ Answer: Up to 7 days, 24 hours by default.
 
 Question: What is Kinesis Firehose?
 Id: 1484
-Answer: @@@
+Answer: Service for delivering real-time streaming data to destinations such as S3, Redshift, Elasticsearch, and Splunk. It is similar to Firehose but you don't have to manage the storage shards.
 
 Question: How is Kinesis Streams different from Kinesis Firehose in terms of shards?
 Id: 1485
@@ -6767,7 +6773,7 @@ Question: For data protection, what is the best practice for data classification
 Id: 1509
 Answer: Put basic data classifiction in place (who is allowed to access each class of data). Implement a least-priviledge access system (people are only allowed to access what they need).
 
-Question: For data protection, what is the best practice for encryption.
+Question: For data protection, what is the best practice for encryption?
 Id: 1510
 Answer: Encrypt all data both at-rest and in-transit. AWS makes it easy to encrypt data and manage keys (KMS) either by the user or by Amazon.
 
@@ -6847,23 +6853,23 @@ Question: What are security considerations for EC2 instancs
 Id: 1529
 Answer: Security groups, patching and virus scanning
 
-Question: What are security considerations for EC2 EBS
+Question: Name 1 security consideration for EC2 EBS
 Id: 1530
 Answer: Encryption
 
-Question: What are security considerations for S3
+Question: Name 1 security consideration for S3
 Id: 1531
 Answer: Encryption
 
-Question: What are security considerations for Glacier
+Question: Name 1 security consideration for Glacier
 Id: 1532
 Answer: Encryption
 
-Question: What are security considerations for RDS
+Question: Name 1 security consideration for RDS
 Id: 1533
 Answer: Encryption
 
-Question: What are security considerations for VPC subnets
+Question: Name 7 security considerations for VPC subnets
 Id: 1534
 Answer: Public or private, Internet gateway, NAT gateway, Service gateway, Security Groups, ACLs, Bastion hosts
 
@@ -7004,7 +7010,7 @@ Question: How does using managed services reduce the cost of ownership?
 Id: 1569
 Answer: You don't have to pay for the operational burden (time, staff, training) of maintaining the infrastructure for the service.
 
-Question: Why is paying Amazon for managing a service cheaper than managing it yourself?
+Question: Why can paying Amazon for managing a service be cheaper than managing it yourself?
 Id: 1570
 Answer: Because Amazon benefits from vast economies of scale.
 
@@ -7470,7 +7476,7 @@ Question: What service does Security Token Service (STS) provide?
 Id: 1686
 Answer: It grants users limited and temporary access to AWS resources.
 
-Question: Name 3 possible sources for users in STS:
+Question: Name 3 possible sources for users in STS.
 Id: 1687
 Answer: Federation (uses SAML, typically Active Directory), Federation with mobile apps (Uses OpenID, typically Facebook, Amazon, Google, ...), Cross-account access.
 
@@ -7544,7 +7550,7 @@ Answer: A session grants temporary access to AWS resources.
 
 Question: Which AWS service generates temporary security tokens?
 Id: 1705
-Answer: The Simple Token Service (STS).
+Answer: The Security Token Service (STS).
 
 Question: What causes STS to generate a session?
 Id: 1706
