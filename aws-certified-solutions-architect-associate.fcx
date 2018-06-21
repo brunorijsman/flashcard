@@ -90,7 +90,7 @@ Question: What is an edge location?
 Id: 24
 Answer: AWS endpoints that are used for caching content.
 
-Question: What is the most prevalent caching service?
+Question: Which AWS service offers content caching?
 Id: 25
 Answer: CloudFront, which is the AWS Content Delivery Network (CDN).
 
@@ -694,7 +694,7 @@ Question: What service does Athena provide?
 Id: 178
 Answer: Analyze data in S3 using SQL.
 
-Question: What service analyzes data in S2 using SQL?
+Question: What service analyzes data in S3 using SQL?
 Id: 179
 Answer: Athena.
 
@@ -3481,13 +3481,13 @@ Question: What is the main reason that Instance Store Backed Volumes exist?
 Id: 842
 Answer: For historical reasons: this was the only type of volume that AWS used to support before EBS Backed Volumes were introduced later.
 
-Question: How is an EBS Backed root volume created?
+Question: An EBS Backed root volume can be restored from what?
 Id: 843
-Answer: It is an EBS volume created from an EBS snapshot.
+Answer: From an EBS snapshot stored in S3.
 
-Question: How is an EBS Backed root volume created?
+Question: An Instance Store Backed root volume can be restored from what?
 Id: 844
-Answer: It is an Instance Store volume created from a template stored in S3.
+Answer: From a template stored in S3.
 
 Question: Which is created faster, an EBS Backed Volume or an Instance Store Backed Volume?
 Id: 845
@@ -3856,7 +3856,7 @@ Question: How do you indicate that the boot script is a bash script?
 Id: 920
 Answer: By making the first line #!/bin/bash
 
-Question: At what priviledge level is the boot script run?
+Question: At what privilege level is the boot script run?
 Id: 921
 Answer: Root (you do not need sudo in the script).
 
@@ -5250,7 +5250,7 @@ Question: What does strongly consistent reads consistency mean in DynamoDB?
 Id: 1199
 Answer: After a write that received a succes response, a read will always return the new data, no matter how fast the read is after the completed write.
 
-Question: DynamoDB pricing depends on which metrics?
+Question: DynamoDB pricing depends on which 2 metrics?
 Id: 1200
 Answer: Provisioned throughput capacity, used storage capacity,
 
@@ -5515,7 +5515,7 @@ Answer: For every region.
 
 Question: Which prefixes does Amazon recommend you to use for subnets?
 Id: 1263
-Answer: 10/8, 172.16/12, 192.168/16
+Answer: 10.x/16, 172.16/12, 192.168/16
 
 Question: What is the maximum number of VPCs?
 Id: 1264
@@ -5545,7 +5545,10 @@ Question: A subnet is contained in what, from a networking point of view?
 Id: 1270
 Answer: In a VPC.
 
-Question: What is the smallest (most specific) prefix AWS allows for a subnet?
+Question: What is the least specific prefix AWS allows for a subnet or VPC?
+Answer: /16
+
+Question: What is the most specific prefix AWS allows for a subnet or VPC?
 Id: 1271
 Answer: /28
 
@@ -5984,7 +5987,7 @@ Question: Can you attach a load balancer to a single subnet?
 Id: 1359
 Answer: No, it is mandatory to attach it to at least two subnets (and hence two AZs) to achieve high availability.
 
-Question: Can you attach a load balancer to a private subnet?
+Question: Can you attach an external load balancer to a private subnet?
 Id: 1360
 Answer: No, the subnet must be public, i.e. it must have an Internet Gateway.
 
@@ -6343,7 +6346,7 @@ Answer: SQS is pull-based (polling), SNS is push-based (pub-sub).
 
 Question: Name 7 types (protocols) of SNS subscribers.
 Id: 1436
-Answer: HTTP, HTTPS, E-mail, E-mail JSON, SQS, Appliction, Lambda.
+Answer: HTTP, HTTPS, E-mail, E-mail JSON, SQS, Application, Lambda.
 
 Question: What types of devices does SNS support?
 Id: 1437
@@ -6612,7 +6615,7 @@ Step: ... IAM Role = S3-Admin-Access
 Step: ... Optional: Boostrap script = copy from ACG resources (if you do, you can skip steps marked [*])
 Step: ... Tag Name = MyEC2WebServer
 Step: ... Security group = Web-DMZ
-Step: SSH into MyEC2WebServer and escalate priviledges
+Step: SSH into MyEC2WebServer and escalate privileges
 Step: [*] Do an update: yum update -y
 Step: [*] Install PHP, Apache, and stress: yum install -y php php-mysql httpd stress
 Step: [*] Go to the Apache configuration directory: cd /etc/httpd/conf (have a look at httpd.conf)
@@ -6771,7 +6774,7 @@ Answer: Data protection, privilege management, infrastructure protection, detect
 
 Question: For data protection, what is the best practice for data classification?
 Id: 1509
-Answer: Put basic data classifiction in place (who is allowed to access each class of data). Implement a least-priviledge access system (people are only allowed to access what they need).
+Answer: Put basic data classifiction in place (who is allowed to access each class of data). Implement a least-privilege access system (people are only allowed to access what they need).
 
 Question: For data protection, what is the best practice for encryption?
 Id: 1510
@@ -6793,7 +6796,7 @@ Question: For data protection, what question should you ask yourself related to 
 Id: 1514
 Answer: How are you ecrypting your data at-rest and in-transit? How do you manage keys and key rotation?
 
-Question: What is priviledge management?
+Question: What is privilege management?
 Id: 1515
 Answer: Ensure that only authenticated and authorized users have access to the resources, and only in a manner that is intended.
 
@@ -7327,7 +7330,7 @@ Id: 1649
 
 Question: What is cross-account access?
 Id: 1650
-Answer: It allows you to loging to the console using one account, and then switch to another account without having to log out and in again.
+Answer: It allows you to log in to the console using one account, and then switch to another account without having to log out and in again.
 
 Question: How can you allow a user group in account A to access the files in a bucket in account B?
 Id: 1651
