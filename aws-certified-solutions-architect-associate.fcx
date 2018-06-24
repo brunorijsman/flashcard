@@ -1,8 +1,14 @@
-Course: AWS Certified Solutions Architect Associate
 NextId: 1780
+
+Course: AWS Certified Solutions Architect Associate
+Code: AWS-CSAA
 Id: 1
 
+Course: AWS Certified Developer Associate
+Code: AWS-CDA
+
 Topic: Introduction
+AppliesToCourse: AWS-CSAA, AWS-CDA
 Id: 2
 
 SubTopic: Introduction & overview
@@ -1189,26 +1195,119 @@ Id: 304
 Answer: GameLift.
 
 Topic: Identity Access Management (IAM)
+AppliesToCourse: AWS-CSAA, AWS-CDA
 Id: 305
 
-SubTopic: IAM 101
+SubTopic: IAM core concepts
 Id: 306
 
 Question: What does IAM stand for?
 Id: 307
 Answer: Identity and Access Management.
 
+Q: What is an IAM principal?
+A: A principal is an entity that can take an action on an AWS resource.
+
+Q: Name 4 types of IAM principals.
+A: Users, roles, federated users, applications (programmatic access).
+
+Q: Name 3 examples of an IAM principal sending a request to AWS.
+A: A principal takes an action on the console, a principal executes an AWS CLI command, a principal invokes an AWS API call. (Under the hood all three are really the same: invoking an AWS API call).
+
+Q: Name 4 types of information that are included in AWS request context.
+A: Which action is requested, upon which resource should the action be performed, credentials to authenticate the principal, environmental information.
+
+Q: Name 4 examples of environmental information in an AWS request that is also use to authorize requests.
+A: Requester IP address, user agent, SSL enabled status, time of day.
+
+Q: What is the difference between authentication and authorization.
+A: Authentication estabilishes who the requester is. Authorization establishes whether the requester is allowed to execute a particular action on a particular resource.
+
+Q: Do all AWS requests have to be authenticated?
+A: No, some services allow anonymous requests (e.g. S3 allows anonymous users to retrieve objects from public buckets).
+
+Question: What is an IAM policy?
+Id: 313
+Answer: A JSON document that defines one or more permissions are allowed or denied for principals (identity-based policies) or resources (resource-based policies).
+
+Q: What is an identity-based policy?
+A: A policy that is attached to a principal (user, role, federated user, or application).
+
+Q: What is the difference between a managed policies and inline policies?
+A: For an inline policy, the JSON document is directly attached to the principal or resource. A managed policy is a stand-alone entity that is attached to a principal.
+
+Q: What are the 2 types of managed policies, in terms of who manages them?
+A: AWS managed policies, and customer managed policies.
+
+Q: Are managed policies supporte for resource-based policies?
+A: No, managed policies are only supported for identity-based policies. Resource-based policies only support inline policies.
+
+Q: What is an resource-based policy?
+A: A policy that is attached to a resource.
+
+Q: What are the 2 types of policies in terms of what they can be attached to?
+A: Identiy-pbased policies (allow or deny permissions for principals), resource-based policies (allow or deny permissions for resources).
+
+Q: What is a trust policy?
+A: A resource-based policy that is attached to a role and that defines which principals can assume the role.
+
+Q: Can multiple IAM policies be applied to a single request?
+A: Yes, IAM applies every policy that matches the context of the request.
+
+Q: If no IAM policy matches a request, what is the default policy?
+A: Deny the request by default.
+
+Q: If multiple IAM policies match a request, how is the combined policy determined?
+A: If there no explicit allow or deny, deny the request by default. If there is at least one explicit allow and no explicit deny, deny the request. If there is at least one explicit deny, deny the request.
+
+Q: If multiple IAM policies match a request, and some of them have an explicit allow, while others have an explicit deny, what is the result?
+A: Deny the request. A single explicit deny overrides all explicit allows.
+
+Q: If multiple IAM policies match a request, and there no explicit allows nor explicit denies in any of them, what is the result?
+A: Deny the request by default.
+
+Question: What language is used to define policy document?
+Id: 314
+Answer: JSON.
+
+Q: If all IAM policies that match a request are identity-based policies (and not resource-based policies), then on which resources is the action allowed?
+A: On the resources in the same account.
+
+Q: If you want to perform an action on an resource in a different account, what are the 2 possible approaches?
+A: The other account can have a policy that grants cross-account permission to the principal in this account. The principal in this account can assume a role with the required permissions from the other account.
+
+Question: What is an IAM user?
+Id: 310
+Answer: A person that interacts with AWS using the console or CLI, or an application that interacts with AWS using the SDK APIs.
+
+Q: What is the default policy for a new IAM user?
+A: Allow nothing.
+
+Question: In IAM, what is the root account?
+Id: 315
+Answer: The default account created when the AWS account was setup. It has full permissions on every resource.
+
+Q: What is the IAM root user?
+Id: 316
+A: The e-mail address and password that were used to create the account?
+
+Q: Is it possible to restrict the permissions granted to the root user?
+A: No.
+
+Question: In IAM, what is the difference between a PowerUser and an Administrator?
+Id: 317
+Answer: An Administrator has access to all AWS services and resources. A PowerUser has access to all AWS services and resources except the management of users and groups.
+
+Q: Is an IAM user the same as an IAM account?
+A: No, a single IAM account has multiple users: one root user and zero or more additional users created in IAM.
+
 Question: What is identity federation?
 Id: 308
-Answer: Integration with Active Directory, Facebook, LinkedIn, etc. for authentication.
+Answer: Using a source external to AWS (typically a corporate Active Directory or web identities) to authenticate users and authorize access to AWS resources.
 
 Question: What does PCI DSS stand for?
 Id: 309
 Answer: Payment Card Industry Data Security Standard.
-
-Question: What is an IAM user?
-Id: 310
-Answer: A person (or service) that interacts with AWS.
 
 Question: What is an IAM group?
 Id: 311
@@ -1218,28 +1317,50 @@ Question: What is an IAM role?
 Id: 312
 Answer: A set of permissions that can permanently or temporarily be assigned to users, applications, and services.
 
-Question: What is an IAM policy?
-Id: 313
-Answer: A document that defines one or more permissions.
+Q: What 2 policies are attached to each role?
+A: A trust policy and a permissions policy.
 
-Question: What language is used to define policy document?
-Id: 314
-Answer: JSON.
+Q: What is a trust policy attached to a role?
+A: A policy that determines who (which user or federated user) can assume the role.
 
-Question: In IAM, what is the root account?
-Id: 315
-Answer: The default account created when the AWS account was setup. It has full permissions on every resource.
+Q: What is a permissions policy attached to a role?
+A: A policy that determines which actions are permitted on which AWS resources.
 
-Question: What are the default permissions for a user?
-Id: 316
-Answer: The root has full administrator access by default. All other users have no permissions by default.
+Q: When a AWS executes a request from a user, which policies are checked?
+A: All policies attached to the user, all policies attached to the groups of which the user is a member, all policies attached to the resource.
 
-Question: In IAM, what is the difference between a PowerUser and an Administrator?
-Id: 317
-Answer: An Administrator has access to all AWS services and resources. A PowerUser has access to all AWS services and resources except the management of users and groups.
+Q: How is an IAM role similar to an IAM user?
+A: Just like a user, a role is an AWS identity with permission policies that determine what the identity can and cannot do in AWS. 
 
-SubTopic: IAM Lab
-Id: 318
+Q: How is an IAM role different from an IAM user?
+A: A user is associated with one person, a role can be assumed by anyone who needs it. A roles does not have standard long-term credentials (password or access keys) associated with it.
+
+Q: When a user assumes a role, what mechanism allows that user to perform actions that the user could not perform before?
+A: Temporary security credentials are created dynamically and provided to the user.
+
+Q: What is an AWS service role?
+A: A roles that an AWS service assumes to perform actions on behalf of a user.
+
+Q: What is an AWS service role for an EC2 instance typically used for?
+A: To allow an application running on the EC2 instance to perform actions on behalf of a user.
+
+Q: What is an AWS service-linked role?
+A: Service-linked roles are predefined by the service and include all the permissions that the service requires to call other AWS services on your behalf.
+
+Q: What is role chaining?
+A: Role chaining occurs when you use a role to assume a second role through the AWS CLI or API.
+
+Q: In the context of IAM, what is delegation?
+A: The granting of permissions to someone to allow access to resources that you control.
+
+Q: In the context of IAM delegation, what is the trusting account?
+A: The account that controls the resource.
+
+Q: In the context of IAM delegation, what is the trusted account?
+A: The account that contains the user that needs to access the account.
+
+Q: In the context of IAM delegation, do the trusting and the trusted account have to be the same account?
+A: No. They can be the same account, or they can be different accounts in the same organization, or they can be different accounts in different organizations.
 
 Lab: Identity and Access Management (IAM) 101
 Id: 331
@@ -1256,6 +1377,8 @@ Step: De-active john's access key and create a new one.
 Step: Change the password policy.
 Step: Create a role that allows EC2 instances to write to S3.
 Step: Clean up.
+
+### TODO: Add role lab
 
 Question: Name two considerations for choosing a region.
 Id: 319
@@ -1297,13 +1420,25 @@ Question: What are the access key id and secret used for?
 Id: 328
 Answer: Programmatic access: API, SDK, command-line, etc. Not for the console.
 
-Question: How can you recover your access key secret?
+Question: How can can you find out what the access key secret is for a given user?
 Id: 329
-Answer: You cannot. You must generate a new access key.
+Answer: You cannot. If the user forgets their access key secret, you must generate a new access key.
+
+Q: What should you do if the access key secret is compromised (e.g. you accidentally check a file with the access key secret into a public Github repository)?
+A: You should deactivate the compromised access key, and generate a new access key for the user.
+
+Question: What are the IAM user name and password used for?
+Answer: Console login only. Not for programmatic access: API, SDK, command-line, etc.
 
 Question: What is the difference between policy AdministratorAccess and policy SystemAdministrator.
 Id: 330
 Answer: AdministratorAccess allows everything. SystemAdministrator allows almost everything (everything needed for development).
+
+Q: Name 3 ways to assign permissions to a user.
+A: Assign user to group, copy permissions from existing user, attach existing policy directly.
+
+Q: Name 4 entities that roles can be assigned to.
+A: An IAM user in another account, an application running in an EC2 instance, an AWS service, a user from a corporate directory who use identity federation with SAML.
 
 SubTopic: Create a billing alarm lab
 Id: 332
@@ -1315,6 +1450,135 @@ Step: Open billing dashboard.
 Step: Enable monitoring of estimated charges.
 Step: Enable billing alerts.
 Step: Create a billing alarm for estimated charges more than $10.
+
+Topic: Security Token Service (STS)
+AppliesToCourse: AWS-CDA
+
+SubTopic: STS core concepts
+
+Q: What does STS stand for?
+A: Security Token Service.
+
+Q: The Security Token Service (STS) is part of which encompasing AWS service?
+A: Identity and Access Management (IAM).
+
+Q: What service does Security Token Service (STS) provide?
+A: Grants users limited and temporary access to AWS resources.
+
+Q: Which AWS service grants users limited and temporary access to AWS resources?
+A: Security Token Service (STS).
+
+Q: Name 3 sources for users in STS.
+A: Enterprise federation with SAML (typically Active Directory), web federation with OpenID (e.g. Facebook, Google, Amazon), AWS cross-account access.
+
+Q: What does SAML stand for?
+A: Security Assertion Markup Language.
+
+Q: When you use STS for Active Directory federation, do you need an IAM user as well?
+A: No.
+
+Q: What is the main use case for STS federation with SAML?
+A: Single sign-on in an enterprise environment using Active Directory.
+
+Q: What is the main use case for STS federation with OpenID?
+A: Single sign-on using a social identity (e.g. Facebook, Google, Amazon).
+
+Q: What is the main use case for STS federation with cross-account access?
+A: Allow a user in one AWS account to access resources in another AWS account.
+
+Q: What is federation in the context of STS?
+A: Combine a list of users in one domain (e.g. IAM) with a list of users in another domain (e.g. Active Directory or Facebook).
+
+Q: What is an identity broker?
+A: A service that allows you to take an identity from point A and join it (federate it) to point B.
+
+Q: What is another name for an identity broker?
+A: An identity proxy server.
+
+Q: Where does an identity broker typically come from?
+A: Typically you have to develop it yourself.
+
+Q: What is an identity store?
+A: A service that stores identity information, e.g. IAM, Active Directory, Facebook, Google, etc.
+
+Q: Name 4 types of identies that IAM can authenticate.
+A: User, group, role, temporary security credentials (token).
+
+SubTopic: STS API
+
+Q: Name 7 STS API endpoints.
+A: AssumeRole, AssumeRoleWithSAML, AssumeRoleWithWebIdentity, GetFederationToken, GetSessionToken, GetCallerIdentity, DecodeAuthorizationMessage.
+
+SubSubTopic: STS AssumeRole API / assume-role CLI
+
+###
+
+SubSubTopic: STS AssumeRoleWithSAML API / assume-role-with-saml CLI
+
+###
+
+SubSubTopic: STS AssumeRoleWithWebIdentity API / assume-role-with-web-identity CLI
+
+###
+
+SubSubTopic: STS GetFederationToken API / get-federation-token CLI
+
+Q: What does the STS GetFederationToken API do?
+A: Provide (or deny) a temporay identity (access key ID, access key secret, token) for a limited duration (the token lifetime) that grants a specific requested IAM policy.
+
+Q: For the single-signon (SSO) use case, which STS API should the identity broker call?
+A: GetFederationToken.
+
+Q: Name 3 parameters in the STS GetFederationToken request API call.
+A: Policy: the requested IAM policy in JSON format. DurationSecond: the lifetime of the token. 
+
+Q: What are the minimum, default, and maximum lifetime for a token requested using GetFederationToken?
+A: Minimum 15 minutes, default 12 hours, maximum 36 hours for an IAM user. Minimum 15 minutes, default 1 hour, maximum 1 hour for account root user.
+
+Q: What determines whether or not STS will honor a GetFederationToken call (i.e. create and return the token)?
+A: The credentials of the caller of the API, i.e. the credentials of the identity broker.  @@@ is needed.
+
+Q: What does a succesful STS GetFederationToken call return?
+A: A newly generated access key ID and secret, a newly generated token, and a duration (token lifetime). 
+
+Q: Once STS grants a token, what is supposed to happen with the token?
+A: The client application uses the granted temporary access key ID, access key secret, and token in subsequent API calls to other AWS services.
+
+Q: How can the temporary credentations granted by STS GetFederationToken be used for Single Sign-On (SSO) into the AWS console?
+A: Pass the temporary credentations to the http://signin.aws.amazon.com/federation endpoint, which will return another token that you can use to construct the SSO URL.
+
+SubSubTopic: STS GetSessionToken API / get-session-token CLI
+
+###
+
+SubSubTopic: STS GetCallerIdentity API / get-caller-identity CLI
+
+###
+
+SubSubTopic: STS DecodeAuthorizationMessage API / decode-authorization-message CLI
+
+###
+
+SubTopic: Active Directory Federation
+
+Q: In the case of Active Directory Federation, does the identity broker call LDAP first or does it call STS first?
+A: LDAP first to authenticate the username and passport provided by the end-user, and then STS to get temporary credentials.
+
+###
+
+SubTopic: Web Identity Federation
+
+Q: What do all of the variations of the STS AssumeRole... family of API calls have in common?
+A: Provide (or deny) a temporay identity (access key ID, access key secret, token) for a limited duration (the token lifetime) that grants a specific requested IAM role.
+
+###
+
+
+Topic: Cognito
+AppliesToCourse: AWS-CDA
+
+###
+
 
 Topic: Object storage and Content Delivery Networks (S3, Glacier, and CloudFront)
 Id: 334
