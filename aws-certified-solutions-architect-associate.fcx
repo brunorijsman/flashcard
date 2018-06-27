@@ -1474,6 +1474,9 @@ A: Enterprise federation with SAML (typically Active Directory), web federation 
 Q: What does SAML stand for?
 A: Security Assertion Markup Language.
 
+Q: What is the URL for SAML sign-in to AWS?
+A: https://signin.aws.amazon.com/saml
+
 Q: When you use STS for Active Directory federation, do you need an IAM user as well?
 A: No.
 
@@ -1564,6 +1567,15 @@ SubTopic: Active Directory Federation
 Q: In the case of Active Directory Federation, does the identity broker call LDAP first or does it call STS first?
 A: LDAP first to authenticate the username and passport provided by the end-user, and then STS to get temporary credentials.
 
+Q: What does ADFS stand for?
+A: Microsoft Active Directory Federation Services.
+
+Q: What does SSO stand for?
+A: Single Sign-On.
+
+Q: What does SAML stand for?
+A: Security Assertion Markup Language.
+
 ###
 
 SubTopic: Web Identity Federation
@@ -1573,12 +1585,10 @@ A: Provide (or deny) a temporay identity (access key ID, access key secret, toke
 
 ###
 
-
 Topic: Cognito
 AppliesToCourse: AWS-CDA
 
 ###
-
 
 Topic: Object storage and Content Delivery Networks (S3, Glacier, and CloudFront)
 Id: 334
@@ -2913,6 +2923,7 @@ Id: 640
 Answer: EC2 lets you pick the AZ, S3 One-Zone-IA picks the AZ for you.
 
 Topic: Elastic Compute Cloud (EC2)
+AppliesToCourse: AWS-CSAA, AWS-CDA
 Id: 641
 
 SubTopic: EC2 101
@@ -5455,7 +5466,7 @@ Answer: It means turning a read replace into a fully stand-alone instance DB, wh
 SubTopic: DynamoDB
 Id: 1189
 
-Lab: DynamoDB
+Lab: DynamoDB Architect Lab
 Id: 1190
 Step: Create a DynamoDB table:
 Step: ... Table name = students
@@ -8107,4 +8118,471 @@ Answer: Clusters per region (1000), instances per cluster (1000), services per c
 Question: What are the ECS hard limits?
 Id: 1778
 Answer: One load balancer per service, 1000 desired taks per service, 10 containers per task, 10 tasks per instance.
+
+Topic: DynamoDB
+AppliesToCourse: AWS-CDA
+
+SubTopic: DynamoDB features
+
+Question: What is DynamoDB?
+Answer: It is the no-SQL (non-relational) database service provided by AWS.
+
+Question: What data models does DynamoDB support?
+Answer: Document and key-value.
+
+Q: What does DAX stand for?
+A: DynamoDB Accelerator.
+
+Q: What is DynamoDB Accelerator (DAX)?
+A: An in-memory cache for DynamoDB.
+
+Q: What are the scaling limits of DynamoDB?
+A: Supposedly there are none, Amazon claims that DynamoDB offers "consistent, single-digit millisecond latency at any scale."
+
+Q: What is the typical latency for DynamoDB (without DAX caching)?
+A: Consistent, single-digit millisecond latency at any scale.
+
+Q: What is the typical latency for DynamoDB with DAX caching?
+A: DAX reduces DynamoDB response times from milliseconds to microseconds, even at millions of requests per second.
+
+Q: What 2 techniques does DynamoDB use to achieve low latency?
+A: Automatic partitioning and SSD technology.
+
+Question: Can a DynamoDB be stored on magnetic storage?
+Answer: No, only on SSD.
+
+Question: Is a (non-global) DynamoDB table spread over multipe AZs?
+Answer: Amazon does not use that language exactly; they say "across 3 geographically distinct data centers".
+
+Question: What consistency models does DynamoDB support?
+Answer: Eventual consistent reads (the default) and strongly consistent reads.
+
+Question: Which consistency model in DynamoDB has the best performance?
+Answer: Eventual consistent reads.
+
+Question: What does "eventually consistent reads" consistency mean in DynamoDB?
+Answer: After a write, read may return the old data for some time, but eventually return the new data.
+
+Question: How long does it take for the data to become consistent in the DynamoDB eventual consistent reads model?
+Answer: Usually within a second.
+
+Question: What does strongly consistent reads consistency mean in DynamoDB?
+Answer: After a write that received a succes response, a read will always return the new data, no matter how fast the read is after the completed write.
+
+Q: Which consistency model in DynamoDB gives the best performance?
+A: Eventually consistent reads.
+
+Q: What is a DynamoDB global table?
+A: A DynamoDB global tables is automatically replicated across your choice of AWS Regions.
+
+Q: Does DynamoDB support backup and restore?
+A: Yes
+
+Q: Does DynamoDB support encryption at rest?
+A: Yes
+
+Q: How does DynamoDB encryption at rest manage keys?
+A: It uses AWS managed encryption keys stored in AWS Key Management Service (AWS KMS).
+
+Q: Do applications have to be modified to use DynamoDB encryption at rest?
+A: No, applications do not have to be modified; encryption at rest is fully transparent to users.
+
+Question: DynamoDB pricing depends on which 2 metrics?
+Answer: Provisioned throughput capacity, used storage capacity.
+
+Q: How is storage charged in DynamoDB?
+A: Per GB per month.
+
+Q: The first how many GB of storage are free in DynamoDB?
+A: The first 25GB.
+
+Question: Is there a difference in pricing for reading vs writing DynamoDBs?
+Answer: Writing is 5x more expensive than reading.
+
+Question: What is reserved capacity in DynamoDB
+Answer: You enter into a 1 or 3 year contract to purchase DynamoDB capacity in advance at a greatly reduced price.
+
+Question: Can you change the provisioned capacity of a DynamoDB table on the fly?
+Answer: Yes.
+
+Question: What does "push-button scaling" mean in DynamoDB?
+Answer: You can increase the scaling of a DynamoDB database, without downtime, and without limits.
+
+Question: What is the maximum size for DynamoDB names and values?
+Answer: The name and value combined must not exceed 400KB.
+
+Question: You receive a ProvisionedThroughputExceededException error. However, the DynamoDB metrics show that your table or Index has not been operating at maximum provisioned throughput. What could the error be caused by?
+Answer: The throughut is not balanced across your partitions. One partition is being subjected to a disproportionate amount of the traffic and, therefore, exceeding limits.
+
+Q: What are the DynamoDB equivalents of SQL tables, rows, and collumns?
+A: Tables, items, attributes.
+
+Q: What is a DynamoDB primary key?
+A: The attribute that uniquely identifies an item in the table.
+
+Q: Can DynamoDB attributes be nested?
+A: Yes.
+
+Q: In the context of PHP, what is Composer?
+A: Composer is the dependency management tool for PHP.
+
+Q: In the context of DynamoDB, what does "push-button scaling" refer to?
+A: You can modify the throughput and capacity of tables on-the-fly using APIs or the console.
+
+Q: Which attribute is required for every item in a DynamoDB table?
+A: The primary key (= the partition key).
+
+Q: What does it mean that DynamoDB supports a document data model?
+A: Applications can store JSON documents directly in a DynamoDB table.
+
+Q: Can you install DynamoDB on your own laptop?
+A: Yes, there is a downloadable version of DynamoDB intended for local testing of you application.
+
+Q: Name 2 types of secondary indexes for DynamoDB?
+A: Local Secondary Index (LSI) and Gobal Secondary Index (GSI).
+
+Q: What is a DynamoDB Stream?
+A: A DynamoDB stream is a time-ordered sequence of item-level changes in any DynamoDB table. 
+
+Q: Does DynamoDB support cross-region replication?
+A: Yes.
+
+Q: What is a DynamoDB trigger?
+A: A trigger automatically executes a Lambda function when an item in a DynamoDB table is changed.
+
+Q: What is a DynamoDB atomic counter?
+A: A numerical attribute that can be incremented or decremented in a single atomic API call.
+
+Q: DynamoDB integrates with which other AWS service for monitoring?
+A: CloudWatch.
+
+Q: What does fine-grained access control in DynamoDB mean?
+A: DynamoDB is integrated with IAM to control which items in a table each user is or is not allowed to access.
+
+Q: DynamoDB is integrated with which AWS service for complex analysis of large datasets?
+A: Elastic MapReduce (EMR).
+
+Q: What can you do if you want to perform SQL queries on the data in DynamoDB?
+A: You can copy the data to RedShift.
+
+Q: Which AWS service helps you to automate data movement and transformation into and out of Amazon DynamoDB?
+A: Data Pipeline.
+
+SubTopic: DynamoDB core concepts
+
+Q: What DynamoDB equivalents to SQL tables, rows, and columns?
+A: Tables, items, and attributes.
+
+Q: What is the maximum number of items per DynamoDB table?
+A: There is no limit.
+
+Q: What does it mean that DynamoDB is schema-less?
+A: You don't have to specify what attributes each item has in advance in a data-model, and each item can have different attributes.
+
+Q: What is the single mandatory attribute that each item in a table must have?
+A: The primary key.
+
+Q: Can DynamoDB attributes be nested?
+A: Yes.
+
+Q: What is the maximum nesting depth for DynamoDB attributes?
+A: Up to 32 levels of nesting.
+
+Q: Is a DynamoDB primary key always a single attribute?
+A: No, the primary key can be a combination of multiple attributes.
+
+Q: What are the 2 types of DynamoDB primary keys?
+A: (1) Partition key (2) Partition key and sort key (also known as composite primary key)
+
+Q: What is the older name for the partition key?
+A: The hash attribute.
+
+Q: What is the older name for the sort key?
+A: The range attribute.
+
+Q: Are the attributes in the primary key allowed to be nested attributes?
+A: No, only string, number, or binary scalar attributes are allowed.
+
+Q: What is a DynamoDB partition key?
+A: DynamoDB applies an internal hash function to the partition key to determine the physical storage location.
+
+Q: In a DynamoDB table with a partition key without a sort key, are two items allowed to have the same partition key?
+A: No, the partition key must be different for each item in the table.
+
+Q: In a DynamoDB table with a partition key and sort key, are two items allowed to have the same partition key?
+A: Yes, two items are allowed to have the same partition key, as long as the sort key is different.
+
+Q: What is a DynamoDB composite key?
+A: Primary key and sort key.
+
+Q: What is a DynamoDB simple key?
+A: A primary key without a sort key. 
+
+Q: In a DynamoDB table with a composite key, what can we say about the physical storage location of items?
+A: All items with the same partition key are stored in the same physical location.
+
+Q: What is a DynamoDB secondary index?
+A: A secondary index allows you to query a table using an alternate key, i.e. other than the primary key.
+
+Q: What are the 2 types of DynamoDB secondary indexes?
+A: Global Secondary Index (GSI) and Local Secondary Index (LSI).
+
+Q: What is a DynamoDB Global Secondary Index (GSI)?
+A: An index with a partition key and sort key that can be different from those on the table.
+
+Q: What is a DynamoDB Local Secondary Index (LSI)?
+A: An index that has the same partition key as the table, but a different sort key.
+
+Q: What is the maximum number of DynamoDB secondary indexes?
+A: Up to 5 global secondary indexes and 5 local secondary indexes per table.
+
+Q: What is a DynamoDB base table?
+A: Every secondary index belongs to a table, which is called the base table for the index. 
+
+Q: What do you have to do to keep the secondary indexes up to date?
+A: Nothing. DynamoDB maintains indexes automatically when you add, update, or delete an item in the base table.
+
+Q: What is DynamoDB projection?
+A: Automatically copy attributes from the base table to a secondary index.
+
+SubTopic: DynamoDB streams
+
+Q: What is a DynamoDB stream?
+A: An optional feature that captures data modification events in DynamoDB tables
+
+Q: How quickly to changes appear in a DynamoDB stream?
+A: Near real-time.
+
+Q: Does a DynamoDB maintain the order of changes?
+A: Yes.
+
+Q: How is each event represented in a DynamoDB stream?
+A: By a stream record.
+
+Q: What 3 events cause a stream record to be written in a DynamoDB stream?
+A: Add a new item, modify an item, delete an item.
+
+Q: How long is each event / stream record stored in a DynamoDB stream?
+A: For 24 hours, after which it is automatically removed from the stream.
+
+Q: Which AWS service integrates with DynamoDB streams to execute code when an event occurs?
+A: Lambda.
+
+Q: What is a DynamoDB trigger?
+A: Code that executes automatically whenever an event of interest appears in a stream.
+
+SubTopic: DynamoDB API
+
+Q: What are the 3 categories of DynamoDB APIs?
+A: Control plane, data plane, DynamoDB streams.
+
+Q: What is the purpose of DynamoDB control plane APIs?
+A: Create and manage DynamoDB tables.
+
+Q: Name 5 DynamoDB control plane APIs.
+A: CreateTable, UpdateTable, DeleteTable, ListTables, DescribeTable.
+
+Q: What does CRUD stand for?
+A: Create, Read, Update, Delete.
+
+Q: What is the purpose of DynamoDB data plane APIs?
+A: Perform CRUD (create, read, update, and delete) actions on data in a table.
+
+Q: What are the 2 DynamoDB APIs for creating items in a table?
+A: PutItem, BatchWriteItem.
+
+Q: What are the 4 DynamoDB APIs for reading items in a table?
+A: GetItem, BatchGetItem, Query, Scan.
+
+Q: What is the 1 DynamoDB API for updating an item in a table?
+A: UpdateItem.
+
+Q: What are the 2 DynamoDB APIs for deleting items from a table?
+A: DeleteItem, BatchWriteItem.
+
+Q: What are the 4 DynamoDB APIs for managing DynamoDB streams?
+A: ListStreams, DescribeStream, GetShardIterator, GetRecords
+
+Q: Which API do you use to create a DynamoDB stream?
+A: When you create a table using CreateTable you specify whether or not you also want a stream.
+
+Q: What a DynamoDB query?
+A: Retrieves all items that have a specific partition key. 
+
+Q: What is a DynamoDB scan?
+A: Retrieves all items in the specified table or index.
+
+SubTopic: Naming Rules and Data Types
+
+Q: What encoding must be used for all DynamoDB names?
+A: UTF-8
+
+Q: Are DymamoDB names case sensitive?
+A: Yes
+
+Q: What is the minimum and maximum length for DynamoDB table and index names?
+A: Between 3 and 255 characters.
+
+Q: What are the allowed characters for DynamoDB table and index names?
+A: A-Z, a-z, 0-9, underscore (_), dash (-), dot (.)
+
+Q: What is the minimum and maximum length for DynamoDB attribute names?
+A: Between 1 and 255 characters.
+
+Q: What names are to be avoided in DynamoDB?
+A: Reserved words, the hash character (#), the colon character (:)
+
+Q: Name 5 DynamoDB scalar data types.
+A: Number, string, binary, boolean, null.
+
+Q: Name 2 DynamoDB document data types.
+A: List, map.
+
+Q: Name 3 DynamoDB set data types.
+A: String set, number set, binary set.
+
+Q: How do you represent dates and times in DynamoDB?
+A: As strings, for example using ISO 8601 encoding.
+
+Q: What is the maximum precision for numbers in DynamoDB?
+A: 38 digits.
+
+Q: How do you represent a timestamp in DynamoDB?
+A: As a number, for example using epoch time (number of seconds since 1-Jan-70).
+
+Q: What is the minumum an maximum size of binary attribute in DynamoDB?
+A: Greater than zero bytes. Maximum is only constrained by maximum size of an item (400 KB).
+
+Q: If a DynamoDB primary key is simple an binary, what is its maximum size?
+A: 2048 bytes.
+
+Q: If a DynamoDB is composite, and the partition key is binary, what is the maximum size of the partition key?
+A: 1024 bytes.
+
+Q: What is the maximum size of an item in DynamoDB?
+A: 400 KB.
+
+Q: How must applications encode binary attributes?
+A: Based64-encoded text.
+
+Q: What is the maximum nesting depth for DynamoDB lists and maps?
+A: 32 levels.
+
+Q: What is the maximum number of values in a DynamoDB list or map or set?
+A: There is no limit, other than the 400 KB limit on the maximum size of an item.
+
+Q: Is an attribute value allowed to be an empty list or map?
+A: Yes, empty lists and maps are allowed (but empty strings and empty sets are not allowed).
+
+Q: How are DynamoDB list values encoded?
+A: Using square brackets, for example ["Cookies", "Coffee", 3.141492]
+
+Q: How are DynamoDB map values encoded?
+A: Using curly braces, for example {Day: "Monday", UnreadEmails: 100}
+
+Q: Do the elements of a DynamoDB set have to be unique to the set?
+A: Yes.
+
+Q: Is the order of values in a DynamoDB set preserved?
+A: No.
+
+Q: Do all the elements in a DynamoDB set have to be the same type?
+A: Yes. A number set contains only numbers, a string set contains only strings, and a binary set contains only binary values.
+
+SubTopic: Read consistency
+
+Q: Can you have two DynamoDB tables with the same name in two different regions?
+A: Yes, and they would be considered different independent tables.
+
+Q: What does it mean when a DynamoDB write operation returns status code 200 OK?
+A: Data has been successfully written to all replicated storage locations.
+
+Q: Does DynamoDB support a choice between eventual consistency and strong consistency for writes?
+A: No, writes are always strongly consistent: DynamoDB returns status 200 OK only after the data has been written to all storage locations.
+
+Q: What 2 consistecy models does DynamoDB support for reads?
+A: Eventually consistent reads and strongly consistent reads.
+
+Q: What is a DynamoDB eventually consistent read?
+A: The read response might include stale data that does not yet reflect the most recent completed write operations.
+
+Q: What is a DynamoDB strongly consistent read?
+A: DynamoDB returns the most up-to-date data, reflecting the updates from all prior write operations that were successful. 
+
+Q: How can network delays or outages affect DynamoDB read operations?
+A: Strongly consistent reads may fail.
+
+Q: How long does it typically take for a DynamoDB write operation to be reflected in eventually consistent read operations?
+A: Usually within 1 second or less.
+
+Q: What is the default for reads: eventually consistent or strongly consistent?
+A: The default behavior is eventually consistent. If you want a strongly consistent read, you must set the ConsistentRead paramater to true.
+
+Q: What paramater do you need to set to request a strongly consistent read?
+A: Set ConsistentRead to true.
+
+SubTopic: Throughput capacity
+
+Q: What does it mean that DynamoDB uses the provisioned throughput model?
+A: You must configure the required read and write throughput capacity for your DynamoDB tables.
+
+Q: Are you charged for the provisioned throughput capacity or the actual throughput of your DynamoDB tables?
+A: The provisioned throughput.
+
+Q: What happens if you try to exceed the provisioned throughput capacity of your DynamoDB tables?
+A: The read and write operations that exceed the provisioned throughput capacity are throttled: the read or write requests fails with HTTP status code 400 (Bad Request) and body ProvisionedThroughputExceededException.
+
+Q: What error code does DynamoDB return when a read or write request is throttled?
+A: HTTP status code 400 (Bad Request) with body ProvisionedThroughputExceededException.
+
+Q: Does DynamoDB throttling applied per table or per index?
+A: Per table for writes, per index for reads.
+
+Q: For which DynamoDB entities do you have to configure the throughput capacity?
+A: Tables and secondary indexes.
+
+Q: For eventually consistent reads, what does one DynamoDB read capacity unit represent?
+A: Two reads per second for an item up to 4 KB.
+
+Q: For strongly consistent reads, what does one DynamoDB read capacity unit represent?
+A: One read per second for an item up to 4 KB.
+
+Q: For writes, what does one DynamoDB write capacity unit represent?
+A: One write per second for an item up to 1 KB.
+
+Q: How do you compute the required number of DynamoDB read capacity units of a given workload of N reads per second where each item is S KBs.
+A: Divide S by 4. Round up. Multiply by N. Divide by 2 again if eventually consistent reads. Round up.
+
+Q: How do you compute the required number of DynamoDB write capacity units of a given workload of N writes per second where each item is S KBs.
+A: Multiply S by N.
+
+### CONTINUE FROM HERE
+
+
+
+
+SubTopic: DynamoDB labs
+
+Lab: DynamoDB Developer Lab
+Step: Create a role that provides full DynamoDB access (without data pipeline) to EC2 instances.
+Step: Launch an EC2 instance:
+Step: ... with the newly create role,
+Step: ... with the bootstrap script from the ACG resources,
+Step: ... with a security group that allows HTTP and SSL.
+Step: SSH into the newly created EC2 instance.
+Step: Raise privileges to root
+Step: Check that /var/www/html contains file test.php and directory dynamodb
+Step: Install Composer: curl -sS https://getcomposer.org/installer | php
+Step: Install the AWS PHP SDK: php composer.phar require aws/aws-sdk-php
+Step: Go into the dynamodb directory
+Step: Edit the php files and set the correct region
+Step: On your laptop, open a browerser for http://<public-ip-of-ec2-instance>/test.php to verify Apache and PHP are working
+Step: On the browerser navigate to http://<public-ip-of-ec2-instance>/dynamodb/createtables.php to create the DynamoDB tables
+Step: On the browerser navigate to http://<public-ip-of-ec2-instance>/dynamodb/uploaddata.php to create the DynamoDB tables
+Step: Look at the DynamoDB tables using the AWS console.
+Step: Clean up.
+
+
+
+
 
