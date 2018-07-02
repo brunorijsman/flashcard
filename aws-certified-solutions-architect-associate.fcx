@@ -8556,14 +8556,355 @@ A: Divide S by 4. Round up. Multiply by N. Divide by 2 again if eventually consi
 Q: How do you compute the required number of DynamoDB write capacity units of a given workload of N writes per second where each item is S KBs.
 A: Multiply S by N.
 
-### CONTINUE FROM HERE
+Q: What is DynamoDB reserved capacity?
+A: DynamoDB read and write units that are payed for up-front and that are cheaper than on-demand capacity.
+
+SubTopic: Partitions and data distribution
+
+Q: What is a DynamoDB partition?
+A: A storage location for DynamoDB tables. Each table is stored in one or more partitions.
+
+Q: How do you manage DynamoDB partitions?
+A: You do not need to manage partitions. Amazon automatically partitions and re-partitions tables as needed by the capacity and throughput requirements.
+
+Q: How does DynamoDB achieve high-availability?
+A: Data is replicated across multiple availability zones.
+
+Q: What is the initial state of a DynamoDB table after you create it?
+A: CREATING.
+
+Q: What state does a DynamoDB table need to reach before you can start reading and writing data?
+A: ACTIVE.
+
+Q: What is DynamoDB doing while the table is waiting to transition from state CREATING to state ACTIVE?
+A: It is allocating suffient partitions to handle the provisioned throughput requirements.
+
+Q: What 2 events cause DynamoDB to allocate more partitions for a table?
+A: (1) The provisioned throughput is increased beyond what the current partitions can support. (2) The storage capacity on the existing partitions is full.
+
+Q: Are Global Secondary Indexes (GSI) stored together with the base table?
+A: No Global Secondary Indexes are stored separately on their own partitions.
+
+Q: How does DynamoDB decide which parition an item is stored?
+A: Using a hash function on the partition key.
+
+Q: What requirements does the partition key need to meet for good partitioning?
+A: Choose a partition key with a large number of distinct values and uniform access patterns.
+
+Q: If you use a compound key with a partition key and sort key, how are the items distribution over the partitions?
+A: All items with the same partition key are stored on the same partition, ordered by sort key.
+
+Q: How do you specify which items you want to read with the Query API in DynamoDB?
+A: You must specify the partition key and you may optionally also provide a condition for the sort key.
+
+Q: What is the maximum number of distinct sort key values for a given parition key value in DynamoDB?
+A: There is no upper limit.
+
+SubTopic: From SQL to NoSQL.
+
+Q: What does RDBMS stand for?
+A: Relational Database Management System.
+
+Q: What is the difference between RDBMS and DynamoDB in terms of data model?
+A: The relational model requires a well-defined schema; DynamoDB is schemaless.
+
+Q: What is the difference between RDBMS and DynamoDB in terms of data access?
+A: RDBMS uses SQL which supports flexible ad-hoc queries; DynamoDB uses less-flexible queries and scans.
+
+Q: What is the difference between RDBMS and DynamoDB in terms of performance?
+A: RDBMS is storage-optimized and must be hand-tuned for optimal performance; DynamoDB is compute-optimized and is automatically tuned by Amazon.
+
+Q: What is the difference between RDBMS and DynamoDB in terms of scale?
+A: RDBMS are generally scaled-up and have inherit scale and performance upper limits; DynamoDB scales out and has no inherent limits.
+
+SubTopic: Setting up DynamoDB
+
+Q: How can you test DynamoDB on your own laptop disconnected from the Internet?
+A: Use the downloadable version of DynamoDB
+
+Q: What parameter must you provide to "aws dynamodb" CLI commands to use the local DynamoDB database?
+A: --endpoint-url http://localhost:8000
+
+SubTopic: Programming with DynamoDB
+
+Q: What 3 types of APIs does the AWS DynamoDB SDK provide (for most language bindings)?
+A: Low-level interface, document interface, high-level interface (aka the object persistence interface)
+
+Q: How is the AWS DynamoDB SDK implemented under the hood?
+A: It sends HTTP(S) requists to the AWS DynamoDB endpoint.
+
+Q: Who is responsible for formatting the HTTP(S) request and serializing the request parameters: the application or the SDK?
+A: The SDK.
+
+Q: Who is responsible for cryptographically signing the request: the application or the SDK?
+A: The SDK.
+
+Q: Who is responsible for sending the request to the service end-point and for waiting for the response: the application or the SDK?
+A: The SDK.
+
+Q: Who is responsible for extracting the results from the response: the application or the SDK?
+A: The SDK.
+
+Q: Who is responsible for retry logic in the case of errors: the application or the SDK?
+A: The SDK.
+
+Q: What characterizes the low-level interface in the DynamoDB SDK?
+A: The methods closely resembly the low-level DynamoDB API.
+
+Q: For which programming languages is the low-level interface in the DynamoDB SDK available?
+A: For all supported programming languages.
+
+Q: What characterizes the document interface in the DynamoDB SDK?
+A: You do not need to specify data type descriptors; the data types are implied by the semantics of the data itself. The document interface also provides methods to easily convert JSON documents to and from native DynamoDB data types.
+
+Q: For which programming languages is the document interface in the DynamoDB SDK available?
+A: Java, .NET, Node.js, JavaScript
+
+Q: What characterizes the object persistence interface (aka high-level interface) in the DynamoDB SDK?
+A: You do not directly perform data plane operations. Instead, you create objects that represent items in DynamoDB tables and indexes, and interact only with those objects.
+
+Q: For which programming languages is the object peristence interface in the DynamoDB SDK available?
+A: Java and .NET.
+
+Q: Which HTTP(S) method does the DynamoDB low-level API use?
+A: POST
+
+Q: Which HTTP(S) header contains the required information to authenticate a request in the DynamoDB low-level API?
+A: The Authorization header.
+
+Q: Which HTTP(S) header contains the operation and API version in the DynamoDB low-level API?
+A: The X-Amz-Target header.
+
+Q: What does the body of the HTTP(S) request contain in the DynamoDB low-level API?
+A: The parameters of the operation.
+
+Q: What is the format of the HTTP(S) response body in the DynamoDB low-level API?
+A: JSON with data type descriptors.
+
+Q: Name the 10 data type descriptors used in the DynamoDB low-level API.
+A: S (String), N (Number), B (Binary), BOOL, NULL, M (Map), L (list), SS (String Set), NS (Number Set), BS (Binary Set)
+
+Q: How many number types does the DynamoDB low-level API support?
+A: One.
+
+Q: How should you encode numbers in the DynamoDB low-level API if precission is important to you?
+A: As strings.
+
+Q: How should you encode binary data in the DynamoDB low-level API?
+A: Base64 encoding.
+
+Q: What are the 3 components of an error in the DynamoDB low-level API?
+A: The HTTP status code, an exception name, an error message.
+
+Q: Do the AWS DynamoDB SDKs implement retries and exponential backoff to deal with errors?
+A: Yes.
+
+Q: If you write an application directly on the DynamoDB low-level API without using an SDK, what should your retry strategy be?
+A: Retry after 5xx server errors. Don't retry after 4xx client errors, except for ThrottlingException or ProvisionedThroughputExceededException. Exponentially backoff retries.
+
+Q: What happens if a BatchGetItem fails partially (one or more, but not all individual GetItems fail)?
+A: The BatchGetItem operation as a whole succeeds, but the result indicates which individual GetItems failed, so that they can be retried.
+
+Q: What happens if a BatchWriteItem fails partially (one or more, but not all individual PutItems or DeleteItems fail)?
+A: The BatchGetItem operation as a whole succeeds, but the result indicates which individual PutItems or DeleteItems failed, so that they can be retried.
+
+SubTopic: Working with DynamoDB
+
+Q: Name the 6 basic operations for tables in DynamoDB.
+A: CreateTable, DescribeTable, UpdateTable, DeleteTable, ListTables, DescribeLimits.
+
+Q: Name the 4 parameters for the DynamoDB CreateTable operation.
+A: TableName, KeySchema, AttributeDefinitions, ProvisionedThroughput.
+
+Q: I thought DynamoDB is a schemaless database; why do I have to provide attribute definitions when I create a table.
+A: You only need to define the type of the attributes that are part of the primary key.
+
+Q: Name the 3 things that UpdateTable can modify for an already existing DynamoDB table.
+A: Provisioned throughput, Global Secondary Indexes (GSI), enable or disable streams.
+
+Q: What can you do to deal with cyclical variations on the workload on a DynamoDB table.
+A: Enable auto scaling to automically adjust the read and write capacity units based on the observed load.
+
+Q: What does CRUD stand for?
+A: Create, Read, Update, Delete.
+
+Q: Name the 4 CRUD operations for individual DynamoDB items.
+A: PutItem, GetItem, UpdateItem, DeleteItem.
+
+Q: Name the 2 batch operations for DynamoDB items.
+A: BatchGetItem, BatchWriteItem.
+
+Q: BatchGetItem perform what operation on how many DynamoDB items?
+A: It performs GetItem on up to 100 items.
+
+Q: BatchWriteItem perform what operation on how many DynamoDB items?
+A: It performs PutItem and/or DeleteItem on up to 25 items.
+
+Q: Name the 2 mandatory parameter for a DynamoDB GetItem operation.
+A: TableName, Key.
+
+Q: Can you provide a partial key for the DynamoDB GetItem operation (e.g. only the partition key part of a composite key)?
+A: No, you must provide the entire primary key to GetItem. Use Query if you want to provide a partial primary key.
+
+Q: What consistency does the DynamoDB GetItem operation use by default: eventually conistent or strongy consisten?
+A: The default is eventually consistent.
+
+Q: What parameter must you provide to the DynamoDB GetItem operation if you want a strongly consistent read?
+A: ConsistentRead
+
+Q: What attributes does the DynamoDB GetItem operation return by default?
+A: All attributes of the item.
+
+Q: What parameter must you provide to the DynamoDB GetItem operation if you only want it to return a subset of the attributes?
+A: ProjectionExpression
+
+Q: What parameter must you provide to the DynamoDB GetItem operation if you want it to return the number of consumed read capacity units?
+A: Set ReturnedConsumedCapacity to TOTAL
+
+Q: Can you provide a partial key for the DynamoDB PutItem, UpdateItem, and DeleteItem operations (e.g. only the partition key part of a composite key)?
+A: No, you must provide the entire primary key.
+
+Q: For the DynamoDB PutItem, UpdateItem, and DeleteItem operations, what are the possible values for the ReturnedConsumedCapacity parameter?
+A: TOTAL, INDEXES, NONE
+
+Q: What does setting the DynamocDB ReturnedConsumedCapacity parameter to INDEXES mean?
+A: The result returns both the total capacity consumed, as well as sub-totals for the base table and each global secondary index.
+
+Q: Which DynamoDB operation is used to create an individual new item?
+A: PutItem.
+
+Q: What happens if you invole the DynamoDB PutItem operation for a primary key that already exists in the table?
+A: The existing item is replaced.
+
+Q: Which DynamoDB operation is used to update some attributes of an existing item?
+A: UpdateItem.
+
+Q: What happens if you invole the DynamoDB UpdateItem operation for a primary key that already exists in the table?
+A: Some attributes of the existing item are modified as specified in the UpdateItem operation.
+
+Q: What happens if you invole the DynamoDB UpdateItem operation for a primary key that does not yet exist in the table?
+A: A new item is created.
+
+Q: What should you do if you want to know the old attributes of a DynamoDB item before it was modified by a PutItem, UpdateItem, or DeleteItem operation?
+A: Set the ReturnValues parameter to ALL_OLD or UPDATED_OLD
+
+Q: Which DynamoDB operation is used to increment or decrement an atomic counter?
+A: UpdateItem.
+
+Q: Is an atomic counter appropriate in an application where over-counting or under-counting cannot be tolerated (e.g. a financial application)?
+A: No, sincee atomic counters are not idempotent they may over-count or under-count due to retries. Use a conditional update instead in this scenario.
+
+Q: What is a DynamoDB conditional write?
+A: A conditional write will succeed only if the item attributes meet one or more expected conditions. Otherwise, it returns an error. 
+
+Q: What should you do if you want the DynamoDB PutItem operation to only succeed if the item is new?
+A: Use a conditional write to make the PutItem operation fail if the key already exists.
+
+Q: How can you use conditional writes to implement optimistic concurrency control in DynamoDB?
+A: Use the conditional write to make the UpdateItem operation fail if another writer changed the attribute value.
+
+Q: How can you make a DynamoDB UpdateItem operation idempotent?
+A: Use a conditiona write and check on the old value of the same attribute that is being modified.
+
+Q: If a conditional write fails because the check fails, are you still charged for write capacity units?
+A: Yes.
+
+Q: What error code is returned if a conditional write fails because the check fails?
+A: ConditionalCheckFailedException.
+
+Q: DynamoDB uses expressions in which 3 scenarios?
+A: Projection expression: to express which attributes to return in a read. Condition expression: to express which attribute the check in a conditional write. Update expression: to express which attributes to change in an atomic counter update.
+
+Q: In a DynamoDB expression how to you refer to a top-level element called Name?
+A: Name
+
+Q: In a DynamoDB expression how to you refer to the 3rd element in a top-level list element called Siblings?
+A: Siblings[3]
+
+Q: In a DynamoDB expression how to you refer to the ZipCode element in a top-level map element called Address?
+A: Address.Zip
+
+Q: Construct a DynamoDB projection expression that project 3 attributes: Title, Price, and Color.
+A: Title, Price, Color
+
+Q: What does the pound (#) sign in a DynamoDB expression mean (for example #x)?
+A: It represents an expression attribute name: replace #x with attribute name specified in the ExpressionAttributeNames parameter.
+
+Q: Name 3 reasons for using expression attribute names in a projection expression.
+A: Avoid reserved words, attribute names containing dots, conciceness for repeating attribute names.
+
+Q: What does the colon (:) sign in a DynamoDB expression mean (for example :x)?
+A: It represents an expression attribute value: replace #x with attribute value specified in the ExpressionAttributeValues parameter.
+
+Q: Construct a condition expression that succeeds if an item does NOT already exists in the table.
+A: attribute_does_not_exist(Key) where Key is the primary key attribute for the table
+
+Q: Construct a condition expression that succeeds if an item does NOT have a specific attribute A.
+A: attribute_does_not_exist(A)
+
+Q: Construct a condition expression that succeeds if an item DOES have a specific attribute A.
+A: attribute_exists(A)
+
+Q: Construct a condition expression to check that attribute Price is greater than a specifed value v.
+A: Price > :v (where the value :v is provided in the ExpressionAttributeValues parameter)
+
+Q: Construct a condition expression to check that attribute Price is between attribute Low and attribute High.
+A: Price BETWEEN Low AND High
+
+Q: Construct a condition expression to check that attribute FullName contains a specific substring ss.
+A: contains(FullName, :ss) (where the value :ss is provided in the ExpressionAttributeValues parameter)
+
+Q: What is a DynamoDB update expression?
+A: The update expression specifies how to change an item in an UpdateItem operation.
+
+Q: Each clause in a DynamoDB update expression must begin with one of which 4 keywords?
+A: SET, REMOVE, ADD, DELETE
+
+Q: Which keyword is used to modify or add an attribute to an item in a DynamoDB UpdateItem operation?
+A: SET
+
+Q: Which keyword is used to remove an attribute from an item in a DynamoDB UpdateItem operation?
+A: REMOVE
+
+Q: Which keyword is used to update a number attribute or a set attribute in a DynamoDB UpdateItem operation?
+A: ADD
+
+Q: Which keyword is used to remote an element from a set attribute in a DynamoDB UpdateItem operation?
+A: DELETE
+
+Q: What is the difference between the SET and ADD keywords in a DynamoDB UpdateItem operation?
+A: SET sets an attribute to a specific value. ADD performs a + or - operation on a number or set.
+
+Q: What is the difference between the REMOVE and DELETE keywords in a DynamoDB UpdateItem operation?
+A: REMOVE removes an attribute. DELETE deletes an element in a set.
+
+Q: Construct an update expression to Age to a specified value a and Gender to a specified value g.
+A: SET Age = :a, Gender = :g (where the values :a and :g are specified in the ExpressionAttributeValues parameter)
+
+Q: Construct an update expression to atomically increase Price with some specified value :p.
+A: SET Price = Price + :p (where the value :p is specified in the ExpressionAttributeValues parameter)
+
+Q: Construct an update expression to add a list of new friends (nf) to the current list of friends Friends.
+A: SET Friends = list_append(Fiends, :nf) (where the list :nf is specified in the ExpressionAttributeValues parameter)
+
+Q: What does TTL stand for?
+A: Time To Live.
+
+Q: What does the DynamoDB TTL feature do?
+A: Automatically delete an item from a table after some specified time span.
+
+Q: What DynamoDB feature allows 
+
+
+
+
 
 
 
 
 SubTopic: DynamoDB labs
 
-Lab: DynamoDB Developer Lab
+Lab: DynamoDB Developer Lab from A Cloud Guru
 Step: Create a role that provides full DynamoDB access (without data pipeline) to EC2 instances.
 Step: Launch an EC2 instance:
 Step: ... with the newly create role,
@@ -8581,6 +8922,15 @@ Step: On the browerser navigate to http://<public-ip-of-ec2-instance>/dynamodb/c
 Step: On the browerser navigate to http://<public-ip-of-ec2-instance>/dynamodb/uploaddata.php to create the DynamoDB tables
 Step: Look at the DynamoDB tables using the AWS console.
 Step: Clean up.
+
+Lab: DynamoDB Python developer lab from AWS
+Step: Install DynamoDB and start locally (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+Step: Follow the DynamoDB Python developer tutorial (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.html)
+
+Lab: DynamoDB JavaScript developer lab from AWS
+Step: Install DynamoDB and start locally (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+Step: Follow the DynamoDB JavaScript developer tutorial (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.JavaScript.html)
+
 
 
 
