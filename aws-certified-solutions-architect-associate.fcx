@@ -8891,16 +8891,217 @@ Q: What does TTL stand for?
 A: Time To Live.
 
 Q: What does the DynamoDB TTL feature do?
-A: Automatically delete an item from a table after some specified time span.
+A: Automatically delete an item from a table when a specific date and time is reached.
 
-Q: What DynamoDB feature allows 
+Q: What DynamoDB feature automatically deletes an item when a specific date and time is reached?
+A: Time to Live (TTL)
 
+Q: What mechanism does DynamoDB use to delete items with a TTL?
+A: A background job checks the TTL attribute of items to see if they are expired.
 
+Q: How quickly is a DynamoDB item deleted after the TTL expires?
+A: Usually within 48 hours.
 
+Q: Is it possible that a DynamoDB read operation returns an item whose TTL has already expired?
+A: Yes. It can take 48 hours or more for an item with an expired TTL to be deleted.
 
+Q: What should you do if you want to avoid the possibility of a DynamoDB query returning items whose TTL has already expired?
+A: Use a filter expression that filters out items whose ExpirationTime is less than the current time.
 
+Q: How do you set a TTL on a DynamoDB item?
+A: Enable TTL for the table, set the TTL attribute name for the table (e.g. "ttl"), and set the "ttl"s attribute for the item using the epoch time format (seconds since 1-Jan-1970).
 
+Q: What is a DynamoDB key condition expression?
+A: A string that determines the items to be read from the table or index.
 
+Q: What is the mandatory part of a DynamoDB key condition expression?
+A: You must specify the partition key name and value as an equality condition.
+
+Q: What is the optional part of a DynamoDB key condition expression?
+A: You can optionally provide a second condition for the sort key (if present) using an =, <, <=, >, >=, BETWEEN, or begins_with operator.
+
+Q: What is a DynamoDB filter expression?
+A: A filter expression determines which items within the Query results should be returned to you. 
+
+Q: If a DynamoDB filter expression filters out an item from a query result, does the filtered out item still count towards the read capacity?
+A: Yes.
+
+Q: What is the maximum size of a DynamoDB query result?
+A: 1 MB.
+
+Q: If a DynamoDB filter expression filters out an item from a query result, does the filtered out item still count towards the maximum query result size of 1 MB?
+A: Yes.
+
+Q: Is a DynamoDB filter allowed to filter on the partition key or on the sort key?
+A: No, if you want to filter on the partition key or the sort key you must do so in the key condition expression, not in the filter expression.
+
+Q: How can you limit the maximum number of items that are returned by a DynamoDB query?
+A: Set the Limit parameter.
+
+Q: What happens if a DynamoDB query or scan has more than 1 MB worth of items to return?
+A: The result is paginated into 1 MB chunks.
+
+Q: How do you know that a DynamoDB query or scan result has more pagination pages to return?
+A: The LastEvaluatedKey element is present in the result.
+
+Q: How do you know that you have gotten the last page of a paginated DynamoDB query or scan result?
+A: The LastEvaluatedKey element is absent in the result.
+
+Q: How do you get the next page of results for a DynamoDB query or scan?
+A: Issue the same query or scan again and set the ExclusiveStartKey parameter to the LastEvaluatedKey from the previous page.
+
+Q: How do you know how many items a DynamoDB query or scan returned (both before and after filtering)?
+A: The ScannedCount element (before filtering) and the Count element (after filtering) in the query result.
+
+Q: If you query or scan a table, DynamoDB consumes read capacity units from what?
+A: From the table's provisioned read capacity.
+
+Q: If you query or scan a local secondary index, DynamoDB consumes read capacity units from what?
+A: From the base table's provisioned read capacity.
+
+Q: If you query or scan a global secondary index, DynamoDB consumes read capacity units from what?
+A: From the index's provisioned read capacity.
+
+Q: By default, does a DynamoDB query or scan return how many read capacity units were consumed?
+A: No.
+
+Q: How can you make a DynamoDB query or scan return how many read capacity units were consumed?
+A: Set the ReturnConsumedCapacity parameter to TOTAL or INDEXES.
+
+Q: What consistency model does a DynamoDB query or scan use by default?
+A: Eventually consistent reads.
+
+Q: How do you request a DynamoDB strongly consistent query or scan?
+A: Set the ConsistentRead parameter in the query to true.
+
+Q: What is a DynamoDB scan?
+A: A scan operation reads every item in a table or a secondary index. 
+
+Q: Which item attributes does a DynamoDB scan return by default?
+A: All attributes of each item.
+
+Q: How can you make a DynamoDB scan return only specific attributes of the items?
+A: Use the ProjectionExpression parameter in the scan request.
+
+Q: How can you make a DynamoDB scan return only specific items in the table?
+A: Use the FilterExpression parameter in the scan request.
+
+Q: What is the different between the ProjectionExpression and the FilterExpression in a DynamoDB scan?
+A: The ProjectionExpression decides which attributes are returned, the FilterExpression decides which items are returned.
+
+Q: What is the maximum amount of data returned by a DynamoDB scan request?
+A: 1 MB.
+
+Q: Very large scans that return much more than 1 MB of results, the default sequential scan can be slow. Why?
+A: Because the result is chunked into 1 MB blocks, and the performance is limited by how quickly the application can request the next chunk.
+
+Q: How can you speed up very large scans that return much more than 1 MB of results?
+A: Use parallel scans.
+
+Q: When a multi-threaded application uses parallel DynamoDB scans, which 2 DynamoDB scan request parameters are used to spread the work across the threads?
+A: The Segment and TotalSegments parameters.
+
+Q: What does the TotalSegments parameter in a DynamoDB parallel scan mean?
+A: The number of parallel scan threads (i.e. into how many segments the table should be divided for parallel scan threads).
+
+Q: What does the TotalSegments parameter in a DynamoDB parallel scan mean?
+A: The number of parallel scan threads (i.e. into how many segments the table should be divided for parallel scan threads).
+
+Q: What does the Segment parameter in a DynamoDB parallel scan mean?
+A: The segment number (out of TotalSegments) that this particular scan thread should work on.
+
+Q: What is a DynamoDB secondary index?
+A: A data structure that contains a subset of attributes from a table, along with an alternate key to support Query operations using a secondary key that is different from the primary key.
+
+Q: DynamoDB supports which 2 types of secondary indexes?
+A: Global Secondary Index (GSI) and Local Secondary Index (LSI).
+
+Q: What is a DynamoDB Global Secondary Index (GSI)?
+A: An index with a partition key and a sort key that can be different from those on the base table.
+
+Q: What is a DynamoDB Local Secondary Index (LSI)?
+A: n index that has the same partition key as the base table, but a different sort key. 
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of the key schema?
+A: For an LSI, the key must be composite. For a GSI, the key can be simple or composite.
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of the index partition key?
+A: For an LSI, the index partition key must be the same as the base table partition key. For a GSI, the index partition key can be any base table attribute of type number, string, or binary.
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of size restrictions per partition key value?
+A: For an LSI, for each partition key value, the total size of all indexed items must be 10 GB or less. For a GSI, there is no size restriction.
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of when it can be created?
+A: An LSI must be created at the same time the base table is created. A GSI can be created after the base table is created. 
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of when it can be deleted?
+A: An LSI cannot be deleted unless the base table is also deleted. A GSI can be deleted at any time.
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of which items in the table can be queried?
+A: For an LSI, you can only query a single partition in the base table. For a GSI, you can query across all partitions in the base table (since the GSI partition key can be different from the base table partition key.)
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of provisioned throughput consumption?
+A: An LSI consumes read and write capacity units from the base table provisioned throughput capacity. Each GSI has its own provisioned throughput capacity independent from the base table.
+
+Q: How does a Global Secondary Index (GSI) differ from a Local Secondary Index (LSI) in terms of projected query attributes?
+A: A LSI query allows you to project attributes from the base table. A GSI query only allows you to project attributes that are stored in the GSI itself.
+
+Q: How many Global Secondary Indexes (GSI) can you have per table?
+A: 5.
+
+Q: How many Local Secondary Indexes (LSI) can you have per table?
+A: 5.
+
+Q: Which DynamoDB operatio returns the name, storage size, and item count for each secondary index?
+A: DescribeTable.
+
+Q: Are the storage size and item count returned by DescribeTable updated in real time?
+A: No, they are updated approximately every 6 hours.
+
+Q: Name the 3 options for projecting base table attributes when you create a DynamoDB global secondary index.
+A: KEYS_ONLY, INCLUDE, ALL.
+
+Q: How do instruct a DynamoDB query to return results in descending key order instead of ascending key order?
+A: Set the ScanIndexForward parameter to false (note the word Scan instead of the word Query in the parameter name).
+
+Q: When you add or modify or delete an item in a DynamoDB base table, are all secondary indexes also updated automatically?
+A: Yes.
+
+Q: What consistency model applies to updating DynamoDB secondary indexes when an item in the base table is added or modified or deleted?
+A: Eventually conistent reads.
+
+Q: How long does it take to update the DynamoDB secondary indexes when an item in the base table is added or modified or deleted?
+A: Within a fraction of a second under normal circumstances, but it may take longer in rare failure scenarios.
+
+Q: What happens when an item added to a DynamoDB base table is missing an attribute that is used as a key in a global secondary index?
+A: The item is not included in the secondary index.
+
+Q: What happens when the type of a base table attribute is different from the type of the same attribute in a global secondary index?
+A: The add or modify operation fails with ValidationException.
+
+Q: Name the 4 possible status for a DynamoDB global secondary index.
+A: CREATING, ACTIVE, UPDATING, DELETING.
+
+Q: What are the 2 stages of creating a DynamoDB global secondary index?
+A: Resource allocation and backfilling.
+
+Q: Which 3 operations cannot be performed while a DynamoDB secondary index is in the resource allocation phase?
+A: Delete the base table, add or delete other secondary indexes, change the provisioned throughput of the base table.
+
+Q: Which 1 operation cannot be performed while a DynamoDB secondary index is in the backfilling phase?
+A: Delete the base table.
+
+Q: Which 3 CloudWatch metrics can be used to monitor the progress of creating a global secondary index?
+A: OnlineIndexPercentageProgress, OnlineIndexConsumedWriteCapacity, OnlineIndexThrottleEvents.
+
+Q: What is the recommended write capacity for a global secondary index?
+A: 1.5 times the write capacity of the base table.
+
+Q: Which 2 attributes in the DynamoDB DescribeTable operation can be used to monitor the progress creating a global secondary index?
+A: IndexStatus (CREATING, ACTIVE, UPDATING, DELETING) and Backfilling (false or true).
+
+### Continue from here:
+### https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
 
 SubTopic: DynamoDB labs
 
